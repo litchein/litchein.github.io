@@ -1,0 +1,47 @@
+.number-black
+{
+	font-weight:bold;
+	color:#000000;
+	cursor:default;
+	text-decoration:none;
+	font-size:12px;
+}
+.small-number
+{
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:default;
+	text-decoration:none;
+	font-size:12px;
+}
+.number-over
+{
+	font-weight:bold;
+	color:#0000FF;
+	text-decoration:underline;
+}
+.number-empty
+{
+	font-weight:normal;
+	font-size:12px;
+}
+.venn5
+{
+	background-image: url(../img/venn5.png);
+}
+.venn4
+{
+	background-image: url(../img/venn4.png);
+}
+.venn3
+{
+	background-image: url(../img/venn3.png);
+}
+.venn2
+{
+	background-image: url(../img/venn2.png);
+}
+.venn1
+{
+	background-image: url(../img/venn1.png);
+}
