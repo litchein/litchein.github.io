@@ -70,13 +70,14 @@
             	alert(value);
             },
             disableClick: false,
-            useValues: false
+            useValues: false,
+            exporting:false
         };  
 		var opts = $.extend(defaults, options); 
 
 
 		function drawEllipse(ctx, x, y, r, w, h, a, strokecolor, fillcolor) {
-			var canvas = document.getElementById("myCanvas"); 
+			var canvas = document.getElementById("canvasEllipse"); 
 			var context = canvas.getContext("2d");
 			context.beginPath();
 			context.save();
@@ -486,28 +487,60 @@
 			}
 		}
 		
-		function addExportModule(){
-			var div_export = '<div><input type="button" id="buttonExporting" value="Export"></div>';
-			$('body').append(div_export);
-			$('#buttonExporting').click(function(){
-				width:$('#example').innerWidth(),
-				html2canvas($('#example'), {
-	  				onrendered: function(canvas) {
-	  					var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-	  					window.location.href = img;
-	  				},
-				});
-			});
+
+		
+		function addExportModule(div){
+			var canvas_export = '<canvas id="canvasExport" width="30" height="20"></canvas>';
+			$('body').append(canvas_export);
+//			draw canvas 
+			var canvas = document.getElementById("canvasExport"); 
+			var context = canvas.getContext("2d");
+			for (i=0;i<3;i++){
+				context.lineWidth = 3;
+				context.beginPath();
+				context.moveTo(0,2+i*7);
+				context.lineTo(100,2+i*7);
+				context.strokeStyle = "grey";
+				context.stroke();
+			}			
+			var $d = div;
+			var select_content = '<select id="select-form" style="display: none;">';
+			select_content += '<option disabled="disabled" selected="selected">Choose</option>';
+			select_content += '<option value="png">Download PNG image</option>';
+			select_content += '<option value="jpeg">Download JPEG image</option>';
+			select_content += '</select>';
+			$('body').append(select_content);
+			var select_form = $('#select-form');
+			canvas.addEventListener("click", function (event) {
+				select_form.toggle('show');
+				if( select_form.css('opacity') == "0"){
+					select_form.on('change', function() {
+						html2canvas($($d), {
+							onrendered: function(canvas) {
+								var val = $("#select-form option:selected").val();
+								if (val == 'png'){
+									var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+								}
+								else{
+									var img = canvas.toDataURL("image/jpeg",1);									
+								}
+								window.location.href = img;
+							},
+						});
+					});
+				}
+			});	
 		}
 		
-		if (opts.export === true){
-			addExportModule();
+		if (opts.exporting === true){
+			addExportModule($(this));
 		}
 		
         this.each(function() {
             var $t = $(this);
-			var div_content = '<div style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 415px;" class="venn1" id="frame">';
-			div_content += '<canvas id="myCanvas" width="500" height="415"></canvas>';
+            $t.css({"width": "550px", "height": "420px"});
+			var div_content = '<div style="position: relative; left: 0pt; top: 5pt; width: 550px; height: 420px;">';
+			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00100"></div>';
