@@ -73,10 +73,46 @@
             useValues: false
         };  
 		var opts = $.extend(defaults, options); 
+
+
+		function drawEllipse(ctx, x, y, r, w, h, a, strokecolor, fillcolor) {
+			var canvas = document.getElementById("myCanvas"); 
+			var context = canvas.getContext("2d");
+			context.beginPath();
+			context.save();
+			context.translate(x, y);
+			context.rotate(a*Math.PI/180);
+			context.scale(w, h);
+			context.arc(0, 0, r, 0, Math.PI * 2);
+		  	context.lineWidth = 0.1;
+		  	context.strokeStyle = strokecolor;
+		  	context.fillStyle = fillcolor;
+		  	context.stroke();
+		  	context.fill();
+			context.restore();
+		};
 		
 		function placeObjects(vennSize) {
+			green = "rgba(0,102,0,0.5)";
+			green2 = "rgba(0,102,0,0.75)";
+			red = "rgba(241,90,96,.5)";
+			red2 = "rgba(241,90,96,.75)";
+			blue = "rgba(90,155,212,.5)";
+			blue2 = "rgba(90,155,212,.75)";
+			yellow = "rgba(250,250,91,.5)";
+			yellow2 = "rgba(250,250,91,.75)";
+			orange = "rgba(255, 117, 0, 0.5)";
+			orange2 = "rgba(255, 117, 0, 0.75)";
+			
 			$("#frame").removeClass("venn1 venn2 venn3 venn4 venn5");
-			if (vennSize == 5) {			
+			if (vennSize == 5) {
+				
+				drawEllipse(1,214,230,10,18.6,9.5,25,green2,green);
+				drawEllipse(1,232,187,10,18.6,9.5,98,blue2,blue);
+				drawEllipse(1,273,196,10,18.6,9.5,170,red2,red);
+				drawEllipse(1,282,238,10,18.6,9.5,62,yellow2,yellow);
+				drawEllipse(1,242,260,10,18.6,9.5,134,orange2,orange);
+				
 				$("#frame").addClass("venn5");
 				$("#label1").css("left", 0).css("top", 100).css("color", "#228B22");
 				$("#label2").css("left", 140).css("top", 15).css("color", "#3366BB");
@@ -114,7 +150,13 @@
 				$("#resultC10111").css("left", 330).css("top", 240);
 				$("#resultC01111").css("left", 290).css("top", 140);
 				$("#resultC11111").css("left", 245).css("top", 210);
-			} else if (vennSize == 4) {			
+			} else if (vennSize == 4) {	
+				
+				drawEllipse(1,181,238,10,18.5,11.5,40,green2,green);
+				drawEllipse(1,242,177,10,18.5,11.5,40,blue2,blue);
+				drawEllipse(1,259,177,10,18.5,11.5,140,red2,red);
+				drawEllipse(1,320,238,10,18.5,11.5,140,yellow2,yellow);
+				
 				$("#frame").addClass("venn4");
 				$("#label1").css("left", 5).css("top", 80).css("color", "#228B22");
 				$("#label2").css("left", 85).css("top", 5).css("color", "#3366BB");
@@ -153,6 +195,11 @@
 				$("#resultC01111").css("left", -1000).css("top", -2200);
 				$("#resultC11111").css("left", -1000).css("top", -2200);
 			} else if (vennSize == 3) {
+				
+				drawEllipse(1,171,142,140,1,1,0,green2,green);
+				drawEllipse(1,327,142,140,1,1,0,blue2,blue);
+				drawEllipse(1,249,271,140,1,1,0,red2,red);
+				
 				$("#frame").addClass("venn3");
 				$("#label1").css("left", 10).css("top", 0).css("color", "#228B22");
 				$("#label2").css("left", 420).css("top", 0).css("color", "#3366BB");
@@ -190,7 +237,11 @@
 				$("#resultC10111").css("left", -1000).css("top", -2200);
 				$("#resultC01111").css("left", -1000).css("top", -2200);
 				$("#resultC11111").css("left", -1000).css("top", -2200);
-			} else if (vennSize == 2) {							
+			} else if (vennSize == 2) {	
+				
+				drawEllipse(1,171,206,140,1,1,0,green2,green);
+				drawEllipse(1,327,206,140,1,1,0,blue2,blue);
+				
 				$("#frame").addClass("venn2");
 				$("#label1").css("left", 95).css("top", 40).css("color", "#228B22");
 				$("#label2").css("left", 360).css("top", 40).css("color", "#3366BB");
@@ -229,6 +280,9 @@
 				$("#resultC01111").css("left", -1000).css("top", -2200);
 				$("#resultC11111").css("left", -1000).css("top", -2200);
 			} else {
+				
+				drawEllipse(1,246,210,140,1,1,0,green2,green);
+				
 				$("#frame").addClass("venn1");
 				$("#label1").css("left", 230).css("top", 30).css("color", "#228B22");
 				$("#label2").css("left", -1000).css("top", -2200);
@@ -432,9 +486,28 @@
 			}
 		}
 		
+		function addExportModule(){
+			var div_export = '<div><input type="button" id="buttonExporting" value="Export"></div>';
+			$('body').append(div_export);
+			$('#buttonExporting').click(function(){
+				width:$('#example').innerWidth(),
+				html2canvas($('#example'), {
+	  				onrendered: function(canvas) {
+	  					var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+	  					window.location.href = img;
+	  				},
+				});
+			});
+		}
+		
+		if (opts.export === true){
+			addExportModule();
+		}
+		
         this.each(function() {
             var $t = $(this);
 			var div_content = '<div style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 415px;" class="venn1" id="frame">';
+			div_content += '<canvas id="myCanvas" width="500" height="415"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00100"></div>';

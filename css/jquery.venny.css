@@ -25,7 +25,12 @@
 	font-weight:normal;
 	font-size:12px;
 }
-.venn5
+#example
+{
+	width:550px; 
+	height:420px;	
+}
+/* .venn5
 {
 	background-image: url(../img/venn5.png);
 }
@@ -44,4 +49,4 @@
 .venn1
 {
 	background-image: url(../img/venn1.png);
-}
+} */
