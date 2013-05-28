@@ -490,8 +490,16 @@
 
 		
 		function addExportModule(div){
-			var canvas_export = '<canvas id="canvasExport" width="30" height="20"></canvas>';
-			$('body').append(canvas_export);
+			var div_export = '<div style="position: absolute; left: 600px; top: 65px;">'
+			div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
+			div_export += '<select id="select-form" style="display: none;">';
+			div_export += '<option disabled="disabled" selected="selected">Choose</option>';
+			div_export += '<option value="png">Download PNG image</option>';
+			div_export += '<option value="jpeg">Download JPEG image</option>';
+			div_export += '</select>';
+			div_export += '</div>';
+			$('body').append(div_export);
+			
 //			draw canvas 
 			var canvas = document.getElementById("canvasExport"); 
 			var context = canvas.getContext("2d");
@@ -504,12 +512,6 @@
 				context.stroke();
 			}			
 			var $d = div;
-			var select_content = '<select id="select-form" style="display: none;">';
-			select_content += '<option disabled="disabled" selected="selected">Choose</option>';
-			select_content += '<option value="png">Download PNG image</option>';
-			select_content += '<option value="jpeg">Download JPEG image</option>';
-			select_content += '</select>';
-			$('body').append(select_content);
 			var select_form = $('#select-form');
 			canvas.addEventListener("click", function (event) {
 				select_form.toggle('show');
