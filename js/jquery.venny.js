@@ -572,19 +572,21 @@
 				var select_form = $('.styled');
 				$("#canvasExport").on("click", function (event) {
 					select_form.toggle();
-					$('#select').change(function() {
-						var val = $(this).val();
-						if (val==='png'){
-							select_form.hide();
-							html2canvas($("#frame"), {
-								onrendered: function(canvas) {
-									var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-									window.location.href = img;
-								}
-							});
-						}
+					$(function() {
+						$('#select').bind('change', function() {
+							var val = $(this).val();
+							if (val==='png'){
+								select_form.hide();
+								html2canvas($("#frame"), {
+									onrendered: function(canvas) {
+										var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+										window.location.href = img;
+									}
+								});
+							}
+							return false;
+						});
 					});
-
 				});
             }
         });
