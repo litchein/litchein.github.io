@@ -77,7 +77,7 @@
 
 
 		function drawEllipse(ctx, x, y, r, w, h, a, strokecolor, fillcolor) {
-			var canvas = document.getElementById("canvasEllipse"); 
+			var canvas = $(document)[0].getElementById("canvasEllipse"); 
 			var context = canvas.getContext("2d");
 			context.beginPath();
 			context.save();
@@ -105,7 +105,6 @@
 			orange = "rgba(255, 117, 0, 0.5)";
 			orange2 = "rgba(255, 117, 0, 0.75)";
 			
-			$("#frame").removeClass("venn1 venn2 venn3 venn4 venn5");
 			if (vennSize == 5) {
 				
 				drawEllipse(1,214,230,10,18.6,9.5,25,green2,green);
@@ -114,7 +113,6 @@
 				drawEllipse(1,282,238,10,18.6,9.5,62,yellow2,yellow);
 				drawEllipse(1,242,260,10,18.6,9.5,134,orange2,orange);
 				
-				$("#frame").addClass("venn5");
 				$("#label1").css("left", 0).css("top", 100).css("color", "#228B22");
 				$("#label2").css("left", 140).css("top", 15).css("color", "#3366BB");
 				$("#label3").css("left", 450).css("top", 120).css("color", "#99334E");
@@ -158,7 +156,6 @@
 				drawEllipse(1,259,177,10,18.5,11.5,140,red2,red);
 				drawEllipse(1,320,238,10,18.5,11.5,140,yellow2,yellow);
 				
-				$("#frame").addClass("venn4");
 				$("#label1").css("left", 5).css("top", 80).css("color", "#228B22");
 				$("#label2").css("left", 85).css("top", 5).css("color", "#3366BB");
 				$("#label3").css("left", 380).css("top", 5).css("color", "#99334E");
@@ -201,7 +198,6 @@
 				drawEllipse(1,327,142,140,1,1,0,blue2,blue);
 				drawEllipse(1,249,271,140,1,1,0,red2,red);
 				
-				$("#frame").addClass("venn3");
 				$("#label1").css("left", 10).css("top", 0).css("color", "#228B22");
 				$("#label2").css("left", 420).css("top", 0).css("color", "#3366BB");
 				$("#label3").css("left", 180).css("top", 420).css("color", "#99334E");
@@ -243,7 +239,6 @@
 				drawEllipse(1,171,206,140,1,1,0,green2,green);
 				drawEllipse(1,327,206,140,1,1,0,blue2,blue);
 				
-				$("#frame").addClass("venn2");
 				$("#label1").css("left", 95).css("top", 40).css("color", "#228B22");
 				$("#label2").css("left", 360).css("top", 40).css("color", "#3366BB");
 				$("#label3").css("left", -1000).css("top", -2200);
@@ -284,7 +279,6 @@
 				
 				drawEllipse(1,246,210,140,1,1,0,green2,green);
 				
-				$("#frame").addClass("venn1");
 				$("#label1").css("left", 230).css("top", 30).css("color", "#228B22");
 				$("#label2").css("left", -1000).css("top", -2200);
 				$("#label3").css("left", -1000).css("top", -2200);
@@ -490,58 +484,17 @@
 
 		
 		function addExportModule(div){
-			var div_export = '<div style="position: absolute; left: 600px; top: 65px;">'
-			div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
-			div_export += '<select id="select-form" style="display: none;">';
-			div_export += '<option disabled="disabled" selected="selected">Choose</option>';
-			div_export += '<option value="png">Download PNG image</option>';
-			div_export += '<option value="jpeg">Download JPEG image</option>';
-			div_export += '</select>';
-			div_export += '</div>';
-			$('body').append(div_export);
-			
-//			draw canvas 
-			var canvas = document.getElementById("canvasExport"); 
-			var context = canvas.getContext("2d");
-			for (i=0;i<3;i++){
-				context.lineWidth = 3;
-				context.beginPath();
-				context.moveTo(0,2+i*7);
-				context.lineTo(100,2+i*7);
-				context.strokeStyle = "grey";
-				context.stroke();
-			}			
-			var $d = div;
-			var select_form = $('#select-form');
-			canvas.addEventListener("click", function (event) {
-				select_form.toggle('show');
-				if( select_form.css('opacity') == "0"){
-					select_form.on('change', function() {
-						html2canvas($($d), {
-							onrendered: function(canvas) {
-								var val = $("#select-form option:selected").val();
-								if (val == 'png'){
-									var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-								}
-								else{
-									var img = canvas.toDataURL("image/jpeg",1);									
-								}
-								window.location.href = img;
-							},
-						});
-					});
-				}
-			});	
+	
 		}
 		
-		if (opts.exporting === true){
-			addExportModule($(this));
-		}
+		
 		
         this.each(function() {
             var $t = $(this);
-            $t.css({"width": "550px", "height": "420px"});
-			var div_content = '<div style="position: relative; left: 0pt; top: 5pt; width: 550px; height: 420px;">';
+            //taille de ma div example
+            $t.css({"width": "650px", "height": "420px"});
+
+			var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 550px; height: 420px;">';
 			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01000"></div>';
@@ -588,6 +541,51 @@
             	fillListVenn();
             } else if (type[0] == "count") {
             	fillCountVenn();
+            }
+            
+            //exporting a true
+            if (opts.exporting === true){
+    			var div_export = '<div id="module-export" style="position: absolute; left: 600px; top: 65px;">'
+				div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
+				div_export += '<div class="styled" style="display:none;">';
+				div_export += '<select id="select" style="width: 180px;height: 30px;padding: 5px;font-size: 14px;border: 1px solid #ccc;background: transparent;position:absolute;left:0px; top:20px;">';
+				div_export += '<option disabled="disabled" selected="selected">Choose</option>';
+				div_export += '<option value="png">Download PNG image</option>';
+//				div_export += '<option value="jpeg">Download JPEG image</option>';
+				div_export += '</select>';
+				div_export += '</div>';
+				div_export += '</div>';
+				$t.append(div_export);
+				
+				//draw canvas button
+				var canvas = $("#canvasExport")[0];
+				var context = canvas.getContext("2d");
+				for (i=0;i<3;i++){
+					context.lineWidth = 3;
+					context.beginPath();
+					context.moveTo(0,2+i*7);
+					context.lineTo(100,2+i*7);
+					context.strokeStyle = "grey";
+					context.stroke();
+				}		
+
+				var select_form = $('.styled');
+				$("#canvasExport").on("click", function (event) {
+					select_form.toggle();
+					$('#select').change(function() {
+						var val = $(this).val();
+						if (val==='png'){
+							select_form.hide();
+							html2canvas($("#frame"), {
+								onrendered: function(canvas) {
+									var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+									window.location.href = img;
+								}
+							});
+						}
+					});
+
+				});
             }
         });
         return this;
