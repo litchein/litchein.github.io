@@ -568,9 +568,11 @@
 					context.strokeStyle = "grey";
 					context.stroke();
 				}		
-
+				
+				//problem of mouseover when i do nothing --> download
 				var select_form = $('.styled');
 				$("#canvasExport").on("click", function (event) {
+					$("#select").prop('selectedIndex',0); 
 					select_form.toggle();
 					$(function() {
 						$('#select').bind('change', function() {
