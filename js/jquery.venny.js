@@ -545,14 +545,14 @@
             
             //exporting a true
             if (opts.exporting === true){
-    			var div_export = '<div id="module-export" style="position: absolute; left: 600px; top: 65px;">'
-				div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
-				div_export += '<div class="styled" style="display:none;">';
-				div_export += '<select id="select" style="width: 180px;height: 30px;padding: 5px;font-size: 14px;border: 1px solid #ccc;background: transparent;position:absolute;left:0px; top:20px;">';
-				div_export += '<option disabled="disabled" selected="selected">Choose</option>';
-				div_export += '<option value="png">Download PNG image</option>';
-//				div_export += '<option value="jpeg">Download JPEG image</option>';
-				div_export += '</select>';
+
+            	var div_export = '<div id="module-export" style="position: absolute; left: 600px; top: 65px;">'
+    			div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
+            	div_export += '<div class="menu" style="position: absolute;width: 160px; height: 30px; display:none; left: 0px; top: 20px;">';
+            	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
+            	div_export += '<div id ="format-png" style="cursor: pointer; padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
+//            	div_export += '<div id ="format-jpg" style="cursor: pointer; padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 11px;">Download JPEG image</div>';
+            	div_export += '</div>';
 				div_export += '</div>';
 				div_export += '</div>';
 				$t.append(div_export);
@@ -569,24 +569,26 @@
 					context.stroke();
 				}		
 				
-				//problem of mouseover when i do nothing --> download
-				var select_form = $('.styled');
+				var select_form = $('.menu');
 				$("#canvasExport").on("click", function (event) {
-					$("#select").prop('selectedIndex',0); 
 					select_form.toggle();
+					var colorOrig=$("div[id^=format-]").css('background');
+					$("div[id^=format-]").hover(function() {
+						$(this).css('background', 'rgba(69,114,165,0.75)')
+					}, function() {
+						$(this).css('background', colorOrig)
+					});
+					
 					$(function() {
-						$('#select').bind('change', function() {
-							var val = $(this).val();
-							if (val==='png'){
-								select_form.hide();
-								html2canvas($("#frame"), {
-									onrendered: function(canvas) {
-										var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-										window.location.href = img;
-									}
-								});
-							}
-							return false;
+						$('#format-png').click(function(event) {
+							select_form.hide();
+							
+							html2canvas($("#frame"), {
+								onrendered: function(canvas) {
+									var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+									window.location.href = img;
+								}
+							});
 						});
 					});
 				});
