@@ -4,25 +4,62 @@
 	<link type="text/css" rel="stylesheet" media="screen" href="css/jquery.venny.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.venny.js"></script>
+	<script type="text/javascript" src="js/tx_venny_pi1.js"></script>
 	<script type="text/javascript" src="js/html2canvas.js"></script>
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-		    $('#example').venny({
-		      series: [{
-		          name: 'Singer',
-		          data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
-		        }, {
-		          name: 'Actor',
-		          data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
-		        }],
-		      exporting:true,
-		    });
-		});
-	</script>
 
 </head>
 	<body>
-		<div id="example"></div>
-	</body>
+		<div id="bandeau"><h1>jQuery Venny</h1></div>
+		<div class="tx-venny-pi1">
+			<table cellspacing="8" cellpadding="0" border="0">
+				<tbody>
+					<tr>
+						<td id="venny-container" valign="center" height="100%" style="padding: 0px;"></td>
+						<td valign="bottom">
+							<p class="bodytext"> Paste up to <strong>five</strong> lists using one row per element, then click the numbers to see the results. <a id="setexample" href="javascript:void(0)"> example </a></p>
+							<br />
+							<dt>
+								<input id="name1" type="textbox" style="color: #228B22; font-weight: bold;" value="List 1" maxlength="11" size="18" />
+								<br />
+								<textarea id="area1" wrap="off" rows="4" style="width: 100%;"></textarea>
+							</dt>
+							<dt style="width: 100%; text-align: right;"> <a id="clear_1" href="javascript:void(0)">clear</a> </dt>
+							<dt>
+								<input id="name2" type="textbox" style="color: #3366BB; font-weight: bold;" value="List 2" maxlength="11" size="18" />
+								<br />
+								<textarea id="area2" wrap="off" rows="4" style="width: 100%;"></textarea>
+							</dt>
+							<dt style="width: 100%; text-align: right;"> <a id="clear_2" href="javascript:void(0)">clear</a> </dt>
+							<dt>
+								<input id="name3" type="textbox" style="color: #99334E; font-weight: bold;" value="List 3" maxlength="11" size="18" />
+								<br />
+								<textarea id="area3" wrap="off" rows="4" style="width: 100%;"></textarea>
+							</dt>
+							<dt style="width: 100%; text-align: right;"> <a id="clear_3" href="javascript:void(0)">clear</a> </dt>
+							<dt>
+								<input id="name4" type="textbox" style="color: #FFD700; font-weight: bold;" value="List 4" maxlength="11" size="18" />
+								<br />
+								<textarea id="area4" wrap="off" rows="4" style="width: 100%;"></textarea>
+							</dt>
+							<dt style="width: 100%; text-align: right;"> <a id="clear_4" href="javascript:void(0)">clear</a> </dt>
+							<dt>
+								<input id="name5" type="textbox" style="color: #FFA54F; font-weight: bold;" value="List 5" maxlength="11" size="18" />
+								<br />
+								<textarea id="area5" wrap="off" rows="4" style="width: 100%;"></textarea>
+							</dt>
+							<dt style="width: 100%; text-align: right;"> <a id="clear_5" href="javascript:void(0)">clear</a> </dt>
+						</td>
+					</tr>
+					<tr>
+						<td valign="bottom" colspan="2">
+							<p> Click on a number to show the corresponding elements: </p>
+							<textarea id="names" wrap="off" style="width: 100%;" rows="8"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<!-- 		<div id="example"></div>
+ -->	</body>
 </html>
