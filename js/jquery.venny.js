@@ -536,7 +536,7 @@
         this.each(function() {
             var $t = $(this);
             $t.css({"width": "700px", "height": "430px"});
-
+            $('<style>.number-black{font-weight:bold;color:#000000;cursor:default;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
 			var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 550px; height: 440px;">';
 			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';

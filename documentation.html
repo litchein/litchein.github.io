@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Venny</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
+		<script src="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+		<style type="text/css">
+			body {
+				padding-top: 20px;
+				padding-bottom: 60px;
+			}
+			/* Custom container */
+			.container {
+				margin: 0 auto;
+				max-width: 1000px;
+			}
+			.container > hr {
+				margin: 60px 0;
+			}
+			/* Customize the navbar links to be fill the entire space of the .navbar */
+			.navbar .navbar-inner {
+				padding: 0;
+			}
+			.navbar .nav {
+				margin: 0;
+				display: table;
+				width: 100%;
+			}
+			.navbar .nav li {
+				display: table-cell;
+				width: 1%;
+				float: none;
+			}
+			.navbar .nav li a {
+				font-weight: bold;
+				text-align: center;
+				border-left: 1px solid rgba(255,255,255,.75);
+				border-right: 1px solid rgba(0,0,0,.1);
+			}
+			.navbar .nav li:first-child a {
+				border-left: 0;
+				border-radius: 3px 0 0 3px;
+			}
+			.navbar .nav li:last-child a {
+				border-right: 0;
+				border-radius: 0 3px 3px 0;
+			}
+			/* Bootstrap code examples
+			-------------------------------------------------- */
+			/* Base class */
+			.bs-docs-example {
+				position: relative;
+				margin: 15px 0;
+				padding: 39px 19px 14px;
+				*padding-top: 19px;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				-webkit-border-radius: 4px;
+				   -moz-border-radius: 4px;
+				        border-radius: 4px;
+			}
+			/* Echo out a label for the example */
+			.bs-docs-example:after {
+				content: "Example";
+				position: absolute;
+				top: -1px;
+				left: -1px;
+				padding: 3px 7px;
+				font-size: 12px;
+				font-weight: bold;
+				background-color: #f5f5f5;
+				border: 1px solid #ddd;
+				color: #9da0a4;
+				-webkit-border-radius: 4px 0 4px 0;
+				   -moz-border-radius: 4px 0 4px 0;
+				        border-radius: 4px 0 4px 0;
+			}
+			/* Remove spacing between an example and it's code */
+			.bs-docs-example + .prettyprint {
+				margin-top: -20px;
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="masthead">
+				<h3 class="muted">jQuery Venny</h3>
+				<div class="navbar">
+			    	<div class="navbar-inner">
+			      		<div class="container">
+			        		<ul class="nav">
+			          			<li><a href="./index.html">Home</a></li>
+								<li class="active"><a href="./documentation.html">Documentation</a></li>
+								<li><a href="./example.html">Example</a></li>
+								<li><a href="#">Downloads</a></li>
+								<li><a href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil">About</a></li>
+								<li><a href="#">Contact</a></li>
+			        		</ul>
+			      		</div>
+			    	</div>
+			  	</div><!-- /.navbar -->
+			</div>
+		
+			<!-- Docs nav
+			================================================== -->
+			<div class="row">
+				<div class="span3 bs-docs-sidebar">
+			    	<ul class="nav nav-list bs-docs-sidenav">
+						<li><a href="#plugin-insertion"><i class="icon-chevron-right"></i>Plugin insertion</a></li>
+						<li><a href="#plugin-options"><i class="icon-chevron-right"></i>Plugin options</a></li>
+			    	</ul>
+			  	</div>
+			  	<div class="span9">
+					<!-- Plugin Insertion
+					================================================== -->
+					<section id="plugin-insertion">
+						<div class="page-header">
+					    	<h1>Plugin insertion</h1>
+						</div>
+					  	<p>In order to use jquery.venny, you need to download tar file and import within your web page: </p>
+					  	<ul>
+					  		<li>jQuery v1.6.x or higher </li>
+					  		<li>jquery.venny.min.js </li>
+					  	</ul>
+					  	<div class="bs-docs-example">
+					  		<p>Take a peek at the code below, a single function call to initialise the venn diagram is all it takes:</p> 
+					  	</div>
+					  	<pre class="prettyprint linenums">
+/*
+* Example init
+*/
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+        name: 'Actors',
+        data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
+      }, {
+        name: 'Singers',
+        data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
+      }]
+  });
+});
+						</pre>
+					</section id="plugin-options">
+						<div class="page-header">
+							<h1>Plugin options</h1>
+						</div>
+						<h3>series: the data in json</h3>
+						<div class="bs-docs-example">
+							<p> The serie can be a list of value, the plugin will then compute itself the intersections between lists. </p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+    $('#example').venny({
+      series: [{
+          name: 'Actors',
+          data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
+        }, {
+          name: 'Singers',
+          data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
+        }]
+    });
+});
+						</pre>
+						<div class="bs-docs-example">
+							<p> The serie can also define the number of occurence for each intersections.</p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+      name: {A: 'List 1',
+                  B: 'List 2',
+                  C: 'List 3',
+                  D: 'List 4'},
+      data: {A: 340, B: 562, C: 620, D: 592,
+                AB: 639, AC: 456, AD: 257, BC: 915,
+                BD: 354, CD: 143, ABC: 552, ABD: 578,
+                ACD: 298, BCD: 613, ABCD: 148}
+     }]
+  });
+});
+						</pre>
+						<div class="bs-docs-example">
+							<p>Finaly, the serie can define the list values with the number of occurence for each value.</p>
+						</div>
+						<pre class="prettyprint">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+          name: 'sample1',
+          data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5"],
+          values: [5, 15, 250, 20, 23]
+       },{
+          name: 'sample2',
+          data: ["Otu1", "Otu5", "Otu6", "Otu7"],
+          values: [234, 29, 239, 5]
+       }]
+  });
+});
+						</pre>
+						<h3>fnClickCallback</h3>
+						<div class="bs-docs-example">
+							<p>The callback function to execute when the user click on a number.</p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+      name: {A: 'List 1',
+                  B: 'List 2',
+                  C: 'List 3',
+                  D: 'List 4'},
+      data: {A: 340, B: 562, C: 620, D: 592,
+                AB: 639, AC: 456, AD: 257, BC: 915,
+                BD: 354, CD: 143, ABC: 552, ABD: 578,
+                ACD: 298, BCD: 613, ABCD: 148}
+    }],
+    fnClickCallback: function() {
+      var value = "";
+      if (this.listnames.length == 1) {
+        value += "Elements only in ";
+      } else {
+        value += "Common elements in ";
+      }
+      for (name in this.listnames) {
+         value += this.listnames[name] + " ";
+      }
+      value += ":\n";
+      for (val in this.list) {
+        value += this.list[val] + "\n";
+      }
+      alert(value);
+    }
+  });
+});
+						</pre>
+						<h3>disableClick</h3>
+						<div class="bs-docs-example">
+							<p>Default is false, if set to true, the click on the number si disabled.</p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+        name: 'Actors',
+        data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
+      }, {
+        name: 'Singers',
+        data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
+      }],
+      disableClick: true
+  });
+});
+						</pre>
+						<h3>useValues</h3>
+						<div class="bs-docs-example">
+							<p>Default is false, if set to true, the values provided in a mixte serie will be considered as the number of occurence of the element.</p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+          name: 'sample1',
+          data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
+          values: [5, 15, 250, 20, 23, 58, 89]
+       }],
+      useValues: true
+  });
+});
+						</pre>
+						<h3>exporting</h3>
+						<div class="bs-docs-example">
+							<p>Default is true, an export module is added to the window, if set to false the export module is disabled.</p>
+						</div>
+						<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    series: [{
+          name: 'sample1',
+          data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
+          values: [5, 15, 250, 20, 23, 58, 89]
+       }],
+      exporting: false
+  });
+});
+						</pre>						
+					</section>
+				</div>
+			</div>
+			<footer class="footer" style="background-color:#e5e5e5;">
+			<script>
+				!function ($) {
+				  $(function(){
+				    window.prettyPrint && prettyPrint()   
+				  })
+				}(window.jQuery)
+			</script>
+	      		<div class="container">
+	        		<p>Copyright &copy; 2013, INRA | Designed by GenoToul Bioinfo and Sigenae teams.</p>
+	        		<p>Code licensed under ....</p>
+	        		<ul class="footer-links" style="list-style-type: none;">
+	          			<li><a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo platform</a></li>
+	          			<li class="muted">&middot;</li>
+	          			<li><a href="http://www.sigenae.org/" target="_blank">Sigenae platform</a></li>
+	          			<li class="muted">&middot;</li>
+	          			<li><a href="http://www.international.inra.fr/" target="_blank">INRA</a></li>
+	        		</ul>
+	      		</div>
+	    	</footer>
+		</div> <!-- /container -->
+
+	    <!-- Le javascript	
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+<!-- 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<script src='http://code.jquery.com/jquery.min.js' type='text/javascript'></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
+		<script src="http://twitter.github.com/bootstrap/assets/js/holder/holder.js"></script>
+    	<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+	    <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script> -->
+	</body>
+</html>
