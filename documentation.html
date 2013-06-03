@@ -7,13 +7,13 @@
 	<title>Jquery.venny</title>
 	<!-- Le styles -->
 	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
-
-	<style type="text/css">
+	<link href="http://twitter.github.io/bootstrap/assets/css/docs.css" rel="stylesheet" media="screen">
+<!-- 	<style type="text/css">
 		body {
 			padding-top: 60px;
 			padding-bottom: 40px;
-		}
-		.bs-docs-sidenav {
+		} */
+ 		.bs-docs-sidenav {
 		    width: 258px;
 		}
 		.bs-docs-sidenav {
@@ -83,16 +83,16 @@
 		    padding-right: 14px;
 		    padding-top: 8px;
 		}
-	</style>
+	</style> -->
 	<link href="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
 	<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
 	<script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-affix.js"></script>
 	<script src="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-
+		
 </head>
-<body>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
 	<div class="navbar navbar-inverse navbar-fixed-top">
       	<div class="navbar-inner">
 			<div class="container">
@@ -116,8 +116,8 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<aside class="sidebar span3">
-		    	<ul class="nav nav-list bs-docs-sidenav" data-spy="affix" data-offset-top="150">
+			<div class="span3 bs-docs-sidebar">
+				<ul class="nav nav-list bs-docs-sidenav affix">
 					<li class="active"><a href="#plugin-insertion">plugin insertion</a></li>
 					<li><a href="#series">series</a></li>
 					<li><a href="#fnClickCallback">fnClickCallback</a></li>
@@ -125,7 +125,7 @@
 					<li><a href="#useValues">useValues</a></li>
 					<li><a href="#exporting">exporting</a></li>
 		    	</ul>
-		  	</aside>
+		  	</div>
 		  	
 		  	<div class="span9">
 		  		<section id="plugin-insertion">

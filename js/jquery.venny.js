@@ -482,7 +482,7 @@
 		
 		function addExportModule(div){
 			$t = div;
-			var div_export = '<div id="module-export" style="position: relative; left: 500px; top: -450px; width: 180px; height: 60px;">'
+			var div_export = '<div id="module-export" style="position: relative; left: 500px; top: -450px; width: 180px; height: 60px;">';
 			div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
         	div_export += '<div id="menu" style="position: relative;width: 160px; height: 30px; display:none; left: 0px; top: 2px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
