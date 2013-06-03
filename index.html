@@ -1,79 +1,77 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>jQuery Venny</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
-		<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-		<link href="http://twitter.github.io/bootstrap/assets/css/docs.css" rel="stylesheet" media="screen">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
-      		<div class="navbar-inner">
-        		<div class="container">
-          			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            			<span class="icon-bar"></span>
-            			<span class="icon-bar"></span>
-            			<span class="icon-bar"></span>
-         			 </button>
-          			<a class="brand" href="#">jQuery Venny</a>
-          			<div class="nav-collapse collapse">
-           				<ul class="nav">
-		          			<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="./documentation.html">Documentation</a></li>
-							<li><a href="./example.html">Example</a></li>
-							<li><a href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil" target=_blank"">About</a></li>
-							<li><a href="#">Contact</a></li>
-            			</ul>
-          			</div><!--/.nav-collapse -->
-        		</div>
-      		</div>
-    	</div>
-    	<div class="container">
-			<div class="hero-unit">
-					<h1>jQuery Venny!</h1>
-			     	<hr>
-			      	<p><b>jquery.venny</b> is a plug-in for the <a href="http://www.jquery.com/" target="_blank">jQuery</a> Javascript library. It is a flexible tool, based upon the 
-			      	venny tool first developed by J.C Oliveros (Oliveros, J.C (2007) <a href="http://bioinfogp.cnb.csic.es/tools/venny/index.html" target="_blank">VENNY</a>, 
-			      	An integrative tool for comparing lists with Venn Diagrams). Key features:</p>
-					<ul>
-						<li>up to 5 classes venn diagram,</li>
-						<li>easily integrable within your own web site,</li>
-						<li>3 different ways to provide the data (list/number/list+number),</li>
-						<li>control the click callback function.</li>
-						<li>export the venn diagram to PNG</li>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Jquery.venny</title>
+	<!-- Le styles -->
+	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+	</style>
+	<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      	<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="./index.html">Jquery.venny</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="./index.html">About</a></li>
+						<li><a href="./documentation.html">Documentation</a></li>
+						<li><a href="./example.html">Examples</a></li>
+						<li><a target="_blank" href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil">Sources</a></li>
+						<li><a href="mailto:support.genopole@toulouse.inra.fr">Contact</a></li>
 					</ul>
-			      	<a class="btn btn-large btn-success" href="./documentation.html">Learn more</a>
+				</div><!--/.nav-collapse -->
 			</div>
-			<hr>
-	      	<div class="row">
-		    	<div class="span6">
-			    	<h2>Example</h2>
-			        <p>Check out the different examples and tests available for jQuery Venny.</p>
-			        <p><a class="btn" href="./example.html">View examples &raquo;</a></p>
-		        </div>
-	        	<div class="span6">
-	          		<h2>Documentation</h2>
-	          		<p>Having problems implementing html2canvas? Check out our documentation on how to use the script.</p>
-	          		<p><a class="btn" href="./documentation.html">Read documentation &raquo;</a></p>
-	       		</div>
-	      	</div>
-	      	<hr>
-			<footer class="footer" style="background-color:#e5e5e5;">
-	      		<div class="container">
-	        		<p>Copyright &copy; 2013, INRA | Designed by GenoToul Bioinfo and Sigenae teams.</p>
-	        		<p>Code licensed under ....</p>
-	        		<ul class="footer-links" style="list-style-type: none;">
-	          			<li><a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo platform</a></li>
-	          			<li class="muted">&middot;</li>
-	          			<li><a href="http://www.sigenae.org/" target="_blank">Sigenae platform</a></li>
-	          			<li class="muted">&middot;</li>
-	          			<li><a href="http://www.international.inra.fr/" target="_blank">INRA</a></li>
-	        		</ul>
-	      		</div>
-	    	</footer>
-		</div> <!-- /container -->
-	</body>
+		</div>
+	</div>
+	
+	<div class="container">
+		<!-- Main hero unit for a primary marketing message or call to action -->
+		<div class="hero-unit">
+			<h1>Jquery.venny!</h1>
+			<p><b>Jquery.venny</b> is a plug-in for the <a href="http://www.jquery.com/" target="_blank">jQuery</a> Javascript 
+				library. It is a flexible tool, based upon the venny tool first developed by J.C Oliveros (Oliveros, J.C (2007) 
+				<a href="http://bioinfogp.cnb.csic.es/tools/venny/index.html" target="_blank">VENNY</a>, An integrative tool for 
+				comparing lists with Venn Diagrams). Key features:</p>
+			<p><ul>
+				<li>up to 5 classes venn diagram,</li>
+				<li>easily integrable within your own web site,</li>
+				<li>3 different ways to provide the data (list/number/list+number),</li>
+				<li>control the click callback function.</li>
+				<li>export the venn diagram to PNG</li>
+			</ul></p>
+        	<p><a href="./documentation.html" class="btn btn-primary btn-large">Learn more »</a></p>
+      </div>
+      
+      <!-- Example row of columns -->
+      <div class="row">
+		  <div class="span6">
+  			<h2>Documentation</h2>
+  			<p>Having problems implementing html2canvas? Check out our documentation on how to use the script.</p>
+  			<p><a class="btn" href="./documentation.html">Read documentation &raquo;</a></p>
+		  </div>
+		  <div class="span6">
+		  	<h2>Examples</h2>
+		  	<p>Check out the different examples and tests available for jQuery Venny.</p>
+		  	<p><a class="btn" href="./example.html">View examples &raquo;</a></p>
+          </div>
+      </div>
+      <hr>
+      <footer>
+  		<p>Copyright &copy; 2013, INRA | Designed by <a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo</a> team.</p>
+      </footer>
+    </div>
+</body>
 </html>
