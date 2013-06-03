@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Venny</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+		<link href="http://twitter.github.io/bootstrap/assets/css/docs.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.venny.js"></script>
+		<script language="Javascript">
+		$(document).ready(function () {
+		
+			function getArrayFromArea(areaID) {
+				var lines = $("#"+areaID).val().split("\n");
+				var table = new Array();
+				for (var lindex in lines) {
+					table.push(lines[lindex]);
+				}
+				return (table);
+			}
+		
+			function updateVenny() {
+				var seriesTable = new Array();
+				if ($("#area1").val() != "") {
+					seriesTable.push({
+						name: $("#name1").val(),
+						data: getArrayFromArea("area1")
+					});
+				}
+		           if ($("#area2").val() != "") { 
+		            seriesTable.push({   
+		                name: $("#name2").val(),
+		                data: getArrayFromArea("area2")
+		            });
+		           }
+		           if ($("#area3").val() != "") { 
+		            seriesTable.push({   
+		                name: $("#name3").val(),
+		                data: getArrayFromArea("area3")
+		            });
+		           }
+		           if ($("#area4").val() != "") { 
+		            seriesTable.push({   
+		                name: $("#name4").val(),
+		                data: getArrayFromArea("area4")
+		            });
+		           }
+		           if ($("#area5").val() != "") { 
+		            seriesTable.push({   
+		                name: $("#name5").val(),
+		                data: getArrayFromArea("area5")
+		            });
+		           }
+		
+				$("#venny-container").venny({
+					series: seriesTable,
+					fnClickCallback: function() {
+						var value = "";
+						if (this.listnames.length == 1) {
+							value += "Elements only in ";
+						} else {
+							value += "Common elements in ";
+						}
+						for (name in this.listnames) {
+							value += this.listnames[name] + " ";
+						}
+						value += ":\n";
+						for (val in this.list) {
+							value += this.list[val] + "\n";
+						}
+						$("#names").val(value);
+					}
+				});
+			}
+		
+			$("#setexample").click(function() {
+				$("#name1").val("Actors");
+				$("#area1").val("Marilyn Monroe\nArnold Schwarzenegger\nJack Nicholson\nBarbra Streisand\nRobert de Niro\nDean Martin\nHarrison Ford");
+				$("#name2").val("Singers");
+				$("#area2").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
+				updateVenny();
+			});
+		
+			$('[id^="clear"]').click(function() {
+				var index = $(this).attr("id").split("_")[1];
+				$("#area" + index).val("");
+				$("#name" + index).val("List " + index);
+				updateVenny();
+			});
+			
+			// update the view when any fields change
+			$("[id^=name]").change(function() {
+				updateVenny();
+			});
+			$("[id^=area]").change(function() {
+					updateVenny();
+			});
+		
+			// first init of the venny plugin
+			$("#venny-container").venny({ series: [] });
+		});
+		</script>
+	</head>
+		<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+        		<div class="container">
+          			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+         			 </button>
+          			<a class="brand" href="#">jQuery Venny</a>
+          			<div class="nav-collapse collapse">
+           				<ul class="nav">
+		          			<li><a href="./index.html">Home</a></li>
+							<li><a href="./documentation.html">Documentation</a></li>
+							<li class="active"><a href="./example.html">Example</a></li>
+							<li><a href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil" target=_blank"">About</a></li>
+							<li><a href="#">Contact</a></li>
+            			</ul>
+          			</div><!--/.nav-collapse -->
+        		</div>
+      		</div>
+    	</div>
+    	<div class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="tx-venny-pi1">
+						<table cellspacing="8" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td id="venny-container" valign="center" height="100%" style="padding: 0px;"></td>
+									<td valign="bottom">
+										<p class="bodytext"> Paste up to <strong>five</strong> lists using one row per element, then click the numbers to see the results. <a id="setexample" href="javascript:void(0)"> example </a></p>
+										<br />
+										<dt>
+											<input id="name1" type="textbox" style="color: #228B22; font-weight: bold;" value="List 1" maxlength="11" size="18" />
+											<br />
+											<textarea id="area1" wrap="off" rows="4" style="width: 100%;"></textarea>
+										</dt>
+										<dt style="width: 100%; text-align: right;"> <a id="clear_1" href="javascript:void(0)">clear</a> </dt>
+										<dt>
+											<input id="name2" type="textbox" style="color: #3366BB; font-weight: bold;" value="List 2" maxlength="11" size="18" />
+											<br />
+											<textarea id="area2" wrap="off" rows="4" style="width: 100%;"></textarea>
+										</dt>
+										<dt style="width: 100%; text-align: right;"> <a id="clear_2" href="javascript:void(0)">clear</a> </dt>
+										<dt>
+											<input id="name3" type="textbox" style="color: #99334E; font-weight: bold;" value="List 3" maxlength="11" size="18" />
+											<br />
+											<textarea id="area3" wrap="off" rows="4" style="width: 100%;"></textarea>
+										</dt>
+										<dt style="width: 100%; text-align: right;"> <a id="clear_3" href="javascript:void(0)">clear</a> </dt>
+										<dt>
+											<input id="name4" type="textbox" style="color: #FFD700; font-weight: bold;" value="List 4" maxlength="11" size="18" />
+											<br />
+											<textarea id="area4" wrap="off" rows="4" style="width: 100%;"></textarea>
+										</dt>
+										<dt style="width: 100%; text-align: right;"> <a id="clear_4" href="javascript:void(0)">clear</a> </dt>
+										<dt>
+											<input id="name5" type="textbox" style="color: #FFA54F; font-weight: bold;" value="List 5" maxlength="11" size="18" />
+											<br />
+											<textarea id="area5" wrap="off" rows="4" style="width: 100%;"></textarea>
+										</dt>
+										<dt style="width: 100%; text-align: right;"> <a id="clear_5" href="javascript:void(0)">clear</a> </dt>
+									</td>
+								</tr>
+								<tr>
+									<td valign="bottom" colspan="2">
+										<p> Click on a number to show the corresponding elements: </p>
+										<textarea id="names" wrap="off" style="width: 100%;" rows="8"></textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div> <!-- /container -->	
+		<footer class="footer" style="background-color:#e5e5e5;">
+	      	<div class="container">
+	        		<p>Copyright &copy; 2013, INRA | Designed by GenoToul Bioinfo team.</p>
+	        		<p>Code licensed under the GNU General Public License</p>
+	       		<ul class="footer-links" style="list-style-type: none;">
+        			<li><a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo platform</a></li>
+	       			<li class="muted">&middot;</li>
+          			<li><a href="http://www.international.inra.fr/" target="_blank">INRA</a></li>
+        		</ul>
+      		</div>
+    	</footer>
+	</body>
+</html>
