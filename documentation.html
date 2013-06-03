@@ -1,65 +1,145 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>jQuery Venny</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
-		<link href="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
-		<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-		<link href="http://twitter.github.io/bootstrap/assets/css/docs.css" rel="stylesheet" media="screen">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
-		<script src="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-	</head>
-	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
-      		<div class="navbar-inner">
-        		<div class="container">
-          			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            			<span class="icon-bar"></span>
-            			<span class="icon-bar"></span>
-            			<span class="icon-bar"></span>
-         			 </button>
-          			<a class="brand" href="#">jQuery Venny</a>
-          			<div class="nav-collapse collapse">
-           				<ul class="nav">
-		          			<li><a href="./index.html">Home</a></li>
-							<li class="active"><a href="./documentation.html">Documentation</a></li>
-							<li><a href="./example.html">Example</a></li>
-							<li><a href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil" target=_blank"">About</a></li>
-							<li><a href="#">Contact</a></li>
-            			</ul>
-          			</div><!--/.nav-collapse -->
-        		</div>
-      		</div>
-    	</div>
-		<div class="container">
-			<div class="row">
-				<div class="span3 bs-docs-sidebar">
-			    	<ul class="nav nav-list bs-docs-sidenav">
-						<li><a href="#plugin-insertion"><i class="icon-chevron-right"></i>Plugin insertion</a></li>
-						<li><a href="#plugin-options"><i class="icon-chevron-right"></i>Plugin options</a></li>
-			    	</ul>
-			  	</div>
-			  	<div class="span9">
-					<!-- Plugin Insertion
-					================================================== -->
-					<section id="plugin-insertion">
-						<div class="page-header">
-					    	<h1>Plugin insertion</h1>
-						</div>
-					  	<p>In order to use jquery.venny, you need to download tar file and import within your web page: </p>
-					  	<ul>
-					  		<li>jQuery v1.6.x or higher </li>
-					  		<li>jquery.venny.min.js </li>
-					  	</ul>
-					  	<div class="bs-docs-example">
-					  		<p>Take a peek at the code below, a single function call to initialise the venn diagram is all it takes:</p> 
-					  	</div>
-					  	<pre class="prettyprint linenums">
-/*
-* Example init
-*/
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+
+	<title>Jquery.venny</title>
+	<!-- Le styles -->
+	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
+
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+		.bs-docs-sidenav {
+		    width: 258px;
+		}
+		.bs-docs-sidenav {
+		    background-color: #FFFFFF;
+		    border-bottom-left-radius: 6px;
+		    border-bottom-right-radius: 6px;
+		    border-top-left-radius: 6px;
+		    border-top-right-radius: 6px;
+		    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+		    margin-bottom: 0;
+		    margin-left: 0;
+		    margin-right: 0;
+		    margin-top: 30px;
+		    padding-bottom: 0;
+		    padding-left: 0;
+		    padding-right: 0;
+		    padding-top: 0;
+		    width: 228px;
+		}
+		.bs-docs-sidenav > li:first-child > a {
+		    border-bottom-left-radius: 0;
+		    border-bottom-right-radius: 0;
+		    border-top-left-radius: 6px;
+		    border-top-right-radius: 6px;
+		}
+		.bs-docs-sidenav > li > a {
+		    -moz-border-bottom-colors: none;
+		    -moz-border-left-colors: none;
+		    -moz-border-right-colors: none;
+		    -moz-border-top-colors: none;
+		    border-bottom-color: #E5E5E5;
+		    border-bottom-style: solid;
+		    border-bottom-width: 1px;
+		    border-image-outset: 0 0 0 0;
+		    border-image-repeat: stretch stretch;
+		    border-image-slice: 100% 100% 100% 100%;
+		    border-image-source: none;
+		    border-image-width: 1 1 1 1;
+		    border-left-color-ltr-source: physical;
+		    border-left-color-rtl-source: physical;
+		    border-left-color-value: #E5E5E5;
+		    border-left-style-ltr-source: physical;
+		    border-left-style-rtl-source: physical;
+		    border-left-style-value: solid;
+		    border-left-width-ltr-source: physical;
+		    border-left-width-rtl-source: physical;
+		    border-left-width-value: 1px;
+		    border-right-color-ltr-source: physical;
+		    border-right-color-rtl-source: physical;
+		    border-right-color-value: #E5E5E5;
+		    border-right-style-ltr-source: physical;
+		    border-right-style-rtl-source: physical;
+		    border-right-style-value: solid;
+		    border-right-width-ltr-source: physical;
+		    border-right-width-rtl-source: physical;
+		    border-right-width-value: 1px;
+		    border-top-color: #E5E5E5;
+		    border-top-style: solid;
+		    border-top-width: 1px;
+		    display: block;
+		    margin-bottom: -1px;
+		    margin-left: 0;
+		    margin-right: 0;
+		    margin-top: 0;
+		    padding-bottom: 8px;
+		    padding-left: 14px;
+		    padding-right: 14px;
+		    padding-top: 8px;
+		}
+	</style>
+	<link href="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
+	<link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
+	<script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-affix.js"></script>
+	<script src="http://twitter.github.io/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      	<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="./index.html">Jquery.venny</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="./index.html">About</a></li>
+						<li class="active"><a href="./documentation.html">Documentation</a></li>
+						<li><a href="./example.html">Examples</a></li>
+						<li><a target="_blank" href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil">Sources</a></li>
+						<li><a href="mailto:support.genopole@toulouse.inra.fr">Contact</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div data-spy="affix" data-offset-top="200" class="span3 bs-docs-sidebar">
+		    	<ul class="nav nav-list bs-docs-sidenav affix-top">
+					<li class="active"><a href="#plugin-insertion">plugin insertion</a></li>
+					<li><a href="#series">series</a></li>
+					<li><a href="#fnClickCallback">fnClickCallback</a></li>
+					<li><a href="#disableClick">disableClick</a></li>
+					<li><a href="#useValues">useValues</a></li>
+					<li><a href="#exporting">exporting</a></li>
+		    	</ul>
+		  	</div>
+		  	
+		  	<div class="span9">
+
+		  		<section id="plugin-insertion">
+					<div class="page-header">
+				    	<h1>Plugin insertion</h1>
+					</div>
+				  	<p>In order to use jquery.venny, you need to download tar file and import within your web page: </p>
+				  	<ul>
+				  		<li>jQuery v1.6.x or higher </li>
+				  		<li>jquery.venny.min.js </li>
+				  	</ul>
+				  	<p>Take a peek at the code below, a single function call to initialise the venn diagram is all it takes:</p> 
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -71,32 +151,29 @@ $(document).ready(function(){
       }]
   });
 });
-						</pre>
-					</section id="plugin-options">
-						<div class="page-header">
-							<h1>Plugin options</h1>
-						</div>
-						<h3>series: the data in json</h3>
-						<div class="bs-docs-example">
-							<p> The serie can be a list of value, the plugin will then compute itself the intersections between lists. </p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+				</section>
+				
+		  		<section id="series">
+					<div class="page-header">
+				    	<h1>series: the data in json</h1>
+					</div>
+				  	<p>The serie can be a list of value, the plugin will then compute itself the intersections between lists.</p>
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-    $('#example').venny({
-      series: [{
-          name: 'Actors',
-          data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
-        }, {
-          name: 'Singers',
-          data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
-        }]
-    });
+  $('#example').venny({
+    series: [{
+        name: 'Actors',
+        data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
+      }, {
+        name: 'Singers',
+        data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
+      }]
+  });
 });
-						</pre>
-						<div class="bs-docs-example">
-							<p> The serie can also define the number of occurence for each intersections.</p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+					<p> The serie can also define the number of occurence for each intersections.</p>
+					<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -111,11 +188,9 @@ $(document).ready(function(){
      }]
   });
 });
-						</pre>
-						<div class="bs-docs-example">
-							<p>Finaly, the serie can define the list values with the number of occurence for each value.</p>
-						</div>
-						<pre class="prettyprint">
+					</pre>
+					<p>Finaly, the serie can define the list values with the number of occurence for each value.</p>
+					<pre class="prettyprint">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -129,12 +204,15 @@ $(document).ready(function(){
        }]
   });
 });
-						</pre>
-						<h3>fnClickCallback</h3>
-						<div class="bs-docs-example">
-							<p>The callback function to execute when the user click on a number.</p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+				</section>
+				
+				<section id="fnClickCallback">
+					<div class="page-header">
+				    	<h1>fnClickCallback</h1>
+					</div>
+				  	<p>The callback function to execute when the user click on a number. </p>
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -165,12 +243,15 @@ $(document).ready(function(){
     }
   });
 });
-						</pre>
-						<h3>disableClick</h3>
-						<div class="bs-docs-example">
-							<p>Default is false, if set to true, the click on the number si disabled.</p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+				</section>
+				
+				<section id="disableClick">
+					<div class="page-header">
+				    	<h1>disableClick</h1>
+					</div>
+				  	<p>Default is false, if set to true, the click on the number si disabled.</p>
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -183,12 +264,15 @@ $(document).ready(function(){
       disableClick: true
   });
 });
-						</pre>
-						<h3>useValues</h3>
-						<div class="bs-docs-example">
-							<p>Default is false, if set to true, the values provided in a mixte serie will be considered as the number of occurence of the element.</p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+				</section>
+				
+				<section id="useValues">
+					<div class="page-header">
+				    	<h1>useValues</h1>
+					</div>
+				  	<p>Default is false, if set to true, the values provided in a mixte serie will be considered as the number of occurence of the element.</p>
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -199,12 +283,15 @@ $(document).ready(function(){
       useValues: true
   });
 });
-						</pre>
-						<h3>exporting</h3>
-						<div class="bs-docs-example">
-							<p>Default is true, an export module is added to the window, if set to false the export module is disabled.</p>
-						</div>
-						<pre class="prettyprint linenums">
+					</pre>
+				</section>
+				
+				<section id="exporting">
+					<div class="page-header">
+				    	<h1>exporting</h1>
+					</div>
+				  	<p>Default is true, an export module is added to the window, if set to false the export module is disabled.</p>
+				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').venny({
     series: [{
@@ -215,51 +302,22 @@ $(document).ready(function(){
       exporting: false
   });
 });
-						</pre>						
-					</section>
-				</div>
-			</div>
-			<footer class="footer" style="background-color:#e5e5e5;">
-			<script>
-				!function ($) {
-				  $(function(){
-				    window.prettyPrint && prettyPrint()   
-				  })
-				}(window.jQuery)
-			</script>
- 	      		<div class="container">
-	        		<p>Copyright &copy; 2013, INRA | Designed by GenoToul Bioinfo and Sigenae teams.</p>
-	        		<p>Code licensed under ....</p>
-	        		<ul class="footer-links" style="list-style-type: none;">
-	          			<li><a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo platform</a></li>
-	          			<li class="muted">&middot;</li>
-	          			<li><a href="http://www.sigenae.org/" target="_blank">Sigenae platform</a></li>
-	          			<li class="muted">&middot;</li>
-	          			<li><a href="http://www.international.inra.fr/" target="_blank">INRA</a></li>
-	        		</ul>
-	      		</div>
-	    	</footer>
-		</div> <!-- /container -->
-	    <!-- Le javascript	
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-<!-- 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		<script src='http://code.jquery.com/jquery.min.js' type='text/javascript'></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
-		<script src="http://twitter.github.com/bootstrap/assets/js/holder/holder.js"></script>
-    	<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-	    <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script> -->
-	</body>
+					</pre>
+				</section>				
+		  	</div>
+		</div>
+		
+		<hr>
+		<footer>
+			<p>Copyright &copy; 2013, INRA | Designed by <a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo</a> team.</p>
+		</footer>
+	</div>
+	<script>
+     	!function ($) {
+     		$(function(){
+				window.prettyPrint && prettyPrint()   
+			})
+		}(window.jQuery)
+	</script>
+</body>
 </html>
