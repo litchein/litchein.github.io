@@ -463,6 +463,7 @@
 			if (opts.series[0].name.B) { $("#label2").html(opts.series[0].name.B); }
 			if (opts.series[0].name.C) { $("#label3").html(opts.series[0].name.C); }
 			if (opts.series[0].name.D) { $("#label4").html(opts.series[0].name.D); }
+			if (opts.series[0].name.E) { $("#label5").html(opts.series[0].name.E); }
 		}
 		
 		function getVennType() {
