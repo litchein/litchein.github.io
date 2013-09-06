@@ -506,7 +506,7 @@
 			}		
 
 			var select_form = $("#menu");
-			$("#canvasExport").on("click", function (event) {
+			$("#canvasExport").click(function (event) {
 				select_form.show();
 				if (select_form.is(":visible")){
 					$(document).mouseup(function (event){
