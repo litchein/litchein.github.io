@@ -483,11 +483,11 @@
 		
 		function addExportModule(div){
 			$t = div;
-			var div_export = '<div id="module-export" style="position: relative; left: 500px; top: -450px; width: 180px; height: 60px;">';
-			div_export += '<canvas id="canvasExport" width="30" height="20"></canvas>';
-        	div_export += '<div id="menu" style="position: relative;width: 160px; height: 30px; display:none; left: 0px; top: 2px;">';
+			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -438px; width: 25px; height: 20px;">';
+			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
+        	div_export += '<div id="menu" style="position: relative;width:160px; height:30px; display:none; right:133px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
-        	div_export += '<div id ="format-png" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
+        	div_export += '<div id ="format-png" style="text-align:center;padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
         	div_export += '</div>';
 			div_export += '</div>';
 			div_export += '</div>';
@@ -499,18 +499,33 @@
 			for (i=0;i<3;i++){
 				context.lineWidth = 3;
 				context.beginPath();
-				context.moveTo(0,2+i*7);
-				context.lineTo(100,2+i*7);
-				context.strokeStyle = "grey";
+				context.lineCap="round";
+				context.moveTo(5,5+i*5.2);
+				context.lineTo(20,5+i*5.2);
+				context.strokeStyle = "#666";
 				context.stroke();
 			}		
 
 			var select_form = $("#menu");
+			var ceColorOri = $("#canvasExport").css('background');
 			$("#canvasExport").click(function (event) {
+				$(this).css('background', 'linear-gradient(to bottom, #AECEFF, white) repeat scroll 0 0 transparent')
+				$(this).css('border', '1px solid #6688AA')
+				$('#canvasExport').unbind('mouseenter mouseleave');
 				select_form.show();
 				if (select_form.is(":visible")){
 					$(document).mouseup(function (event){
 						if (select_form.has(event.target).length === 0){
+							$("#canvasExport").css('background', ceColorOri)
+							$("#canvasExport").css('border-color', "white")
+							$("#canvasExport").hover(function() {
+								$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent')
+								$(this).css('border', '1px solid #6688AA')
+								$(this).css('border-radius', '3px')
+							}, function() {
+								$(this).css('background', ceColorOri)
+								$(this).css('border-color', "white")
+							});
 							select_form.hide();
 						}
 					});
@@ -518,8 +533,10 @@
 				var colorOrig=$("div[id^=format-]").css('background');
 				$("div[id^=format-]").hover(function() {
 					$(this).css('background', 'rgba(69,114,165,0.75)')
+					$(this).css('color', 'white')
 				}, function() {
 					$(this).css('background', colorOrig)
+					$(this).css('color', '')
 				});
 				$("#format-png").click(function(event) {
 					select_form.hide();
@@ -530,15 +547,23 @@
 						}
 					});
 				});
-//				TODO add format jpeg, pdf
+				//TODO add format jpeg, pdf
+			});
+			$("#canvasExport").hover(function() {
+				$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent')
+				$(this).css('border', '1px solid #6688AA')
+				$(this).css('border-radius', '3px')
+			}, function() {
+				$(this).css('background', ceColorOri)
+				$(this).css('border-color', "white")
 			});
 		}
 		
         this.each(function() {
             var $t = $(this);
-            $t.css({"width": "680px", "height": "450px"});
+            $t.css({"width": "500px", "height": "450px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:default;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
-			var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 550px; height: 445px;">';
+            var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 445px;">';
 			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01000"></div>';
