@@ -560,11 +560,11 @@
 			var div_legend = '<div class="module-legend">';
 			$("*[id^=label]").each(function(){
 				div_legend += '<div id="item-'+i+'" class="leg-items" style="background-color:' + $(this).css("color") + '">';
-				div_legend += '<span style="background-color:white; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">off</span></div>';
+				div_legend += '<span style="background-color:white; margin-left:13px; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">on</span></div>';
 				i += 1;
 			});
 			div_legend += '</div>';
-			div_legend += '<div id="leg-res" class="number-black leg-res"></div>';
+			div_legend += '<div id="leg-res" class="number-black leg-res">'+ $("#resultC111111").html() +'</div>';
 			$t.append(div_legend);
 			
 			$("*[id^=item]").hover(function(){
@@ -573,8 +573,8 @@
 		    },function(){
 		    	if($(this).children("span").text() === 'off') {
 					$(this).css('opacity', 0.5);
-					$(this).css('box-shadow',  'none');
-				}
+		    	}
+				$(this).css('box-shadow',  'none');
 		    });
 			$("*[id^=item]").click(function(){
 				if($(this).children("span").text() === 'off') {
@@ -617,6 +617,13 @@
 	            $("#leg-res").mouseout(function(){
 	            	$(this).removeClass("number-over");
 	            });
+	            
+	            // Add info to the number (init)
+				$("#leg-res").each(function(){
+					this.listnames = $("#resultC111111")[0].listnames;
+					this.list      = $("#resultC111111")[0].list;
+				});
+				$("#leg-res").bind("click", opts.fnClickCallback);
 			}
 		}
 		
@@ -909,8 +916,8 @@
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:default;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
            
             $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:405px;top:-150px;width:34px;height:104px}</style>').appendTo('body');
-            $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.6em;line-height:10px;opacity:0.5}</style>').appendTo('body');
-            $('<style>.leg-res{text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-214px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
+            $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.6em;line-height:10px;opacity:0.75}</style>').appendTo('body');
+            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-214px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
             
             var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 445px;">';
 			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
