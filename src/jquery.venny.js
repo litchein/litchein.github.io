@@ -71,11 +71,12 @@
             },
             disableClick: false,
             useValues: false,
-            exporting:true
+            exporting: true,
+            hideLegend: true
         };  
 		var opts = $.extend(defaults, options); 
 
-		function drawEllipse(ctx, x, y, r, w, h, a, strokecolor, fillcolor) {
+		function drawEllipse(ctx, x, y, r, w, h, a, fillcolor) {
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
 			context.beginPath();
@@ -84,236 +85,529 @@
 			context.rotate(a*Math.PI/180);
 			context.scale(w, h);
 			context.arc(0, 0, r, 0, Math.PI * 2);
-			context.lineWidth = 0.1;
-			context.strokeStyle = strokecolor;
 			context.fillStyle = fillcolor;
-			context.stroke();
 			context.fill();
 			context.restore();
 		};
 		
+		function drawTriangle(ctx, x1, y1, x2, y2, x3, y3, fillcolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			context.beginPath();
+			context.save();
+			context.moveTo(x1,y1);
+		    context.lineTo(x2,y2);
+		    context.lineTo(x3,y3);
+			context.fillStyle = fillcolor;
+			context.fill();
+			context.restore();
+		};
+		
+		function drawLine(ctx, x1, y1, x2, y2, strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+		    context.lineWidth = 1;
+		    context.beginPath();
+		    context.moveTo(x1, y1);
+		    context.lineTo(x2, y2);
+			context.strokeStyle = strokecolor;
+		    context.stroke();
+		};
+		
 		function placeObjects(vennSize) {
-			var green = "rgba(0,102,0,0.5)",
-				green2 = "rgba(0,102,0,0.75)",
-				red = "rgba(241,90,96,.5)",
-				red2 = "rgba(241,90,96,.75)",
-				blue = "rgba(90,155,212,.5)",
-				blue2 = "rgba(90,155,212,.75)",
-				yellow = "rgba(250,250,91,.5)",
-				yellow2 = "rgba(250,250,91,.75)",
-				orange = "rgba(255, 117, 0, 0.5)",
-				orange2 = "rgba(255, 117, 0, 0.75)";
+			var green   = "rgba(0,102,0, 0.5)",
+				red     = "rgba(241,90,96, 0.5)",
+				blue    = "rgba(90,155,212, 0.5)",
+				yellow  = "rgba(250,250,91, 0.5)",
+				orange  = "rgba(255,117,0, 0.5)",
+				brown   = "rgba(192,152,83, 0.5)";
 			
-			if (vennSize == 5) {
+			if (vennSize == 6) {
+				drawTriangle(1, 0,11,    254,160, 174,235, green);
+				drawTriangle(1, 188,0,   134,242, 236,202, blue);
+				drawTriangle(1, 338,52,  135,123, 191,242, red);
+				drawTriangle(1, 500,260, 163,117, 134,219, yellow);
+				drawTriangle(1, 250,415, 133,150, 203,67,  orange);
+				drawTriangle(1, 11,307,  263,81,  214,220, brown);
 				
-				drawEllipse(1,214,230,10,18.6,9.5,25,green2,green);
-				drawEllipse(1,232,187,10,18.6,9.5,98,blue2,blue);
-				drawEllipse(1,273,196,10,18.6,9.5,170,red2,red);
-				drawEllipse(1,282,238,10,18.6,9.5,62,yellow2,yellow);
-				drawEllipse(1,242,260,10,18.6,9.5,134,orange2,orange);
+				$("#label1").css("left",  35).css("top",  10).css("color", "#228B22");
+				$("#label2").css("left", 200).css("top",   5).css("color", "#3366BB");
+				$("#label3").css("left", 335).css("top",  60).css("color", "#99334E");
+				$("#label4").css("left", 410).css("top", 200).css("color", "#FFD700");
+				$("#label5").css("left", 255).css("top", 385).css("color", "#FFA54F");
+				$("#label6").css("left",  30).css("top", 300).css("color", "#c09853");
+				$("#resultC100000").css("left",  93).css("top",  90);
+				$("#resultC010000").css("left", 185).css("top",  50);
+				$("#resultC001000").css("left", 275).css("top",  80);
+				$("#resultC000100").css("left", 320).css("top", 205);
+				$("#resultC000010").css("left", 210).css("top", 275);
+				$("#resultC000001").css("left",  95).css("top", 240);
+				$("#resultC111111").css("left", 185).css("top", 170);
+
+				drawLine(1, 140, 80, 166,110, "#6ea7a8");
+				$("#resultC110000").css("left",  130).css("top",  60);
+				$("#resultC101000").css("left",  140).css("top", 117);
+				drawLine(1,  75,180, 145,185, "#bdd76f");
+				drawLine(1,  75,180,  65,175, "#bdd76f");
+				$("#resultC100100").css("left",   55).css("top", 157);
+				$("#resultC100010").css("left",  140).css("top", 145);
+				drawLine(1,  75,200, 142,190, "#a5ab6b");
+				drawLine(1,  75,200,  65,195, "#a5ab6b");
+				$("#resultC100001").css("left",   55).css("top", 177);
+				drawLine(1, 230, 80, 212,115, "#cf94a6");
+				$("#resultC011000").css("left",  230).css("top",  60);
+				$("#resultC010100").css("left",  225).css("top", 190);
+				$("#resultC010010").css("left",  190).css("top",  80);
+				$("#resultC010001").css("left",  143).css("top", 219);
+				drawLine(1, 295,145, 235,180, "#fad486");
+				$("#resultC001100").css("left",  302).css("top", 132);
+				drawLine(1, 275,270, 193,233, "#fc9159");
+				$("#resultC001010").css("left",  275).css("top", 268);
+				$("#resultC001001").css("left",  235).css("top", 110);
+				$("#resultC000110").css("left",  215).css("top", 210);
+				drawLine(1,  75,220, 140,205, "#dfcb80");
+				drawLine(1,  75,220,  65,215, "#dfcb80");
+				$("#resultC000101").css("left",   55).css("top", 197);
+				drawLine(1, 150,270, 183,230, "#dfa969");
+				$("#resultC000011").css("left",  145).css("top", 268);
+				opts.hideLegend = false;
+				
+			} else if (vennSize == 5) {
+				
+				drawEllipse(1,214,230,10,18.6,9.5,25,green);
+				drawEllipse(1,232,187,10,18.6,9.5,98,blue);
+				drawEllipse(1,273,196,10,18.6,9.5,170,red);
+				drawEllipse(1,282,238,10,18.6,9.5,62,yellow);
+				drawEllipse(1,242,260,10,18.6,9.5,134,orange);
 				
 				$("#label1").css("left", 0).css("top", 100).css("color", "#228B22");
-				$("#label2").css("left", 140).css("top", 15).css("color", "#3366BB");
+				$("#label2").css("left", 310).css("top", 15).css("color", "#3366BB");
 				$("#label3").css("left", 450).css("top", 120).css("color", "#99334E");
 				$("#label4").css("left", 410).css("top", 350).css("color", "#FFD700");
 				$("#label5").css("left", 40).css("top", 400).css("color", "#FFA54F");
-				$("#resultC10000").css("left", 60).css("top", 150);
-				$("#resultC01000").css("left", 230).css("top", 30);
-				$("#resultC00100").css("left", 420).css("top", 150);
-				$("#resultC00010").css("left", 350).css("top", 370);
-				$("#resultC00001").css("left", 130).css("top", 370);
-				$("#resultC11000").css("left", 151).css("top", 120).addClass("small-number");
-				$("#resultC10100").css("left", 110).css("top", 200);
-				$("#resultC10010").css("left", 350).css("top", 295);
-				$("#resultC10001").css("left", 125).css("top", 275).addClass("small-number");
-				$("#resultC01100").css("left", 305).css("top", 97).addClass("small-number");
-				$("#resultC01010").css("left", 205).css("top", 85);
-				$("#resultC01001").css("left", 195).css("top", 345);
-				$("#resultC00110").css("left", 380).css("top", 235).addClass("small-number");
-				$("#resultC00101").css("left", 355).css("top", 140);
-				$("#resultC00011").css("left", 262).css("top", 350).addClass("small-number");
-				$("#resultC11100").css("left", 145).css("top", 180);
-				$("#resultC11010").css("left", 167).css("top", 118).addClass("small-number");
-				$("#resultC11001").css("left", 180).css("top", 300);
-				$("#resultC10110").css("left", 365).css("top", 250).addClass("small-number");
-				$("#resultC10101").css("left", 127).css("top", 260).addClass("small-number");
-				$("#resultC10011").css("left", 305).css("top", 300);
-				$("#resultC01110").css("left", 240).css("top", 110);
-				$("#resultC01101").css("left", 317).css("top", 112).addClass("small-number");
-				$("#resultC01011").css("left", 248).css("top", 342).addClass("small-number");
-				$("#resultC00111").css("left", 340).css("top", 180);
-				$("#resultC11110").css("left", 180).css("top", 140);
-				$("#resultC11101").css("left", 160).css("top", 250);
-				$("#resultC11011").css("left", 250).css("top", 310);
-				$("#resultC10111").css("left", 330).css("top", 240);
-				$("#resultC01111").css("left", 290).css("top", 140);
-				$("#resultC11111").css("left", 245).css("top", 210);
+				$("#resultC100000").css("left", 60).css("top", 150);
+				$("#resultC010000").css("left", 230).css("top", 30);
+				$("#resultC001000").css("left", 420).css("top", 150);
+				$("#resultC000100").css("left", 350).css("top", 370);
+				$("#resultC000010").css("left", 130).css("top", 370);
+				$("#resultC110000").css("left", 151).css("top", 120).addClass("small-number");
+				$("#resultC101000").css("left", 110).css("top", 200);
+				$("#resultC100100").css("left", 350).css("top", 295);
+				$("#resultC100010").css("left", 125).css("top", 275).addClass("small-number");
+				$("#resultC011000").css("left", 305).css("top", 97).addClass("small-number");
+				$("#resultC010100").css("left", 205).css("top", 85);
+				$("#resultC010010").css("left", 195).css("top", 345);
+				$("#resultC001100").css("left", 380).css("top", 235).addClass("small-number");
+				$("#resultC001010").css("left", 355).css("top", 140);
+				$("#resultC000110").css("left", 262).css("top", 350).addClass("small-number");
+				$("#resultC111000").css("left", 145).css("top", 180);
+				$("#resultC110100").css("left", 167).css("top", 118).addClass("small-number");
+				$("#resultC110010").css("left", 180).css("top", 300);
+				$("#resultC101100").css("left", 365).css("top", 250).addClass("small-number");
+				$("#resultC101010").css("left", 127).css("top", 260).addClass("small-number");
+				$("#resultC100110").css("left", 305).css("top", 300);
+				$("#resultC011100").css("left", 240).css("top", 110);
+				$("#resultC011010").css("left", 317).css("top", 112).addClass("small-number");
+				$("#resultC010110").css("left", 248).css("top", 342).addClass("small-number");
+				$("#resultC001110").css("left", 340).css("top", 180);
+				$("#resultC111100").css("left", 180).css("top", 140);
+				$("#resultC111010").css("left", 160).css("top", 250);
+				$("#resultC110110").css("left", 250).css("top", 310);
+				$("#resultC101110").css("left", 330).css("top", 240);
+				$("#resultC011110").css("left", 290).css("top", 140);
+				$("#resultC111110").css("left", 245).css("top", 210);				
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
 			} else if (vennSize == 4) {	
 				
-				drawEllipse(1,181,238,10,18.5,11.5,40,green2,green);
-				drawEllipse(1,242,177,10,18.5,11.5,40,blue2,blue);
-				drawEllipse(1,259,177,10,18.5,11.5,140,red2,red);
-				drawEllipse(1,320,238,10,18.5,11.5,140,yellow2,yellow);
+				drawEllipse(1,181,238,10,18.5,11.5,40,green);
+				drawEllipse(1,242,177,10,18.5,11.5,40,blue);
+				drawEllipse(1,259,177,10,18.5,11.5,140,red);
+				drawEllipse(1,320,238,10,18.5,11.5,140,yellow);
 				
-				$("#label1").css("left", 5).css("top", 80).css("color", "#228B22");
+				$("#label1").css("left", 5).css("top", 70).css("color", "#228B22");
 				$("#label2").css("left", 85).css("top", 5).css("color", "#3366BB");
-				$("#label3").css("left", 380).css("top", 5).css("color", "#99334E");
-				$("#label4").css("left", 450).css("top", 80).css("color", "#FFD700");
+				$("#label3").css("left", 350).css("top", 5).css("color", "#99334E");
+				$("#label4").css("left", 428).css("top", 70).css("color", "#FFD700");
 				$("#label5").css("left", -1000).css("top", -2200);
-				$("#resultC10000").css("left", 55).css("top", 190);
-				$("#resultC01000").css("left", 140).css("top", 60);
-				$("#resultC00100").css("left", 320).css("top", 60);
-				$("#resultC00010").css("left", 420).css("top", 190);
-				$("#resultC00001").css("left", -1000).css("top", -2200);
-				$("#resultC11000").css("left", 105).css("top", 120);
-				$("#resultC10100").css("left", 120).css("top", 260);
-				$("#resultC10010").css("left", 235).css("top", 340);
-				$("#resultC10001").css("left", -1000).css("top", -2200);
-				$("#resultC01100").css("left", 235).css("top", 90);
-				$("#resultC01010").css("left", 350).css("top", 260);
-				$("#resultC01001").css("left", -1000).css("top", -2200);
-				$("#resultC00110").css("left", 370).css("top", 120);
-				$("#resultC00101").css("left", -1000).css("top", -2200);
-				$("#resultC00011").css("left", -1000).css("top", -2200);
-				$("#resultC11100").css("left", 160).css("top", 170);
-				$("#resultC11010").css("left", 300).css("top", 290);
-				$("#resultC11001").css("left", -1000).css("top", -2200);
-				$("#resultC10110").css("left", 170).css("top", 290);
-				$("#resultC10101").css("left", -1000).css("top", -2200);
-				$("#resultC10011").css("left", -1000).css("top", -2200);
-				$("#resultC01110").css("left", 310).css("top", 170);
-				$("#resultC01101").css("left", -1000).css("top", -2200);
-				$("#resultC01011").css("left", -1000).css("top", -2200);
-				$("#resultC00111").css("left", -1000).css("top", -2200);
-				$("#resultC11110").css("left", 235).css("top", 220);
-				$("#resultC11101").css("left", -1000).css("top", -2200);
-				$("#resultC11011").css("left", -1000).css("top", -2200);
-				$("#resultC10111").css("left", -1000).css("top", -2200);
-				$("#resultC01111").css("left", -1000).css("top", -2200);
-				$("#resultC11111").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 55).css("top", 190);
+				$("#resultC010000").css("left", 140).css("top", 60);
+				$("#resultC001000").css("left", 320).css("top", 60);
+				$("#resultC000100").css("left", 420).css("top", 190);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 105).css("top", 120);
+				$("#resultC101000").css("left", 120).css("top", 260);
+				$("#resultC100100").css("left", 235).css("top", 340);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", 235).css("top", 90);
+				$("#resultC010100").css("left", 350).css("top", 260);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", 370).css("top", 120);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", 160).css("top", 170);
+				$("#resultC110100").css("left", 300).css("top", 290);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", 170).css("top", 290);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", 310).css("top", 170);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", 235).css("top", 220);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
 			} else if (vennSize == 3) {
 				
-				drawEllipse(1,171,142,140,1,1,0,green2,green);
-				drawEllipse(1,327,142,140,1,1,0,blue2,blue);
-				drawEllipse(1,249,271,140,1,1,0,red2,red);
+				drawEllipse(1,171,142,120,1,1,0,green);
+				drawEllipse(1,327,142,120,1,1,0,blue);
+				drawEllipse(1,249,271,120,1,1,0,red);
 				
-				$("#label1").css("left", 10).css("top", 0).css("color", "#228B22");
-				$("#label2").css("left", 420).css("top", 0).css("color", "#3366BB");
-				$("#label3").css("left", 180).css("top", 420).css("color", "#99334E");
+				$("#label1").css("left", 55).css("top", 5).css("color", "#228B22");
+				$("#label2").css("left", 380).css("top", 5).css("color", "#3366BB");
+				$("#label3").css("left", 220).css("top", 400).css("color", "#99334E");
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
-				$("#resultC10000").css("left", 120).css("top", 100);
-				$("#resultC01000").css("left", 360).css("top", 100);
-				$("#resultC00100").css("left", 245).css("top", 330);
-				$("#resultC00010").css("left", -1000).css("top", -2200);
-				$("#resultC00001").css("left", -1000).css("top", -2200);
-				$("#resultC11000").css("left", 245).css("top", 100);
-				$("#resultC10100").css("left", 170).css("top", 220);
-				$("#resultC10010").css("left", -1000).css("top", -2200);
-				$("#resultC10001").css("left", -1000).css("top", -2200);
-				$("#resultC01100").css("left", 320).css("top", 220);
-				$("#resultC01010").css("left", -1000).css("top", -2200);
-				$("#resultC01001").css("left", -1000).css("top", -2200);
-				$("#resultC00110").css("left", -1000).css("top", -2200);
-				$("#resultC00101").css("left", -1000).css("top", -2200);
-				$("#resultC00011").css("left", -1000).css("top", -2200);
-				$("#resultC11100").css("left", 245).css("top", 175);
-				$("#resultC11010").css("left", -1000).css("top", -2200);
-				$("#resultC11001").css("left", -1000).css("top", -2200);
-				$("#resultC10110").css("left", -1000).css("top", -2200);
-				$("#resultC10101").css("left", -1000).css("top", -2200);
-				$("#resultC10011").css("left", -1000).css("top", -2200);
-				$("#resultC01110").css("left", -1000).css("top", -2200);
-				$("#resultC01101").css("left", -1000).css("top", -2200);
-				$("#resultC01011").css("left", -1000).css("top", -2200);
-				$("#resultC00111").css("left", -1000).css("top", -2200);
-				$("#resultC11110").css("left", -1000).css("top", -2200);
-				$("#resultC11101").css("left", -1000).css("top", -2200);
-				$("#resultC11011").css("left", -1000).css("top", -2200);
-				$("#resultC10111").css("left", -1000).css("top", -2200);
-				$("#resultC01111").css("left", -1000).css("top", -2200);
-				$("#resultC11111").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 120).css("top", 100);
+				$("#resultC010000").css("left", 360).css("top", 100);
+				$("#resultC001000").css("left", 245).css("top", 330);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 245).css("top", 100);
+				$("#resultC101000").css("left", 170).css("top", 220);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", 320).css("top", 220);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", 245).css("top", 175);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
 			} else if (vennSize == 2) {	
 				
-				drawEllipse(1,171,206,140,1,1,0,green2,green);
-				drawEllipse(1,327,206,140,1,1,0,blue2,blue);
+				drawEllipse(1,171,206,140,1,1,0,green);
+				drawEllipse(1,327,206,140,1,1,0,blue);
 				
 				$("#label1").css("left", 95).css("top", 40).css("color", "#228B22");
 				$("#label2").css("left", 360).css("top", 40).css("color", "#3366BB");
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
-				$("#resultC10000").css("left", 120).css("top", 195);
-				$("#resultC01000").css("left", 360).css("top", 195);
-				$("#resultC00100").css("left", -1000).css("top", -2200);
-				$("#resultC00010").css("left", -1000).css("top", -2200);
-				$("#resultC00001").css("left", -1000).css("top", -2200);
-				$("#resultC11000").css("left", 250).css("top", 195);
-				$("#resultC10100").css("left", -1000).css("top", -2200);
-				$("#resultC10010").css("left", -1000).css("top", -2200);
-				$("#resultC10001").css("left", -1000).css("top", -2200);
-				$("#resultC01100").css("left", -1000).css("top", -2200);
-				$("#resultC01010").css("left", -1000).css("top", -2200);
-				$("#resultC01001").css("left", -1000).css("top", -2200);
-				$("#resultC00110").css("left", -1000).css("top", -2200);
-				$("#resultC00101").css("left", -1000).css("top", -2200);
-				$("#resultC00011").css("left", -1000).css("top", -2200);
-				$("#resultC11100").css("left", -1000).css("top", -2200);
-				$("#resultC11010").css("left", -1000).css("top", -2200);
-				$("#resultC11001").css("left", -1000).css("top", -2200);
-				$("#resultC10110").css("left", -1000).css("top", -2200);
-				$("#resultC10101").css("left", -1000).css("top", -2200);
-				$("#resultC10011").css("left", -1000).css("top", -2200);
-				$("#resultC01110").css("left", -1000).css("top", -2200);
-				$("#resultC01101").css("left", -1000).css("top", -2200);
-				$("#resultC01011").css("left", -1000).css("top", -2200);
-				$("#resultC00111").css("left", -1000).css("top", -2200);
-				$("#resultC11110").css("left", -1000).css("top", -2200);
-				$("#resultC11101").css("left", -1000).css("top", -2200);
-				$("#resultC11011").css("left", -1000).css("top", -2200);
-				$("#resultC10111").css("left", -1000).css("top", -2200);
-				$("#resultC01111").css("left", -1000).css("top", -2200);
-				$("#resultC11111").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 120).css("top", 195);
+				$("#resultC010000").css("left", 360).css("top", 195);
+				$("#resultC001000").css("left", -1000).css("top", -2200);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 250).css("top", 195);
+				$("#resultC101000").css("left", -1000).css("top", -2200);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", -1000).css("top", -2200);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", -1000).css("top", -2200);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
 			} else {
 				
-				drawEllipse(1,246,210,140,1,1,0,green2,green);
+				drawEllipse(1,246,210,140,1,1,0,green);
 				
 				$("#label1").css("left", 230).css("top", 30).css("color", "#228B22");
 				$("#label2").css("left", -1000).css("top", -2200);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
-				$("#resultC10000").css("left", 240).css("top", 200);
-				$("#resultC01000").css("left", -1000).css("top", -2200);
-				$("#resultC00100").css("left", -1000).css("top", -2200);
-				$("#resultC00010").css("left", -1000).css("top", -2200);
-				$("#resultC00001").css("left", -1000).css("top", -2200);
-				$("#resultC11000").css("left", -1000).css("top", -2200);
-				$("#resultC10100").css("left", -1000).css("top", -2200);
-				$("#resultC10010").css("left", -1000).css("top", -2200);
-				$("#resultC10001").css("left", -1000).css("top", -2200);
-				$("#resultC01100").css("left", -1000).css("top", -2200);
-				$("#resultC01010").css("left", -1000).css("top", -2200);
-				$("#resultC01001").css("left", -1000).css("top", -2200);
-				$("#resultC00110").css("left", -1000).css("top", -2200);
-				$("#resultC00101").css("left", -1000).css("top", -2200);
-				$("#resultC00011").css("left", -1000).css("top", -2200);
-				$("#resultC11100").css("left", -1000).css("top", -2200);
-				$("#resultC11010").css("left", -1000).css("top", -2200);
-				$("#resultC11001").css("left", -1000).css("top", -2200);
-				$("#resultC10110").css("left", -1000).css("top", -2200);
-				$("#resultC10101").css("left", -1000).css("top", -2200);
-				$("#resultC10011").css("left", -1000).css("top", -2200);
-				$("#resultC01110").css("left", -1000).css("top", -2200);
-				$("#resultC01101").css("left", -1000).css("top", -2200);
-				$("#resultC01011").css("left", -1000).css("top", -2200);
-				$("#resultC00111").css("left", -1000).css("top", -2200);
-				$("#resultC11110").css("left", -1000).css("top", -2200);
-				$("#resultC11101").css("left", -1000).css("top", -2200);
-				$("#resultC11011").css("left", -1000).css("top", -2200);
-				$("#resultC10111").css("left", -1000).css("top", -2200);
-				$("#resultC01111").css("left", -1000).css("top", -2200);
-				$("#resultC11111").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 240).css("top", 200);
+				$("#resultC010000").css("left", -1000).css("top", -2200);
+				$("#resultC001000").css("left", -1000).css("top", -2200);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", -1000).css("top", -2200);
+				$("#resultC101000").css("left", -1000).css("top", -2200);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", -1000).css("top", -2200);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", -1000).css("top", -2200);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
+			}
+		}
+		
+		function addLegend(div) {
+			$t = div;
+			var i=1;
+			var div_legend = '<div class="module-legend">';
+			$("*[id^=label]").each(function(){
+				div_legend += '<div id="item-'+i+'" class="leg-items" style="background-color:' + $(this).css("color") + '">';
+				div_legend += '<span style="background-color:white; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">off</span></div>';
+				i += 1;
+			});
+			div_legend += '</div>';
+			div_legend += '<div id="leg-res" class="number-black leg-res"></div>';
+			$t.append(div_legend);
+			
+			$("*[id^=item]").hover(function(){
+		        $(this).css('opacity', 0.75);
+		        $(this).css('box-shadow',  '0px 0px 8px 1px lightgrey');
+		    },function(){
+		    	if($(this).children("span").text() === 'off') {
+					$(this).css('opacity', 0.5);
+					$(this).css('box-shadow',  'none');
+				}
+		    });
+			$("*[id^=item]").click(function(){
+				if($(this).children("span").text() === 'off') {
+					$(this).children("span").css('margin-left', '13px');
+			        $(this).css('opacity', 0.75);
+			        $(this).css('color', 'black');
+			        $(this).children("span").text('on');
+				}
+				else {
+					$(this).children("span").css('margin-left', '0px');
+					$(this).css('opacity', 0.5);
+					$(this).children("span").text('off');
+				}
+				var val = "#resultC";
+				$("*[id^=item]").each(function(){
+					if($(this).children("span").text() === 'on') { val += "1"; } else { val += "0"; }
+				});
+				if(val === "#resultC000000") {
+					$("#leg-res").text("");
+					$("#leg-res").unbind("click");
+					$("#leg-res").css('cursor', 'default')
+				}
+				else {
+					$("#leg-res").text($(val).html());
+					$("#leg-res").bind("click", opts.fnClickCallback);
+					$("#leg-res").css('cursor', 'pointer')
+				}
+				
+				// Add info to the number
+				$("#leg-res").each(function(){
+					this.listnames = $(val)[0].listnames;
+					this.list      = $(val)[0].list;
+				});
+			});
+			if (!opts.disableClick) {
+				// Add some eventlistener
+				$("#leg-res").mouseover(function(){
+	            	$(this).addClass("number-over");
+	            });
+	            $("#leg-res").mouseout(function(){
+	            	$(this).removeClass("number-over");
+	            });
 			}
 		}
 		
@@ -325,6 +619,7 @@
 			actualList[2]=new Array();
 			actualList[3]=new Array();
 			actualList[4]=new Array();
+			actualList[5]=new Array();
 			$("*[id^=resultC]").each(function(){
 				$(this).html(0);
 				$(this).addClass("number-empty");
@@ -343,7 +638,7 @@
 					}
 				}
 			}
-			for (t=0;t<5;t++) {
+			for (t=0;t<6;t++) {
 				for (tt in actualList[t]) {
 					if (classified[tt]) {
 						classified[tt]=classified[tt]+"1";
@@ -374,7 +669,14 @@
 			}
 			
 			// Update the labels
-			if (opts.series.length == 5) {
+			if (opts.series.length == 6) {
+				$("#label1").html(opts.series[0].name);
+				$("#label2").html(opts.series[1].name);
+				$("#label3").html(opts.series[2].name);
+				$("#label4").html(opts.series[3].name);
+				$("#label5").html(opts.series[4].name);
+				$("#label6").html(opts.series[5].name);
+			} else if (opts.series.length == 5) {
 				$("#label1").html(opts.series[0].name);
 				$("#label2").html(opts.series[1].name);
 				$("#label3").html(opts.series[2].name);
@@ -416,7 +718,7 @@
             		}
             	}
 				this.list = new Array();
-				var cvalue = $(this).attr("id").substring(6,12);
+				var cvalue = $(this).attr("id").substring(6,13);
 				for (cl in classified) {
 					if (classified[cl]==cvalue) {
 						this.list.push(cl);
@@ -427,43 +729,76 @@
 		
 		function fillCountVenn() {
 			// Update values
-			if (opts.series[0].data.A) { $("#resultC10000").html(opts.series[0].data.A); }
-			if (opts.series[0].data.B) { $("#resultC01000").html(opts.series[0].data.B); }
-			if (opts.series[0].data.C) { $("#resultC00100").html(opts.series[0].data.C); }
-			if (opts.series[0].data.D) { $("#resultC00010").html(opts.series[0].data.D); }
-			if (opts.series[0].data.E) { $("#resultC00001").html(opts.series[0].data.E); }
-			if (opts.series[0].data.AB) { $("#resultC11000").html(opts.series[0].data.AB); }
-			if (opts.series[0].data.AC) { $("#resultC10100").html(opts.series[0].data.AC); }
-			if (opts.series[0].data.AD) { $("#resultC10010").html(opts.series[0].data.AD); }
-			if (opts.series[0].data.AE) { $("#resultC10001").html(opts.series[0].data.AE); }
-			if (opts.series[0].data.BC) { $("#resultC01100").html(opts.series[0].data.BC); }
-			if (opts.series[0].data.BD) { $("#resultC01010").html(opts.series[0].data.BD); }
-			if (opts.series[0].data.BE) { $("#resultC01001").html(opts.series[0].data.BE); }
-			if (opts.series[0].data.CD) { $("#resultC00110").html(opts.series[0].data.CD); }
-			if (opts.series[0].data.CE) { $("#resultC00101").html(opts.series[0].data.CE); }
-			if (opts.series[0].data.DE) { $("#resultC00011").html(opts.series[0].data.DE); }
-			if (opts.series[0].data.ABC) { $("#resultC11100").html(opts.series[0].data.ABC); }
-			if (opts.series[0].data.ABD) { $("#resultC11010").html(opts.series[0].data.ABD); }
-			if (opts.series[0].data.ABE) { $("#resultC11001").html(opts.series[0].data.ABE); }
-			if (opts.series[0].data.ACD) { $("#resultC10110").html(opts.series[0].data.ACD); }
-			if (opts.series[0].data.ACE) { $("#resultC10101").html(opts.series[0].data.ACE); }
-			if (opts.series[0].data.ADE) { $("#resultC10011").html(opts.series[0].data.ADE); }
-			if (opts.series[0].data.BCD) { $("#resultC01110").html(opts.series[0].data.BCD); }
-			if (opts.series[0].data.BCE) { $("#resultC01101").html(opts.series[0].data.BCE); }
-			if (opts.series[0].data.BDE) { $("#resultC01011").html(opts.series[0].data.BDE); }
-			if (opts.series[0].data.CDE) { $("#resultC00111").html(opts.series[0].data.CDE); }
-			if (opts.series[0].data.ABCD) { $("#resultC11110").html(opts.series[0].data.ABCD); }
-			if (opts.series[0].data.ABCE) { $("#resultC11101").html(opts.series[0].data.ABCE); }
-			if (opts.series[0].data.ABDE) { $("#resultC11011").html(opts.series[0].data.ABDE); }
-			if (opts.series[0].data.ACDE) { $("#resultC10111").html(opts.series[0].data.ACDE); }
-			if (opts.series[0].data.BCDE) { $("#resultC01111").html(opts.series[0].data.BCDE); }
-			if (opts.series[0].data.ABCDE) { $("#resultC11111").html(opts.series[0].data.ABCDE); }
+			if (opts.series[0].data.A) { $("#resultC100000").html(opts.series[0].data.A); }
+			if (opts.series[0].data.B) { $("#resultC010000").html(opts.series[0].data.B); }
+			if (opts.series[0].data.C) { $("#resultC001000").html(opts.series[0].data.C); }
+			if (opts.series[0].data.D) { $("#resultC000100").html(opts.series[0].data.D); }
+			if (opts.series[0].data.E) { $("#resultC000010").html(opts.series[0].data.E); }
+			if (opts.series[0].data.F) { $("#resultC000001").html(opts.series[0].data.F); }
+			if (opts.series[0].data.AB) { $("#resultC110000").html(opts.series[0].data.AB); }
+			if (opts.series[0].data.AC) { $("#resultC101000").html(opts.series[0].data.AC); }
+			if (opts.series[0].data.AD) { $("#resultC100100").html(opts.series[0].data.AD); }
+			if (opts.series[0].data.AE) { $("#resultC100010").html(opts.series[0].data.AE); }
+			if (opts.series[0].data.AF) { $("#resultC100001").html(opts.series[0].data.AF); }
+			if (opts.series[0].data.BC) { $("#resultC011000").html(opts.series[0].data.BC); }
+			if (opts.series[0].data.BD) { $("#resultC010100").html(opts.series[0].data.BD); }
+			if (opts.series[0].data.BE) { $("#resultC010010").html(opts.series[0].data.BE); }
+			if (opts.series[0].data.BF) { $("#resultC010001").html(opts.series[0].data.BF); }
+			if (opts.series[0].data.CD) { $("#resultC001100").html(opts.series[0].data.CD); }
+			if (opts.series[0].data.CE) { $("#resultC001010").html(opts.series[0].data.CE); }
+			if (opts.series[0].data.CF) { $("#resultC001001").html(opts.series[0].data.CF); }
+			if (opts.series[0].data.DE) { $("#resultC000110").html(opts.series[0].data.DE); }
+			if (opts.series[0].data.DF) { $("#resultC000101").html(opts.series[0].data.DF); }
+			if (opts.series[0].data.EF) { $("#resultC000011").html(opts.series[0].data.EF); }
+			if (opts.series[0].data.ABC) { $("#resultC111000").html(opts.series[0].data.ABC); }
+			if (opts.series[0].data.ABD) { $("#resultC110100").html(opts.series[0].data.ABD); }
+			if (opts.series[0].data.ABE) { $("#resultC110010").html(opts.series[0].data.ABE); }
+			if (opts.series[0].data.ABF) { $("#resultC110001").html(opts.series[0].data.ABF); }
+			if (opts.series[0].data.ACD) { $("#resultC101100").html(opts.series[0].data.ACD); }
+			if (opts.series[0].data.ACE) { $("#resultC101010").html(opts.series[0].data.ACE); }
+			if (opts.series[0].data.ACF) { $("#resultC101001").html(opts.series[0].data.ACF); }
+			if (opts.series[0].data.ADE) { $("#resultC100110").html(opts.series[0].data.ADE); }
+			if (opts.series[0].data.ADF) { $("#resultC100101").html(opts.series[0].data.ADF); }
+			if (opts.series[0].data.AEF) { $("#resultC100011").html(opts.series[0].data.AEF); }
+			if (opts.series[0].data.BCD) { $("#resultC011100").html(opts.series[0].data.BCD); }
+			if (opts.series[0].data.BCE) { $("#resultC011010").html(opts.series[0].data.BCE); }
+			if (opts.series[0].data.BCF) { $("#resultC011001").html(opts.series[0].data.BCF); }
+			if (opts.series[0].data.BDE) { $("#resultC010110").html(opts.series[0].data.BDE); }
+			if (opts.series[0].data.BDF) { $("#resultC010101").html(opts.series[0].data.BDF); }
+			if (opts.series[0].data.BEF) { $("#resultC010011").html(opts.series[0].data.BEF); }
+			if (opts.series[0].data.CDE) { $("#resultC001110").html(opts.series[0].data.CDE); }
+			if (opts.series[0].data.CDF) { $("#resultC001101").html(opts.series[0].data.CDF); }
+			if (opts.series[0].data.CEF) { $("#resultC001011").html(opts.series[0].data.CEF); }
+			if (opts.series[0].data.DEF) { $("#resultC000111").html(opts.series[0].data.DEF); }
+			if (opts.series[0].data.ABCD) { $("#resultC111100").html(opts.series[0].data.ABCD); }
+			if (opts.series[0].data.ABCE) { $("#resultC111010").html(opts.series[0].data.ABCE); }
+			if (opts.series[0].data.ABCF) { $("#resultC111001").html(opts.series[0].data.ABCF); }
+			if (opts.series[0].data.ABDE) { $("#resultC110110").html(opts.series[0].data.ABDE); }
+			if (opts.series[0].data.ABDF) { $("#resultC110101").html(opts.series[0].data.ABDF); }
+			if (opts.series[0].data.ACDE) { $("#resultC101110").html(opts.series[0].data.ACDE); }
+			if (opts.series[0].data.ACDF) { $("#resultC101101").html(opts.series[0].data.ACDF); }
+			if (opts.series[0].data.BCDE) { $("#resultC011110").html(opts.series[0].data.BCDE); }
+			if (opts.series[0].data.BCDF) { $("#resultC011101").html(opts.series[0].data.BCDF); }
+			if (opts.series[0].data.CDEF) { $("#resultC001111").html(opts.series[0].data.CDEF); }
+			if (opts.series[0].data.BDEF) { $("#resultC010111").html(opts.series[0].data.BDEF); }
+			if (opts.series[0].data.BCEF) { $("#resultC011011").html(opts.series[0].data.BCEF); }
+			if (opts.series[0].data.ADEF) { $("#resultC100111").html(opts.series[0].data.ADEF); }
+			if (opts.series[0].data.ACEF) { $("#resultC101011").html(opts.series[0].data.ACEF); }
+			if (opts.series[0].data.ABEF) { $("#resultC110011").html(opts.series[0].data.ABEF); }
+			if (opts.series[0].data.ABCDE) { $("#resultC111110").html(opts.series[0].data.ABCDE); }
+			if (opts.series[0].data.ABCDF) { $("#resultC111101").html(opts.series[0].data.ABCDF); }
+			if (opts.series[0].data.ABCEF) { $("#resultC111011").html(opts.series[0].data.ABCEF); }
+			if (opts.series[0].data.ABDEF) { $("#resultC110111").html(opts.series[0].data.ABDEF); }
+			if (opts.series[0].data.ACDEF) { $("#resultC101111").html(opts.series[0].data.ACDEF); }
+			if (opts.series[0].data.BCDEF) { $("#resultC011111").html(opts.series[0].data.BCDEF); }
+			if (opts.series[0].data.ABCDEF) { $("#resultC111111").html(opts.series[0].data.ABCDEF); }
 			// Update the labels
 			if (opts.series[0].name.A) { $("#label1").html(opts.series[0].name.A); }
 			if (opts.series[0].name.B) { $("#label2").html(opts.series[0].name.B); }
 			if (opts.series[0].name.C) { $("#label3").html(opts.series[0].name.C); }
 			if (opts.series[0].name.D) { $("#label4").html(opts.series[0].name.D); }
 			if (opts.series[0].name.E) { $("#label5").html(opts.series[0].name.E); }
+			if (opts.series[0].name.F) { $("#label6").html(opts.series[0].name.F); }
 		}
 		
 		function getVennType() {
@@ -563,49 +898,89 @@
             var $t = $(this);
             $t.css({"width": "500px", "height": "450px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:default;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
+           
+            $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:405px;top:-150px;width:34px;height:104px}</style>').appendTo('body');
+            $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.6em;line-height:10px;opacity:0.5}</style>').appendTo('body');
+            $('<style>.leg-res{text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-214px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
+            
             var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 445px;">';
 			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10000"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01000"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00100"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00010"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00001"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11000"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10100"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10010"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10001"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01100"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01010"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01001"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00110"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00101"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00011"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11100"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11010"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11001"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10110"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10101"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10011"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01110"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01101"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01011"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC00111"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11110"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11101"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11011"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC10111"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC01111"></div>';
-			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC11111"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(255,215,0);" id="label1"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(153,51,78);" id="label2"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111000"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111100"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111010"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111110"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC000111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC011111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC101111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC110111"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111001"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111011"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111101"></div>';
+			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111111"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(255,215,0);"  id="label1"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(153,51,78);"  id="label2"></div>';
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(51,102,187);" id="label3"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(34,139,34);" id="label4"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(34,139,34);"  id="label4"></div>';
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(255,165,79);" id="label5"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; color: rgb(255,165,79);" id="label6"></div>';
 			div_content += '</div>';
             $t.html(div_content);
 
             var type = getVennType();
+            
             placeObjects(type[1]);
+            
             if (type[0] == "list") {
             	fillListVenn();
             } else if (type[0] == "count") {
@@ -614,6 +989,9 @@
             
             if (opts.exporting === true){
             	addExportModule($t);
+            }
+            if (opts.hideLegend === false) {
+            	addLegend($t);
             }
         });
         return this;
