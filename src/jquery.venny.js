@@ -72,7 +72,7 @@
             disableClick: false,
             useValues: false,
             exporting: true,
-            hideLegend: true
+            displayMode: 'classic'
         };  
 		var opts = $.extend(defaults, options); 
 
@@ -114,7 +114,7 @@
 		    context.stroke();
 		};
 		
-		function placeObjects(vennSize) {
+		function placeClassicVenn(vennSize) {
 			var green   = "rgba(0,102,0, 0.5)",
 				red     = "rgba(241,90,96, 0.5)",
 				blue    = "rgba(90,155,212, 0.5)",
@@ -170,7 +170,6 @@
 				$("#resultC000101").css("left",   55).css("top", 197);
 				drawLine(1, 150,270, 183,230, "#dfa969");
 				$("#resultC000011").css("left",  145).css("top", 268);
-				opts.hideLegend = false;
 				
 			} else if (vennSize == 5) {
 				
@@ -542,6 +541,16 @@
 				$("#resultC101111").css("left", -1000).css("top", -2200);
 				$("#resultC011111").css("left", -1000).css("top", -2200);
 				$("#resultC111111").css("left", -1000).css("top", -2200);
+			}
+		}
+		
+		function placeEdwardsVenn(vennSize) {
+			if (vennSize == 6) {
+			} else if (vennSize == 5) {
+			} else if (vennSize == 4) {
+			} else if (vennSize == 3) {
+			} else if (vennSize == 2) {
+			} else {
 			}
 		}
 		
@@ -978,21 +987,21 @@
             $t.html(div_content);
 
             var type = getVennType();
-            
-            placeObjects(type[1]);
+            if (opts.displayMode == 'edwards') {
+            	placeEdwardsVenn(type[1]);
+            } else {
+            	placeClassicVenn(type[1]);
+            }
             
             if (type[0] == "list") {
             	fillListVenn();
             } else if (type[0] == "count") {
             	fillCountVenn();
             }
-            
-            if (opts.exporting === true){
-            	addExportModule($t);
-            }
-            if (opts.hideLegend === false) {
-            	addLegend($t);
-            }
+            // if the exporting modul is requested
+            if (opts.exporting === true){ addExportModule($t); }
+            // if a 6 classes diagram is requested
+            if (type[1] == 6 && opts.displayMode == 'classic') { addLegend($t); }
         });
         return this;
 	};

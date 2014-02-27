@@ -42,6 +42,7 @@
 				<ul class="nav nav-list bs-docs-sidenav affix">
 					<li class="active"><a href="#plugin-insertion"><i class="icon-chevron-right"></i> plugin insertion</a></li>
 					<li><a href="#series"><i class="icon-chevron-right"></i> series</a></li>
+					<li><a href="#displayType"><i class="icon-chevron-right"></i> displayType</a></li>
 					<li><a href="#fnClickCallback"><i class="icon-chevron-right"></i> fnClickCallback</a></li>
 					<li><a href="#disableClick"><i class="icon-chevron-right"></i> disableClick</a></li>
 					<li><a href="#useValues"><i class="icon-chevron-right"></i> useValues</a></li>
@@ -123,6 +124,21 @@ $(document).ready(function(){
           data: ["Otu1", "Otu5", "Otu6", "Otu7"],
           values: [234, 29, 239, 5]
        }]
+  });
+});
+					</pre>
+				</section>
+				
+				<section id="displayType">
+					<div class="page-header">
+				    	<h1>displayType</h1>
+					</div>
+				  	<p>The default value is 'classic' to have a classical venn diagram to be displayed. If you want a Edwards-Venn diagram display,
+				  	just set this option to 'edwards'. Available values for this parameters are: 'classic', 'edwards'.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').venny({
+    displayType: 'edwards'
   });
 });
 					</pre>
