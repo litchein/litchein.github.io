@@ -76,7 +76,7 @@
         };  
 		var opts = $.extend(defaults, options); 
 
-		function drawEllipse(ctx, x, y, r, w, h, a, fillcolor) {
+		function drawEllipse(x, y, r, w, h, a, fillcolor) {
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
 			context.beginPath();
@@ -90,7 +90,7 @@
 			context.restore();
 		};
 		
-		function drawTriangle(ctx, x1, y1, x2, y2, x3, y3, fillcolor) {
+		function drawTriangle(x1, y1, x2, y2, x3, y3, fillcolor) {
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
 			context.beginPath();
@@ -103,7 +103,7 @@
 			context.restore();
 		};
 		
-		function drawLine(ctx, x1, y1, x2, y2, strokecolor) {
+		function drawLine(x1, y1, x2, y2, strokecolor) {
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
 		    context.lineWidth = 1;
@@ -114,8 +114,156 @@
 		    context.stroke();
 		};
 		
+		function drawCircle(x, y, r, w, h, a, strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			context.beginPath();
+			context.save();
+			context.translate(x, y);
+			context.rotate(a*Math.PI/180);
+			context.scale(w, h);
+			context.arc(0, 0, r, 0, Math.PI * 2);
+		    context.lineWidth = 3;
+			context.strokeStyle = strokecolor;
+		    context.stroke();
+			context.restore();
+		};
+		
+		function drawDoubleCircle(strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			var counterClockwise = false;
+			
+			context.strokeStyle = strokecolor;
+			context.lineWidth = 3;
+			// Circles
+			context.beginPath();
+			context.arc(120, 205, 90, 0.25 * Math.PI, 1.75 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(370, 205, 90, 1.25 * Math.PI, 0.75 * Math.PI, counterClockwise);
+			context.stroke();
+			// Arcs
+			context.beginPath();
+			context.arc(245, 360, 110, 1.3 * Math.PI,  1.7 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(245, 50, 110, 0.3 * Math.PI,  0.7 * Math.PI, counterClockwise);
+			context.stroke();
+		};
+		
+		function drawCross(strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			var counterClockwise = false;
+			
+			context.strokeStyle = strokecolor;
+			context.lineWidth = 3;
+			context.beginPath();
+			context.arc(145, 205, 40, 0.35 * Math.PI, 1.65 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(345, 205, 40, 1.35 * Math.PI, 0.65 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(245, 100, 40, 0.8 * Math.PI, 2.2 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(245, 310, 40, 1.82 * Math.PI, 1.18 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(182, 140, 35, 1.84 * Math.PI, 0.7 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(308, 140, 35, 0.3 * Math.PI, 1.18 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(182, 270, 35, 1.3 * Math.PI, 0.2 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(308, 270, 35, 0.8 * Math.PI, 1.7 * Math.PI, counterClockwise);
+			context.stroke();
+		};
+		
+		function drawCross2(strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			var counterClockwise = false;
+			
+			context.strokeStyle = strokecolor;
+			context.lineWidth = 3;
+			context.beginPath();
+			context.arc(151, 205, 18, 0.4 * Math.PI, 1.6 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(167, 238, 18, 1.35 * Math.PI, 2.42 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(180, 272, 18, 0.18 * Math.PI, 1.33 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(212, 289, 18, 1.15 * Math.PI, 2.1 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(245, 302, 18, 1.85 * Math.PI, 1.15 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(279, 289, 18, 0.87 * Math.PI, 1.85 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(311, 272, 18, 1.65 * Math.PI, 0.85 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(325, 238, 18, 0.54 * Math.PI, 1.68 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(340, 205, 18, 1.37 * Math.PI, 0.59 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(325, 172, 18, 0.35 * Math.PI, 1.4 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(311, 138, 18, 1.15 * Math.PI, 2.35 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(279, 122, 18, 0.17 * Math.PI, 1.1 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(245, 108, 18, 0.8 * Math.PI, 2.15 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(212, 122, 18, 1.9 * Math.PI, 0.85 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(180, 138, 18, 0.65 * Math.PI, 1.85 * Math.PI, counterClockwise);
+			context.stroke();
+			context.beginPath();
+			context.arc(167, 172, 18, 1.6 * Math.PI, 0.7 * Math.PI, counterClockwise);
+			context.stroke();
+		};
+		
+		function drawRoundRect(x, y, width, height, strokecolor) {
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+		    var radius = 10;
+		    context.beginPath();
+		    context.moveTo(x + radius, y);
+		    context.lineTo(x + width - radius, y);
+		    context.quadraticCurveTo(x + width, y, x + width, y + radius);
+		    context.lineTo(x + width, y + height - radius);
+		    context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+		    context.lineTo(x + radius, y + height);
+		    context.quadraticCurveTo(x, y + height, x, y + height - radius);
+		    context.lineTo(x, y + radius);
+		    context.quadraticCurveTo(x, y, x + radius, y);
+		    context.closePath();
+		    context.lineWidth = 3;
+		    context.strokeStyle = strokecolor;
+		    context.stroke();
+		};
+		
 		function placeClassicVenn(vennSize) {
-			var green   = "rgba(0,102,0, 0.5)",
+			var green	= "rgba(0,102,0, 0.5)",
 				red     = "rgba(241,90,96, 0.5)",
 				blue    = "rgba(90,155,212, 0.5)",
 				yellow  = "rgba(250,250,91, 0.5)",
@@ -123,12 +271,12 @@
 				brown   = "rgba(192,152,83, 0.5)";
 			
 			if (vennSize == 6) {
-				drawTriangle(1, 0,11,    254,160, 174,235, green);
-				drawTriangle(1, 188,0,   134,242, 236,202, blue);
-				drawTriangle(1, 338,52,  135,123, 191,242, red);
-				drawTriangle(1, 500,260, 163,117, 134,219, yellow);
-				drawTriangle(1, 250,415, 133,150, 203,67,  orange);
-				drawTriangle(1, 11,307,  263,81,  214,220, brown);
+				drawTriangle(0,11,    254,160, 174,235, green);
+				drawTriangle(188,0,   134,242, 236,202, blue);
+				drawTriangle(338,52,  135,123, 191,242, red);
+				drawTriangle(500,260, 163,117, 134,219, yellow);
+				drawTriangle(250,415, 133,150, 203,67,  orange);
+				drawTriangle(11,307,  263,81,  214,220, brown);
 				
 				$("#label1").css("left",  35).css("top",  10).css("color", "#228B22");
 				$("#label2").css("left", 200).css("top",   5).css("color", "#3366BB");
@@ -144,46 +292,47 @@
 				$("#resultC000001").css("left",  95).css("top", 240);
 				$("#resultC111111").css("left", 185).css("top", 170);
 
-				drawLine(1, 140, 80, 166,110, "#6ea7a8");
+				drawLine(140, 80, 166,110, "#6ea7a8");
 				$("#resultC110000").css("left",  130).css("top",  60);
 				$("#resultC101000").css("left",  140).css("top", 117);
-				drawLine(1,  75,180, 145,185, "#bdd76f");
-				drawLine(1,  75,180,  65,175, "#bdd76f");
+				drawLine( 75,180, 145,185, "#bdd76f");
+				drawLine( 75,180,  65,175, "#bdd76f");
 				$("#resultC100100").css("left",   55).css("top", 157);
 				$("#resultC100010").css("left",  140).css("top", 145);
-				drawLine(1,  75,200, 142,190, "#a5ab6b");
-				drawLine(1,  75,200,  65,195, "#a5ab6b");
+				drawLine( 75,200, 142,190, "#a5ab6b");
+				drawLine( 75,200,  65,195, "#a5ab6b");
 				$("#resultC100001").css("left",   55).css("top", 177);
-				drawLine(1, 230, 80, 212,115, "#cf94a6");
+				drawLine(230, 80, 212,115, "#cf94a6");
 				$("#resultC011000").css("left",  230).css("top",  60);
 				$("#resultC010100").css("left",  225).css("top", 190);
 				$("#resultC010010").css("left",  190).css("top",  80);
 				$("#resultC010001").css("left",  143).css("top", 219);
-				drawLine(1, 295,145, 235,180, "#fad486");
+				drawLine(295,145, 235,180, "#fad486");
 				$("#resultC001100").css("left",  302).css("top", 132);
-				drawLine(1, 275,270, 193,233, "#fc9159");
+				drawLine(275,270, 193,233, "#fc9159");
 				$("#resultC001010").css("left",  275).css("top", 268);
 				$("#resultC001001").css("left",  235).css("top", 110);
 				$("#resultC000110").css("left",  215).css("top", 210);
-				drawLine(1,  75,220, 140,205, "#dfcb80");
-				drawLine(1,  75,220,  65,215, "#dfcb80");
+				drawLine( 75,220, 140,205, "#dfcb80");
+				drawLine( 75,220,  65,215, "#dfcb80");
 				$("#resultC000101").css("left",   55).css("top", 197);
-				drawLine(1, 150,270, 183,230, "#dfa969");
+				drawLine(150,270, 183,230, "#dfa969");
 				$("#resultC000011").css("left",  145).css("top", 268);
 				
 			} else if (vennSize == 5) {
 				
-				drawEllipse(1,214,230,10,18.6,9.5,25,green);
-				drawEllipse(1,232,187,10,18.6,9.5,98,blue);
-				drawEllipse(1,273,196,10,18.6,9.5,170,red);
-				drawEllipse(1,282,238,10,18.6,9.5,62,yellow);
-				drawEllipse(1,242,260,10,18.6,9.5,134,orange);
+				drawEllipse(214,230,10,18.6,9.5,25,green);
+				drawEllipse(232,187,10,18.6,9.5,98,blue);
+				drawEllipse(273,196,10,18.6,9.5,170,red);
+				drawEllipse(282,238,10,18.6,9.5,62,yellow);
+				drawEllipse(242,260,10,18.6,9.5,134,orange);
 				
 				$("#label1").css("left", 0).css("top", 100).css("color", "#228B22");
 				$("#label2").css("left", 310).css("top", 15).css("color", "#3366BB");
 				$("#label3").css("left", 450).css("top", 120).css("color", "#99334E");
 				$("#label4").css("left", 410).css("top", 350).css("color", "#FFD700");
 				$("#label5").css("left", 40).css("top", 400).css("color", "#FFA54F");
+				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 60).css("top", 150);
 				$("#resultC010000").css("left", 230).css("top", 30);
 				$("#resultC001000").css("left", 420).css("top", 150);
@@ -247,18 +396,20 @@
 				$("#resultC101111").css("left", -1000).css("top", -2200);
 				$("#resultC011111").css("left", -1000).css("top", -2200);
 				$("#resultC111111").css("left", -1000).css("top", -2200);
+
 			} else if (vennSize == 4) {	
 				
-				drawEllipse(1,181,238,10,18.5,11.5,40,green);
-				drawEllipse(1,242,177,10,18.5,11.5,40,blue);
-				drawEllipse(1,259,177,10,18.5,11.5,140,red);
-				drawEllipse(1,320,238,10,18.5,11.5,140,yellow);
+				drawEllipse(181,238,10,18.5,11.5,40,green);
+				drawEllipse(242,177,10,18.5,11.5,40,blue);
+				drawEllipse(259,177,10,18.5,11.5,140,red);
+				drawEllipse(320,238,10,18.5,11.5,140,yellow);
 				
 				$("#label1").css("left", 5).css("top", 70).css("color", "#228B22");
 				$("#label2").css("left", 85).css("top", 5).css("color", "#3366BB");
 				$("#label3").css("left", 350).css("top", 5).css("color", "#99334E");
 				$("#label4").css("left", 428).css("top", 70).css("color", "#FFD700");
 				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 55).css("top", 190);
 				$("#resultC010000").css("left", 140).css("top", 60);
 				$("#resultC001000").css("left", 320).css("top", 60);
@@ -322,17 +473,19 @@
 				$("#resultC101111").css("left", -1000).css("top", -2200);
 				$("#resultC011111").css("left", -1000).css("top", -2200);
 				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else if (vennSize == 3) {
 				
-				drawEllipse(1,171,142,120,1,1,0,green);
-				drawEllipse(1,327,142,120,1,1,0,blue);
-				drawEllipse(1,249,271,120,1,1,0,red);
+				drawEllipse(171,142,120,1,1,0,green);
+				drawEllipse(327,142,120,1,1,0,blue);
+				drawEllipse(249,271,120,1,1,0,red);
 				
 				$("#label1").css("left", 55).css("top", 5).css("color", "#228B22");
 				$("#label2").css("left", 380).css("top", 5).css("color", "#3366BB");
 				$("#label3").css("left", 220).css("top", 400).css("color", "#99334E");
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 120).css("top", 100);
 				$("#resultC010000").css("left", 360).css("top", 100);
 				$("#resultC001000").css("left", 245).css("top", 330);
@@ -396,16 +549,18 @@
 				$("#resultC101111").css("left", -1000).css("top", -2200);
 				$("#resultC011111").css("left", -1000).css("top", -2200);
 				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else if (vennSize == 2) {	
 				
-				drawEllipse(1,171,206,140,1,1,0,green);
-				drawEllipse(1,327,206,140,1,1,0,blue);
+				drawEllipse(171,206,140,1,1,0,green);
+				drawEllipse(327,206,140,1,1,0,blue);
 				
 				$("#label1").css("left", 95).css("top", 40).css("color", "#228B22");
 				$("#label2").css("left", 360).css("top", 40).css("color", "#3366BB");
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 120).css("top", 195);
 				$("#resultC010000").css("left", 360).css("top", 195);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
@@ -469,15 +624,17 @@
 				$("#resultC101111").css("left", -1000).css("top", -2200);
 				$("#resultC011111").css("left", -1000).css("top", -2200);
 				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else {
 				
-				drawEllipse(1,246,210,140,1,1,0,green);
+				drawEllipse(246,210,140,1,1,0,green);
 				
 				$("#label1").css("left", 230).css("top", 30).css("color", "#228B22");
 				$("#label2").css("left", -1000).css("top", -2200);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 240).css("top", 200);
 				$("#resultC010000").css("left", -1000).css("top", -2200);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
@@ -545,12 +702,345 @@
 		}
 		
 		function placeEdwardsVenn(vennSize) {
+			var green	= "rgba(0,102,0, 0.5)",
+				red     = "rgba(241,90,96, 0.5)",
+				blue    = "rgba(90,155,212, 0.5)",
+				yellow  = "rgba(250,250,91, 0.7)",
+				orange  = "rgba(255,117,0, 0.5)",
+				brown   = "rgba(192,152,83, 0.5)";
+			
 			if (vennSize == 6) {
+				
+				drawCircle(246,206,90,1,1,0,green);
+				drawRoundRect(245,25,250,365,blue);
+				drawRoundRect(5,205,490,185,red);
+				drawDoubleCircle(yellow);
+				drawCross(orange);
+				drawCross2(brown);
+				
+				$("#label1").css("left", 297).css("top", 90).css("color", "#228B22");
+				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
+				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
+				$("#label5").css("left", 282).css("top", 45).css("color", "#FFA54F");
+				$("#label6").css("left", 297).css("top",302).css("color", "#c09853");
+			
 			} else if (vennSize == 5) {
+				
+				drawCircle(246,206,90,1,1,0,green);
+				drawRoundRect(245,25,250,365,blue);
+				drawRoundRect(5,205,490,185,red);
+				drawDoubleCircle(yellow);
+				drawCross(orange);
+			
+				$("#label1").css("left", 297).css("top", 90).css("color", "#228B22");
+				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
+				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
+				$("#label5").css("left", 282).css("top", 45).css("color", "#FFA54F");
+				$("#label6").css("left", -1000).css("top", -2200);
+		
 			} else if (vennSize == 4) {
+				
+				drawCircle(246,206,90,1,1,0,green);
+				drawRoundRect(245,25,250,365,blue);
+				drawRoundRect(5,205,490,185,red);
+				drawDoubleCircle(yellow);
+
+				$("#label1").css("left", 267).css("top", 90).css("color", "#228B22");
+				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
+				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
+				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 215).css("top", 130);
+				$("#resultC010000").css("left", 390).css("top",  70);
+				$("#resultC001000").css("left",  85).css("top", 330);
+				$("#resultC000100").css("left",  85).css("top", 150);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 265).css("top", 130);
+				$("#resultC101000").css("left", 215).css("top", 260);
+				$("#resultC100100").css("left", 200).css("top", 170);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", 390).css("top", 330);
+				$("#resultC010100").css("left", 390).css("top", 150);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left",  85).css("top", 240);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", 265).css("top", 260);
+				$("#resultC110100").css("left", 280).css("top", 170);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", 200).css("top", 220);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", 390).css("top", 240);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", 280).css("top", 220);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else if (vennSize == 3) {
+				
+				drawCircle(246,206,110,1,1,0,green);
+				drawRoundRect(245,25,250,365,blue);
+				drawRoundRect(5,205,490,185,red);
+				
+				$("#label1").css("left", 95).css("top", 75).css("color", "#228B22");
+				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
+				$("#label4").css("left", -1000).css("top", -2200);
+				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 190).css("top", 150);
+				$("#resultC010000").css("left", 390).css("top",  70);
+				$("#resultC001000").css("left",  85).css("top", 330);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 290).css("top", 150);
+				$("#resultC101000").css("left", 190).css("top", 240);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", 390).css("top", 330);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", 290).css("top", 240);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else if (vennSize == 2) {
+
+				drawCircle(246,206,110,1,1,0,green);
+				drawRoundRect(245,25,250,365,blue);
+				
+				$("#label1").css("left", 95).css("top", 75).css("color", "#228B22");
+				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label3").css("left", -1000).css("top", -2200);
+				$("#label4").css("left", -1000).css("top", -2200);
+				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 180).css("top", 195);
+				$("#resultC010000").css("left", 420).css("top", 195);
+				$("#resultC001000").css("left", -1000).css("top", -2200);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", 290).css("top", 195);
+				$("#resultC101000").css("left", -1000).css("top", -2200);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", -1000).css("top", -2200);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", -1000).css("top", -2200);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
+			
 			} else {
+				
+				drawCircle(246,210,140,1,1,0,green);
+				
+				$("#label1").css("left", 225).css("top", 30).css("color", "#228B22");
+				$("#label2").css("left", -1000).css("top", -2200);
+				$("#label3").css("left", -1000).css("top", -2200);
+				$("#label4").css("left", -1000).css("top", -2200);
+				$("#label5").css("left", -1000).css("top", -2200);
+				$("#label6").css("left", -1000).css("top", -2200);
+				$("#resultC100000").css("left", 240).css("top", 200);
+				$("#resultC010000").css("left", -1000).css("top", -2200);
+				$("#resultC001000").css("left", -1000).css("top", -2200);
+				$("#resultC000100").css("left", -1000).css("top", -2200);
+				$("#resultC000010").css("left", -1000).css("top", -2200);
+				$("#resultC110000").css("left", -1000).css("top", -2200);
+				$("#resultC101000").css("left", -1000).css("top", -2200);
+				$("#resultC100100").css("left", -1000).css("top", -2200);
+				$("#resultC100010").css("left", -1000).css("top", -2200);
+				$("#resultC011000").css("left", -1000).css("top", -2200);
+				$("#resultC010100").css("left", -1000).css("top", -2200);
+				$("#resultC010010").css("left", -1000).css("top", -2200);
+				$("#resultC001100").css("left", -1000).css("top", -2200);
+				$("#resultC001010").css("left", -1000).css("top", -2200);
+				$("#resultC000110").css("left", -1000).css("top", -2200);
+				$("#resultC111000").css("left", -1000).css("top", -2200);
+				$("#resultC110100").css("left", -1000).css("top", -2200);
+				$("#resultC110010").css("left", -1000).css("top", -2200);
+				$("#resultC101100").css("left", -1000).css("top", -2200);
+				$("#resultC101010").css("left", -1000).css("top", -2200);
+				$("#resultC100110").css("left", -1000).css("top", -2200);
+				$("#resultC011100").css("left", -1000).css("top", -2200);
+				$("#resultC011010").css("left", -1000).css("top", -2200);
+				$("#resultC010110").css("left", -1000).css("top", -2200);
+				$("#resultC001110").css("left", -1000).css("top", -2200);
+				$("#resultC111100").css("left", -1000).css("top", -2200);
+				$("#resultC111010").css("left", -1000).css("top", -2200);
+				$("#resultC110110").css("left", -1000).css("top", -2200);
+				$("#resultC101110").css("left", -1000).css("top", -2200);
+				$("#resultC011110").css("left", -1000).css("top", -2200);
+				$("#resultC111110").css("left", -1000).css("top", -2200);
+				$("#resultC000001").css("left", -1000).css("top", -2200);
+				$("#resultC100001").css("left", -1000).css("top", -2200);
+				$("#resultC010001").css("left", -1000).css("top", -2200);
+				$("#resultC001001").css("left", -1000).css("top", -2200);
+				$("#resultC000101").css("left", -1000).css("top", -2200);
+				$("#resultC000011").css("left", -1000).css("top", -2200);
+				$("#resultC110001").css("left", -1000).css("top", -2200);
+				$("#resultC101001").css("left", -1000).css("top", -2200);
+				$("#resultC100101").css("left", -1000).css("top", -2200);
+				$("#resultC100011").css("left", -1000).css("top", -2200);
+				$("#resultC011001").css("left", -1000).css("top", -2200);
+				$("#resultC010101").css("left", -1000).css("top", -2200);
+				$("#resultC010011").css("left", -1000).css("top", -2200);
+				$("#resultC001101").css("left", -1000).css("top", -2200);
+				$("#resultC001011").css("left", -1000).css("top", -2200);
+				$("#resultC000111").css("left", -1000).css("top", -2200);
+				$("#resultC111001").css("left", -1000).css("top", -2200);
+				$("#resultC110101").css("left", -1000).css("top", -2200);
+				$("#resultC110011").css("left", -1000).css("top", -2200);
+				$("#resultC101101").css("left", -1000).css("top", -2200);
+				$("#resultC101011").css("left", -1000).css("top", -2200);
+				$("#resultC100111").css("left", -1000).css("top", -2200);
+				$("#resultC011101").css("left", -1000).css("top", -2200);
+				$("#resultC011011").css("left", -1000).css("top", -2200);
+				$("#resultC010111").css("left", -1000).css("top", -2200);
+				$("#resultC001111").css("left", -1000).css("top", -2200);
+				$("#resultC111101").css("left", -1000).css("top", -2200);
+				$("#resultC111011").css("left", -1000).css("top", -2200);
+				$("#resultC110111").css("left", -1000).css("top", -2200);
+				$("#resultC101111").css("left", -1000).css("top", -2200);
+				$("#resultC011111").css("left", -1000).css("top", -2200);
+				$("#resultC111111").css("left", -1000).css("top", -2200);
 			}
 		}
 		
@@ -1008,7 +1498,7 @@
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t); }
             // if a 6 classes diagram is requested
-            if (type[1] == 6 && opts.displayMode == 'classic') { addLegend($t); }
+            if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
         });
         return this;
 	};
