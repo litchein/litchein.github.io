@@ -1529,7 +1529,7 @@
         this.each(function() {
             var $t = $(this);
             $t.css({"width": "500px", "height": "450px"});
-            $('<style>.number-black{font-weight:bold;color:#000000;cursor:default;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
+            $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.small-number{font-weight:bold;color:#FFFFFF;cursor:default;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
            
             $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:405px;top:-150px;width:34px;height:104px}</style>').appendTo('body');
             $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.6em;line-height:10px;opacity:0.75}</style>').appendTo('body');
@@ -1621,10 +1621,31 @@
             } else if (type[0] == "count") {
             	fillCountVenn();
             }
+            
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t); }
             // if a 6 classes diagram is requested
             if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
+            
+            // number hover action
+            $(".number-black").hover(
+            	function(){
+	            	var labels  = this.listnames;
+	            	$("*[id^=label]").each(function(){
+	            		if (labels.indexOf($(this).text()) < 0) {
+	            			$(this).animate({ opacity: 0.1	}, 100);
+	            		}
+	            	});
+            	},
+            	function(){
+            		var labels = this.listnames;
+                	$("*[id^=label]").each(function(){
+                		if (labels.indexOf($(this).text()) < 0) {
+	            			$(this).animate({ opacity: 1}, 100);
+                		}
+                	});
+            	}
+            );
         });
         return this;
 	};
