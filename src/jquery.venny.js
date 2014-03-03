@@ -1,7 +1,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 PF bioinformatique de Toulouse
+*  (c) 2014 PF bioinformatique de Toulouse
 *  All rights reserved
 * 
 *
