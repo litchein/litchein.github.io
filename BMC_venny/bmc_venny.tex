@@ -178,13 +178,34 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} %if any
-Text for this section.
+In many genomics projects, numerous lists containing biological identifiers are produced. Often 
+it is useful to see the overlap between different lists, enabling researchers to quickly observe 
+similarities and differences between the data sets they are analyzing. One of the most popular 
+methods to visualize the overlap and differences between data sets is the Venn diagram: a diagram 
+consisting of two or more circles in which each circle corresponds to a data set, and the overlap 
+between the circles corresponds to the overlap between the data sets. Venn diagrams are especially 
+useful when they are 'area-proportional' i.e. the sizes of the circles and the overlaps correspond 
+to the sizes of the data sets. Currently there are no programs available that can create area-proportional 
+Venn diagrams connected to a wide range of biological databases. 
 
 \parttitle{Results} %if any
-Text for this section.
+We designed a web application named BioVenn to summarize the overlap between two or three lists of 
+identifiers, using area-proportional Venn diagrams. The user only needs to input these lists of 
+identifiers in the textboxes and push the submit button. Parameters like colors and text size can 
+be adjusted easily through the web interface. The position of the text can be adjusted by 'drag-and-drop' 
+principle. The output Venn diagram can be shown as an SVG or PNG image embedded in the web application, 
+or as a standalone SVG or PNG image. The latter option is useful for batch queries. Besides the Venn diagram, 
+BioVenn outputs lists of identifiers for each of the resulting subsets. If an identifier is recognized as 
+belonging to one of the supported biological databases, the output is linked to that database. Finally, 
+BioVenn can map Affymetrix and EntrezGene identifiers to Ensembl genes. 
 
 \parttitle{Conclusions} %if any
-Text for this section.
+BioVenn is an easy-to-use web application to generate area-proportional Venn diagrams from lists of 
+biological identifiers. It supports a wide range of identifiers from the most used biological databases 
+currently available. Its implementation on the World Wide Web makes it available for use on any computer 
+with internet connection, independent of operating system and without the need to install programs locally. 
+BioVenn is freely accessible at http://www.cmbi.ru.nl/cdd/biovenn/ webcite. 
+
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,6 +221,7 @@ Text for this section.
 \kwd{edward}
 \kwd{diagram}
 \kwd{jquery}
+\kwd{javascript}
 \end{keyword}
 
 % MSC classifications codes, if any
@@ -243,8 +265,33 @@ Text for this section.
 %%
 
 \section*{Background}
+In many genomics projects and other projects handling large amounts of biological data, various lists 
+containing biological identifiers are produced, corresponding to e.g. sets of genes regulated under different 
+treatments. Often, it is useful to see the overlap between these lists. This enables researchers to quickly 
+observe similarities and differences between the data sets they are analyzing. One of the most popular methods 
+to visualize the overlap and differences between data sets is the Venn diagram, named by its inventor John Venn 
+\cite{Venn1880}. A large number of different types of Venn diagrams exist, the most popular being the three-circle 
+Venn diagram, used to visualize the overlap between three data sets. In such a diagram, the size of the circle can 
+be used to represent the size of the corresponding data set. This is called an area-proportional Venn diagram 
+[2]. Venn diagrams have been used recently to visualize gene lists [3,4]. However, these applications generate 
+diagrams with circles of equal size. 
+
+There are some computer programs available that generate area-proportional Venn Diagrams, either as rectangles 
+[5] or as polygons [6]. Drawback of these programs is that they need to be downloaded and run locally, limiting 
+their use by a wide community. There is also the Google Chart API [7], which can generate circular, area-proportional 
+Venn Diagrams, but can only have three numbers as input, and cannot do any calculations to obtain these three numbers. 
+There is currently no web application available that can generate circular, area-proportional Venn diagrams connected 
+to a wide range of biological databases, and can map different kinds of IDs to genes. In this article, we present a 
+web application named BioVenn which can generate circular, area-proportional Venn diagrams just by entering two or 
+three lists of biological IDs. IDs that can be recognized by BioVenn as belonging to a certain database, are linked 
+to that database. BioVenn currently supports cross-references to Affymetrix [8], COG [9], Ensembl [10], EntrezGene [11], 
+Gene Ontology [12], InterPro [13], IPI [14], KEGG Pathway [15], KOG [16], PhyloPat [17] and RefSeq [18]. BioVenn is based 
+on a previous version [19], which has been used in several scientific publications to visualize sets and their overlapping 
+areas [20-22]. 
 
 \section*{Implementation}
+a jquery plugin 
+all figures are a canvas object 
 
 \section*{Results and Discussion}
 
@@ -287,7 +334,7 @@ the system and for pointing out features worth developing.
 
 % if your bibliography is in bibtex format, use those commands:
 \bibliographystyle{bmc-mathphys} % Style BST file
-\bibliography{bmc_article}      % Bibliography file (usually '*.bib' )
+\bibliography{bmc_venny}      % Bibliography file (usually '*.bib' )
 
 % or include bibliography directly:
 % \begin{thebibliography}
@@ -319,42 +366,6 @@ the system and for pointing out features worth developing.
   \caption{\csentence{Sample figure title.}
       Figure legend text.}
       \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                               %%
-%% Tables                        %%
-%%                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Use of \listoftables is discouraged.
-%%
-\section*{Tables}
-\begin{table}[h!]
-\caption{Sample table title. This is where the description of the table should go.}
-      \begin{tabular}{cccc}
-        \hline
-           & B1  &B2   & B3\\ \hline
-        A1 & 0.1 & 0.2 & 0.3\\
-        A2 & ... & ..  & .\\
-        A3 & ..  & .   & .\\ \hline
-      \end{tabular}
-\end{table}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                               %%
-%% Additional Files              %%
-%%                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Additional Files}
-  \subsection*{Additional file 1 --- Sample additional file title}
-    Additional file descriptions text (including details of how to
-    view the file, if it is in a non-standard format or the file extension).  This might
-    refer to a multi-page table or a figure.
-
-  \subsection*{Additional file 2 --- Sample additional file title}
-    Additional file descriptions text.
-
 
 \end{backmatter}
 \end{document}
