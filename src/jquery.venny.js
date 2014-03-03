@@ -1476,22 +1476,22 @@
 			var select_form = $("#menu");
 			var ceColorOri = $("#canvasExport").css('background');
 			$("#canvasExport").click(function (event) {
-				$(this).css('background', 'linear-gradient(to bottom, #AECEFF, white) repeat scroll 0 0 transparent')
-				$(this).css('border', '1px solid #6688AA')
+				$(this).css('background', 'linear-gradient(to bottom, #AECEFF, white) repeat scroll 0 0 transparent');
+				$(this).css('border', '1px solid #6688AA');
 				$('#canvasExport').unbind('mouseenter mouseleave');
 				select_form.show();
 				if (select_form.is(":visible")){
 					$(document).mouseup(function (event){
 						if (select_form.has(event.target).length === 0){
-							$("#canvasExport").css('background', ceColorOri)
-							$("#canvasExport").css('border-color', "white")
+							$("#canvasExport").css('background', ceColorOri);
+							$("#canvasExport").css('border-color', "white");
 							$("#canvasExport").hover(function() {
-								$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent')
-								$(this).css('border', '1px solid #6688AA')
-								$(this).css('border-radius', '3px')
+								$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent');
+								$(this).css('border', '1px solid #6688AA');
+								$(this).css('border-radius', '3px');
 							}, function() {
-								$(this).css('background', ceColorOri)
-								$(this).css('border-color', "white")
+								$(this).css('background', ceColorOri);
+								$(this).css('border-color', "white");
 							});
 							select_form.hide();
 						}
@@ -1499,11 +1499,11 @@
 				}
 				var colorOrig=$("div[id^=format-]").css('background');
 				$("div[id^=format-]").hover(function() {
-					$(this).css('background', 'rgba(69,114,165,0.75)')
-					$(this).css('color', 'white')
+					$(this).css('background', 'rgba(69,114,165,0.75)');
+					$(this).css('color', 'white');
 				}, function() {
-					$(this).css('background', colorOrig)
-					$(this).css('color', '')
+					$(this).css('background', colorOrig);
+					$(this).css('color', '');
 				});
 				$("#format-png").click(function(event) {
 					select_form.hide();
@@ -1517,12 +1517,12 @@
 				//TODO add format jpeg, pdf
 			});
 			$("#canvasExport").hover(function() {
-				$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent')
-				$(this).css('border', '1px solid #6688AA')
-				$(this).css('border-radius', '3px')
+				$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent');
+				$(this).css('border', '1px solid #6688AA');
+				$(this).css('border-radius', '3px');
 			}, function() {
-				$(this).css('background', ceColorOri)
-				$(this).css('border-color', "white")
+				$(this).css('background', ceColorOri);
+				$(this).css('border-color', "white");
 			});
 		}
 		
