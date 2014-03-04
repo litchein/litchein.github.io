@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 
-	<title>Jquery.venny</title>
+	<title>jvenn</title>
 	<!-- Les styles -->
 	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 	<link href="css/docs.css" rel="stylesheet" media="screen">
@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="./index.html">Jquery.venny</a>
+				<a class="brand" href="./index.html">jvenn</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="./index.html">About</a></li>
@@ -55,15 +55,15 @@
 					<div class="page-header">
 				    	<h1>Plugin insertion</h1>
 					</div>
-				  	<p>In order to use jquery.venny, you need to import within your web page: </p>
+				  	<p>In order to use jvenn, you need to import within your web page: </p>
 				  	<ul>
 				  		<li><a href="http://jquery.com/">jQuery v1.6.x or higher</a></li>
-				  		<li><a href="src/jquery.venny.min.js">jquery.venny.min.js</a></li>
+				  		<li><a href="src/jvenn.min.js">jvenn.min.js</a></li>
 				  	</ul>
 				  	<p>Take a peek at the code below, a single function call to initialise the venn diagram is all it takes:</p> 
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
         name: 'Actors',
         data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
@@ -83,7 +83,7 @@ $(document).ready(function(){
 				  	<p>The serie can be a list of value, the plugin will then compute itself the intersections between lists.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
         name: 'Actors',
         data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
@@ -97,7 +97,7 @@ $(document).ready(function(){
 					<p> The serie can also define the number of occurence for each intersections.</p>
 					<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
       name: {A: 'List 1',
                   B: 'List 2',
@@ -114,7 +114,7 @@ $(document).ready(function(){
 					<p>Finaly, the serie can define the list values with the number of occurence for each value.</p>
 					<pre class="prettyprint">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
           name: 'sample1',
           data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5"],
@@ -137,7 +137,7 @@ $(document).ready(function(){
 				  	just set this option to 'edwards'. Available values for this parameters are: 'classic', 'edwards'.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     displayType: 'edwards'
   });
 });
@@ -151,7 +151,7 @@ $(document).ready(function(){
 				  	<p>The callback function to execute when the user click on a number. </p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
       name: {A: 'List 1',
                   B: 'List 2',
@@ -190,7 +190,7 @@ $(document).ready(function(){
 				  	<p>Default is false, if set to true, the click on the number si disabled.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
         name: 'Actors',
         data: ["Marilyn Monroe", "Arnold Schwarzenegger", "Jack Nicholson", "Barbra Streisand", "Robert de Niro", "Dean Martin", "Harrison Ford"]
@@ -211,7 +211,7 @@ $(document).ready(function(){
 				  	<p>Default is false, if set to true, the values provided in a mixte serie will be considered as the number of occurence of the element.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
           name: 'sample1',
           data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
@@ -230,7 +230,7 @@ $(document).ready(function(){
 				  	<p>Default is true, an export module is added to the window, if set to false the export module is disabled.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
-  $('#example').venny({
+  $('#example').jvenn({
     series: [{
           name: 'sample1',
           data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
