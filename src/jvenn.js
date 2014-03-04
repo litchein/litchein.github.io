@@ -25,7 +25,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 (function($) {
-	$.fn.venny = function(options) {
+	$.fn.jvenn = function(options) {
         var defaults = {
             series: [{
             	name: 'Actors',
