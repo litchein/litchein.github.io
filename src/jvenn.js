@@ -1115,7 +1115,7 @@
 				drawCircle(246,206,90,1,1,0,green);
 				drawRoundRect(245,25,250,365,blue);
 				drawRoundRect(5,205,490,185,red);
-				drawDoubleCircle(red);
+				drawDoubleCircle(yellow);
 
 				$("#label1").css("left", 267).css("top", 90).css("color", "#228B22");
 				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
