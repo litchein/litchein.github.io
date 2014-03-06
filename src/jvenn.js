@@ -1876,41 +1876,45 @@
             // number hover action
             $(".number-black").hover(
             	function(){
-	            	var labels  = this.listnames;
-	            	var current = this;
-	            	$("*[id^=label]").each(function(){
-	            		if (labels.indexOf($(this).text()) < 0) {
-	            			$(this).css('opacity', 0.1);
-	            		} else {
-	            			$(this).css('opacity', 0.6);
-	            		}
-	            	});
-	            	$(".number-black").each(function(){
-                		if(this != current) {
-                			$(this).css('opacity', 0.1);
-                		}
-                	});
-	            	clearCanvas();
-	            	if (opts.displayMode == 'edwards') {
-	                   	placeEdwardsVenn(type[1]);
-	                } else {
-	                   	placeClassicVenn(type[1]);
-	                }
+            		if($(this).text() !== "") {
+		            	var labels  = this.listnames;
+		            	var current = this;
+		            	$("*[id^=label]").each(function(){
+		            		if (labels.indexOf($(this).text()) < 0) {
+		            			$(this).css('opacity', 0.1);
+		            		} else {
+		            			$(this).css('opacity', 0.6);
+		            		}
+		            	});
+		            	$(".number-black").each(function(){
+	                		if(this != current) {
+	                			$(this).css('opacity', 0.1);
+	                		}
+	                	});
+		            	clearCanvas();
+		            	if (opts.displayMode == 'edwards') {
+		                   	placeEdwardsVenn(type[1]);
+		                } else {
+		                   	placeClassicVenn(type[1]);
+		                }
+            		}
             	},
             	function(){
-            		var labels = this.listnames;
-                	$("*[id^=label]").each(function(){
-            			$(this).css('opacity', 0.5);
-                	});
-                	$(".number-black").each(function(){
-                		$(this).css('opacity', 1);
-                	});
-                	clearCanvas();
-                	if (opts.displayMode == 'edwards') {
-                       	placeEdwardsVenn(type[1]);
-                    } else {
-                       	placeClassicVenn(type[1]);
-                    }
+            		if($(this).text() !== "") {
+	            		var labels = this.listnames;
+	                	$("*[id^=label]").each(function(){
+	            			$(this).css('opacity', 0.5);
+	                	});
+	                	$(".number-black").each(function(){
+	                		$(this).css('opacity', 1);
+	                	});
+	                	clearCanvas();
+	                	if (opts.displayMode == 'edwards') {
+	                       	placeEdwardsVenn(type[1]);
+	                    } else {
+	                       	placeClassicVenn(type[1]);
+	                    }
+            		}
             	}
             );
         });
