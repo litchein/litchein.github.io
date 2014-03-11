@@ -113,15 +113,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author[
-   addressref={aff1},                   % id's of addresses, e.g. {aff1,aff2}
+   addressref={aff2},                   % id's of addresses, e.g. {aff1,aff2}
+   noteref={n1},                        % id's of article notes, if any
+   email={Philippe.Bardou@toulouse.inra.fr}   % email address
+]{\inits{PB}\fnm{Philippe} \snm{Bardou}}
+\author[
+   addressref={aff1},
    corref={aff1},                       % id of corresponding address, if any
    noteref={n1},                        % id's of article notes, if any
-   email={jane.e.doe@cambridge.co.uk}   % email address
-]{\inits{JE}\fnm{Jane E} \snm{Doe}}
+   email={Jerome.Mariette@toulouse.inra.fr}
+]{\inits{JM}\fnm{J\'{e}r\^{o}me} \snm{Mariette}}
+\author[
+   addressref={aff1},
+   email={Christophe.Djemiel@toulouse.inra.fr}
+]{\inits{CD}\fnm{Christophe} \snm{Djemiel}}
 \author[
    addressref={aff1,aff2},
-   email={john.RS.Smith@cambridge.co.uk}
-]{\inits{JRS}\fnm{John RS} \snm{Smith}}
+   email={Christophe.Klopp@toulouse.inra.fr}
+]{\inits{CK}\fnm{Christophe} \snm{Klopp}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                          %%
@@ -133,18 +142,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \address[id=aff1]{%                           % unique id
-  \orgname{Department of Zoology, Cambridge}, % university, etc
-  \street{Waterloo Road},                     %
-  %\postcode{}                                % post or zip code
-  \city{London},                              % city
-  \cny{UK}                                    % country
+  \orgname{Plate-forme bio-informatique Genotoul / MIA-T, INRA}, % university, etc
+  \street{Borde Rouge},                     %
+  \postcode{31326}                                % post or zip code
+  \city{Castanet-Tolosan},                              % city
+  \cny{France}                                    % country
 }
 \address[id=aff2]{%
-  \orgname{Marine Ecology Department, Institute of Marine Sciences Kiel},
-  \street{D\"{u}sternbrooker Weg 20},
-  \postcode{24105}
-  \city{Kiel},
-  \cny{Germany}
+  \orgname{Plate-forme SIGENAE / GenPhySE, INRA}, % university, etc
+  \street{Borde Rouge},                     %
+  \postcode{31326}                                % post or zip code
+  \city{Castanet-Tolosan},                              % city
+  \cny{France}                                    % country
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,7 +195,8 @@
 Currently there is no software that provides such features.
 
 \parttitle{Conclusions} %if any
-conclusions ....
+We introduce jvenn a javascript library aiming to be part of rich WEB environments helping scientists to analyse 
+their data.
 
 \end{abstract}
 
@@ -199,9 +209,9 @@ conclusions ....
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{keyword}
-\kwd{venn}
-\kwd{edward}
-\kwd{diagram}
+\kwd{Venn}
+\kwd{Edward-Venn}
+\kwd{vizualisation}
 \kwd{jquery}
 \kwd{javascript}
 \end{keyword}
@@ -254,40 +264,38 @@ tools to explore and extract relevant knowledge from these data sets. Data analy
 production of biological identifiers (gene names, operational taxonomic unit, ...) for which it is 
 interesting to know intersections between samples. One of the most popular visualization chart is the 
 Venn diagrams \cite{Venn1880} wich allows to identify shared and unshared identifiers providing an insight 
-on the similarities between the data sets.
+on the similarities between the lists.
 
-Several Venn diagram applications are availble. Some of them such as BioVenn \cite{Hulsen2008} or venny 
-\cite{venny} provides their users a web application with text areas as inputs to enter identifiers.
-Where the first one outputs a three lists area-proportional diagram, the second one offers a four lists 
-diagram without any respect of area proportions. Canvasxpress \cite{canvasxpress} and the Google Chart API
-\cite{googleAPI}, meanwhile, are javascript libraries including Venn diagram features that can easily be 
-embedded in any WEB site. These libraries can only have as inputs numbers corresponding to each intersections
-and cannot perform any calculations to otain them.
+This type of graphs is often used to present results on WEB page. Thus, several Venn diagram applications are 
+availble. Some of them such as BioVenn \cite{Hulsen2008} or venny \cite{venny}, provide WEB 
+applications with identifiers inputs text areas. Where the first one offers only a three circles 
+area-proportional diagram, the second one offers a four lists diagram without any respect of area proportions. 
+Canvasxpress \cite{canvasxpress} and the Google Chart API \cite{googleAPI}, meanwhile, are javascript libraries 
+including Venn diagram features which can easily be embedded in any WEB site. These libraries can only handle 
+figures corresponding to each intersection but cannot perform the calculations on the lists.
 
-We intruduce jvenn a javascript library aiming to be part of rich WEB environments helping scientists to analyse 
-their data, such does already existing tools as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, 
-and jHeatmap \cite{DeuPons2014}. Jvenn handles up to 6 lists venn diagram, can display Edwards-Venn diagram
-\cite{Edwards2004}, can easily be embeded within any web site, allows to provide inputs data in three different formats 
-(list/number/list+number), allows to export the diagram to png and permits to overload the callback 
-function to control users interactions. jvenn has already been used in several scientific publications to display 
-sets and their overlapping areas \cite{Bianchia2013, Aravindraja2013}. 
+We intruduce jvenn a javascript library helping scientists to present their data, such does already existing 
+tools as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}. 
+Jvenn handles up to 6 input lists venn diagram, can display Edwards-Venn diagram \cite{Edwards2004}, can easily be 
+embeded within any web site, allows to provide inputs data in three different formats (list/number/list+number), 
+allows to export the diagram to png and permits to overload the callback function to control users interactions. 
+jvenn has already been used in several scientific publications to display sets and their overlapping areas 
+\cite{Bianchia2013, Aravindraja2013}. 
 
 
 \section*{Implementation}
 
 jvenn is a javascript library written as a jQuery plugin \cite{jquery} and can be embeded within any WEB applications 
-by referencing the javascript file from an HTML page. For researchers who want to produce a Venn diagram from their 
-identifiers, jvenn is also available as a WEB application at http://bioinfo.genotoul.fr/index.php?id=116. A full 
-documentation to insert the plugin within a WEB application is included in the software package that can be downloaded 
-from https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
+by referencing the javascript file in an HTML page. For researchers who want to produce a Venn diagram from their 
+identifiers, jvenn is also available as a WEB application at http://bioinfo.genotoul.fr/index.php?id=116. The installation
+documentation is included in the software package which can be downloaded from https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
 
 
 \section*{Results and Discussion}
 
-The jvenn output is a chart of two to six areas in which each area represents one of the identifiers set define as input. 
-The numbers of each overlaps are displayed and are clickable by the user to access the identifiers list belonging to the 
-intersection. In order to ease overlaps understanding, when the user is over an intersection number, jvenn overlights the 
-pointed classes and blurs the other ones.
+jvenn outputs a chart of two to six areas each representing an identifiers input list. Overlaps counts are displayed and 
+are clickable by the user to access the identifiers list belonging to the intersection. In order to ease overlaps understanding, 
+when the user mouse is over an intersection number, jvenn overlights the pointed classes and blurs the other ones.
 
 The library provides an option to define the data inputs: \textit{series}. The library accepts three different input formats. 
 In case the \textit{series} are a list of value, the plugin will compute itself the overlaps between lists. The \textit{series} 
@@ -296,11 +304,11 @@ The resulting display is created with the help of the javascript canvas object w
 This last feature can be disabled in order to hide the exporting button from the user by setting the \textit{exporting} option 
 to \textit{false}.
 
-jvenn handles up to six classes, what leads to display sixty three overlap numbers. Displaying and interacting with such a chart
-can be bulky and difficult. In such a case, jvenn propose a switch button panel which allows to activate or disactivate classes. 
+jvenn handles up to six classes, which leads to display sixty three overlap numbers. Displaying and interacting with such a chart
+can be bulky and difficult. In this case, jvenn proposes a switch button panel allowing to activate or disactivate classes. 
 The selected overlap number is then displayed and can be clicked just like the other ones. jvenn also provides the Edwards-Venn
 display (Fig. 2) available by setting the \textit{displayType} option to \textit{edwards}. This display gives a different 
-graphical representation of the classes which can be clearer whith a 6 classes diagram.
+graphical representation of the classes which is clearer whith a 6 classes diagram.
 The WEB application creator can also overload the callback function defining the click on an overlap number. This can be done 
 by defining the \textit{fnClickCallback} parameter. The overloading function has access to the \textit{this.listnames} and
 \textit{this.list} variables allowing the developer to control the users interactions with the jvenn plugin. This feature can
@@ -315,9 +323,9 @@ six ones used to create the Edwards-Venn diagram.
 \section*{Conclusions}
 
 jvenn is an easy-to-use library aiming to generate Venn and Edwards-Venn diagrams from lists of identifiers or from
-computed numbers. Its implementation as a javascript library allows whoever who have WEB programming skills to embed 
-it within its WEB application without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, 
-RNAbrowse \cite{Mariette} and WallProtDB \cite{SanClemente} WEB applications.
+computed numbers. Its implementation as a javascript library allows whoever has WEB programming skills to embed it 
+within its WEB application without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse 
+\cite{Mariette} and WallProtDB \cite{SanClemente} WEB applications.
 
 \section*{Availability and requirements}
 
@@ -334,10 +342,11 @@ can be found on the downloadable archive. A running version is accessible at htt
 \begin{backmatter}
 
 \section*{Competing interests}
-  The authors declare that they have no competing interests.
+The authors declare that they have no competing interests.
 
 \section*{Author's contributions}
-    Text for this section \ldots
+JM conceived and designed the project. JM, PB, and CD implemented the project. CK evaluated software capabilities, and provided 
+feedback on implementation. JM and CK wrote the manuscript. All authors read and approved the final manuscript.
 
 \section*{Acknowledgements}
 We would like to acknowledge all our users for providing us useful feedback on
@@ -385,16 +394,16 @@ the system and for pointing out features worth developing.
   \begin{figure}[h!]
   \caption{\csentence{A five lists Venn diagram.}
       A Venn diagram displaying overlaps between five different biological samples. When 
-      the user click on a number, the function called is the one specified by the application
-      developper. On the top-right, the exporting module allows the user to download its diagram
-      as a png file.}
+      the user clicks on a number, the function the application developper specified is called. 
+      On the top-right, the exporting module allows the user to download its diagram as a png 
+      file.}
       \end{figure}
 
 \begin{figure}[h!]
   \caption{\csentence{A six lists Edwards-Venn diagram.}
-      When the user is pointing a specific number, the lists involved in the intersection
-      are overlighted and the other ones are blurred. In this example, the user pointed the
-      intersection between the samples SRR068049, SRR068051 and SRR068052 which contains
+      When the user mouse is over a specific figure, the lists involved in the intersection
+      are highlighted and the other ones are fade out. In this example, the user pointed the
+      intersection between the samples SRR068049, SRR068051 and SRR068052 containing
       twelve different identifiers.}
       \end{figure}
 
