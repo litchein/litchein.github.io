@@ -47,6 +47,19 @@
 \documentclass{bmcart}
 
 %%% Load packages
+\usepackage{listings}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\lstset{
+  language=Java,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\scriptsize \ttfamily},
+  numbers=none,
+  stringstyle=\color{gray},
+  breaklines=true,
+  breakatwhitespace=true
+}
 %\usepackage{amsthm,amsmath}
 %\RequirePackage{natbib}
 %\RequirePackage{hyperref}
@@ -297,12 +310,12 @@ jvenn outputs a chart of two to six areas each representing an identifiers input
 are clickable by the user to access the identifiers list belonging to the intersection. In order to ease overlaps understanding, 
 when the user mouse is over an intersection number, jvenn overlights the pointed classes and blurs the other ones.
 
-The library provides an option to define the data inputs: \textit{series}. The library accepts three different input formats. 
-In case the \textit{series} are a list of value, the plugin will compute itself the overlaps between lists. The \textit{series} 
-can also define the number to display for each intersections or can be defined as a mix of the first two formats. 
-The resulting display is created with the help of the javascript canvas object which allows to export the chart as a png file. 
-This last feature can be disabled in order to hide the exporting button from the user by setting the \textit{exporting} option 
-to \textit{false}.
+The library provides an option to define the data inputs: \textit{series}. The library accepts three different input formats
+discribed in Table 1. In case the \textit{series} are a list of value, the plugin will compute itself the overlaps between 
+lists. The \textit{series} can also define the number to display for each intersections or can be defined as a mix of the first 
+two formats. The resulting display is created with the help of the javascript canvas object which allows to export the chart as 
+a png file. This last feature can be disabled in order to hide the exporting button from the user by setting the \textit{exporting} 
+option to \textit{false}.
 
 jvenn handles up to six classes, which leads to display sixty three overlap numbers. Displaying and interacting with such a chart
 can be bulky and difficult. In this case, jvenn proposes a switch button panel allowing to activate or disactivate classes. 
@@ -406,6 +419,52 @@ the system and for pointing out features worth developing.
       intersection between the samples SRR068049, SRR068051 and SRR068052 containing
       twelve different identifiers.}
       \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Tables                        %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Use of \listoftables is discouraged.
+%%
+\section*{Tables}
+\begin{table}[h!]
+\caption{Available formats and example for the \textit{series} option.}
+      \begin{tabular}{cccc}
+        \hline
+        format & example\\ \hline
+        list & 
+\begin{lstlisting}
+series: [{
+	name: 'sample1',
+	data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"]
+}, {
+	name: 'sample2',
+	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"]
+}]
+\end{lstlisting}\\ \hline
+        number & 
+\begin{lstlisting}
+series: [{
+	name: {A: 'sample 1', B: 'sample 2', C: 'sample 3'},
+	data: {A: 340, B: 562, C: 620, AB: 639, AC: 456, BC: 915, ABC: 552}
+}]
+\end{lstlisting}\\ \hline
+        list+number  &
+\begin{lstlisting}
+series: [{
+	name: 'sample1',
+	data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
+	values: [5, 15, 250, 20, 23, 58, 89]
+}, {
+	name: 'sample2',
+	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"],
+	values: [90, 300, 10, 2, 45, 9]
+}]
+\end{lstlisting}\\ \hline
+      \end{tabular}
+\end{table}
 
 \end{backmatter}
 \end{document}
