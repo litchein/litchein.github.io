@@ -72,7 +72,8 @@
             disableClick: false,
             useValues: false,
             exporting: true,
-            displayMode: 'classic'
+            displayMode: 'classic',
+            displayStat: 'venn'
         };  
 		var opts = $.extend(defaults, options); 
 
@@ -488,7 +489,32 @@
 		    }
 		    context.stroke();
 		};
-
+		
+		function drawAxis(context, startx, starty, endx, endy) {
+			context.beginPath();
+			context.moveTo(startx, starty);
+			context.lineTo(endx, endy);
+			context.closePath();
+			context.stroke();
+		}
+		
+		function drawRectangle(context, x, y, w, h, fillcolor, strokecolor) {			
+			context.beginPath();
+			context.rect(x, y, w, h);
+			context.closePath();
+			context.save();
+			context.lineWidth = 0.75;
+			context.shadowColor = 'grey';
+		    context.shadowBlur = 7;
+		    context.shadowOffsetX = 2;
+		    context.shadowOffsetY = -2;
+			context.strokeStyle = strokecolor;
+			context.stroke();
+			context.fillStyle = fillcolor;
+			context.fill();
+		    context.restore();
+		}
+		
 		function rgbaToObj(rgba) {
 			var	colorStr = rgba.slice(rgba.indexOf('(') + 1, rgba.indexOf(')'));
 			var	colorArr = colorStr.split(',');
@@ -504,7 +530,141 @@
 			var context = canvas.getContext("2d");
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
- 
+
+		function placeStat(vennSize) {
+			var fillcolor = new Array(5);
+			fillcolor[0] = "rgba(0,102,0,    0.5)"; //green
+			fillcolor[1] = "rgba(90,155,212, 0.5)"; //blue
+			fillcolor[2] = "rgba(241,90,96,  0.5)"; //red
+			fillcolor[3] = "rgba(250,250,91, 0.5)"; //yellow
+			fillcolor[4] = "rgba(255,117,0,  0.5)"; //orange
+			fillcolor[5] = "rgba(192,152,83, 0.5)"; //brown
+			var strokecolor = new Array(5);
+			strokecolor[0] = "rgba(0,102,0,    1)"; //green
+			strokecolor[1] = "rgba(90,155,212, 1)"; //blue
+			strokecolor[2] = "rgba(241,90,96,  1)"; //red
+			strokecolor[3] = "rgba(250,250,91, 1)"; //yellow
+			strokecolor[4] = "rgba(255,117,0,  1)"; //orange
+			strokecolor[5] = "rgba(192,152,83, 1)"; //brown
+			var axiscolor = "rgba(0,0,0, 0.7)";
+			
+			var canvas = $("#canvasEllipse")[0]; 
+			var context = canvas.getContext("2d");
+			
+			/* 
+			 * Bar chart
+			*/
+			// Data
+			var	data = sizeOfClass(),
+				dataplot = new Array();
+			var max = 0;
+			for (var i=0; i<vennSize; i++) {
+				max = Math.max(max, data[i]);
+			}
+			for (var i=0; i<vennSize; i++) {
+				dataplot.push(data[i]/max * 200);
+			}
+		
+			// Draw the bar chart
+			context.font = 'italic 11pt Calibri';
+			context.textAlign = 'center';
+		    context.fillText('Size of each class', 250, 14);
+		    context.font = 'normal 9pt Calibri';
+		    context.textAlign = 'right';
+		    context.fillText(0, 45, 253);
+		    context.fillText(max/2, 45, 154);
+		    context.fillText(max, 45, 55);
+		    context.textAlign = 'left';
+			var	h = 250,
+				xmargin = 70,
+				xspacer = 10,
+				barwidth = (370-(vennSize*xspacer))/vennSize;
+				ytext = 265;
+			for (var i=0; i<vennSize; i++) {
+				drawRectangle(context,
+							  xmargin + i*barwidth + i*xspacer,
+							  h-dataplot[i],
+							  barwidth,
+							  dataplot[i],
+							  fillcolor[i],
+							  strokecolor[i]);
+				context.textAlign = 'right';
+				if(h-dataplot[i]+15 <= 242) {
+					context.fillStyle = 'white';
+					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, h-dataplot[i]+15);
+				}
+				else {
+					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, h-dataplot[i]-10);
+				}
+				if(i%2 && vennSize>2) {	ytext = 275; }
+				else { ytext = 265; }
+				context.fillStyle = "#000";
+				context.textAlign = 'left';
+				context.fillText(opts.series[i].name, xmargin + i*barwidth + i*xspacer, ytext, 200);
+			}
+			
+			// Draw the x and y axes
+			context.lineWidth = 1;
+			context.strokeStyle = axiscolor;
+			drawAxis(context, 50, h, 50, 30); 
+			drawAxis(context, 50, h, 450, h);
+			context.lineWidth = 0.4;
+			drawAxis(context, 47, (h+50)/2, 53, (h+50)/2);
+			drawAxis(context, 47, 50, 53, 50);
+			drawTriangle(50,20, 46,30, 54,30, axiscolor);
+			drawTriangle(460,250, 450,246, 450,254, axiscolor);
+			
+			/* 
+			 * Stacked bar chart
+			*/
+			// Data
+			var	data2 = countByNbClass(),
+				data2plot = new Array();
+			var	xspacer = 4,
+				xmargin = 60,
+				maxwidth = 390 + xspacer,
+				sum = 0;
+			for (var i=0; i<vennSize; i++) {
+				sum += data2[i];
+			}
+			for (var i=0; i<vennSize; i++) {
+				data2plot.push(data2[i]/sum * maxwidth);
+			}
+			console.log(data2);
+			console.log(data2plot);
+			
+			// Draw the bar chart
+			context.font = 'italic 11pt Calibri';
+			context.textAlign = 'center';
+		    context.fillText('Number of common and specific elements', 250, 310);
+		    context.font = 'normal 9pt Calibri';
+			var xprev = 0;
+			for (var i=vennSize-1; i>=0; i--) {
+				if(data2plot[i] == 0) { continue };
+			    drawRectangle(context,
+							  xmargin + xprev,
+							  335,
+							  data2plot[i] - xspacer,
+							  50,
+							  fillcolor[i],
+							  strokecolor[i]);
+				context.textAlign = 'center';
+				context.fillStyle = 'white';
+				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, 363);
+				context.strokeStyle = axiscolor;
+				context.lineWidth = 0.4;
+				drawAxis(context, (data2plot[i] - xspacer)/2  + xmargin + xprev, 395, (data2plot[i] - xspacer)/2  + xmargin + xprev, 400);
+				context.fillStyle = '#000';
+				context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, 415);
+				xprev += data2plot[i];
+			}
+
+		    // Draw the x axis
+		    context.lineWidth = 1;
+			context.strokeStyle = axiscolor;
+			drawAxis(context, 50, 395, 460, 395);
+		}
+		
 		function placeClassicVenn(vennSize) {
 			var green	= "rgba(0,102,0, "    + $("#label1").css('opacity') + ")",
 				blue    = "rgba(90,155,212, " + $("#label2").css('opacity') + ")",
@@ -512,7 +672,7 @@
 				yellow  = "rgba(250,250,91, " + $("#label4").css('opacity') + ")",
 				orange  = "rgba(255,117,0, "  + $("#label5").css('opacity') + ")",
 				brown   = "rgba(192,152,83, " + $("#label6").css('opacity') + ")",
-				grey    = "rgba(0,0,0,0.1)" 
+				grey    = "rgba(0,0,0,0.1)";
 						
 			if (vennSize == 6) {
 				drawTriangle(0,11,    254,160, 174,235, green);
@@ -951,7 +1111,7 @@
 				red     = "rgba(241,90,96, "  + $("#label3").css('opacity') + ")",
 				yellow  = "rgba(250,250,91, " + $("#label4").css('opacity') + ")",
 				orange  = "rgba(255,117,0, "  + $("#label5").css('opacity') + ")",
-				brown   = "rgba(192,152,83, " + $("#label6").css('opacity') + ")"
+				brown   = "rgba(192,152,83, " + $("#label6").css('opacity') + ")";
 
 			if (vennSize == 6) {
 				
@@ -1605,6 +1765,32 @@
             });      
 		}
 		
+		// Return an Array with number of common and specific element (x in 1 class, y in 2 class...) 
+		function countByNbClass() {
+			var data = new Array(0,0,0,0,0,0);
+			$("*[id^=resultC]").each(function(){
+				var n = 0;
+				for (var i=6; i<$(this).attr("id").length; i++) {
+					n += $(this).attr("id").substring(i+1,i+2) == "1";
+				}
+				data[n-1] += parseInt($(this).html());
+			});
+			return data;
+		}
+		
+		// Return an Array with size of each class 
+		function sizeOfClass() {
+			var data = new Array(0,0,0,0,0,0);
+			$("*[id^=resultC]").each(function(){
+				for (var i=6; i<$(this).attr("id").length; i++) {
+					if ($(this).attr("id").substring(i+1,i+2) == "1") {
+						data[i-6] += parseInt($(this).html());
+					}
+				}
+			});
+			return data;
+		}
+		
 		function fillCountVenn() {
 			// Update values
 			if (opts.series[0].data.A) { $("#resultC100000").html(opts.series[0].data.A); }
@@ -1855,23 +2041,28 @@
 			div_content += '</div>';
             $t.html(div_content);
 
-            var type = getVennType();
-            if (opts.displayMode == 'edwards') {
-            	placeEdwardsVenn(type[1]);
-            } else {
-            	placeClassicVenn(type[1]);
-            }
-            
+            var type = getVennType(); 
             if (type[0] == "list") {
             	fillListVenn();
             } else if (type[0] == "count") {
             	fillCountVenn();
             }
             
+            if (opts.displayStat == 'gStat') {
+            	placeStat(type[1]);
+            }
+            else {
+            	if (opts.displayMode == 'edwards') {
+            		placeEdwardsVenn(type[1]);
+            	} else {
+            		placeClassicVenn(type[1]);
+            	}
+            }
+                        
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t); }
             // if a 6 classes diagram is requested
-            if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
+            if (type[1] == 6 && opts.displayMode != 'edwards' && opts.displayStat == 'venn') { addLegend($t); }
             
             // number hover action
             $(".number-black").hover(

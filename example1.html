@@ -71,6 +71,7 @@
 				$("#jvenn-container").jvenn({
 					series: seriesTable,
 					displayMode: $("#venn-type").val(),
+					displayStat: $("#venn-stat").val(),
 					fnClickCallback: function() {
 						var value = "";
 						if (this.listnames.length == 1) {
@@ -89,7 +90,6 @@
 					}
 				});
 			}
-		
 			$("#name1").val("Actors");
 			$("#area1").val("Marilyn Monroe\nArnold Schwarzenegger\nJack Nicholson\nBarbra Streisand\nRobert de Niro\nDean Martin\nHarrison Ford");
 			$("#name2").val("Singers");
@@ -111,6 +111,10 @@
 			});
 			
 			$("#venn-type").change(function() {
+				updateJvenn();
+			});
+			
+			$("#venn-stat").change(function() {
 				updateJvenn();
 			});
 			
@@ -226,7 +230,8 @@
 		<div class="hero-unit">
 			<h1>Hello venn!</h1>
 			<p class="bodytext"> Paste up to <strong>six</strong> lists using one row per element, then click 
-			the numbers in the <select id="venn-type" class="input-small" style="margin-top:5px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.</p>
+			the numbers in the <select id="venn-type" class="input-small" style="width:110px;margin-top:5px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.<br/>
+			Intead of venn general statistic about data are available : <select id="venn-stat" class="input" style="width:150px;margin-top:5px"><option value="gStat">General statistics</option><option value="venn">Venn diagram</option></select>.</p>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
