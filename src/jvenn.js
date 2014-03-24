@@ -504,7 +504,7 @@
 			context.closePath();
 			context.save();
 			context.lineWidth = 0.75;
-			context.shadowColor = 'grey';
+			context.shadowColor = "rgba(0,0,0, 0.4)";
 		    context.shadowBlur = 7;
 		    context.shadowOffsetX = 2;
 		    context.shadowOffsetY = -2;
@@ -577,7 +577,7 @@
 		    context.textAlign = 'left';
 			var	h = 250,
 				xmargin = 70,
-				xspacer = 10,
+				xspacer = 20,
 				barwidth = (370-(vennSize*xspacer))/vennSize;
 				ytext = 265;
 			for (var i=0; i<vennSize; i++) {
@@ -596,11 +596,14 @@
 				else {
 					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, h-dataplot[i]-10);
 				}
-				if(i%2 && vennSize>2) {	ytext = 275; }
-				else { ytext = 265; }
+				if(i%2 && vennSize>2) {	ytext = 280; }
+				else { ytext = 270; }
 				context.fillStyle = "#000";
-				context.textAlign = 'left';
-				context.fillText(opts.series[i].name, xmargin + i*barwidth + i*xspacer, ytext, 200);
+				context.textAlign = 'center';
+				context.fillText(opts.series[i].name, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ytext, 200);
+				context.strokeStyle = axiscolor;
+				context.lineWidth = 0.4;
+				drawAxis(context, (xmargin + i*barwidth + i*xspacer) + barwidth/2, h, (xmargin + i*barwidth + i*xspacer) + barwidth/2, h+5);
 			}
 			
 			// Draw the x and y axes
@@ -620,7 +623,7 @@
 			// Data
 			var	data2 = countByNbClass(),
 				data2plot = new Array();
-			var	xspacer = 4,
+			var	xspacer = 2,
 				xmargin = 60,
 				maxwidth = 390 + xspacer,
 				sum = 0;
@@ -636,16 +639,16 @@
 			// Draw the bar chart
 			context.font = 'italic 11pt Calibri';
 			context.textAlign = 'center';
-		    context.fillText('Number of common and specific elements', 250, 310);
+		    context.fillText('Number of common and specific elements', 250, 315);
 		    context.font = 'normal 9pt Calibri';
 			var xprev = 0;
 			for (var i=vennSize-1; i>=0; i--) {
 				if(data2plot[i] == 0) { continue };
 			    drawRectangle(context,
 							  xmargin + xprev,
-							  335,
+							  340,
 							  data2plot[i] - xspacer,
-							  50,
+							  40,
 							  fillcolor[i],
 							  strokecolor[i]);
 				context.textAlign = 'center';
