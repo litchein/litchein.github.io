@@ -200,16 +200,16 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} %if any
-The amount of rich WEB applications allowing scientists to store, share and analyze data on the WEB is increasing. 
-This highlights the need to implement effective web-based data visualization that can easily be embeded within any
-WEB site. The Venn diagram is one of the most popular chart to display shared and unshared identifiers outcoming 
-from biological projects.
+The amount of rich WEB applications allowing scientists to store, share and analyze data online is increasing. 
+This enhances the need of embadable visualization tools. In a first approach, scientists often produce lists 
+of known identifiers corresponding to the different experimental conditions. The Venn diagram is one of the most 
+popular charts presenting list comparison results.
 
 \parttitle{Results} %if any
-jvenn provides Venn diagram features that no other softwares do. It is the only library that handle up 
-to 6 input lists and display Edwards-Venn diagram. Its implementation as a javascript library permits any
-developper to embed Venn diagramm visualization features within its WEB application. jvenn is fully configurable
-and allows the developper to control and customize all interactions with its users.
+jvenn is a javascript library providing lists processing and Venn diagram displaying functions. It is the only library 
+able to handle up to 6 input lists presenting results as classical or Edwards-Venn diagrams. It permits any developper 
+to embed Venn diagramm visualization features in a WEB page. jvenn is fully configurable and allows developpers to control 
+and customize all user interactions.
 
 \parttitle{Conclusions} %if any
 We introduce jvenn a javascript library aiming to be part of rich WEB environments helping scientists to analyse 
@@ -279,69 +279,66 @@ available at https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/inde
 
 Biological projects are increasingly multiplexing samples to assess differences between conditions or individuals, 
 thus, it is important to provide researchers with effective visualization tools to explore and extract 
-relevant knowledge from these data sets. Data analysis often leads to the production of biological 
-identifiers (gene names, operational taxonomic unit, ...) for which it is interesting to know intersections 
-between samples. A common visualization chart is the Venn diagrams \cite{Venn1880} wich allows to identify 
+relevant differences between these data sets. Data analysis often leads produces lists of biological  identifiers 
+(gene names, operational taxonomic unit, ...). One simple analysis is the comparison of the intersections of these 
+lists. A commonly used visualization chart is the Venn diagrams \cite{Venn1880} wich allows to identify 
 shared and unshared identifiers providing an insight on the similarities between the lists.
 
-This type of graphs is often used to present results on WEB page. Thus, several Venn diagram applications are 
-availble. Some of them such as BioVenn \cite{Hulsen2008} or venny \cite{venny}, provide WEB 
-applications with identifiers inputs text areas. Where the first one offers only a three circles 
-area-proportional diagram, the second one offers a four lists diagram without any respect of area proportions. 
-Canvasxpress \cite{canvasxpress} and the Google Chart API \cite{googleAPI}, meanwhile, are javascript libraries 
-including Venn diagram features which can easily be embedded in any WEB site. These libraries can only handle 
-figures corresponding to each intersection but cannot perform the calculations on the lists.
+Venn diagrams are often used to present results on WEB pages. Thus, several Venn diagram applications are 
+availble. BioVenn \cite{Hulsen2008} or venny \cite{venny} are WEB applications with identifier input text 
+areas. Where the first one offers only a three circles area-proportional diagram, the second one offers a 
+four lists diagram without area proportion respect. Canvasxpress \cite{canvasxpress} and the Google Chart 
+API \cite{googleAPI}, meanwhile, are javascript libraries including Venn diagram features which can easily 
+be embedded in any WEB site. These libraries can only produce figures given the intersection counts but 
+cannot perform the calculations on the lists.
 
-We intruduce jvenn a javascript library helping scientists to present their data, such does already existing 
-tools as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}. 
-Jvenn handles up to 6 input lists venn diagram, can display Edwards-Venn diagram \cite{Edwards2004}, can easily be 
-embeded within any web site, allows to provide inputs data in three different formats (list/number/list+number), 
-allows to export the diagram to png and permits to overload the callback function to control users interactions. 
-jvenn has already been used in several scientific publications to display sets and their overlapping areas 
-\cite{Bianchia2013, Aravindraja2013}. 
+We introduce jvenn a javascript library helping scientists to present their data, in the same spirit as already 
+existing tools such as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}. 
+Jvenn handles up to 6 input lists, can display classical or Edwards-Venn \cite{Edwards2004} diagrams, can easily be 
+embeded in a WEB page, allows three different data formats (lists/intersection counts/count lists), exports png files and permits 
+to overload the callback function in order to control users interactions. jvenn has already been used in several scientific 
+publications \cite{Bianchia2013, Aravindraja2013}.
 
 
 \section*{Implementation}
 
-jvenn is a javascript library written as a jQuery plugin \cite{jquery} and can be embeded within any WEB applications 
-by referencing the javascript file in an HTML page. For researchers who want to produce a Venn diagram from their 
-identifiers, jvenn is also available as a WEB application at http://bioinfo.genotoul.fr/index.php?id=116. The installation
-documentation is included in the software package which can be downloaded from https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
+jvenn is a javascript library written as a jQuery plugin \cite{jquery}. It can be embeded by referencing the javascript file 
+in an HTML page. For researchers who want to produce a Venn diagram from their identifier lists, jvenn is also available as a 
+WEB application at http://bioinfo.genotoul.fr/index.php?id=116. The installation documentation is included in the software package 
+which can be downloaded from https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
 
 
 \section*{Results and Discussion}
 
-jvenn outputs a chart of two to six areas each representing an identifiers input list. Overlaps counts are displayed and 
-are clickable by the user to access the identifiers list belonging to the intersection. In order to ease overlaps understanding, 
-when the user mouse is over an intersection number, jvenn overlights the pointed classes and blurs the other ones.
+jvenn outputs a chart build from two to six identifier lists. Overlap counts are displayed and are clickable enabling to access
+identifiers list of the intersection. In order to ease overlaps understanding, on mouse over, jvenn highlights the intersection count
+and the corresponding conditions while bluring the others.
 
-The library provides an option to define the data inputs: \textit{series}. The library accepts three different input formats
-discribed in Table 1. In case the \textit{series} are a list of value, the plugin will compute itself the overlaps between 
-lists. The \textit{series} can also define the number to display for each intersections or can be defined as a mix of the first 
-two formats. The resulting display is created with the help of the javascript canvas object which allows to export the chart as 
-a png file. This last feature can be disabled in order to hide the exporting button from the user by setting the \textit{exporting} 
-option to \textit{false}.
+The library provides an option to define the data inputs: \textit{series}. It accepts three different input formats discribed in 
+Table 1. In the case of list or count lists \textit{series} it will first execute a function to compute the overlaps between lists and
+display the chart. In the case of intersection counts \textit{series}, the plugin will only display the graphical results. The resulting 
+display is based on the javascript canvas object allowing to export the chart as a png file. This last feature can be disabled in order 
+to hide the exporting button from the user by setting the \textit{exporting} option to \textit{false}.
 
-jvenn handles up to six classes, which leads to display sixty three overlap numbers. Displaying and interacting with such a chart
-can be bulky and difficult. In this case, jvenn proposes a switch button panel allowing to activate or disactivate classes. 
-The selected overlap number is then displayed and can be clicked just like the other ones. jvenn also provides the Edwards-Venn
-display (Fig. 2) available by setting the \textit{displayType} option to \textit{edwards}. This display gives a different 
-graphical representation of the classes which is clearer whith a 6 classes diagram.
-The WEB application creator can also overload the callback function defining the click on an overlap number. This can be done 
-by defining the \textit{fnClickCallback} parameter. The overloading function has access to the \textit{this.listnames} and
-\textit{this.list} variables allowing the developer to control the users interactions with the jvenn plugin. This feature can
-be disabled by setting the \textit{disableClick} option to \textit{true}.
+jvenn handles up to six lists, which leads to display sixty three overlap areas. Displaying and interacting with such a chart
+can be bulky and difficult, therefore jvenn proposes a switch button panel allowing to activate or disactivate lists. The selected 
+overlap count is then displayed and can be clicked. jvenn also provides the Edwards-Venn display (Fig. 2) available by setting the 
+\textit{displayType} option to \textit{edwards}. This display gives a different graphical representation of the lists which is clearer 
+for 6 list diagrams. The WEB application developer can also overload the callback function defining the click on an overlap number. 
+This can be done by defining the \textit{fnClickCallback} parameter. The overloading function has access to the \textit{this.listnames} and
+\textit{this.list} variables allowing the developer to control the user interactions. This feature can be disabled by setting the 
+\textit{disableClick} option to \textit{true}.
 
 As example, we produced two venn diagrams representing six samples SRR068049, SRR06805, SRR068051, SRR068052, SRR068053 and 
 SRR068054 corresponding to sets of Operational Taxonomic Units observed under different conditions. Fig. 1 shows intersections
-between five of them using the Venn diagram display. In Fig. 2, jvenn overlights the intersection between three samples of the 
-six ones used to create the Edwards-Venn diagram.
+between five of them using the Venn diagram display. In Fig. 2, jvenn overlights the intersection between three samples out of 
+six.
 
 
 \section*{Conclusions}
 
 jvenn is an easy-to-use library aiming to generate Venn and Edwards-Venn diagrams from lists of identifiers or from
-computed numbers. Its implementation as a javascript library allows whoever has WEB programming skills to embed it 
+computed interaction counts. Its implementation as a javascript library allows whoever has WEB programming skills to embed it 
 within its WEB application without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse 
 \cite{Mariette} and WallProtDB \cite{SanClemente} WEB applications.
 
@@ -439,7 +436,7 @@ the system and for pointing out features worth developing.
       \begin{tabular}{cccc}
         \hline
         format & example\\ \hline
-        list & 
+        lists & 
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
@@ -449,14 +446,14 @@ series: [{
 	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"]
 }]
 \end{lstlisting}\\ \hline
-        number & 
+        intersection counts & 
 \begin{lstlisting}
 series: [{
 	name: {A: 'sample 1', B: 'sample 2', C: 'sample 3'},
 	data: {A: 340, B: 562, C: 620, AB: 639, AC: 456, BC: 915, ABC: 552}
 }]
 \end{lstlisting}\\ \hline
-        list+number  &
+        count lists  &
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
