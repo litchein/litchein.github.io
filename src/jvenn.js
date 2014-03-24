@@ -73,7 +73,9 @@
             useValues: false,
             exporting: true,
             displayMode: 'classic',
-            displayStat: 'venn'
+            displayStat: true,
+            // Colors must be RGB : green, blue, red, yellow, orange, brown
+            colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
         };  
 		var opts = $.extend(defaults, options); 
 
@@ -126,9 +128,8 @@
 			context.arc(0, 0, r, 0, Math.PI * 2);
 		    context.lineWidth = 3;
 			context.strokeStyle = strokecolor;
-			var colorObj = rgbaToObj(strokecolor);  // strokecolor must be rgba
-		    if(colorObj.a >= 0.6) {
-			    context.fillStyle = "rgba("+ colorObj.rgb + ",0.1)";
+		    if(getOpacity(strokecolor) >= 0.6) {  // strokecolor must be rgba
+			    context.fillStyle = changeOpacity(strokecolor, 0.1);
 				context.fill();
 		    }
 		    context.stroke();
@@ -157,8 +158,7 @@
 			context.arc(245, 50, 110, 0.3 * Math.PI,  0.7 * Math.PI, counterClockwise);
 			context.stroke();
 			// Fill if hover
-			var colorObj = rgbaToObj(strokecolor);  // strokecolor must be rgba
-		    if(colorObj.a >= 0.6) {
+			if(getOpacity(strokecolor) >= 0.6) {  // strokecolor must be rgba
 	    		context.save();
 	    		context.beginPath();
 	    		context.moveTo(0,0);
@@ -178,7 +178,7 @@
 	    		context.save();
 	    		context.translate(-11,-633);
 	    		context.save();
-	    		context.strokeStyle = "rgba(0, 0, 0, 0)";
+	    		context.strokeStyle = 'rgba(0,0,0,0)';
 	    		context.translate(0,636);
 	    		context.beginPath();
 	    		context.moveTo(116.68996,288.55847);
@@ -207,7 +207,7 @@
 	    		context.bezierCurveTo(145.28290999999993,289.00015999999994,123.31454999999994,289.87026999999995,116.68995999999993,288.55846999999994);
 	    		context.lineTo(116.68995999999993,288.55846999999994);
 	    		context.closePath();
-			    context.fillStyle = "rgba("+ colorObj.rgb + ",0.1)";
+			    context.fillStyle = changeOpacity(strokecolor, 0.1);  // strokecolor must be rgba
 	    		context.fill();
 	    		context.stroke();
 	    		context.restore();
@@ -248,8 +248,7 @@
 			context.arc(308, 270, 35, 0.8 * Math.PI, 1.7 * Math.PI, counterClockwise);
 			context.stroke();
 			// Fill if hover
-			var colorObj = rgbaToObj(strokecolor);  // strokecolor must be rgba
-		    if(colorObj.a >= 0.6) {
+			if(getOpacity(strokecolor) >= 0.6) {  // strokecolor must be rgba
 				context.save();
 				context.beginPath();
 				context.moveTo(0,0);
@@ -269,7 +268,7 @@
 				context.save();
 				context.translate(-140,-212);
 				context.save();
-				context.strokeStyle = "rgba(0, 0, 0, 0)";
+				context.strokeStyle = 'rgba(0,0,0,0)';
 				context.translate(139,217);
 				context.beginPath();
 				context.moveTo(234.95394,341.16933);
@@ -315,7 +314,7 @@
 				context.bezierCurveTo(253.04107000000008,343.30956000000003,243.1026400000001,343.84789,234.95394000000007,341.16933);
 				context.lineTo(234.95394000000007,341.16933);
 				context.closePath();
-			    context.fillStyle = "rgba("+ colorObj.rgb + ",0.1)";
+			    context.fillStyle = changeOpacity(strokecolor, 0.1);  // strokecolor must be rgba
 				context.fill();
 				context.stroke();
 				context.restore();
@@ -380,8 +379,7 @@
 			context.arc(167, 172, 18, 1.6 * Math.PI, 0.7 * Math.PI, counterClockwise);
 			context.stroke();
 			// Fill if hover
-			var colorObj = rgbaToObj(strokecolor);  // strokecolor must be rgba
-		    if(colorObj.a >= 0.6) {
+		    if(getOpacity(strokecolor) >= 0.6) {  // strokecolor must be rgba
 				context.save();
 				context.beginPath();
 				context.moveTo(0,0);
@@ -401,7 +399,7 @@
 				context.save();
 				context.translate(-4,-637);
 				context.save();
-				context.strokeStyle = "rgba(0, 0, 0, 0)";
+				context.strokeStyle = 'rgba(0,0,0,0)';
 				context.translate(0,637);
 				context.beginPath();
 				context.moveTo(242.80929,316.76895);
@@ -456,7 +454,7 @@
 				context.bezierCurveTo(254.81776000000002,317.43526999999995,246.76347000000004,318.2981699999999,242.80929000000003,316.76894999999996);
 				context.lineTo(242.80929000000003,316.76894999999996);
 				context.closePath();
-				context.fillStyle = "rgba("+ colorObj.rgb + ",0.1)";
+				context.fillStyle = changeOpacity(strokecolor, 0.1); // strokecolor must be rgba
 				context.fill();
 				context.stroke();
 				context.restore();
@@ -482,9 +480,8 @@
 		    context.closePath();
 		    context.lineWidth = 3;
 		    context.strokeStyle = strokecolor;
-		    var colorObj = rgbaToObj(strokecolor);  // strokecolor must be rgba
-		    if(colorObj.a >= 0.6) {
-			    context.fillStyle = "rgba("+ colorObj.rgb + ",0.1)";
+		    if(getOpacity(strokecolor) >= 0.6) {  // strokecolor must be rgba
+			    context.fillStyle = changeOpacity(strokecolor, 0.1); // strokecolor must be rgba
 				context.fill();
 		    }
 		    context.stroke();
@@ -515,14 +512,16 @@
 		    context.restore();
 		}
 		
-		function rgbaToObj(rgba) {
+		function changeOpacity(rgba, opacity) {
 			var	colorStr = rgba.slice(rgba.indexOf('(') + 1, rgba.indexOf(')'));
 			var	colorArr = colorStr.split(',');
-			var colorObj = {
-			    rgb: colorArr[0] + "," + colorArr[1] + "," + colorArr[2],
-			    a: parseFloat(colorArr[3])
-			}
-			return colorObj;
+			return "rgba("+colorArr[0] + "," + colorArr[1] + "," + colorArr[2] + "," + opacity + ")";
+		}
+		
+		function getOpacity(rgba) {
+			var	colorStr = rgba.slice(rgba.indexOf('(') + 1, rgba.indexOf(')'));
+			var	colorArr = colorStr.split(',');
+			return colorArr[3];
 		}
 		
 		function clearCanvas() {
@@ -532,28 +531,20 @@
 		}
 
 		function placeStat(vennSize) {
-			var fillcolor = new Array(5);
-			fillcolor[0] = "rgba(0,102,0,    0.5)"; //green
-			fillcolor[1] = "rgba(90,155,212, 0.5)"; //blue
-			fillcolor[2] = "rgba(241,90,96,  0.5)"; //red
-			fillcolor[3] = "rgba(250,250,91, 0.5)"; //yellow
-			fillcolor[4] = "rgba(255,117,0,  0.5)"; //orange
-			fillcolor[5] = "rgba(192,152,83, 0.5)"; //brown
-			var strokecolor = new Array(5);
-			strokecolor[0] = "rgba(0,102,0,    1)"; //green
-			strokecolor[1] = "rgba(90,155,212, 1)"; //blue
-			strokecolor[2] = "rgba(241,90,96,  1)"; //red
-			strokecolor[3] = "rgba(250,250,91, 1)"; //yellow
-			strokecolor[4] = "rgba(255,117,0,  1)"; //orange
-			strokecolor[5] = "rgba(192,152,83, 1)"; //brown
 			var axiscolor = "rgba(0,0,0, 0.7)";
-			
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
 			
 			/* 
 			 * Bar chart
 			*/
+			var	h = 120,
+				xmargin = 70,
+				ymargin = 425,
+				xspacer = 20,
+				barwidth = (370-(vennSize*xspacer))/vennSize,
+				ytext = 265;
+			
 			// Data
 			var	data = sizeOfClass(),
 				dataplot = new Array();
@@ -562,60 +553,56 @@
 				max = Math.max(max, data[i]);
 			}
 			for (var i=0; i<vennSize; i++) {
-				dataplot.push(data[i]/max * 200);
+				dataplot.push(data[i]/max * (h-50));
 			}
 		
 			// Draw the bar chart
-			context.font = 'italic 11pt Calibri';
+			context.fillStyle = "#000";
+			context.font = 'italic 10pt Arial';
 			context.textAlign = 'center';
-		    context.fillText('Size of each class', 250, 14);
-		    context.font = 'normal 9pt Calibri';
+		    context.fillText('Size of each class', 250, ymargin+25);
+		    context.font = 'normal 8pt Arial';
 		    context.textAlign = 'right';
-		    context.fillText(0, 45, 253);
-		    context.fillText(max/2, 45, 154);
-		    context.fillText(max, 45, 55);
+		    context.fillText(0, 45, ymargin + h + 5);
+		    context.fillText(max/2, 45, ymargin + ((h+55)/2));
+		    context.fillText(max, 45, ymargin + 55);
 		    context.textAlign = 'left';
-			var	h = 250,
-				xmargin = 70,
-				xspacer = 20,
-				barwidth = (370-(vennSize*xspacer))/vennSize;
-				ytext = 265;
 			for (var i=0; i<vennSize; i++) {
 				drawRectangle(context,
 							  xmargin + i*barwidth + i*xspacer,
-							  h-dataplot[i],
+							  ymargin + h-dataplot[i],
 							  barwidth,
 							  dataplot[i],
-							  fillcolor[i],
-							  strokecolor[i]);
-				context.textAlign = 'right';
-				if(h-dataplot[i]+15 <= 242) {
+							  changeOpacity(opts.colors[i], 0.5),
+							  opts.colors[i]);
+				if(h-dataplot[i]+15 <= h) {
+					context.textAlign = 'right';
 					context.fillStyle = 'white';
-					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, h-dataplot[i]+15);
+					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, ymargin + h-dataplot[i]+15);
 				}
 				else {
-					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, h-dataplot[i]-10);
+					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, ymargin + h-dataplot[i]-10);
 				}
-				if(i%2 && vennSize>2) {	ytext = 280; }
-				else { ytext = 270; }
+				if(i%2 && vennSize>2) {	ytext = ymargin + h + 25; }
+				else { ytext = ymargin + h + 15; }
 				context.fillStyle = "#000";
 				context.textAlign = 'center';
 				context.fillText(opts.series[i].name, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ytext, 200);
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
-				drawAxis(context, (xmargin + i*barwidth + i*xspacer) + barwidth/2, h, (xmargin + i*barwidth + i*xspacer) + barwidth/2, h+5);
+				drawAxis(context, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ymargin + h, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ymargin + h+5);
 			}
 			
 			// Draw the x and y axes
 			context.lineWidth = 1;
 			context.strokeStyle = axiscolor;
-			drawAxis(context, 50, h, 50, 30); 
-			drawAxis(context, 50, h, 450, h);
+			drawAxis(context, 50, ymargin + h, 50, ymargin + 35); 
+			drawAxis(context, 50, ymargin + h, 450, ymargin + h);
 			context.lineWidth = 0.4;
-			drawAxis(context, 47, (h+50)/2, 53, (h+50)/2);
-			drawAxis(context, 47, 50, 53, 50);
-			drawTriangle(50,20, 46,30, 54,30, axiscolor);
-			drawTriangle(460,250, 450,246, 450,254, axiscolor);
+			drawAxis(context, 47, ymargin + (h+50)/2, 53, ymargin + (h+50)/2);
+			drawAxis(context, 47, ymargin + 50, 53, ymargin + 50);
+			drawTriangle(50, ymargin+25,  46,ymargin+35,   54,ymargin+35, axiscolor);
+			drawTriangle(460,ymargin+h, 450,ymargin+h-4, 450,ymargin+h+4, axiscolor);
 			
 			/* 
 			 * Stacked bar chart
@@ -623,9 +610,10 @@
 			// Data
 			var	data2 = countByNbClass(),
 				data2plot = new Array();
-			var	xspacer = 2,
-				xmargin = 60,
-				maxwidth = 390 + xspacer,
+			xspacer = 2,
+			xmargin = 60;
+			ymargin += h + 55;
+			var	maxwidth = 390 + xspacer,
 				sum = 0;
 			for (var i=0; i<vennSize; i++) {
 				sum += data2[i];
@@ -633,64 +621,56 @@
 			for (var i=0; i<vennSize; i++) {
 				data2plot.push(data2[i]/sum * maxwidth);
 			}
-			console.log(data2);
-			console.log(data2plot);
-			
+
 			// Draw the bar chart
-			context.font = 'italic 11pt Calibri';
+			context.font = 'italic 10pt Arial';
 			context.textAlign = 'center';
-		    context.fillText('Number of common and specific elements', 250, 315);
-		    context.font = 'normal 9pt Calibri';
+		    context.fillText('Number of common and specific elements', 250, ymargin);
+		    context.font = 'normal 8pt Arial';
 			var xprev = 0;
 			for (var i=vennSize-1; i>=0; i--) {
 				if(data2plot[i] == 0) { continue };
 			    drawRectangle(context,
 							  xmargin + xprev,
-							  340,
+							  ymargin + 15,
 							  data2plot[i] - xspacer,
-							  40,
-							  fillcolor[i],
-							  strokecolor[i]);
+							  20,
+							  changeOpacity(opts.colors[i], 0.5),
+							  opts.colors[i]);
 				context.textAlign = 'center';
 				context.fillStyle = 'white';
-				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, 363);
+				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
-				drawAxis(context, (data2plot[i] - xspacer)/2  + xmargin + xprev, 395, (data2plot[i] - xspacer)/2  + xmargin + xprev, 400);
+				drawAxis(context, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+40, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+45);
 				context.fillStyle = '#000';
-				context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, 415);
+				context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+57);
 				xprev += data2plot[i];
 			}
 
 		    // Draw the x axis
 		    context.lineWidth = 1;
 			context.strokeStyle = axiscolor;
-			drawAxis(context, 50, 395, 460, 395);
+			drawAxis(context, 50, ymargin+40, 460, ymargin+40);
 		}
 		
 		function placeClassicVenn(vennSize) {
-			var green	= "rgba(0,102,0, "    + $("#label1").css('opacity') + ")",
-				blue    = "rgba(90,155,212, " + $("#label2").css('opacity') + ")",
-				red     = "rgba(241,90,96, "  + $("#label3").css('opacity') + ")",
-				yellow  = "rgba(250,250,91, " + $("#label4").css('opacity') + ")",
-				orange  = "rgba(255,117,0, "  + $("#label5").css('opacity') + ")",
-				brown   = "rgba(192,152,83, " + $("#label6").css('opacity') + ")",
-				grey    = "rgba(0,0,0,0.1)";
+			var	grey = "rgba(0,0,0,0.1)";
 						
 			if (vennSize == 6) {
-				drawTriangle(0,11,    254,160, 174,235, green);
-				drawTriangle(188,0,   134,242, 236,202, blue);
-				drawTriangle(338,52,  135,123, 191,242, red);
-				drawTriangle(500,260, 163,117, 134,219, yellow);
-				drawTriangle(250,415, 133,150, 203,67,  orange);
-				drawTriangle(11,307,  263,81,  214,220, brown);
+				drawTriangle(0,11,    254,160, 174,235, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawTriangle(188,0,   134,242, 236,202, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawTriangle(338,52,  135,123, 191,242, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawTriangle(500,260, 163,117, 134,219, changeOpacity(opts.colors[3], $("#label4").css('opacity')));
+				drawTriangle(250,415, 133,150, 203,67,  changeOpacity(opts.colors[4], $("#label5").css('opacity')));
+				drawTriangle(11,307,  263,81,  214,220, changeOpacity(opts.colors[5], $("#label6").css('opacity')));
 				
-				$("#label1").css("left",  35).css("top",  10).css("color", "#228B22");
-				$("#label2").css("left", 200).css("top",   5).css("color", "#3366BB");
-				$("#label3").css("left", 335).css("top",  60).css("color", "#99334E");
-				$("#label4").css("left", 410).css("top", 200).css("color", "#FFD700");
-				$("#label5").css("left", 255).css("top", 385).css("color", "#FFA54F");
-				$("#label6").css("left",  30).css("top", 300).css("color", "#c09853");
+				$("#label1").css("left",  35).css("top",  10).css("color", opts.colors[0]);
+				$("#label2").css("left", 200).css("top",   5).css("color", opts.colors[1]);
+				$("#label3").css("left", 335).css("top",  60).css("color", opts.colors[2]);
+				$("#label4").css("left", 410).css("top", 200).css("color", opts.colors[3]);
+				$("#label5").css("left", 255).css("top", 385).css("color", opts.colors[4]);
+				$("#label6").css("left",  30).css("top", 300).css("color", opts.colors[5]);
 				$("#resultC100000").css("left",  93).css("top",  90);
 				$("#resultC010000").css("left", 185).css("top",  50);
 				$("#resultC001000").css("left", 275).css("top",  80);
@@ -728,17 +708,17 @@
 				
 			} else if (vennSize == 5) {
 				
-				drawEllipse(214,230,10,18.6,9.5,25,green);
-				drawEllipse(232,187,10,18.6,9.5,98,blue);
-				drawEllipse(273,196,10,18.6,9.5,170,red);
-				drawEllipse(282,238,10,18.6,9.5,62,yellow);
-				drawEllipse(242,260,10,18.6,9.5,134,orange);
+				drawEllipse(214,230,10,18.6,9.5,25,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawEllipse(232,187,10,18.6,9.5,98,  changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawEllipse(273,196,10,18.6,9.5,170, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawEllipse(282,238,10,18.6,9.5,62,  changeOpacity(opts.colors[3], $("#label4").css('opacity')));
+				drawEllipse(242,260,10,18.6,9.5,134, changeOpacity(opts.colors[4], $("#label5").css('opacity')));
 				
-				$("#label1").css("left", 0).css("top", 100).css("color", "#228B22");
-				$("#label2").css("left", 310).css("top", 15).css("color", "#3366BB");
-				$("#label3").css("left", 450).css("top", 120).css("color", "#99334E");
-				$("#label4").css("left", 410).css("top", 350).css("color", "#FFD700");
-				$("#label5").css("left", 40).css("top", 400).css("color", "#FFA54F");
+				$("#label1").css("left", 0).css("top", 100).css("color",   opts.colors[0]);
+				$("#label2").css("left", 310).css("top", 15).css("color",  opts.colors[1]);
+				$("#label3").css("left", 450).css("top", 120).css("color", opts.colors[2]);
+				$("#label4").css("left", 410).css("top", 350).css("color", opts.colors[3]);
+				$("#label5").css("left", 40).css("top", 400).css("color",  opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 60).css("top", 150);
 				$("#resultC010000").css("left", 230).css("top", 30);
@@ -806,15 +786,15 @@
 
 			} else if (vennSize == 4) {	
 				
-				drawEllipse(181,238,10,18.5,11.5,40,green);
-				drawEllipse(242,177,10,18.5,11.5,40,blue);
-				drawEllipse(259,177,10,18.5,11.5,140,red);
-				drawEllipse(320,238,10,18.5,11.5,140,yellow);
+				drawEllipse(181,238,10,18.5,11.5,40,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawEllipse(242,177,10,18.5,11.5,40,  changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawEllipse(259,177,10,18.5,11.5,140, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawEllipse(320,238,10,18.5,11.5,140, changeOpacity(opts.colors[3], $("#label4").css('opacity')));
 				
-				$("#label1").css("left", 5).css("top", 70).css("color", "#228B22");
-				$("#label2").css("left", 85).css("top", 5).css("color", "#3366BB");
-				$("#label3").css("left", 350).css("top", 5).css("color", "#99334E");
-				$("#label4").css("left", 428).css("top", 70).css("color", "#FFD700");
+				$("#label1").css("left", 5).css("top", 70).css("color",   opts.colors[0]);
+				$("#label2").css("left", 85).css("top", 5).css("color",   opts.colors[1]);
+				$("#label3").css("left", 350).css("top", 5).css("color",  opts.colors[2]);
+				$("#label4").css("left", 428).css("top", 70).css("color", opts.colors[3]);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 55).css("top", 190);
@@ -883,13 +863,13 @@
 			
 			} else if (vennSize == 3) {
 				
-				drawEllipse(171,142,120,1,1,0,green);
-				drawEllipse(327,142,120,1,1,0,blue);
-				drawEllipse(249,271,120,1,1,0,red);
+				drawEllipse(171,142,120,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawEllipse(327,142,120,1,1,0, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawEllipse(249,271,120,1,1,0, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
 				
-				$("#label1").css("left", 55).css("top", 5).css("color", "#228B22");
-				$("#label2").css("left", 380).css("top", 5).css("color", "#3366BB");
-				$("#label3").css("left", 220).css("top", 400).css("color", "#99334E");
+				$("#label1").css("left", 55).css("top", 5).css("color",    opts.colors[0]);
+				$("#label2").css("left", 380).css("top", 5).css("color",   opts.colors[1]);
+				$("#label3").css("left", 220).css("top", 400).css("color", opts.colors[2]);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
@@ -959,11 +939,11 @@
 			
 			} else if (vennSize == 2) {	
 				
-				drawEllipse(171,206,140,1,1,0,green);
-				drawEllipse(327,206,140,1,1,0,blue);
+				drawEllipse(171,206,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawEllipse(327,206,140,1,1,0, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				
-				$("#label1").css("left", 95).css("top", 40).css("color", "#228B22");
-				$("#label2").css("left", 360).css("top", 40).css("color", "#3366BB");
+				$("#label1").css("left", 95).css("top", 40).css("color",  opts.colors[0]);
+				$("#label2").css("left", 360).css("top", 40).css("color", opts.colors[1]);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
@@ -1034,9 +1014,9 @@
 			
 			} else {
 				
-				drawEllipse(246,210,140,1,1,0,green);
+				drawEllipse(246,210,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				
-				$("#label1").css("left", 225).css("top", 30).css("color", "#228B22");
+				$("#label1").css("left", 225).css("top", 30).css("color", opts.colors[0]);
 				$("#label2").css("left", -1000).css("top", -2200);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
@@ -1109,28 +1089,20 @@
 		}
 		
 		function placeEdwardsVenn(vennSize) {
-			var green	= "rgba(0,102,0, "    + $("#label1").css('opacity') + ")",
-				blue    = "rgba(90,155,212, " + $("#label2").css('opacity') + ")",
-				red     = "rgba(241,90,96, "  + $("#label3").css('opacity') + ")",
-				yellow  = "rgba(250,250,91, " + $("#label4").css('opacity') + ")",
-				orange  = "rgba(255,117,0, "  + $("#label5").css('opacity') + ")",
-				brown   = "rgba(192,152,83, " + $("#label6").css('opacity') + ")";
-
 			if (vennSize == 6) {
+				drawCircle(246,206,90,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawRoundRect(245,25,250,365,changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawRoundRect(5,205,490,185,changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawDoubleCircle(changeOpacity(opts.colors[3], $("#label4").css('opacity')));
+				drawCross(changeOpacity(opts.colors[4], $("#label5").css('opacity')));
+				drawCross2(changeOpacity(opts.colors[5], $("#label6").css('opacity')));
 				
-				drawCircle(246,206,90,1,1,0,green);
-				drawRoundRect(245,25,250,365,blue);
-				drawRoundRect(5,205,490,185,red);
-				drawDoubleCircle(yellow);
-				drawCross(orange);
-				drawCross2(brown);
-				
-				$("#label1").css("left", 297).css("top", 90).css("color", "#228B22");
-				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
-				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
-				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
-				$("#label5").css("left", 282).css("top", 45).css("color", "#FFA54F");
-				$("#label6").css("left", 297).css("top",302).css("color", "#c09853");
+				$("#label1").css("left", 297).css("top", 90).css("color", opts.colors[0]);
+				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
+				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
+				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
+				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
+				$("#label6").css("left", 297).css("top",302).css("color", opts.colors[5]);
 				$("#resultC100000").css("left", 204).css("top", 122);
 				$("#resultC010000").css("left", 390).css("top",  70);
 				$("#resultC001000").css("left",  85).css("top", 330);
@@ -1197,17 +1169,17 @@
 				
 			} else if (vennSize == 5) {
 				
-				drawCircle(246,206,90,1,1,0,green);
-				drawRoundRect(245,25,250,365,blue);
-				drawRoundRect(5,205,490,185,red);
-				drawDoubleCircle(yellow);
-				drawCross(orange);
+				drawCircle(246,206,90,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawRoundRect(245,25,250,365,changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawRoundRect(5,205,490,185, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawDoubleCircle(changeOpacity(opts.colors[3], $("#label4").css('opacity')));
+				drawCross(changeOpacity(opts.colors[4], $("#label5").css('opacity')));
 			
-				$("#label1").css("left", 297).css("top", 90).css("color", "#228B22");
-				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
-				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
-				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
-				$("#label5").css("left", 282).css("top", 45).css("color", "#FFA54F");
+				$("#label1").css("left", 297).css("top", 90).css("color", opts.colors[0]);
+				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
+				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
+				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
+				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 200).css("top", 130);
 				$("#resultC010000").css("left", 390).css("top",  70);
@@ -1275,15 +1247,15 @@
 				
 			} else if (vennSize == 4) {
 				
-				drawCircle(246,206,90,1,1,0,green);
-				drawRoundRect(245,25,250,365,blue);
-				drawRoundRect(5,205,490,185,red);
-				drawDoubleCircle(yellow);
+				drawCircle(246,206,90,1,1,0,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawRoundRect(5,205,490,185,  changeOpacity(opts.colors[2], $("#label3").css('opacity')));
+				drawDoubleCircle(changeOpacity(opts.colors[3], $("#label4").css('opacity')));
 
-				$("#label1").css("left", 267).css("top", 90).css("color", "#228B22");
-				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
-				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
-				$("#label4").css("left",  27).css("top", 90).css("color", "#FFD700");
+				$("#label1").css("left", 267).css("top", 90).css("color", opts.colors[0]);
+				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
+				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
+				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
 				$("#resultC100000").css("left", 215).css("top", 130);
@@ -1352,13 +1324,13 @@
 			
 			} else if (vennSize == 3) {
 				
-				drawCircle(246,206,110,1,1,0,green);
-				drawRoundRect(245,25,250,365,blue);
-				drawRoundRect(5,205,490,185,red);
+				drawCircle(246,206,110,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
+				drawRoundRect(5,205,490,185,  changeOpacity(opts.colors[2], $("#label3").css('opacity')));
 				
-				$("#label1").css("left", 95).css("top", 75).css("color", "#228B22");
-				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
-				$("#label3").css("left",  27).css("top",400).css("color", "#99334E");
+				$("#label1").css("left", 95).css("top", 75).css("color",  opts.colors[0]);
+				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
+				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
@@ -1428,11 +1400,11 @@
 			
 			} else if (vennSize == 2) {
 
-				drawCircle(246,206,110,1,1,0,green);
-				drawRoundRect(245,25,250,365,blue);
+				drawCircle(246,206,110,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
+				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				
-				$("#label1").css("left", 95).css("top", 75).css("color", "#228B22");
-				$("#label2").css("left", 267).css("top",  0).css("color", "#3366BB");
+				$("#label1").css("left", 95).css("top", 75).css("color",  opts.colors[0]);
+				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
@@ -1503,9 +1475,9 @@
 			
 			} else {
 				
-				drawCircle(246,210,140,1,1,0,green);
+				drawCircle(246,210,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				
-				$("#label1").css("left", 225).css("top", 30).css("color", "#228B22");
+				$("#label1").css("left", 225).css("top", 30).css("color", opts.colors[0]);
 				$("#label2").css("left", -1000).css("top", -2200);
 				$("#label3").css("left", -1000).css("top", -2200);
 				$("#label4").css("left", -1000).css("top", -2200);
@@ -1885,7 +1857,11 @@
 		
 		function addExportModule(div){
 			$t = div;
-			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -438px; width: 25px; height: 20px;">';
+			var extraheight = 0;
+	        if (opts.displayStat) {
+	        	extraheight = 250; 
+	        }
+			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
         	div_export += '<div id="menu" style="position: relative;width:160px; height:30px; display:none; right:133px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
@@ -1963,15 +1939,19 @@
 		
         this.each(function() {
             var $t = $(this);
-            $t.css({"width": "500px", "height": "450px"});
+            var extraheight = 0;
+            if (opts.displayStat) {
+            	extraheight = 250; 
+            }
+            $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
            
-            $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:404px;top:-150px;width:35px;height:105px}</style>').appendTo('body');
+            $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:404px;top:-'+(150+extraheight)+'px;width:35px;height:105px}</style>').appendTo('body');
             $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.65em;line-height:10px;opacity:0.75}</style>').appendTo('body');
-            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-214px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
+            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-'+(214+extraheight)+'px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
             
-            var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: 445px;">';
-			div_content += '<canvas id="canvasEllipse" width="500" height="415"></canvas>';
+            var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: "'+(445+extraheight)+'px;">';
+			div_content += '<canvas id="canvasEllipse" width="500px" height="'+(415+extraheight)+'px;"></canvas>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC100000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC010000"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC001000"></div>';
@@ -2051,21 +2031,19 @@
             	fillCountVenn();
             }
             
-            if (opts.displayStat == 'gStat') {
+        	if (opts.displayMode == 'edwards') {
+        		placeEdwardsVenn(type[1]);
+        	} else {
+        		placeClassicVenn(type[1]);
+        	}
+            if (opts.displayStat) {
             	placeStat(type[1]);
             }
-            else {
-            	if (opts.displayMode == 'edwards') {
-            		placeEdwardsVenn(type[1]);
-            	} else {
-            		placeClassicVenn(type[1]);
-            	}
-            }
-                        
+                                    
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t); }
             // if a 6 classes diagram is requested
-            if (type[1] == 6 && opts.displayMode != 'edwards' && opts.displayStat == 'venn') { addLegend($t); }
+            if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
             
             // number hover action
             $(".number-black").hover(
@@ -2091,6 +2069,9 @@
 		                } else {
 		                   	placeClassicVenn(type[1]);
 		                }
+		            	if (opts.displayStat) {
+		            		placeStat(type[1]);
+		                }
             		}
             	},
             	function(){
@@ -2107,6 +2088,9 @@
 	                       	placeEdwardsVenn(type[1]);
 	                    } else {
 	                       	placeClassicVenn(type[1]);
+	                    }
+	                	if (opts.displayStat) {
+	                		placeStat(type[1]);
 	                    }
             		}
             	}
