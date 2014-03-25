@@ -321,17 +321,25 @@ display is based on the javascript canvas object allowing to export the chart as
 to hide the exporting button from the user by setting the \textit{exporting} option to \textit{false}.
 
 jvenn handles up to six lists, which leads to display sixty three overlap areas. Displaying and interacting with such a chart
-can be bulky and difficult, therefore jvenn proposes a switch button panel allowing to activate or disactivate lists. The selected 
-overlap count is then displayed and can be clicked. jvenn also provides the Edwards-Venn display (Fig. 2) available by setting the 
-\textit{displayType} option to \textit{edwards}. This display gives a different graphical representation of the lists which is clearer 
-for 6 list diagrams. The WEB application developer can also overload the callback function defining the click on an overlap number. 
+can be bulky and difficult, therefore jvenn proposes a switch button panel allowing to activate or disactivate lists (Fig. 1). The selected 
+overlap count is then displayed and can be clicked. Moreover for a high readability of the diagram, when the intersection counts size exceeds
+the allowed space, the value is substituted by a question mark. The real value is then poped-up when the user mouse is over. This behaviour 
+can be disabled by setting the \textit{shortNumber} option to \textit{false}. jvenn also provides the Edwards-Venn display (Fig. 2) available 
+by setting the \textit{displayType} option to \textit{edwards}. This display gives a different graphical representation of the lists which is 
+clearer for 6 list diagrams. The WEB application developer can also overload the callback function defining the click on an overlap number. 
 This can be done by defining the \textit{fnClickCallback} parameter. The overloading function has access to the \textit{this.listnames} and
 \textit{this.list} variables allowing the developer to control the user interactions. This feature can be disabled by setting the 
-\textit{disableClick} option to \textit{true}.
+\textit{disableClick} option to \textit{true}. To customize the diagram display, the developer can also settle the \textit{colors} option.
+
+Having an overview of the input data and comparing multiple diagrams can be difficult when using a Venn vizualisation. Thus, in order to ease 
+this step, jvenn provides two extra charts bellow the Venn diagram (Fig. 1). The first graph represents the input lists size histogram. This one
+allows the user to check the homogeneity of its lists size. As example, In Fig. 1, both SRR068051 and SRR068053 lists have more identifiers than 
+other ones. The second graph, displays the number of elements shared by one to six lists. This feature can be used to compare multiple Venn 
+diagrams in order to asses the similarities between the input lists. Setting the \textit{displayStat} to true enables this feature.
 
 As example, we produced two venn diagrams representing six samples SRR068049, SRR06805, SRR068051, SRR068052, SRR068053 and 
 SRR068054 corresponding to sets of Operational Taxonomic Units observed under different conditions. Fig. 1 shows intersections
-between five of them using the Venn diagram display. In Fig. 2, jvenn overlights the intersection between three samples out of 
+between six of them using the Venn diagram display. In Fig. 2, jvenn overlights the intersection between three samples out of 
 six.
 
 
@@ -407,19 +415,21 @@ the system and for pointing out features worth developing.
 
 \section*{Figures}
   \begin{figure}[h!]
-  \caption{\csentence{A five lists Venn diagram.}
-      A Venn diagram displaying overlaps between five different biological samples. When 
+  \caption{\csentence{A six lists classic Venn diagram.}
+      A Venn diagram displaying overlaps between six different biological samples. When 
       the user clicks on a number, the function the application developper specified is called. 
       On the top-right, the exporting module allows the user to download its diagram as a png 
-      file.}
+      file. On the bottom-right of the chart, a switch button panel allowing to activate or 
+      disactivate lists to access a specific intersection count. On the bottom, some statistic 
+      charts showing the lists size repartition and the number of common and specific elements.}
       \end{figure}
 
 \begin{figure}[h!]
   \caption{\csentence{A six lists Edwards-Venn diagram.}
       When the user mouse is over a specific figure, the lists involved in the intersection
       are highlighted and the other ones are fade out. In this example, the user pointed the
-      intersection between the samples SRR068049, SRR068051 and SRR068052 containing
-      twelve different identifiers.}
+      intersection between the samples SRR068049, SRR068051 and SRR068052 containing eight 
+      different identifiers.}
       \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
