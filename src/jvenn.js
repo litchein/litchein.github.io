@@ -73,7 +73,7 @@
             useValues: false,
             exporting: true,
             displayMode: 'classic',
-            displayStat: true,
+            displayStat: false,
             shortNumber: true,
             // Colors must be RGB : green, blue, red, yellow, orange, brown
             colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
