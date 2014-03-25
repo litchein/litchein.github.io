@@ -29,7 +29,6 @@
 						<li><a href="./index.html">About</a></li>
 						<li class="active"><a href="./documentation.html">Documentation</a></li>
 						<li><a href="./example1.html">Example 1</a></li>
-						<li><a href="./example2.html">Example 2</a></li>
 						<li><a target="_blank" href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil">Sources</a></li>
 						<li><a href="mailto:support.genopole@toulouse.inra.fr">Contact</a></li>
 					</ul>
@@ -43,8 +42,11 @@
 				<ul class="nav nav-list bs-docs-sidenav affix">
 					<li class="active"><a href="#plugin-insertion"><i class="icon-chevron-right"></i> plugin insertion</a></li>
 					<li><a href="#series"><i class="icon-chevron-right"></i> series</a></li>
-					<li><a href="#displayType"><i class="icon-chevron-right"></i> displayType</a></li>
+					<li><a href="#displayMode"><i class="icon-chevron-right"></i> displayMode</a></li>
+					<li><a href="#displayStat"><i class="icon-chevron-right"></i> displayStat</a></li>
 					<li><a href="#fnClickCallback"><i class="icon-chevron-right"></i> fnClickCallback</a></li>
+					<li><a href="#colors"><i class="icon-chevron-right"></i> colors</a></li>
+					<li><a href="#shortNumber"><i class="icon-chevron-right"></i> shortNumber</a></li>
 					<li><a href="#disableClick"><i class="icon-chevron-right"></i> disableClick</a></li>
 					<li><a href="#useValues"><i class="icon-chevron-right"></i> useValues</a></li>
 					<li><a href="#exporting"><i class="icon-chevron-right"></i> exporting</a></li>
@@ -130,16 +132,33 @@ $(document).ready(function(){
 					</pre>
 				</section>
 				
-				<section id="displayType">
+				<section id="displayMode">
 					<div class="page-header">
-				    	<h1>displayType</h1>
+				    	<h1>displayMode</h1>
 					</div>
 				  	<p>The default value is 'classic' to have a classical venn diagram to be displayed. If you want a Edwards-Venn diagram display,
 				  	just set this option to 'edwards'. Available values for this parameters are: 'classic', 'edwards'.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').jvenn({
-    displayType: 'edwards'
+    displayMode: 'edwards'
+  });
+});
+					</pre>
+				</section>
+
+				<section id="displayStat">
+					<div class="page-header">
+				    	<h1>displayStat</h1>
+					</div>
+				  	<p>The default value is true to display some statisics based on input lists. The first chart represents the histogram of the 
+				  	lists size, providing to the user a rapid view on its lists composition to verify the samples homogeneity. The second chart 
+				  	displays the number of common and specific elements between lists. This feature allows to quickly get an insight on the 
+				  	similarity of the data sets when comparing multiple Venn diagrams.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    displayStat: false
   });
 });
 					</pre>
@@ -179,6 +198,35 @@ $(document).ready(function(){
       }
       alert(value);
     }
+  });
+});
+					</pre>
+				</section>
+				
+				<section id="colors">
+					<div class="page-header">
+				    	<h1>colors</h1>
+					</div>
+				  	<p>jvenn comes with some default colors, you can change them to the ones you want.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
+  });
+});
+					</pre>
+				</section>
+
+				<section id="shortNumber">
+					<div class="page-header">
+				    	<h1>shortNumber</h1>
+					</div>
+				  	<p>Default is false, if set to true, when intersection counts are too big to be displayed, jvenn will
+				  	add a "?" instead of the value, which is accessible on the rollover action.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    shortNumber: true
   });
 });
 					</pre>
