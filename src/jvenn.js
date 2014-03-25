@@ -74,6 +74,7 @@
             exporting: true,
             displayMode: 'classic',
             displayStat: true,
+            shortNumber: true,
             // Colors must be RGB : green, blue, red, yellow, orange, brown
             colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
         };  
@@ -1593,7 +1594,12 @@
 					$("#leg-res").css('cursor', 'default')
 				}
 				else {
-					$("#leg-res").text($(val).html());
+					if($(val).text() == '?') {
+						$("#leg-res").text($(val).children("span").attr('title'));
+					}
+					else {
+						$("#leg-res").text($(val).text());
+					}
 					$("#leg-res").bind("click", opts.fnClickCallback);
 					$("#leg-res").css('cursor', 'pointer')
 				}
@@ -1740,6 +1746,14 @@
             });      
 		}
 		
+		function shortNumber() {
+			$("*[id^=resultC]").each(function(){
+				if($(this).text().length > 2) {
+					$(this).html("<span title=" + $(this).text() + ">?</span>");
+				}
+			});
+		}
+		
 		// Return an Array with number of common and specific element (x in 1 class, y in 2 class...) 
 		function countByNbClass() {
 			var data = new Array(0,0,0,0,0,0);
@@ -1748,7 +1762,11 @@
 				for (var i=6; i<$(this).attr("id").length; i++) {
 					n += $(this).attr("id").substring(i+1,i+2) == "1";
 				}
-				data[n-1] += parseInt($(this).html());
+				var val = $(this).text();
+				if(val == '?') {
+					val = $(this).children("span").attr('title');
+				}
+				data[n-1] += parseInt(val);
 			});
 			return data;
 		}
@@ -1759,7 +1777,11 @@
 			$("*[id^=resultC]").each(function(){
 				for (var i=6; i<$(this).attr("id").length; i++) {
 					if ($(this).attr("id").substring(i+1,i+2) == "1") {
-						data[i-6] += parseInt($(this).html());
+						var val = $(this).text();
+						if(val == '?') {
+							val = $(this).children("span").attr('title');
+						}
+						data[i-6] += parseInt(val);
 					}
 				}
 			});
@@ -1948,7 +1970,7 @@
            
             $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:404px;top:-'+(150+extraheight)+'px;width:35px;height:105px}</style>').appendTo('body');
             $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.65em;line-height:10px;opacity:0.75}</style>').appendTo('body');
-            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:34px;height:20px;border:1px solid lightgrey;top:-'+(214+extraheight)+'px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
+            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:44px;height:20px;border:1px solid lightgrey;top:-'+(214+extraheight)+'px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
             
             var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: "'+(445+extraheight)+'px;">';
 			div_content += '<canvas id="canvasEllipse" width="500px" height="'+(415+extraheight)+'px;"></canvas>';
@@ -2039,7 +2061,12 @@
             if (opts.displayStat) {
             	placeStat(type[1]);
             }
-                                    
+            
+            // if shortNumber option && more than 4 classes
+            if(opts.shortNumber && type[1]>4) {
+            	shortNumber();
+            }
+            
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t); }
             // if a 6 classes diagram is requested
