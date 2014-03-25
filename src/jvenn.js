@@ -575,7 +575,7 @@
 							  dataplot[i],
 							  changeOpacity(opts.colors[i], 0.5),
 							  opts.colors[i]);
-				if(h-dataplot[i]+15 <= h) {
+				if(h-dataplot[i]+15 <= h-10) {
 					context.textAlign = 'right';
 					context.fillStyle = 'white';
 					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, ymargin + h-dataplot[i]+15);
@@ -635,8 +635,8 @@
 							  ymargin + 15,
 							  data2plot[i] - xspacer,
 							  20,
-							  changeOpacity(opts.colors[i], 0.5),
-							  opts.colors[i]);
+							  changeOpacity("rgb(156,106,156)", (1/(i+1.5))),
+							  "rgba(0,0,0,0.5)");
 				context.textAlign = 'center';
 				context.fillStyle = 'white';
 				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
