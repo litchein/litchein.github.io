@@ -31,44 +31,22 @@
 		
 			function updateJvenn() {
 				var seriesTable = new Array();
-				if ($("#area1").val() != "") {
+				var num = 0;
+				for(var i=6; i>=1; i--) {
+					if($("#area"+i).val() != "") {
+						num = i;
+						break;
+					}
+				}
+				console.log(num);
+				for(var i=1; i<=num; i++) {
 					seriesTable.push({
-						name: $("#name1").val(),
-						data: getArrayFromArea("area1")
+						name: $("#name"+i).val(),
+						data: getArrayFromArea("area"+i)
 					});
 				}
-		           if ($("#area2").val() != "") { 
-		            seriesTable.push({   
-		                name: $("#name2").val(),
-		                data: getArrayFromArea("area2")
-		            });
-		           }
-		           if ($("#area3").val() != "") { 
-		            seriesTable.push({   
-		                name: $("#name3").val(),
-		                data: getArrayFromArea("area3")
-		            });
-		           }
-		           if ($("#area4").val() != "") { 
-		            seriesTable.push({   
-		                name: $("#name4").val(),
-		                data: getArrayFromArea("area4")
-		            });
-		           }
-		           if ($("#area5").val() != "") { 
-		            seriesTable.push({   
-		                name: $("#name5").val(),
-		                data: getArrayFromArea("area5")
-		            });
-		           }
-		           if ($("#area6").val() != "") { 
-		            seriesTable.push({   
-		                name: $("#name6").val(),
-		                data: getArrayFromArea("area6")
-		            });
-		           }
-		
-				$("#jvenn-container").jvenn({
+		       
+			    $("#jvenn-container").jvenn({
 					series: seriesTable,
 					displayMode: $("#venn-type").val(),
 					displayStat: true,
