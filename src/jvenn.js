@@ -75,7 +75,8 @@
             displayMode: 'classic',
             displayStat: false,
             shortNumber: true,
-            // Colors must be RGB : green, blue, red, yellow, orange, brown
+            // Colors must be RGB
+            //       green         , blue            , red            , yellow          , orange         , brown
             colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
         };  
 		var opts = $.extend(defaults, options); 
@@ -588,7 +589,7 @@
 				else { ytext = ymargin + h + 15; }
 				context.fillStyle = "#000";
 				context.textAlign = 'center';
-				context.fillText(opts.series[i].name, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ytext, 200);
+				context.fillText($("#label"+(i+1)).html(), (xmargin + i*barwidth + i*xspacer) + barwidth/2, ytext, 200);
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
 				drawAxis(context, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ymargin + h, (xmargin + i*barwidth + i*xspacer) + barwidth/2, ymargin + h+5);
@@ -640,6 +641,10 @@
 							  "rgba(0,0,0,0.5)");
 				context.textAlign = 'center';
 				context.fillStyle = 'white';
+				if((data2plot[i] - xspacer) < 25) {
+					context.fillStyle = '#000';
+				}
+				console.log(data2[i] + " pour " + (data2plot[i] - xspacer));
 				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
@@ -1639,10 +1644,7 @@
 			actualList[3]=new Array();
 			actualList[4]=new Array();
 			actualList[5]=new Array();
-			$("*[id^=resultC]").each(function(){
-				$(this).html(0);
-				$(this).addClass("number-empty");
-			});
+			
 			for (m=0;m<opts.series.length;m++) {
 				actualList[m]=new Array();
 				var list = opts.series[m].data;
@@ -1743,7 +1745,7 @@
 						this.list.push(cl);
 					}
 				}
-            });      
+            });
 		}
 		
 		function shortNumber() {
@@ -1777,6 +1779,7 @@
 			$("*[id^=resultC]").each(function(){
 				for (var i=6; i<$(this).attr("id").length; i++) {
 					if ($(this).attr("id").substring(i+1,i+2) == "1") {
+						
 						var val = $(this).text();
 						if(val == '?') {
 							val = $(this).children("span").attr('title');
@@ -1860,6 +1863,27 @@
 			if (opts.series[0].name.D) { $("#label4").html(opts.series[0].name.D); }
 			if (opts.series[0].name.E) { $("#label5").html(opts.series[0].name.E); }
 			if (opts.series[0].name.F) { $("#label6").html(opts.series[0].name.F); }
+		
+			// Add info to the number
+            $("*[id^=resultC]").each(function(){
+            	this.listnames = new Array();
+            	for (var i=6; i<$(this).attr("id").length; i++) {
+            		if ($(this).attr("id").substring(i+1,i+2) == "1") {
+            			try {
+            				if(i-6 == 0)		{ this.listnames.push(opts.series[0].name.A); }
+            				else if(i-6 == 1)	{ this.listnames.push(opts.series[0].name.B); } 
+            				else if(i-6 == 2)	{ this.listnames.push(opts.series[0].name.C); }
+            				else if(i-6 == 3)	{ this.listnames.push(opts.series[0].name.D); }
+            				else if(i-6 == 4)	{ this.listnames.push(opts.series[0].name.E); }
+            				else if(i-6 == 5)	{ this.listnames.push(opts.series[0].name.F); }
+            				}
+            			catch(err) { }
+            		}
+            	}
+            	if($(this).text() > 0) {
+            		$(this).removeClass("number-empty");
+            	}
+            });      
 		}
 		
 		function getVennType() {
@@ -2045,7 +2069,13 @@
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label6"></div>';
 			div_content += '</div>';
             $t.html(div_content);
-
+           
+            // init with 0
+            $("*[id^=resultC]").each(function(){
+				$(this).html(0);
+				$(this).addClass("number-empty");
+			});
+            
             var type = getVennType(); 
             if (type[0] == "list") {
             	fillListVenn();
@@ -2078,13 +2108,13 @@
             		if($(this).text() !== "") {
 		            	var labels  = this.listnames;
 		            	var current = this;
-		            	$("*[id^=label]").each(function(){
-		            		if (labels.indexOf($(this).text()) < 0) {
-		            			$(this).css('opacity', 0.1);
-		            		} else {
-		            			$(this).css('opacity', 0.6);
-		            		}
-		            	});
+	            		$("*[id^=label]").each(function(){
+	            			if (labels.indexOf($(this).text()) < 0) {
+	            				$(this).css('opacity', 0.1);
+	            			} else {
+	            				$(this).css('opacity', 0.6);
+	            			}
+	            		});
 		            	$(".number-black").each(function(){
 	                		if(this != current) {
 	                			$(this).css('opacity', 0.1);
