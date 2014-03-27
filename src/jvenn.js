@@ -542,7 +542,7 @@
 			*/
 			var	h = 120,
 				xmargin = 70,
-				ymargin = 425,
+				ymargin = 420,
 				xspacer = 20,
 				barwidth = (370-(vennSize*xspacer))/vennSize,
 				ytext = 265;
@@ -562,12 +562,12 @@
 			context.fillStyle = "#000";
 			context.font = 'italic 10pt Arial';
 			context.textAlign = 'center';
-		    context.fillText('Size of each lists', 250, ymargin+25);
+		    context.fillText('Size of each lists', 250, ymargin+27);
 		    context.font = 'normal 8pt Arial';
 		    context.textAlign = 'right';
-		    context.fillText(0, 45, ymargin + h + 5);
+		    context.fillText(0, 45, ymargin + h + 2);
 		    context.fillText(max/2, 45, ymargin + ((h+55)/2));
-		    context.fillText(max, 45, ymargin + 55);
+		    context.fillText(max, 45, ymargin + 54);
 		    context.textAlign = 'left';
 			for (var i=0; i<vennSize; i++) {
 				drawRectangle(context,
@@ -601,7 +601,7 @@
 			drawAxis(context, 50, ymargin + h, 50, ymargin + 35); 
 			drawAxis(context, 50, ymargin + h, 450, ymargin + h);
 			context.lineWidth = 0.4;
-			drawAxis(context, 47, ymargin + (h+50)/2, 53, ymargin + (h+50)/2);
+			drawAxis(context, 47, ymargin + (h+48)/2, 53, ymargin + (h+48)/2);
 			drawAxis(context, 47, ymargin + 50, 53, ymargin + 50);
 			drawTriangle(50, ymargin+25,  46,ymargin+35,   54,ymargin+35, axiscolor);
 			drawTriangle(460,ymargin+h, 450,ymargin+h-4, 450,ymargin+h+4, axiscolor);
@@ -629,7 +629,9 @@
 			context.textAlign = 'center';
 		    context.fillText('Number of common and specific elements', 250, ymargin);
 		    context.font = 'normal 8pt Arial';
-			var xprev = 0;
+			var	xprev = 0,
+				ylegend = 0;
+			
 			for (var i=vennSize-1; i>=0; i--) {
 				if(data2plot[i] == 0) { continue };
 			    drawRectangle(context,
@@ -643,14 +645,21 @@
 				context.fillStyle = 'white';
 				if((data2plot[i] - xspacer) < 25) {
 					context.fillStyle = '#000';
+					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 57 + ylegend);
+					context.fillText("(" + data2[i] + ")", (data2plot[i] - xspacer)/2  + xmargin + xprev + 13, ymargin + 57 + ylegend);
+					if(ylegend == 0) { ylegend = 12; }
+					else { ylegend = 0; }
+				}
+				else {
+					context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
+					context.fillStyle = '#000';
+					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+57);
+					ylegend = 0;
 				}
 				console.log(data2[i] + " pour " + (data2plot[i] - xspacer));
-				context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
 				drawAxis(context, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+40, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+45);
-				context.fillStyle = '#000';
-				context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+57);
 				xprev += data2plot[i];
 			}
 
@@ -1715,7 +1724,7 @@
 			} else if (opts.series.length == 2) {
 				$("#label1").html(opts.series[0].name);
 				$("#label2").html(opts.series[1].name);
-			} else {
+			} else if (opts.series.length == 1) {
 				$("#label1").html(opts.series[0].name);
 			}
 			
@@ -1891,7 +1900,7 @@
 			if (opts.series.length > 1) {
 				return (new Array("list", opts.series.length));
 			} else {
-				if (opts.series[0].name.A) {
+				if (opts.series[0] != undefined && opts.series[0].name.A) {
 					var count = 0;
 					for (i in opts.series[0].name){ count++; }
 					return (new Array("count", count));
