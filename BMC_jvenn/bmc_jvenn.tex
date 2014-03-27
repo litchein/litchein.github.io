@@ -201,20 +201,20 @@
 \begin{abstract} % abstract
 \parttitle{Background} %if any
 The amount of rich WEB applications allowing scientists to store, share and analyze data online is increasing. 
-This enhances the need of embadable visualization tools. In a first approach, scientists often produce lists 
-of known identifiers corresponding to the different experimental conditions. The Venn diagram is one of the most 
-popular charts presenting list comparison results.
+This enhances the need of embadable visualization tools. Scientists often produce lists of known identifiers 
+corresponding to different experimental conditions. The Venn diagram is one of the most popular chart types 
+used to present list comparison results.
 
 \parttitle{Results} %if any
 jvenn is a javascript library providing lists processing and Venn diagram displaying functions. It is the only library 
-able to handle up to 6 input lists presenting results as classical or Edwards-Venn diagrams. It permits any developper 
-to embed Venn diagramm visualization features in a WEB page. jvenn is fully configurable and allows developpers to control 
+able to handle up to 6 input lists presenting results as classical or Edwards-Venn diagrams. Using it, developpers can 
+easily embed Venn diagramm visualization features in WEB pages. jvenn is fully configurable and allows to control 
 and customize all user interactions.
 
 \parttitle{Conclusions} %if any
-We introduce jvenn a javascript library aiming to be part of rich WEB environments helping scientists to analyse 
-their data. The library package, comming with a full documentation and some integration examples, is freely 
-available at https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
+We introduce jvenn an open source component for WEB environments helping scientists to analyse their data. The 
+library package, comming with a full documentation and some integration examples, is freely available at 
+https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
 
 
 \end{abstract}
@@ -279,24 +279,24 @@ available at https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/inde
 
 Biological projects are increasingly multiplexing samples to assess differences between conditions or individuals, 
 thus, it is important to provide researchers with effective visualization tools to explore and extract 
-relevant differences between these data sets. Data analysis often leads produces lists of biological  identifiers 
-(gene names, operational taxonomic unit, ...). One simple analysis is the comparison of the intersections of these 
-lists. A commonly used visualization chart is the Venn diagrams \cite{Venn1880} wich allows to identify 
-shared and unshared identifiers providing an insight on the similarities between the lists.
+relevant differences between these data sets. Data analysis often produces lists of biological identifiers 
+(gene names, operational taxonomic unit, ...) which are then compared. List intersection 
+results are commonly visualized using Venn diagrams \cite{Venn1880} presenting shared and unshared identifier 
+counts, providing an insight on the similarities between the lists.
 
 Venn diagrams are often used to present results on WEB pages. Thus, several Venn diagram applications are 
 availble. BioVenn \cite{Hulsen2008} or venny \cite{venny} are WEB applications with identifier input text 
 areas. Where the first one offers only a three circles area-proportional diagram, the second one offers a 
 four lists diagram without area proportion respect. Canvasxpress \cite{canvasxpress} and the Google Chart 
 API \cite{googleAPI}, meanwhile, are javascript libraries including Venn diagram features which can easily 
-be embedded in any WEB site. These libraries can only produce figures given the intersection counts but 
+be embedded in any WEB page. These libraries generate the graphical output given the intersection counts but 
 cannot perform the calculations on the lists.
 
 We introduce jvenn a javascript library helping scientists to present their data, in the same spirit as already 
 existing tools such as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}. 
 jvenn handles up to 6 input lists, can display classical or Edwards-Venn \cite{Edwards2004} diagrams, can easily be 
 embeded in a WEB page, allows three different data formats (lists/intersection counts/count lists), exports PNG files and permits 
-to overload the callback function in order to control users interactions. jvenn has already been used in several scientific 
+to overload the callback function in order to control users interactions. jvenn has already been cited in several scientific 
 publications \cite{Bianchia2013, Aravindraja2013}.
 
 
@@ -345,16 +345,16 @@ six.
 
 \section*{Conclusions}
 
-jvenn is an easy-to-use library aiming to generate Venn and Edwards-Venn diagrams from lists of identifiers or from
-computed interaction counts. Its implementation as a javascript library allows whoever has WEB programming skills to embed it 
-within its WEB application without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse 
+jvenn is an easy-to-use library which generates Venn and Edwards-Venn diagrams from lists of identifiers or from
+computed intersection counts. Its implementation as a javascript library allows whoever has some WEB programming skills to embed it 
+within a WEB page without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse 
 \cite{Mariette} and WallProtDB \cite{SanClemente} WEB applications.
 
 \section*{Availability and requirements}
 
-jvenn is freely available under the GNU General Public License (GPL) at 
-https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil webcite. Some examples and a full documentation 
-can be found on the downloadable archive. A running version is accessible at http://bioinfo.genotoul.fr/index.php?id=116.
+jvenn is freely available under the GNU General Public License (GPL) and can be downloaded with an example and the full documentation
+at https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil webcite. A running version is accessible at 
+http://bioinfo.genotoul.fr/index.php?id=116.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                          %%
@@ -416,20 +416,21 @@ the system and for pointing out features worth developing.
 \section*{Figures}
   \begin{figure}[h!]
   \caption{\csentence{A six lists classic Venn diagram.}
-      A Venn diagram displaying overlaps between six different biological samples. When 
-      the user clicks on a number, the function the application developper specified is called. 
-      On the top-right, the exporting module allows the user to download its diagram as a PNG 
+      This Venn diagram displays overlaps between six different biological samples. When 
+      the user clicks on a figure, it calls the developper defined function. 
+      The icon located on the top-right, allows users to download the diagram as a PNG 
       file. On the bottom-right of the chart, a switch button panel allowing to activate or 
-      disactivate lists to access a specific intersection count. On the bottom, some statistic 
-      charts showing the lists size repartition and the number of common and specific elements.}
+      disactivate lists to access a specific intersection count. The charts showing the lists 
+      size repartition and the number of common and specific elements are located underneath the
+      diagram.}
       \end{figure}
 
 \begin{figure}[h!]
   \caption{\csentence{A six lists Edwards-Venn diagram.}
-      When the user mouse is over a specific figure, the lists involved in the intersection
-      are highlighted and the other ones are fade out. In this example, the user pointed the
-      intersection between the samples SRR068049, SRR068051 and SRR068052 containing eight 
-      different identifiers.}
+      On mouse over a figure, the shape corresponding to the list involved in the intersection
+      are highlighted and the other ones faded out. In this example, the user points the
+      intersection between samples SRR068049, SRR068051 and SRR068052 which contains eight 
+      different items.}
       \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
