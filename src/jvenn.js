@@ -656,7 +656,6 @@
 					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+57);
 					ylegend = 0;
 				}
-				console.log(data2[i] + " pour " + (data2plot[i] - xspacer));
 				context.strokeStyle = axiscolor;
 				context.lineWidth = 0.4;
 				drawAxis(context, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+40, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+45);
@@ -667,6 +666,15 @@
 		    context.lineWidth = 1;
 			context.strokeStyle = axiscolor;
 			drawAxis(context, 50, ymargin+40, 460, ymargin+40);
+		}
+		
+		function placeNumber(div, left, top, space) {
+			// if shortNumber option && lenght>space
+            if(opts.shortNumber  &&  div.text().length > space) {
+				div.html("<span title=" + div.text() + ">?</span>");
+			}
+            var l = left - ((div.text().length-1)/2 * 8);
+			div.css("left", l).css("top", top);
 		}
 		
 		function placeClassicVenn(vennSize) {
@@ -686,43 +694,41 @@
 				$("#label4").css("left", 410).css("top", 200).css("color", opts.colors[3]);
 				$("#label5").css("left", 255).css("top", 385).css("color", opts.colors[4]);
 				$("#label6").css("left",  30).css("top", 300).css("color", opts.colors[5]);
-				$("#resultC100000").css("left",  93).css("top",  90);
-				$("#resultC010000").css("left", 185).css("top",  50);
-				$("#resultC001000").css("left", 275).css("top",  80);
-				$("#resultC000100").css("left", 320).css("top", 205);
-				$("#resultC000010").css("left", 210).css("top", 275);
-				$("#resultC000001").css("left",  95).css("top", 240);
-				$("#resultC111111").css("left", 185).css("top", 170);
-
+				placeNumber($("#resultC100000"),  98,  90, 6);
+				placeNumber($("#resultC010000"), 187,  50, 4);
+				placeNumber($("#resultC001000"), 280,  80, 6);
+				placeNumber($("#resultC000100"), 320, 205, 6);
+				placeNumber($("#resultC000010"), 212, 272, 5);
+				placeNumber($("#resultC000001"), 100, 240, 6);
+				placeNumber($("#resultC111111"), 185, 170, 6);
 				drawLine(140, 80, 166,110, grey);
-				$("#resultC110000").css("left",  130).css("top",  60);
-				$("#resultC101000").css("left",  140).css("top", 117);
+				placeNumber($("#resultC110000"), 132,  60, 6);
+				placeNumber($("#resultC101000"), 142, 116, 2);
 				drawLine( 75,180, 145,185, grey);
 				drawLine( 75,180,  65,175, grey);
-				$("#resultC100100").css("left",   55).css("top", 157);
-				$("#resultC100010").css("left",  140).css("top", 145);
+				placeNumber($("#resultC100100"),  55, 157, 6);
+				placeNumber($("#resultC100010"), 140, 145, 2);
 				drawLine( 75,200, 142,190, grey);
 				drawLine( 75,200,  65,195, grey);
-				$("#resultC100001").css("left",   55).css("top", 177);
+				placeNumber($("#resultC100001"),  55, 177, 6);
 				drawLine(230, 80, 212,115, grey);
-				$("#resultC011000").css("left",  230).css("top",  60);
-				$("#resultC010100").css("left",  225).css("top", 190);
-				$("#resultC010010").css("left",  190).css("top",  80);
-				$("#resultC010001").css("left",  143).css("top", 219);
+				placeNumber($("#resultC011000"), 230,  60, 6);
+				placeNumber($("#resultC010100"), 225, 190, 1);
+				placeNumber($("#resultC010010"), 193,  82, 3);
+				placeNumber($("#resultC010001"), 145, 218, 2);
 				drawLine(295,145, 235,180, grey);
-				$("#resultC001100").css("left",  302).css("top", 132);
+				placeNumber($("#resultC001100"), 302, 132, 6);
 				drawLine(275,270, 193,233, grey);
-				$("#resultC001010").css("left",  275).css("top", 268);
-				$("#resultC001001").css("left",  235).css("top", 110);
-				$("#resultC000110").css("left",  215).css("top", 210);
+				placeNumber($("#resultC001010"), 275, 268, 6);
+				placeNumber($("#resultC001001"), 232, 113, 4);
+				placeNumber($("#resultC000110"), 215, 210, 1);
 				drawLine( 75,220, 140,205, grey);
 				drawLine( 75,220,  65,215, grey);
-				$("#resultC000101").css("left",   55).css("top", 197);
+				placeNumber($("#resultC000101"),  55, 197, 6);
 				drawLine(150,270, 183,230, grey);
-				$("#resultC000011").css("left",  145).css("top", 268);
+				placeNumber($("#resultC000011"), 145, 268, 6);
 				
 			} else if (vennSize == 5) {
-				
 				drawEllipse(214,230,10,18.6,9.5,25,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawEllipse(232,187,10,18.6,9.5,98,  changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawEllipse(273,196,10,18.6,9.5,170, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -735,37 +741,37 @@
 				$("#label4").css("left", 410).css("top", 350).css("color", opts.colors[3]);
 				$("#label5").css("left", 40).css("top", 400).css("color",  opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 60).css("top", 150);
-				$("#resultC010000").css("left", 230).css("top", 30);
-				$("#resultC001000").css("left", 420).css("top", 150);
-				$("#resultC000100").css("left", 350).css("top", 370);
-				$("#resultC000010").css("left", 130).css("top", 370);
-				$("#resultC110000").css("left", 151).css("top", 120);
-				$("#resultC101000").css("left", 110).css("top", 200);
-				$("#resultC100100").css("left", 350).css("top", 295);
-				$("#resultC100010").css("left", 125).css("top", 275);
-				$("#resultC011000").css("left", 305).css("top", 97);
-				$("#resultC010100").css("left", 205).css("top", 85);
-				$("#resultC010010").css("left", 195).css("top", 345);
-				$("#resultC001100").css("left", 380).css("top", 235);
-				$("#resultC001010").css("left", 355).css("top", 140);
-				$("#resultC000110").css("left", 262).css("top", 350);
-				$("#resultC111000").css("left", 145).css("top", 180);
-				$("#resultC110100").css("left", 167).css("top", 118);
-				$("#resultC110010").css("left", 180).css("top", 300);
-				$("#resultC101100").css("left", 365).css("top", 250);
-				$("#resultC101010").css("left", 127).css("top", 260);
-				$("#resultC100110").css("left", 305).css("top", 300);
-				$("#resultC011100").css("left", 240).css("top", 110);
-				$("#resultC011010").css("left", 317).css("top", 112);
-				$("#resultC010110").css("left", 248).css("top", 342);
-				$("#resultC001110").css("left", 340).css("top", 180);
-				$("#resultC111100").css("left", 180).css("top", 140);
-				$("#resultC111010").css("left", 160).css("top", 250);
-				$("#resultC110110").css("left", 250).css("top", 310);
-				$("#resultC101110").css("left", 330).css("top", 240);
-				$("#resultC011110").css("left", 290).css("top", 140);
-				$("#resultC111110").css("left", 245).css("top", 210);				
+				placeNumber($("#resultC100000"),  75, 150, 6);
+				placeNumber($("#resultC010000"), 245,  30, 6);
+				placeNumber($("#resultC001000"), 415, 162, 6);
+				placeNumber($("#resultC000100"), 350, 370, 6);
+				placeNumber($("#resultC000010"), 132, 370, 6);
+				placeNumber($("#resultC110000"), 152, 118, 2);
+				placeNumber($("#resultC101000"), 110, 200, 6);
+				placeNumber($("#resultC100100"), 350, 295, 6);
+				placeNumber($("#resultC100010"), 125, 273, 2);
+				placeNumber($("#resultC011000"), 309,  94, 3);
+				placeNumber($("#resultC010100"), 215,  82, 6);
+				placeNumber($("#resultC010010"), 195, 340, 6);
+				placeNumber($("#resultC001100"), 378, 232, 2);
+				placeNumber($("#resultC001010"), 360, 140, 5);
+				placeNumber($("#resultC000110"), 261, 347, 2);
+				placeNumber($("#resultC111000"), 148, 180, 4);
+				placeNumber($("#resultC110100"), 168, 113, 2);
+				placeNumber($("#resultC110010"), 176, 295, 6);
+				placeNumber($("#resultC101100"), 367, 248, 2);
+				placeNumber($("#resultC101010"), 127, 256, 2);
+				placeNumber($("#resultC100110"), 305, 300, 4);
+				placeNumber($("#resultC011100"), 240, 110, 6);
+				placeNumber($("#resultC011010"), 317, 108, 2);
+				placeNumber($("#resultC010110"), 248, 338, 2);
+				placeNumber($("#resultC001110"), 345, 180, 4);
+				placeNumber($("#resultC111100"), 185, 140, 6);
+				placeNumber($("#resultC111010"), 158, 245, 6);
+				placeNumber($("#resultC110110"), 250, 310, 6);
+				placeNumber($("#resultC101110"), 330, 240, 6);
+				placeNumber($("#resultC011110"), 290, 133, 6);
+				placeNumber($("#resultC111110"), 245, 210, 6);				
 				$("#resultC000001").css("left", -1000).css("top", -2200);
 				$("#resultC100001").css("left", -1000).css("top", -2200);
 				$("#resultC010001").css("left", -1000).css("top", -2200);
@@ -800,7 +806,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 
 			} else if (vennSize == 4) {	
-				
 				drawEllipse(181,238,10,18.5,11.5,40,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawEllipse(242,177,10,18.5,11.5,40,  changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawEllipse(259,177,10,18.5,11.5,140, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -812,32 +817,32 @@
 				$("#label4").css("left", 428).css("top", 70).css("color", opts.colors[3]);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 55).css("top", 190);
-				$("#resultC010000").css("left", 140).css("top", 60);
-				$("#resultC001000").css("left", 320).css("top", 60);
-				$("#resultC000100").css("left", 420).css("top", 190);
+				placeNumber($("#resultC100000"),  55, 190, 6);
+				placeNumber($("#resultC010000"), 140,  60, 6);
+				placeNumber($("#resultC001000"), 335,  60, 6);
+				placeNumber($("#resultC000100"), 430, 190, 6);
+				placeNumber($("#resultC110000"), 105, 120, 6);
+				placeNumber($("#resultC101000"), 130, 260, 6);
+				placeNumber($("#resultC100100"), 245, 340, 6);
+				placeNumber($("#resultC011000"), 245,  90, 6);
+				placeNumber($("#resultC010100"), 365, 260, 6);
+				placeNumber($("#resultC001100"), 385, 120, 6);
+				placeNumber($("#resultC111000"), 160, 170, 6);
+				placeNumber($("#resultC110100"), 310, 290, 6);
+				placeNumber($("#resultC101100"), 180, 290, 6);
+				placeNumber($("#resultC011100"), 330, 170, 6);
+				placeNumber($("#resultC111100"), 245, 220, 6);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 105).css("top", 120);
-				$("#resultC101000").css("left", 120).css("top", 260);
-				$("#resultC100100").css("left", 235).css("top", 340);
 				$("#resultC100010").css("left", -1000).css("top", -2200);
-				$("#resultC011000").css("left", 235).css("top", 90);
-				$("#resultC010100").css("left", 350).css("top", 260);
 				$("#resultC010010").css("left", -1000).css("top", -2200);
-				$("#resultC001100").css("left", 370).css("top", 120);
 				$("#resultC001010").css("left", -1000).css("top", -2200);
 				$("#resultC000110").css("left", -1000).css("top", -2200);
-				$("#resultC111000").css("left", 160).css("top", 170);
-				$("#resultC110100").css("left", 300).css("top", 290);
 				$("#resultC110010").css("left", -1000).css("top", -2200);
-				$("#resultC101100").css("left", 170).css("top", 290);
 				$("#resultC101010").css("left", -1000).css("top", -2200);
 				$("#resultC100110").css("left", -1000).css("top", -2200);
-				$("#resultC011100").css("left", 310).css("top", 170);
 				$("#resultC011010").css("left", -1000).css("top", -2200);
 				$("#resultC010110").css("left", -1000).css("top", -2200);
 				$("#resultC001110").css("left", -1000).css("top", -2200);
-				$("#resultC111100").css("left", 235).css("top", 220);
 				$("#resultC111010").css("left", -1000).css("top", -2200);
 				$("#resultC110110").css("left", -1000).css("top", -2200);
 				$("#resultC101110").css("left", -1000).css("top", -2200);
@@ -877,7 +882,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else if (vennSize == 3) {
-				
 				drawEllipse(171,142,120,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawEllipse(327,142,120,1,1,0, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawEllipse(249,271,120,1,1,0, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -888,22 +892,22 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 120).css("top", 100);
-				$("#resultC010000").css("left", 360).css("top", 100);
-				$("#resultC001000").css("left", 245).css("top", 330);
+				placeNumber($("#resultC100000"), 120, 100, 8);
+				placeNumber($("#resultC010000"), 360, 100, 8);
+				placeNumber($("#resultC001000"), 245, 330, 8);
+				placeNumber($("#resultC110000"), 245, 100, 8);
+				placeNumber($("#resultC101000"), 170, 220, 8);
+				placeNumber($("#resultC011000"), 320, 220, 8);
+				placeNumber($("#resultC111000"), 245, 175, 8);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 245).css("top", 100);
-				$("#resultC101000").css("left", 170).css("top", 220);
 				$("#resultC100100").css("left", -1000).css("top", -2200);
 				$("#resultC100010").css("left", -1000).css("top", -2200);
-				$("#resultC011000").css("left", 320).css("top", 220);
 				$("#resultC010100").css("left", -1000).css("top", -2200);
 				$("#resultC010010").css("left", -1000).css("top", -2200);
 				$("#resultC001100").css("left", -1000).css("top", -2200);
 				$("#resultC001010").css("left", -1000).css("top", -2200);
 				$("#resultC000110").css("left", -1000).css("top", -2200);
-				$("#resultC111000").css("left", 245).css("top", 175);
 				$("#resultC110100").css("left", -1000).css("top", -2200);
 				$("#resultC110010").css("left", -1000).css("top", -2200);
 				$("#resultC101100").css("left", -1000).css("top", -2200);
@@ -953,7 +957,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else if (vennSize == 2) {	
-				
 				drawEllipse(171,206,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawEllipse(327,206,140,1,1,0, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				
@@ -963,12 +966,12 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 120).css("top", 195);
-				$("#resultC010000").css("left", 360).css("top", 195);
+				placeNumber($("#resultC100000"), 120, 195, 10);
+				placeNumber($("#resultC010000"), 360, 195, 10);
+				placeNumber($("#resultC110000"), 250, 195, 10);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 250).css("top", 195);
 				$("#resultC101000").css("left", -1000).css("top", -2200);
 				$("#resultC100100").css("left", -1000).css("top", -2200);
 				$("#resultC100010").css("left", -1000).css("top", -2200);
@@ -1028,7 +1031,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else {
-				
 				drawEllipse(246,210,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				
 				$("#label1").css("left", 225).css("top", 30).css("color", opts.colors[0]);
@@ -1037,7 +1039,7 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 240).css("top", 200);
+				placeNumber($("#resultC100000"), 245, 200, 10);
 				$("#resultC010000").css("left", -1000).css("top", -2200);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
@@ -1118,72 +1120,71 @@
 				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
 				$("#label6").css("left", 297).css("top",302).css("color", opts.colors[5]);
-				$("#resultC100000").css("left", 204).css("top", 122);
-				$("#resultC010000").css("left", 390).css("top",  70);
-				$("#resultC001000").css("left",  85).css("top", 330);
-				$("#resultC000100").css("left",  85).css("top", 150);
-				$("#resultC000010").css("left", 225).css("top",  70);
-				$("#resultC110000").css("left", 280).css("top", 122);
-				$("#resultC101000").css("left", 204).css("top", 269);
-				$("#resultC100100").css("left", 172).css("top", 155);
-				$("#resultC100010").css("left", 218).css("top", 118);
-				$("#resultC011000").css("left", 390).css("top", 330);
-				$("#resultC010100").css("left", 390).css("top", 150);
-				$("#resultC010010").css("left", 258).css("top",  70);
-				$("#resultC001100").css("left",  85).css("top", 240);
-				$("#resultC001010").css("left", 225).css("top", 320);
-				$("#resultC000110").css("left", 120).css("top", 178);
-				$("#resultC111000").css("left", 280).css("top", 269);
-				$("#resultC110100").css("left", 314).css("top", 155);
-				$("#resultC110010").css("left", 266).css("top", 118);
-				$("#resultC101100").css("left", 172).css("top", 235);
-				$("#resultC101010").css("left", 219).css("top", 274);
-				$("#resultC100110").css("left", 167).css("top", 171);
-				$("#resultC011100").css("left", 390).css("top", 240);
-				$("#resultC011010").css("left", 258).css("top", 320);
-				$("#resultC010110").css("left", 365).css("top", 178);
-				$("#resultC001110").css("left", 120).css("top", 212);
-				$("#resultC111100").css("left", 315).css("top", 235);
-				$("#resultC111010").css("left", 266).css("top", 274);
-				$("#resultC110110").css("left", 320).css("top", 171);
-				$("#resultC101110").css("left", 166).css("top", 218);
-				$("#resultC011110").css("left", 365).css("top", 212);
-				$("#resultC111110").css("left", 320).css("top", 218);
-				$("#resultC000001").css("left", 180).css("top", 120);
-				$("#resultC100001").css("left", 199).css("top", 134);
-				$("#resultC010001").css("left", 304).css("top", 120);
-				$("#resultC001001").css("left", 179).css("top", 271);
-				$("#resultC000101").css("left", 169).css("top", 132);
-				$("#resultC000011").css("left", 234).css("top",  95);
-				$("#resultC110001").css("left", 286).css("top", 134);
-				$("#resultC101001").css("left", 199).css("top", 256);
-				$("#resultC100101").css("left", 190).css("top", 149);
-				$("#resultC100011").css("left", 228).css("top", 135);
-				$("#resultC011001").css("left", 306).css("top", 272);
-				$("#resultC010101").css("left", 317).css("top", 132);
-				$("#resultC010011").css("left", 250).css("top",  95);
-				$("#resultC001101").css("left", 167).css("top", 260);
-				$("#resultC001011").css("left", 233).css("top", 296);
-				$("#resultC000111").css("left", 143).css("top", 187);
-				$("#resultC111001").css("left", 285).css("top", 256);
-				$("#resultC110101").css("left", 295).css("top", 149);
-				$("#resultC110011").css("left", 255).css("top", 135);
-				$("#resultC101101").css("left", 190).css("top", 242);
-				$("#resultC101011").css("left", 227).css("top", 255);
-				$("#resultC100111").css("left", 213).css("top", 178);
-				$("#resultC011101").css("left", 318).css("top", 259);
-				$("#resultC011011").css("left", 250).css("top", 296);
-				$("#resultC010111").css("left", 342).css("top", 187);
-				$("#resultC001111").css("left", 143).css("top", 203);
-				$("#resultC111101").css("left", 295).css("top", 240);
-				$("#resultC111011").css("left", 256).css("top", 255);
-				$("#resultC110111").css("left", 270).css("top", 178);
-				$("#resultC101111").css("left", 213).css("top", 212);
-				$("#resultC011111").css("left", 342).css("top", 203);
-				$("#resultC111111").css("left", 270).css("top", 212);
+				placeNumber($("#resultC100000"), 204, 122, 1);
+				placeNumber($("#resultC010000"), 390,  70, 6);
+				placeNumber($("#resultC001000"),  85, 330, 6);
+				placeNumber($("#resultC000100"),  85, 150, 6);
+				placeNumber($("#resultC000010"), 225,  70, 3);
+				placeNumber($("#resultC110000"), 280, 122, 1);
+				placeNumber($("#resultC101000"), 204, 269, 1);
+				placeNumber($("#resultC100100"), 172, 155, 1);
+				placeNumber($("#resultC100010"), 218, 118, 1);
+				placeNumber($("#resultC011000"), 390, 330, 6);
+				placeNumber($("#resultC010100"), 390, 150, 6);
+				placeNumber($("#resultC010010"), 258,  70, 3);
+				placeNumber($("#resultC001100"),  85, 240, 6);
+				placeNumber($("#resultC001010"), 225, 320, 3);
+				placeNumber($("#resultC000110"), 120, 178, 2);
+				placeNumber($("#resultC111000"), 280, 269, 1);
+				placeNumber($("#resultC110100"), 314, 155, 1);
+				placeNumber($("#resultC110010"), 266, 118, 1);
+				placeNumber($("#resultC101100"), 172, 235, 1);
+				placeNumber($("#resultC101010"), 219, 274, 1);
+				placeNumber($("#resultC100110"), 167, 171, 1);
+				placeNumber($("#resultC011100"), 390, 240, 6);
+				placeNumber($("#resultC011010"), 258, 320, 3);
+				placeNumber($("#resultC010110"), 365, 178, 2);
+				placeNumber($("#resultC001110"), 120, 212, 2);
+				placeNumber($("#resultC111100"), 315, 235, 1);
+				placeNumber($("#resultC111010"), 266, 274, 1);
+				placeNumber($("#resultC110110"), 320, 171, 1);
+				placeNumber($("#resultC101110"), 166, 218, 1);
+				placeNumber($("#resultC011110"), 365, 212, 2);
+				placeNumber($("#resultC111110"), 320, 218, 1);
+				placeNumber($("#resultC000001"), 180, 120, 1);
+				placeNumber($("#resultC100001"), 199, 134, 1);
+				placeNumber($("#resultC010001"), 304, 120, 1);
+				placeNumber($("#resultC001001"), 179, 271, 1);
+				placeNumber($("#resultC000101"), 169, 132, 1);
+				placeNumber($("#resultC000011"), 234,  95, 1);
+				placeNumber($("#resultC110001"), 286, 134, 1);
+				placeNumber($("#resultC101001"), 199, 256, 1);
+				placeNumber($("#resultC100101"), 190, 149, 1);
+				placeNumber($("#resultC100011"), 228, 135, 3);
+				placeNumber($("#resultC011001"), 306, 272, 1);
+				placeNumber($("#resultC010101"), 317, 132, 1);
+				placeNumber($("#resultC010011"), 250,  95, 1);
+				placeNumber($("#resultC001101"), 167, 260, 1);
+				placeNumber($("#resultC001011"), 233, 296, 1);
+				placeNumber($("#resultC000111"), 143, 187, 1);
+				placeNumber($("#resultC111001"), 285, 256, 1);
+				placeNumber($("#resultC110101"), 295, 149, 1);
+				placeNumber($("#resultC110011"), 255, 135, 3);
+				placeNumber($("#resultC101101"), 190, 242, 1);
+				placeNumber($("#resultC101011"), 227, 255, 3);
+				placeNumber($("#resultC100111"), 213, 178, 6);
+				placeNumber($("#resultC011101"), 318, 259, 1);
+				placeNumber($("#resultC011011"), 250, 296, 1);
+				placeNumber($("#resultC010111"), 342, 187, 1);
+				placeNumber($("#resultC001111"), 143, 203, 1);
+				placeNumber($("#resultC111101"), 295, 240, 1);
+				placeNumber($("#resultC111011"), 256, 255, 3);
+				placeNumber($("#resultC110111"), 270, 178, 6);
+				placeNumber($("#resultC101111"), 213, 212, 6);
+				placeNumber($("#resultC011111"), 342, 203, 1);
+				placeNumber($("#resultC111111"), 270, 212, 6);
 				
 			} else if (vennSize == 5) {
-				
 				drawCircle(246,206,90,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawRoundRect(245,25,250,365,changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawRoundRect(5,205,490,185, changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -1196,37 +1197,37 @@
 				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 200).css("top", 130);
-				$("#resultC010000").css("left", 390).css("top",  70);
-				$("#resultC001000").css("left",  85).css("top", 330);
-				$("#resultC000100").css("left",  85).css("top", 150);
-				$("#resultC000010").css("left", 225).css("top",  80);
-				$("#resultC110000").css("left", 280).css("top", 130);
-				$("#resultC101000").css("left", 200).css("top", 260);
-				$("#resultC100100").css("left", 185).css("top", 150);
-				$("#resultC100010").css("left", 228).css("top", 130);
-				$("#resultC011000").css("left", 390).css("top", 330);
-				$("#resultC010100").css("left", 390).css("top", 150);
-				$("#resultC010010").css("left", 258).css("top",  80);
-				$("#resultC001100").css("left",  85).css("top", 240);
-				$("#resultC001010").css("left", 225).css("top", 310);
-				$("#resultC000110").css("left", 130).css("top", 178);
-				$("#resultC111000").css("left", 280).css("top", 260);
-				$("#resultC110100").css("left", 300).css("top", 150);
-				$("#resultC110010").css("left", 255).css("top", 130);
-				$("#resultC101100").css("left", 185).css("top", 240);
-				$("#resultC101010").css("left", 228).css("top", 260);
-				$("#resultC100110").css("left", 213).css("top", 178);
-				$("#resultC011100").css("left", 390).css("top", 240);
-				$("#resultC011010").css("left", 258).css("top", 310);
-				$("#resultC010110").css("left", 355).css("top", 178);
-				$("#resultC001110").css("left", 130).css("top", 212);
-				$("#resultC111100").css("left", 300).css("top", 240);
-				$("#resultC111010").css("left", 256).css("top", 260);
-				$("#resultC110110").css("left", 270).css("top", 178);
-				$("#resultC101110").css("left", 213).css("top", 212);
-				$("#resultC011110").css("left", 355).css("top", 212);
-				$("#resultC111110").css("left", 270).css("top", 212);
+				placeNumber($("#resultC100000"), 200, 130, 3);
+				placeNumber($("#resultC010000"), 390,  70, 6);
+				placeNumber($("#resultC001000"),  85, 330, 6);
+				placeNumber($("#resultC000100"),  85, 150, 6);
+				placeNumber($("#resultC000010"), 225,  80, 4);
+				placeNumber($("#resultC110000"), 284, 130, 3);
+				placeNumber($("#resultC101000"), 200, 260, 3);
+				placeNumber($("#resultC100100"), 185, 150, 4);
+				placeNumber($("#resultC100010"), 228, 130, 3);
+				placeNumber($("#resultC011000"), 390, 330, 6);
+				placeNumber($("#resultC010100"), 390, 150, 6);
+				placeNumber($("#resultC010010"), 258,  80, 4);
+				placeNumber($("#resultC001100"),  85, 240, 6);
+				placeNumber($("#resultC001010"), 225, 310, 4);
+				placeNumber($("#resultC000110"), 133, 178, 6);
+				placeNumber($("#resultC111000"), 284, 260, 3);
+				placeNumber($("#resultC110100"), 300, 150, 4);
+				placeNumber($("#resultC110010"), 255, 130, 3);
+				placeNumber($("#resultC101100"), 185, 240, 4);
+				placeNumber($("#resultC101010"), 228, 260, 3);
+				placeNumber($("#resultC100110"), 213, 178, 6);
+				placeNumber($("#resultC011100"), 390, 240, 6);
+				placeNumber($("#resultC011010"), 258, 310, 4);
+				placeNumber($("#resultC010110"), 355, 178, 6);
+				placeNumber($("#resultC001110"), 133, 212, 6);
+				placeNumber($("#resultC111100"), 300, 240, 4);
+				placeNumber($("#resultC111010"), 256, 260, 3);
+				placeNumber($("#resultC110110"), 270, 178, 6);
+				placeNumber($("#resultC101110"), 213, 212, 6);
+				placeNumber($("#resultC011110"), 355, 212, 6);
+				placeNumber($("#resultC111110"), 270, 212, 6);
 				$("#resultC000001").css("left", -1000).css("top", -2200);
 				$("#resultC100001").css("left", -1000).css("top", -2200);
 				$("#resultC010001").css("left", -1000).css("top", -2200);
@@ -1261,7 +1262,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 				
 			} else if (vennSize == 4) {
-				
 				drawCircle(246,206,90,1,1,0,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawRoundRect(5,205,490,185,  changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -1273,32 +1273,32 @@
 				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 215).css("top", 130);
-				$("#resultC010000").css("left", 390).css("top",  70);
-				$("#resultC001000").css("left",  85).css("top", 330);
-				$("#resultC000100").css("left",  85).css("top", 150);
+				placeNumber($("#resultC100000"), 215, 130, 6);
+				placeNumber($("#resultC010000"), 390,  70, 6);
+				placeNumber($("#resultC001000"),  85, 330, 6);
+				placeNumber($("#resultC000100"),  85, 150, 6);
+				placeNumber($("#resultC110000"), 265, 130, 6);
+				placeNumber($("#resultC101000"), 215, 260, 6);
+				placeNumber($("#resultC100100"), 200, 170, 6);
+				placeNumber($("#resultC011000"), 390, 330, 6);
+				placeNumber($("#resultC010100"), 390, 150, 6);
+				placeNumber($("#resultC001100"),  85, 240, 6);
+				placeNumber($("#resultC111000"), 265, 260, 6);
+				placeNumber($("#resultC110100"), 280, 170, 6);
+				placeNumber($("#resultC101100"), 200, 220, 6);
+				placeNumber($("#resultC011100"), 390, 240, 6);
+				placeNumber($("#resultC111100"), 280, 220, 6);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 265).css("top", 130);
-				$("#resultC101000").css("left", 215).css("top", 260);
-				$("#resultC100100").css("left", 200).css("top", 170);
-				$("#resultC100010").css("left", -1000).css("top", -2200);
-				$("#resultC011000").css("left", 390).css("top", 330);
-				$("#resultC010100").css("left", 390).css("top", 150);
+				$("#resultC100010").css("left", -1000).css("top", -2200);			
 				$("#resultC010010").css("left", -1000).css("top", -2200);
-				$("#resultC001100").css("left",  85).css("top", 240);
 				$("#resultC001010").css("left", -1000).css("top", -2200);
 				$("#resultC000110").css("left", -1000).css("top", -2200);
-				$("#resultC111000").css("left", 265).css("top", 260);
-				$("#resultC110100").css("left", 280).css("top", 170);
 				$("#resultC110010").css("left", -1000).css("top", -2200);
-				$("#resultC101100").css("left", 200).css("top", 220);
 				$("#resultC101010").css("left", -1000).css("top", -2200);
 				$("#resultC100110").css("left", -1000).css("top", -2200);
-				$("#resultC011100").css("left", 390).css("top", 240);
 				$("#resultC011010").css("left", -1000).css("top", -2200);
 				$("#resultC010110").css("left", -1000).css("top", -2200);
 				$("#resultC001110").css("left", -1000).css("top", -2200);
-				$("#resultC111100").css("left", 280).css("top", 220);
 				$("#resultC111010").css("left", -1000).css("top", -2200);
 				$("#resultC110110").css("left", -1000).css("top", -2200);
 				$("#resultC101110").css("left", -1000).css("top", -2200);
@@ -1338,7 +1338,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else if (vennSize == 3) {
-				
 				drawCircle(246,206,110,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				drawRoundRect(5,205,490,185,  changeOpacity(opts.colors[2], $("#label3").css('opacity')));
@@ -1349,22 +1348,22 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 190).css("top", 150);
-				$("#resultC010000").css("left", 390).css("top",  70);
-				$("#resultC001000").css("left",  85).css("top", 330);
+				placeNumber($("#resultC100000"), 190, 150, 8);
+				placeNumber($("#resultC010000"), 390,  70, 8);
+				placeNumber($("#resultC001000"),  85, 330, 8);
+				placeNumber($("#resultC110000"), 290, 150, 8);
+				placeNumber($("#resultC101000"), 190, 240, 8);
+				placeNumber($("#resultC011000"), 390, 330, 8);
+				placeNumber($("#resultC111000"), 290, 240, 8);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 290).css("top", 150);
-				$("#resultC101000").css("left", 190).css("top", 240);
 				$("#resultC100100").css("left", -1000).css("top", -2200);
 				$("#resultC100010").css("left", -1000).css("top", -2200);
-				$("#resultC011000").css("left", 390).css("top", 330);
 				$("#resultC010100").css("left", -1000).css("top", -2200);
 				$("#resultC010010").css("left", -1000).css("top", -2200);
 				$("#resultC001100").css("left", -1000).css("top", -2200);
 				$("#resultC001010").css("left", -1000).css("top", -2200);
 				$("#resultC000110").css("left", -1000).css("top", -2200);
-				$("#resultC111000").css("left", 290).css("top", 240);
 				$("#resultC110100").css("left", -1000).css("top", -2200);
 				$("#resultC110010").css("left", -1000).css("top", -2200);
 				$("#resultC101100").css("left", -1000).css("top", -2200);
@@ -1414,7 +1413,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else if (vennSize == 2) {
-
 				drawCircle(246,206,110,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				drawRoundRect(245,25,250,365, changeOpacity(opts.colors[1], $("#label2").css('opacity')));
 				
@@ -1424,12 +1422,12 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 180).css("top", 195);
-				$("#resultC010000").css("left", 420).css("top", 195);
+				placeNumber($("#resultC100000"), 180, 195, 10);
+				placeNumber($("#resultC010000"), 420, 195, 10);
+				placeNumber($("#resultC110000"), 290, 195, 10);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
 				$("#resultC000010").css("left", -1000).css("top", -2200);
-				$("#resultC110000").css("left", 290).css("top", 195);
 				$("#resultC101000").css("left", -1000).css("top", -2200);
 				$("#resultC100100").css("left", -1000).css("top", -2200);
 				$("#resultC100010").css("left", -1000).css("top", -2200);
@@ -1489,7 +1487,6 @@
 				$("#resultC111111").css("left", -1000).css("top", -2200);
 			
 			} else {
-				
 				drawCircle(246,210,140,1,1,0, changeOpacity(opts.colors[0], $("#label1").css('opacity')));
 				
 				$("#label1").css("left", 225).css("top", 30).css("color", opts.colors[0]);
@@ -1498,7 +1495,7 @@
 				$("#label4").css("left", -1000).css("top", -2200);
 				$("#label5").css("left", -1000).css("top", -2200);
 				$("#label6").css("left", -1000).css("top", -2200);
-				$("#resultC100000").css("left", 240).css("top", 200);
+				placeNumber($("#resultC100000"), 245, 200, 10);
 				$("#resultC010000").css("left", -1000).css("top", -2200);
 				$("#resultC001000").css("left", -1000).css("top", -2200);
 				$("#resultC000100").css("left", -1000).css("top", -2200);
@@ -1755,14 +1752,6 @@
 					}
 				}
             });
-		}
-		
-		function shortNumber() {
-			$("*[id^=resultC]").each(function(){
-				if($(this).text().length > 2) {
-					$(this).html("<span title=" + $(this).text() + ">?</span>");
-				}
-			});
 		}
 		
 		// Return an Array with number of common and specific element (x in 1 class, y in 2 class...) 
@@ -2099,11 +2088,6 @@
         	}
             if (opts.displayStat) {
             	placeStat(type[1]);
-            }
-            
-            // if shortNumber option && more than 4 classes
-            if(opts.shortNumber && type[1]>4) {
-            	shortNumber();
             }
             
             // if the exporting modul is requested
