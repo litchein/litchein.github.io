@@ -542,7 +542,7 @@
 			*/
 			var	h = 120,
 				xmargin = 70,
-				ymargin = 420,
+				ymargin = 415,
 				xspacer = 20,
 				barwidth = (370-(vennSize*xspacer))/vennSize,
 				ytext = 265;
@@ -614,7 +614,7 @@
 				data2plot = new Array();
 			xspacer = 2,
 			xmargin = 60;
-			ymargin += h + 55;
+			ymargin += h + 50;
 			var	maxwidth = 390 + xspacer,
 				sum = 0;
 			for (var i=0; i<vennSize; i++) {
@@ -646,14 +646,15 @@
 				if((data2plot[i] - xspacer) < 25) {
 					context.fillStyle = '#000';
 					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 57 + ylegend);
-					context.fillText("(" + data2[i] + ")", (data2plot[i] - xspacer)/2  + xmargin + xprev + 13, ymargin + 57 + ylegend);
-					if(ylegend == 0) { ylegend = 12; }
+					context.textAlign = 'left';
+					context.fillText("(" + data2[i] + ")", (data2plot[i] - xspacer)/2  + xmargin + xprev + 6, ymargin + 57 + ylegend);
+					if(ylegend != 24) { ylegend += 12; }
 					else { ylegend = 0; }
 				}
 				else {
 					context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
 					context.fillStyle = '#000';
-					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin+57);
+					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 57 + ylegend);
 					ylegend = 0;
 				}
 				context.strokeStyle = axiscolor;
@@ -1985,7 +1986,7 @@
             var $t = $(this);
             var extraheight = 0;
             if (opts.displayStat) {
-            	extraheight = 250; 
+            	extraheight = 255; 
             }
             $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
