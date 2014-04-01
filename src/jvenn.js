@@ -648,10 +648,11 @@
 					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 57 + ylegend);
 					context.textAlign = 'left';
 					context.fillText("(" + data2[i] + ")", (data2plot[i] - xspacer)/2  + xmargin + xprev + 6, ymargin + 57 + ylegend);
-					if(ylegend != 24) { ylegend += 12; }
+					if(ylegend != 48) { ylegend += 12; }
 					else { ylegend = 0; }
 				}
 				else {
+					if(ylegend >= 24) { ylegend = 0; }
 					context.fillText(data2[i], (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 29);
 					context.fillStyle = '#000';
 					context.fillText(i+1, (data2plot[i] - xspacer)/2  + xmargin + xprev, ymargin + 57 + ylegend);
@@ -1986,7 +1987,7 @@
             var $t = $(this);
             var extraheight = 0;
             if (opts.displayStat) {
-            	extraheight = 255; 
+            	extraheight = 280; 
             }
             $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
