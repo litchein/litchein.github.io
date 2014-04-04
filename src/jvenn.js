@@ -1901,12 +1901,9 @@
 			}
 		}
 		
-		function addExportModule(div){
+		function addExportModule(div, extraheight){
 			$t = div;
-			var extraheight = 0;
-	        if (opts.displayStat) {
-	        	extraheight = 250; 
-	        }
+			
 			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
         	div_export += '<div id="menu" style="position: relative;width:160px; height:30px; display:none; right:133px; top:-4px;">';
@@ -2093,7 +2090,7 @@
             }
             
             // if the exporting modul is requested
-            if (opts.exporting === true){ addExportModule($t); }
+            if (opts.exporting === true){ addExportModule($t, extraheight); }
             // if a 6 classes diagram is requested
             if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
             
