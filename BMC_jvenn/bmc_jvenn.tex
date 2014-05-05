@@ -109,7 +109,7 @@
 %%                                          %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{jvenn: an interactive venn diagram viewer.}
+\title{jvenn: an interactive Venn diagram viewer.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                          %%
@@ -200,20 +200,20 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} %if any
-The amount of rich WEB applications allowing scientists to store, share and analyze data online is increasing. 
-This enhances the need of embadable visualization tools. Scientists often produce lists of known identifiers 
+The amount of rich Web applications allowing scientists to store, share and analyze data online is increasing. 
+This enhances the need of embeddable visualization tools. Scientists often produce lists of known identifiers 
 corresponding to different experimental conditions. The Venn diagram is one of the most popular chart types 
 used to present list comparison results.
 
 \parttitle{Results} %if any
-jvenn is a javascript library providing lists processing and Venn diagram displaying functions. It is the only library 
-able to handle up to 6 input lists presenting results as classical or Edwards-Venn diagrams. Using it, developpers can 
-easily embed dynamic Venn diagramms in WEB pages. jvenn is fully configurable and allows to control and customize all 
+jvenn is a JavaScript library providing lists processing and Venn diagram displaying functions. It is the only library 
+able to handle up to six input lists presenting results as classical or Edwards-Venn diagrams. Using it, developers can 
+easily embed dynamic Venn diagramms in Web pages. jvenn is fully configurable and allows to control and customize all 
 user interactions.
 
 \parttitle{Conclusions} %if any
-We introduce jvenn, an open source component for WEB environments helping scientists to analyse their data. The 
-library package, comming with a full documentation and an integration example, is freely available at 
+We introduce jvenn, an open source component for Web environments helping scientists to analyse their data. The 
+library package, which comes with full documentation and an integration example, is freely available at 
 https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
 
 
@@ -232,7 +232,7 @@ https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil
 \kwd{Edward-Venn}
 \kwd{vizualisation}
 \kwd{jquery}
-\kwd{javascript}
+\kwd{JavaScript}
 \end{keyword}
 
 % MSC classifications codes, if any
@@ -284,36 +284,39 @@ relevant differences between these data sets. Data analysis often produces lists
 results are commonly visualized using Venn diagrams \cite{Venn1880} presenting shared and unshared identifier 
 counts, providing an insight on the similarities between the lists.
 
-Venn diagrams are often used to present results in WEB pages. Thus, several Venn diagram applications are 
-availble. BioVenn \cite{Hulsen2008} or venny \cite{venny} are WEB applications with identifier input text 
+\cite{Bronwen2012}
+\cite{RVennDiagram}
+
+Venn diagrams are often used to present results in Web pages. Thus, several Venn diagram applications are 
+available. BioVenn \cite{Hulsen2008} or venny \cite{venny} are Web applications with identifier input text 
 areas. Where the first one offers only a three circles area-proportional diagram, the second one offers a 
 four lists diagram without area proportion respect. Canvasxpress \cite{canvasxpress} and the Google Chart 
-API \cite{googleAPI}, meanwhile, are javascript libraries including Venn diagram features which can easily 
-be embedded in any WEB page. These libraries generate the graphical output given the intersection counts but 
-cannot perform the calculations on the lists.
+API \cite{googleAPI}, meanwhile, are JavaScript libraries including Venn diagram features which can easily 
+be embedded in any Web page. These libraries generate graphical output given the intersection counts but 
+cannot perform calculations on the lists.
 
-We introduce jvenn, a javascript library helping scientists to present their data, in the same spirit as already 
+We introduce jvenn, a JavaScript library helping scientists to present their data, in the same spirit as already 
 existing tools such as jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}. 
-jvenn handles up to 6 input lists, can display classical or Edwards-Venn \cite{Edwards2004} diagrams, can easily be 
-embeded in a WEB page, allows three different data formats (lists/intersection counts/count lists), exports PNG files and permits 
+jvenn handles up to six input lists, can display classical or Edwards-Venn \cite{Edwards2004} diagrams, can easily be 
+embeded in a Web page, allows three different data formats (lists, intersection counts and count lists), exports PNG files and permits 
 to overload the callback function in order to control users interactions. jvenn has already been cited in two scientific 
 publications \cite{Bianchia2013, Aravindraja2013}.
 
 
 \section*{Implementation}
 
-jvenn is a javascript library written as a jQuery plugin \cite{jquery}. It can be embeded by referencing the javascript file 
+jvenn is a JavaScript library written as a jQuery plugin \cite{jquery}. It can be embeded by referencing the JavaScript file 
 in an HTML page. For researchers who want to produce a Venn diagram from their identifier lists, jvenn is also available as a 
-WEB application at http://bioinfo.genotoul.fr/index.php?id=116. The installation documentation is included in the software package 
+Web application at http://bioinfo.genotoul.fr/index.php?id=116. The installation documentation is included in the software package 
 which can be downloaded from https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil.
 
 The library provides an option to define the data inputs: \textit{series}. It accepts three different input formats discribed in 
 Table 1. In the case of list or count lists \textit{series} it will first execute a function to compute the overlaps between lists and then
 display the chart. In the case of intersection counts \textit{series}, the plugin will only display the graphical result. The display 
-is based on a javascript canvas object allowing to export the chart as a PNG file. This feature can be disabled by setting the \textit{exporting} 
+is based on a JavaScript canvas object allowing to export the chart as a PNG file. This feature can be disabled by setting the \textit{exporting} 
 option to \textit{false} hiding the exporting button.
 
-The WEB application developer can also overload the callback function defining the click on an intersection count. This can be done by defining 
+The Web application developer can also overload the callback function defining the click on an intersection count. This can be done by defining 
 the \textit{fnClickCallback} parameter. The overloading function has access to the \textit{this.listnames} and \textit{this.list} variables 
 allowing the developer to control the user interactions. This feature can be disabled by setting the \textit{disableClick} option to \textit{true}. 
 To customize the diagram display, the developer can also settle the \textit{colors} option.
@@ -322,42 +325,42 @@ To customize the diagram display, the developer can also settle the \textit{colo
 \section*{Results and Discussion}
 
 Venn diagrams are commonly used to display list intersections because they are simple to read and understand. This is true up to four lists but 
-scientists are interested in using it with more. Nowadays, this type of diagrams is able to present up to six lists in the classical representations.
-Reaching this number, the presented diagrams are not proportional with the list counts and the intersection areas are often too small to display the 
+scientists are interested in using it with more. Nowadays, this type of diagrams are able to present up to six lists in the classical representations.
+Reaching this number, the presented diagrams are not proportional to the list counts and the intersection areas are often too small to display the 
 figures. 
 
-To present in a user-friendly manner five or six list diagrams, jvenn implements several functionnalities. First, the display can be switched to
+To present in a user-friendly manner five or six list diagrams, jvenn implements several functionalities. First, the display can be switched to
 Edwards-Venn (Fig. 2) by setting the \textit{displayType} option to \textit{edwards}. It gives a clearer graphical representation for six list
-diagrams. To enhance the figures readibility on the classical six lists Venn graphic it was decided not to present all the values and to link some areas
+diagrams. To enhance the figure's readability on the classical six lists Venn graphic it was decided not to present all the values and to link some areas
 to their figures using lines. This still did not permit to show all figures, therefore a switch button panel (Fig. 1) was added. This panel enables 
 to switch on and off the different lists and display the corresponding intersection counts. For all the diagrams, when the intersection count size 
 exceeds the allowed space, the value is substituted by a question mark. The real value pops-up on mouse over. This behaviour can be disabled by setting 
 the \textit{shortNumber} option to \textit{false}. Last, to show the lists taking part in an intersection, jvenn highlights the corresponding areas on
 mouse over the figure and fades the others out.
 
-Scientists are usually interested in extracting identifier lists from some of the intersections, therefore, jvenn implements an on click function which 
+Scientists are usually interested in extracting identifier lists from some of the intersections, therefore, jvenn implements an one-click function which 
 retrieves the names of the corresponding samples and the identifiers.
 
 Having an overview of the list size and comparing multiple diagrams can be difficult using a Venn diagram. Thus, jvenn provides two extra charts (Fig. 1) 
-bellow the Venn. The first one represents the input lists size histogram. It allows users to check the list size homogeneity. The second one, displays 
+bellow the Venn. The first one represents the input lists size histogram. It allows users to check the list size homogeneity. The second one displays 
 the number of elements located in intersections of a certain size. This feature can be used to compare the compactness of multiple Venn diagrams. 
 Setting the \textit{displayStat} to true enables this feature.
 
-jvenn performances depends on the client browser. Using the running version (link below) on a standard linux computer, it displays a six lists diagram of 
+jvenn's performance depends on the client browser. Using the running version (link below) on a standard linux computer, it displays a six lists diagram of 
 10 000 identifiers in two seconds.
 
-As examples, we produced two venn diagrams representing six samples SRR068049, SRR06805, SRR068051, SRR068052, SRR068053 and 
+As examples, we produced two Venn diagrams representing six samples SRR068049, SRR06805, SRR068051, SRR068052, SRR068053 and 
 SRR068054 corresponding to sets of Operational Taxonomic Units observed under different conditions. Fig. 1 shows intersections
-between the six of them using the classical Venn diagram display. In Fig. 2, jvenn overlights the intersection between three samples out of 
+between the six of them using the classical Venn diagram display. In Fig. 2, jvenn highlights the intersection between three samples out of 
 six from an Edwards-Venn diagram.
 
 
 \section*{Conclusions}
 
 jvenn is an easy-to-use library which generates Venn and Edwards-Venn diagrams from lists of identifiers or from
-computed intersection counts. Its implementation as a javascript library allows whoever has some WEB programming skills to embed it 
-in a WEB page without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse \cite{Mariette} and 
-WallProtDB \cite{SanClemente} WEB applications.
+computed intersection counts. Its implementation as a JavaScript library allows whoever has some Web programming skills to embed it 
+in a Web page without any dependancies. jvenn is already embeded within nG6 \cite{Mariette2012}, RNAbrowse \cite{Mariette} and 
+WallProtDB \cite{SanClemente} Web applications.
 
 \section*{Availability and requirements}
 
@@ -426,7 +429,7 @@ the system and for pointing out features worth developing.
   \begin{figure}[h!]
   \caption{\csentence{A six lists classic Venn diagram.}
       This Venn diagram displays overlaps between six different biological samples. When 
-      the user clicks on a figure, it calls the developper defined function. 
+      the user clicks on a figure, it calls the developer defined function. 
       The icon located on the top-right, allows users to download the diagram as a PNG 
       file. On the bottom-right of the chart, a switch button panel allowing to activate or 
       disactivate lists to access a specific intersection count. The charts showing the lists 
