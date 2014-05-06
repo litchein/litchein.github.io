@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>jvenn</title>
+	<!-- Les styles -->
+	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="css/docs.css" rel="stylesheet" media="screen">
+	<link href="css/prettify.css" rel="stylesheet" media="screen">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/prettify.js"></script>
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      	<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="./index.html">jvenn</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="./index.html">About</a></li>
+						<li><a href="./example.html">Example</a></li>
+						<li><a href="./documentation.html">Plugin documentation</a></li>
+						<li class="active"><a href="./usermanual.html">User manual</a></li>
+						<li><a target="_blank" href="https://mulcyber.toulouse.inra.fr/plugins/mediawiki/wiki/venny/index.php/Accueil">Sources</a></li>
+						<li><a href="mailto:support.genopole@toulouse.inra.fr">Contact</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="span3 bs-docs-sidebar">
+				<ul class="nav nav-list bs-docs-sidenav affix">
+					<li class="active"><a href="#export-to-PNG"><i class="icon-chevron-right"></i> export to PNG</a></li>
+					<li><a href="#add-new-identifiers"><i class="icon-chevron-right"></i> add new identifiers</a></li>
+		    	</ul>
+		  	</div>
+		  	
+		  	<div class="span9">
+		  		<section id="export-to-PNG">
+					<div class="page-header">
+				    	<h1>Export to PNG</h1>
+					</div>
+				  	<p>Explication avec une image ... </p> 
+				</section>
+				
+				<section id="add-new-identifiers">
+					<div class="page-header">
+				    	<h1>Add new identifiers</h1>
+					</div>
+				  	<p>The default value is 'classic' to have a classical venn diagram to be displayed. If you want a Edwards-Venn diagram display,
+				  	just set this option to 'edwards'. Available values for this parameters are: 'classic', 'edwards'.</p>
+				</section>
+
+		  	</div>
+		</div>
+		
+		<hr>
+		<footer>
+			<p>Copyright &copy; 2014, INRA | Designed by <a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo</a> team.</p>
+		</footer>
+	</div>
+	<script>
+     	!function ($) {
+     		$(function(){
+				window.prettyPrint && prettyPrint()   
+			})
+		}(window.jQuery)
+	</script>
+</body>
+</html>
