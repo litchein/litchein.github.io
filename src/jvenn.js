@@ -679,6 +679,26 @@
 			div.css("left", l).css("top", top);
 		}
 		
+		function transpose (a) {
+			  // Calculate the width and height of the Array
+			  var w = a.length ? a.length : 0,
+			    h = a[0] instanceof Array ? a[0].length : 0;
+			  // In case it is a zero matrix, no transpose routine needed.
+			  if(h === 0 || w === 0) { return []; }
+			  var i, j, t = [];
+			  // Loop through every item in the outer array (height)
+			  for(i=0; i<h; i++) {
+			    // Insert a new row (array)
+			    t[i] = [];
+			    // Loop through every item per item in outer array (width)
+			    for(j=0; j<w; j++) {
+			      // Save transposed data.
+			      t[i][j] = a[j][i];
+			    }
+			  }
+			  return t;
+		}
+		
 		function placeClassicVenn(vennSize) {
 			var	grey = "rgba(0,0,0,0.1)";
 						
@@ -1746,11 +1766,13 @@
             			try { this.listnames.push(opts.series[i-6].name); } catch(err) { }
             		}
             	}
+            	this.empty = true;
 				this.list = new Array();
 				var cvalue = $(this).attr("id").substring(6,13);
 				for (cl in classified) {
 					if (classified[cl]==cvalue) {
 						this.list.push(cl);
+						this.empty = false;
 					}
 				}
             });
@@ -1901,14 +1923,17 @@
 			}
 		}
 		
-		function addExportModule(div, extraheight){
+		function addExportModule(div, extraheight, type){
 			$t = div;
 			
 			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
-        	div_export += '<div id="menu" style="position: relative;width:160px; height:30px; display:none; right:133px; top:-4px;">';
+        	div_export += '<div id="menu" style="position: relative;width:150px; height:30px; display:none; right:133px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
-        	div_export += '<div id ="format-png" style="text-align:center;padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
+        	div_export += '<div id="format-png" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
+        	if (type == "list") {
+        		div_export += '<div id="format-csv" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download CSV lists</div>';
+        	}
         	div_export += '</div>';
 			div_export += '</div>';
 			div_export += '</div>';
@@ -1968,7 +1993,26 @@
 						}
 					});
 				});
-				//TODO add format jpeg, pdf
+				$("#format-csv").click(function(event) {
+					var rawData = new Array();
+					$("*[id^=resultC]").each(function(){
+						if (!this.empty) {
+							var currentRow = new Array();
+							currentRow.push(this.listnames.join("|"));
+							for (var i in this.list) {
+								currentRow.push(this.list[i]);
+							}
+							rawData.push(currentRow);
+						}
+		            });
+					var csvContent = "data:text/csv;charset=utf-8,";
+					transpose(rawData).forEach(function(infoArray, index){
+					   dataString = infoArray.join(",");
+					   csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
+					});
+					var encodedUri = encodeURI(csvContent);
+					window.open(encodedUri);
+				});
 			});
 			$("#canvasExport").hover(function() {
 				$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent');
@@ -2079,7 +2123,7 @@
             } else if (type[0] == "count") {
             	fillCountVenn();
             }
-            
+
         	if (opts.displayMode == 'edwards') {
         		placeEdwardsVenn(type[1]);
         	} else {
@@ -2090,7 +2134,7 @@
             }
             
             // if the exporting modul is requested
-            if (opts.exporting === true){ addExportModule($t, extraheight); }
+            if (opts.exporting === true){ addExportModule($t, extraheight, type[0]); }
             // if a 6 classes diagram is requested
             if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
             
