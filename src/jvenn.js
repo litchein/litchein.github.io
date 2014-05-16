@@ -680,23 +680,23 @@
 		}
 		
 		function transpose (a) {
-			  // Calculate the width and height of the Array
-			  var w = a.length ? a.length : 0,
-			    h = a[0] instanceof Array ? a[0].length : 0;
-			  // In case it is a zero matrix, no transpose routine needed.
-			  if(h === 0 || w === 0) { return []; }
-			  var i, j, t = [];
-			  // Loop through every item in the outer array (height)
-			  for(i=0; i<h; i++) {
-			    // Insert a new row (array)
-			    t[i] = [];
-			    // Loop through every item per item in outer array (width)
-			    for(j=0; j<w; j++) {
-			      // Save transposed data.
-			      t[i][j] = a[j][i];
-			    }
-			  }
-			  return t;
+			// Calculate the width and height of the Array
+			var	w = a.length ? a.length : 0,
+				h = a[0] instanceof Array ? a[0].length : 0;
+			// In case it is a zero matrix, no transpose routine needed.
+			if(h === 0 || w === 0) { return []; }
+			var i, j, t = [];
+			// Loop through every item in the outer array (height)
+			for(i=0; i<h; i++) {
+				// Insert a new row (array)
+				t[i] = [];
+				// Loop through every item per item in outer array (width)
+				for(j=0; j<w; j++) {
+					// Save transposed data.
+					t[i][j] = a[j][i];
+				}
+			}
+			return t;
 		}
 		
 		function placeClassicVenn(vennSize) {
@@ -1994,21 +1994,37 @@
 					});
 				});
 				$("#format-csv").click(function(event) {
-					var rawData = new Array();
+					var	rawData = new Array(),
+						comma = false;
 					$("*[id^=resultC]").each(function(){
 						if (!this.empty) {
-							var currentRow = new Array();
-							currentRow.push(this.listnames.join("|"));
+							var	currentRow = new Array(),
+								tmpline = this.listnames.join("|");
+							
+							if (tmpline.indexOf(',') >= 0) {
+								comma = true;
+								tmpline = tmpline.replace(/,/g, '_');
+							}
+							currentRow.push(tmpline);
+							
 							for (var i in this.list) {
-								currentRow.push(this.list[i]);
+								tmpline = this.list[i];
+								if (this.list[i].indexOf(",") >= 0) {
+									comma = true;
+									tmpline = this.list[i].replace(/,/g, '_');
+								}
+								currentRow.push(tmpline);
 							}
 							rawData.push(currentRow);
 						}
 		            });
 					var csvContent = "data:text/csv;charset=utf-8,";
+					if(comma) {
+						csvContent += "##\n## Warning: comma(s) have been replaced by underscore(s)\n##\n";
+					}
 					transpose(rawData).forEach(function(infoArray, index){
-					   dataString = infoArray.join(",");
-					   csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
+						dataString = infoArray.join(",");
+						csvContent += index <= infoArray.length ? dataString+ "\n" : dataString;
 					});
 					var encodedUri = encodeURI(csvContent);
 					window.open(encodedUri);
