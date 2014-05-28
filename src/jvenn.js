@@ -743,12 +743,97 @@
 				drawLine(275,270, 193,233, grey);
 				placeNumber($("#resultC001010"), 275, 268, 6);
 				placeNumber($("#resultC001001"), 232, 113, 4);
-				placeNumber($("#resultC000110"), 215, 210, 1);
+				placeNumber($("#resultC000110"), 216, 211, 1);
 				drawLine( 75,220, 140,205, grey);
 				drawLine( 75,220,  65,215, grey);
 				placeNumber($("#resultC000101"),  55, 197, 6);
 				drawLine(150,270, 183,230, grey);
 				placeNumber($("#resultC000011"), 145, 268, 6);
+				
+				placeNumber($("#resultC111110"), 170, 130, 6);
+				$("#resultC111110").hide();
+				placeNumber($("#resultC111101"), 218, 155, 6);
+				$("#resultC111101").hide();
+				placeNumber($("#resultC111011"), 205, 125, 6);
+				$("#resultC111011").hide();
+				placeNumber($("#resultC110111"), 160, 190, 6);
+				$("#resultC110111").hide();
+				placeNumber($("#resultC101111"), 180, 212, 6);
+				$("#resultC101111").hide();
+				placeNumber($("#resultC011111"), 208, 197, 6);
+				$("#resultC011111").hide();
+				
+				placeNumber($("#resultC111100"), 225, 170, 6);
+				$("#resultC111100").hide();
+				placeNumber($("#resultC111010"), 182, 113, 6);
+				$("#resultC111010").hide();
+				placeNumber($("#resultC110110"), 149, 163, 6);
+				$("#resultC110110").hide();
+				placeNumber($("#resultC101110"), 152, 140, 6);
+				$("#resultC101110").hide();
+				placeNumber($("#resultC011110"), 215, 195, 6);
+				$("#resultC011110").hide();
+				placeNumber($("#resultC111001"), 212, 128, 6);
+				$("#resultC111001").hide();
+				placeNumber($("#resultC110101"), 150, 194, 6);
+				$("#resultC110101").hide();
+				placeNumber($("#resultC110011"), 168, 216, 6);
+				$("#resultC110011").hide();
+				placeNumber($("#resultC101101"), 226, 145, 6);
+				$("#resultC101101").hide();
+				placeNumber($("#resultC101011"), 178, 216, 6);
+				$("#resultC101011").hide();
+				placeNumber($("#resultC100111"), 178, 214, 6);
+				$("#resultC100111").hide();
+				placeNumber($("#resultC011101"), 218, 180, 6);
+				$("#resultC011101").hide();
+				placeNumber($("#resultC011011"), 206, 122, 6);
+				$("#resultC011011").hide();
+				placeNumber($("#resultC010111"), 215, 198, 6);
+				$("#resultC010111").hide();
+				placeNumber($("#resultC001111"), 200, 208, 6);
+				$("#resultC001111").hide();
+				
+				placeNumber($("#resultC111000"), 156, 105, 6);
+				$("#resultC111000").hide();
+				placeNumber($("#resultC110100"), 145, 174, 6);
+				$("#resultC110100").hide();
+				placeNumber($("#resultC110010"), 163, 100, 6);
+				$("#resultC110010").hide();
+				placeNumber($("#resultC101100"), 238, 152, 6);
+				$("#resultC101100").hide();
+				placeNumber($("#resultC101010"), 148, 128, 6);
+				$("#resultC101010").hide();
+				placeNumber($("#resultC100110"), 145, 158, 6);
+				$("#resultC100110").hide();
+				placeNumber($("#resultC011100"), 226, 178, 6);
+				$("#resultC011100").hide();
+				placeNumber($("#resultC011010"), 195, 105, 6);
+				$("#resultC011010").hide();
+				placeNumber($("#resultC010110"), 218, 198, 6);
+				$("#resultC010110").hide();
+				placeNumber($("#resultC001110"), 202, 216, 6);
+				$("#resultC001110").hide();
+				placeNumber($("#resultC110001"), 160, 213, 6);
+				$("#resultC110001").hide();
+				placeNumber($("#resultC101001"), 220, 132, 6);
+				$("#resultC101001").hide();
+				placeNumber($("#resultC100101"), 139, 182, 6);
+				$("#resultC100101").hide();
+				placeNumber($("#resultC100011"), 170, 220, 6);
+				$("#resultC100011").hide();
+				placeNumber($("#resultC011001"), 212, 122, 6);
+				$("#resultC011001").hide();
+				placeNumber($("#resultC010101"), 146, 203, 6);
+				$("#resultC010101").hide();
+				placeNumber($("#resultC010011"), 164, 220, 6);
+				$("#resultC010011").hide();
+				placeNumber($("#resultC001101"), 233, 138, 6);
+				$("#resultC001101").hide();
+				placeNumber($("#resultC001011"), 185, 218, 6);
+				$("#resultC001011").hide();
+				placeNumber($("#resultC000111"), 209, 207, 6);
+				$("#resultC000111").hide();
 				
 			} else if (vennSize == 5) {
 				drawEllipse(214,230,10,18.6,9.5,25,  changeOpacity(opts.colors[0], $("#label1").css('opacity')));
@@ -757,11 +842,11 @@
 				drawEllipse(282,238,10,18.6,9.5,62,  changeOpacity(opts.colors[3], $("#label4").css('opacity')));
 				drawEllipse(242,260,10,18.6,9.5,134, changeOpacity(opts.colors[4], $("#label5").css('opacity')));
 				
-				$("#label1").css("left", 0).css("top", 100).css("color",   opts.colors[0]);
-				$("#label2").css("left", 310).css("top", 15).css("color",  opts.colors[1]);
+				$("#label1").css("left",   0).css("top", 100).css("color",   opts.colors[0]);
+				$("#label2").css("left", 310).css("top",  15).css("color",  opts.colors[1]);
 				$("#label3").css("left", 450).css("top", 120).css("color", opts.colors[2]);
-				$("#label4").css("left", 410).css("top", 350).css("color", opts.colors[3]);
-				$("#label5").css("left", 40).css("top", 400).css("color",  opts.colors[4]);
+				$("#label4").css("left", 387).css("top", 400).css("color", opts.colors[3]);
+				$("#label5").css("left",  40).css("top", 400).css("color",  opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
 				placeNumber($("#resultC100000"),  75, 150, 6);
 				placeNumber($("#resultC010000"), 245,  30, 6);
@@ -1139,7 +1224,7 @@
 				$("#label1").css("left", 297).css("top", 90).css("color", opts.colors[0]);
 				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
 				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
-				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
+				$("#label4").css("left",  55).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
 				$("#label6").css("left", 297).css("top",302).css("color", opts.colors[5]);
 				placeNumber($("#resultC100000"), 204, 122, 1);
@@ -1216,7 +1301,7 @@
 				$("#label1").css("left", 297).css("top", 90).css("color", opts.colors[0]);
 				$("#label2").css("left", 267).css("top",  0).css("color", opts.colors[1]);
 				$("#label3").css("left",  27).css("top",400).css("color", opts.colors[2]);
-				$("#label4").css("left",  27).css("top", 90).css("color", opts.colors[3]);
+				$("#label4").css("left",  55).css("top", 90).css("color", opts.colors[3]);
 				$("#label5").css("left", 282).css("top", 45).css("color", opts.colors[4]);
 				$("#label6").css("left", -1000).css("top", -2200);
 				placeNumber($("#resultC100000"), 200, 130, 3);
@@ -1586,14 +1671,17 @@
 		function addLegend(div) {
 			$t = div;
 			var i=1;
+			var hide = "";
 			var div_legend = '<div class="module-legend">';
 			$("*[id^=label]").each(function(){
-				div_legend += '<div id="item-'+i+'" class="leg-items" style="background-color:' + $(this).css("color") + '">';
-				div_legend += '<span style="background-color:white; margin-left:13px; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">on</span></div>';
+				div_legend += '<div id="item-'+i+'" name="' + $(this).text() + '" class="leg-items" style="opacity:0.5; background-color:' + $(this).css("color") + hide + '">';
+				div_legend += '<span style="background-color:white; margin-left:0px; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">off</span></div>';
 				i += 1;
+				if(i>opts.series.length) {
+					hide = ";display:none";
+				}
 			});
 			div_legend += '</div>';
-			div_legend += '<div id="leg-res" class="number-black leg-res">'+ $("#resultC111111").html() +'</div>';
 			$t.append(div_legend);
 			
 			$("*[id^=item]").hover(function(){
@@ -1617,50 +1705,51 @@
 					$(this).css('opacity', 0.5);
 					$(this).children("span").text('off');
 				}
-				var val = "#resultC";
-				$("*[id^=item]").each(function(){
-					if($(this).children("span").text() === 'on') { val += "1"; } else { val += "0"; }
-				});
-				if(val === "#resultC000000") {
-					$("#leg-res").text("");
-					$("#leg-res").unbind("click");
-					$("#leg-res").css('cursor', 'default')
-				}
-				else {
-					if($(val).text() == '?') {
-						$("#leg-res").text($(val).children("span").attr('title'));
-					}
-					else {
-						$("#leg-res").text($(val).text());
-					}
-					$("#leg-res").bind("click", opts.fnClickCallback);
-					$("#leg-res").css('cursor', 'pointer')
-				}
 				
-				// Add info to the number
-				$("#leg-res").each(function(){
-					if (typeof $(val)[0] !== 'undefined') {
-						this.listnames = $(val)[0].listnames;
-						this.list      = $(val)[0].list;
+				var	labels = [];
+					val = "#resultC";
+				$("*[id^=item]").each(function(){
+					if($(this).children("span").text() === 'on') {
+						labels.push($(this).attr("name"));
+						val += "1";
 					}
+					else { val += "0"; }
 				});
+				if(labels.length > 0) {  
+					$("*[id^=label]").each(function(){
+            			if (labels.indexOf($(this).text()) < 0) {
+            				$(this).css('opacity', 0.1);
+            			} else {
+            				$(this).css('opacity', 0.6);
+            			}
+            		});
+					$(".number-black").each(function(){
+                		$(this).css('opacity', 0.1);
+                	});
+					$(val).css('opacity', 1);
+        		}
+				else {
+					$("*[id^=label]").each(function(){
+						$(this).css('opacity', 0.6);
+        			});
+					$(".number-black").each(function(){
+						$(this).css('opacity', 1);
+                	});
+				}
+
+				clearCanvas();
+            	if (opts.displayMode == 'edwards') {
+                   	placeEdwardsVenn(opts.series.length);
+                } else {
+                   	placeClassicVenn(opts.series.length);
+                }
+            	if (opts.displayStat) {
+            		placeStat(opts.series.length);
+                }
+            	if(labels.length > 0) { 
+            		$(val).show();
+            	}
 			});
-			if (!opts.disableClick) {
-				// Add some eventlistener
-				$("#leg-res").mouseover(function(){
-	            	$(this).addClass("number-over");
-	            });
-	            $("#leg-res").mouseout(function(){
-	            	$(this).removeClass("number-over");
-	            });
-	            
-	            // Add info to the number (init)
-				$("#leg-res").each(function(){
-					this.listnames = $("#resultC111111")[0].listnames;
-					this.list      = $("#resultC111111")[0].list;
-				});
-				$("#leg-res").bind("click", opts.fnClickCallback);
-			}
 		}
 		
 		function fillListVenn() {
@@ -1919,7 +2008,7 @@
 					return (new Array("count", count));
 				} else {
 					return (new Array("list", opts.series.length));
-				} 
+				}
 			}
 		}
 		
@@ -1928,7 +2017,7 @@
 			
 			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
-        	div_export += '<div id="menu" style="position: relative;width:150px; height:30px; display:none; right:133px; top:-4px;">';
+        	div_export += '<div id="menu" style="position: relative;width:150px; height:30px; display:none; right:123px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
         	div_export += '<div id="format-png" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
         	if (type == "list") {
@@ -2049,9 +2138,14 @@
             $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
             $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
            
-            $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:404px;top:-'+(150+extraheight)+'px;width:35px;height:105px}</style>').appendTo('body');
+            var	legleft = 434,
+            	legtop  = 130;
+            if (opts.displayMode == 'edwards') {
+            	legleft = 10;
+            	legtop  = 425;
+            }
+            $('<style>.module-legend{border:1px solid lightgrey;border-radius:5px;position:relative;left:'+legleft+'px;top:-'+(legtop+extraheight)+'px;width:35px;padding-bottom:3px}</style>').appendTo('body');
             $('<style>.leg-items{padding-top:1px;margin:3px 3px 0px 3px;cursor:pointer;border: 1px solid grey;border-radius:2px;width:27px;height:11px;font-size:0.65em;line-height:10px;opacity:0.75}</style>').appendTo('body');
-            $('<style>.leg-res{cursor:pointer;text-align:right;padding-right:3px;position:relative;width:44px;height:20px;border:1px solid lightgrey;top:-'+(214+extraheight)+'px;border-radius:0 5px 5px 0;left:440px}</style>').appendTo('body');
             
             var div_content = '<div id="frame" style="position: relative; left: 0pt; top: 5pt; width: 500px; height: "'+(445+extraheight)+'px;">';
 			div_content += '<canvas id="canvasEllipse" width="500px" height="'+(415+extraheight)+'px;"></canvas>';
@@ -2151,13 +2245,17 @@
             
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t, extraheight, type[0]); }
-            // if a 6 classes diagram is requested
-            if (type[1] == 6 && opts.displayMode != 'edwards') { addLegend($t); }
+            // if min 4 classes diagram is requested add legend
+            if (type[1] >= 4) { addLegend($t); }
             
             // number hover action
             $(".number-black").hover(
             	function(){
-            		if($(this).text() !== "") {
+            		var activeleg = false;
+            		$("*[id^=item]").each(function(){
+            			if($(this).children("span").text() === 'on') { activeleg = true; }
+            		});
+            		if(!activeleg  &&  $(this).text() !== "") {
 		            	var labels  = this.listnames;
 		            	var current = this;
 	            		$("*[id^=label]").each(function(){
@@ -2184,7 +2282,11 @@
             		}
             	},
             	function(){
-            		if($(this).text() !== "") {
+            		var activeleg = false;
+            		$("*[id^=item]").each(function(){
+            			if($(this).children("span").text() === 'on') { activeleg = true; }
+            		});
+            		if(!activeleg  &&  $(this).text() !== "") {
 	            		var labels = this.listnames;
 	                	$("*[id^=label]").each(function(){
 	            			$(this).css('opacity', 0.5);
