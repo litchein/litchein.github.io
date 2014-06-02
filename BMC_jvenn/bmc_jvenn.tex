@@ -284,42 +284,39 @@ http://bioinfo.genotoul.fr/jvenn.
 
 \section*{Background}
 
-Biological experiments are often based on sample or condition comparison.
-Thus, it is important to provide researchers with effective visualization 
-tools to explore and extract relevant differences between data sets. Data
-analysis often leads to compare lists of biological identifiers (gene names, 
-Operational Taxonomic Unit (OTU), ...). List intersection results are commonly 
-visualized using Venn diagrams \cite{Venn1880} presenting shared and unshared 
-identifier counts. They provide a simple way to extract similarities and
-differences between the lists.
+List comparison results are often presented as Venn diagrams \cite{Venn1880}. In
+a Venn diagram each list is figured by a transparent shape, differents shapes 
+ovelap when elements are shared between the lists. The intersection counts are 
+usually presented in the corresponding shapes overlap. In proportionnal Venn 
+diagram the size of a shape depends on the number of elements in the
+corresponding list. Venn diagram with up to four lists are easy to read and 
+understand, but are difficult to interpret with more lists. To overcome this
+issue, the Edwards-Venn \cite{Edwards2004} representation introduce new shapes 
+that provides a clearer view for diagrams having more than four lists (Fig. 2).
 
-Many Venn diagram software packages are already available. They can be classified 
-using their type : stand-alone, library, Web applications, JavaScript library and 
-their diagram layout: classical or Edwards. Edwards-Venn \cite{Edwards2004} representation provides
-a clearer view for diagrams having more than four lists (Fig. 2). VENNTURE \cite{Bronwen2012}
-is a stand-alone application able to generate this layout for up to six lists. VennDiagram \cite{RVennDiagram}
-is an R package including functions to draw classical diagrams from two to five lists. 
-
-Venn diagrams are also often included in Web pages.  BioVenn \cite{Hulsen2008} and venny
-\cite{venny} are Web applications with identifier input text areas. The
-first one offers a three circles area-proportional diagram, the second one 
-outputs a non-proportional four lists diagram. Canvasxpress
-\cite{canvasxpress} and Google Chart API \cite{googleAPI} are
+Many Venn diagram software packages are already available. They can be
+classified using their type : stand-alone, library, Web applications, JavaScript
+library and their diagram layout: classical or Edwards. VENNTURE
+\cite{Bronwen2012} is a stand-alone application able to generate Edwards-Venn
+outputs for up to six lists. VennDiagram \cite{RVennDiagram} is an R package
+including functions to draw classical diagrams from two to five lists. Venn 
+diagrams are nowadays also often included in Web pages. BioVenn
+\cite{Hulsen2008} and venny \cite{venny} are Web applications  with identifier 
+input text areas. The first one offers a three circles  area-proportional
+diagram, the second one outputs a non-proportional four lists diagram.
+Canvasxpress \cite{canvasxpress} and Google Chart API \cite{googleAPI} are 
 JavaScript libraries including Venn diagram features which can easily be
-embedded in any Web page. They respectively produce diagrams with up to four and three lists.
-Both generate graphical outputs given the intersection counts but cannot calculate them. 
+embedded in any Web page. They respectively produce diagrams with up to four 
+and three lists. Both generate graphical outputs given the intersection counts 
+but cannot calculate them.
 
-We introduce jvenn, a JavaScript library helping scientists to present their
-data, in the same spirit as already existing tools such as jbrowse
-\cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap
-\cite{DeuPons2014}. jvenn handles up to six input lists, can display classical
-or Edwards-Venn diagrams, can easily be embedded in a Web
-page, allows three different data formats (lists, intersection counts and count
-lists), exports PNG or CSV files and permits to redefine the callback function
-in order to control users interactions. jvenn has already been cited in two
-scientific publications \cite{Bianchia2013, Aravindraja2013} and is embedded
-within nG6 \cite{Mariette2012}, RNAbrowse \cite{Mariette} and WallProtDB
-\cite{SanClemente} Web applications.
+Hereafter we introduce jvenn, a JavaScript library helping scientists to present
+their data, in the same spirit as already existing tools such as jbrowse 
+\cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010}, and jHeatmap 
+\cite{DeuPons2014}. The library has already been cited in two scientific 
+publications \cite{Bianchia2013, Aravindraja2013} and is embedded within nG6
+\cite{Mariette2012}, RNAbrowse \cite{Mariette} and WallProtDB \cite{SanClemente}
+Web applications.
 
 
 \section*{Implementation}
