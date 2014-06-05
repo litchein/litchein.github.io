@@ -46,8 +46,8 @@
             //series: [{
             //	name: {A: 'Actors',
             //         B: 'Singers'},
-            //	data: {A: 4, B: 3, AB: 3},
-            //	values: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]}
+            //	data: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]},
+            //	values: {A: 4, B: 3, AB: 3}
             //}],
             fnClickCallback: function() {
             	var value = "";
@@ -1898,71 +1898,75 @@
 			return data;
 		}
 		
+		function setValuesforFillCountVenn (values) {
+			if (values.A) { $("#resultC100000").html(values.A); }
+			if (values.B) { $("#resultC010000").html(values.B); }
+			if (values.C) { $("#resultC001000").html(values.C); }
+			if (values.D) { $("#resultC000100").html(values.D); }
+			if (values.E) { $("#resultC000010").html(values.E); }
+			if (values.F) { $("#resultC000001").html(values.F); }
+			if (values.AB) { $("#resultC110000").html(values.AB); }
+			if (values.AC) { $("#resultC101000").html(values.AC); }
+			if (values.AD) { $("#resultC100100").html(values.AD); }
+			if (values.AE) { $("#resultC100010").html(values.AE); }
+			if (values.AF) { $("#resultC100001").html(values.AF); }
+			if (values.BC) { $("#resultC011000").html(values.BC); }
+			if (values.BD) { $("#resultC010100").html(values.BD); }
+			if (values.BE) { $("#resultC010010").html(values.BE); }
+			if (values.BF) { $("#resultC010001").html(values.BF); }
+			if (values.CD) { $("#resultC001100").html(values.CD); }
+			if (values.CE) { $("#resultC001010").html(values.CE); }
+			if (values.CF) { $("#resultC001001").html(values.CF); }
+			if (values.DE) { $("#resultC000110").html(values.DE); }
+			if (values.DF) { $("#resultC000101").html(values.DF); }
+			if (values.EF) { $("#resultC000011").html(values.EF); }
+			if (values.ABC) { $("#resultC111000").html(values.ABC); }
+			if (values.ABD) { $("#resultC110100").html(values.ABD); }
+			if (values.ABE) { $("#resultC110010").html(values.ABE); }
+			if (values.ABF) { $("#resultC110001").html(values.ABF); }
+			if (values.ACD) { $("#resultC101100").html(values.ACD); }
+			if (values.ACE) { $("#resultC101010").html(values.ACE); }
+			if (values.ACF) { $("#resultC101001").html(values.ACF); }
+			if (values.ADE) { $("#resultC100110").html(values.ADE); }
+			if (values.ADF) { $("#resultC100101").html(values.ADF); }
+			if (values.AEF) { $("#resultC100011").html(values.AEF); }
+			if (values.BCD) { $("#resultC011100").html(values.BCD); }
+			if (values.BCE) { $("#resultC011010").html(values.BCE); }
+			if (values.BCF) { $("#resultC011001").html(values.BCF); }
+			if (values.BDE) { $("#resultC010110").html(values.BDE); }
+			if (values.BDF) { $("#resultC010101").html(values.BDF); }
+			if (values.BEF) { $("#resultC010011").html(values.BEF); }
+			if (values.CDE) { $("#resultC001110").html(values.CDE); }
+			if (values.CDF) { $("#resultC001101").html(values.CDF); }
+			if (values.CEF) { $("#resultC001011").html(values.CEF); }
+			if (values.DEF) { $("#resultC000111").html(values.DEF); }
+			if (values.ABCD) { $("#resultC111100").html(values.ABCD); }
+			if (values.ABCE) { $("#resultC111010").html(values.ABCE); }
+			if (values.ABCF) { $("#resultC111001").html(values.ABCF); }
+			if (values.ABDE) { $("#resultC110110").html(values.ABDE); }
+			if (values.ABDF) { $("#resultC110101").html(values.ABDF); }
+			if (values.ACDE) { $("#resultC101110").html(values.ACDE); }
+			if (values.ACDF) { $("#resultC101101").html(values.ACDF); }
+			if (values.BCDE) { $("#resultC011110").html(values.BCDE); }
+			if (values.BCDF) { $("#resultC011101").html(values.BCDF); }
+			if (values.CDEF) { $("#resultC001111").html(values.CDEF); }
+			if (values.BDEF) { $("#resultC010111").html(values.BDEF); }
+			if (values.BCEF) { $("#resultC011011").html(values.BCEF); }
+			if (values.ADEF) { $("#resultC100111").html(values.ADEF); }
+			if (values.ACEF) { $("#resultC101011").html(values.ACEF); }
+			if (values.ABEF) { $("#resultC110011").html(values.ABEF); }
+			if (values.ABCDE) { $("#resultC111110").html(values.ABCDE); }
+			if (values.ABCDF) { $("#resultC111101").html(values.ABCDF); }
+			if (values.ABCEF) { $("#resultC111011").html(values.ABCEF); }
+			if (values.ABDEF) { $("#resultC110111").html(values.ABDEF); }
+			if (values.ACDEF) { $("#resultC101111").html(values.ACDEF); }
+			if (values.BCDEF) { $("#resultC011111").html(values.BCDEF); }
+			if (values.ABCDEF) { $("#resultC111111").html(values.ABCDEF); }
+		}
+		
+		
 		function fillCountVenn() {
-			// Update values
-			if (opts.series[0].data.A) { $("#resultC100000").html(opts.series[0].data.A); }
-			if (opts.series[0].data.B) { $("#resultC010000").html(opts.series[0].data.B); }
-			if (opts.series[0].data.C) { $("#resultC001000").html(opts.series[0].data.C); }
-			if (opts.series[0].data.D) { $("#resultC000100").html(opts.series[0].data.D); }
-			if (opts.series[0].data.E) { $("#resultC000010").html(opts.series[0].data.E); }
-			if (opts.series[0].data.F) { $("#resultC000001").html(opts.series[0].data.F); }
-			if (opts.series[0].data.AB) { $("#resultC110000").html(opts.series[0].data.AB); }
-			if (opts.series[0].data.AC) { $("#resultC101000").html(opts.series[0].data.AC); }
-			if (opts.series[0].data.AD) { $("#resultC100100").html(opts.series[0].data.AD); }
-			if (opts.series[0].data.AE) { $("#resultC100010").html(opts.series[0].data.AE); }
-			if (opts.series[0].data.AF) { $("#resultC100001").html(opts.series[0].data.AF); }
-			if (opts.series[0].data.BC) { $("#resultC011000").html(opts.series[0].data.BC); }
-			if (opts.series[0].data.BD) { $("#resultC010100").html(opts.series[0].data.BD); }
-			if (opts.series[0].data.BE) { $("#resultC010010").html(opts.series[0].data.BE); }
-			if (opts.series[0].data.BF) { $("#resultC010001").html(opts.series[0].data.BF); }
-			if (opts.series[0].data.CD) { $("#resultC001100").html(opts.series[0].data.CD); }
-			if (opts.series[0].data.CE) { $("#resultC001010").html(opts.series[0].data.CE); }
-			if (opts.series[0].data.CF) { $("#resultC001001").html(opts.series[0].data.CF); }
-			if (opts.series[0].data.DE) { $("#resultC000110").html(opts.series[0].data.DE); }
-			if (opts.series[0].data.DF) { $("#resultC000101").html(opts.series[0].data.DF); }
-			if (opts.series[0].data.EF) { $("#resultC000011").html(opts.series[0].data.EF); }
-			if (opts.series[0].data.ABC) { $("#resultC111000").html(opts.series[0].data.ABC); }
-			if (opts.series[0].data.ABD) { $("#resultC110100").html(opts.series[0].data.ABD); }
-			if (opts.series[0].data.ABE) { $("#resultC110010").html(opts.series[0].data.ABE); }
-			if (opts.series[0].data.ABF) { $("#resultC110001").html(opts.series[0].data.ABF); }
-			if (opts.series[0].data.ACD) { $("#resultC101100").html(opts.series[0].data.ACD); }
-			if (opts.series[0].data.ACE) { $("#resultC101010").html(opts.series[0].data.ACE); }
-			if (opts.series[0].data.ACF) { $("#resultC101001").html(opts.series[0].data.ACF); }
-			if (opts.series[0].data.ADE) { $("#resultC100110").html(opts.series[0].data.ADE); }
-			if (opts.series[0].data.ADF) { $("#resultC100101").html(opts.series[0].data.ADF); }
-			if (opts.series[0].data.AEF) { $("#resultC100011").html(opts.series[0].data.AEF); }
-			if (opts.series[0].data.BCD) { $("#resultC011100").html(opts.series[0].data.BCD); }
-			if (opts.series[0].data.BCE) { $("#resultC011010").html(opts.series[0].data.BCE); }
-			if (opts.series[0].data.BCF) { $("#resultC011001").html(opts.series[0].data.BCF); }
-			if (opts.series[0].data.BDE) { $("#resultC010110").html(opts.series[0].data.BDE); }
-			if (opts.series[0].data.BDF) { $("#resultC010101").html(opts.series[0].data.BDF); }
-			if (opts.series[0].data.BEF) { $("#resultC010011").html(opts.series[0].data.BEF); }
-			if (opts.series[0].data.CDE) { $("#resultC001110").html(opts.series[0].data.CDE); }
-			if (opts.series[0].data.CDF) { $("#resultC001101").html(opts.series[0].data.CDF); }
-			if (opts.series[0].data.CEF) { $("#resultC001011").html(opts.series[0].data.CEF); }
-			if (opts.series[0].data.DEF) { $("#resultC000111").html(opts.series[0].data.DEF); }
-			if (opts.series[0].data.ABCD) { $("#resultC111100").html(opts.series[0].data.ABCD); }
-			if (opts.series[0].data.ABCE) { $("#resultC111010").html(opts.series[0].data.ABCE); }
-			if (opts.series[0].data.ABCF) { $("#resultC111001").html(opts.series[0].data.ABCF); }
-			if (opts.series[0].data.ABDE) { $("#resultC110110").html(opts.series[0].data.ABDE); }
-			if (opts.series[0].data.ABDF) { $("#resultC110101").html(opts.series[0].data.ABDF); }
-			if (opts.series[0].data.ACDE) { $("#resultC101110").html(opts.series[0].data.ACDE); }
-			if (opts.series[0].data.ACDF) { $("#resultC101101").html(opts.series[0].data.ACDF); }
-			if (opts.series[0].data.BCDE) { $("#resultC011110").html(opts.series[0].data.BCDE); }
-			if (opts.series[0].data.BCDF) { $("#resultC011101").html(opts.series[0].data.BCDF); }
-			if (opts.series[0].data.CDEF) { $("#resultC001111").html(opts.series[0].data.CDEF); }
-			if (opts.series[0].data.BDEF) { $("#resultC010111").html(opts.series[0].data.BDEF); }
-			if (opts.series[0].data.BCEF) { $("#resultC011011").html(opts.series[0].data.BCEF); }
-			if (opts.series[0].data.ADEF) { $("#resultC100111").html(opts.series[0].data.ADEF); }
-			if (opts.series[0].data.ACEF) { $("#resultC101011").html(opts.series[0].data.ACEF); }
-			if (opts.series[0].data.ABEF) { $("#resultC110011").html(opts.series[0].data.ABEF); }
-			if (opts.series[0].data.ABCDE) { $("#resultC111110").html(opts.series[0].data.ABCDE); }
-			if (opts.series[0].data.ABCDF) { $("#resultC111101").html(opts.series[0].data.ABCDF); }
-			if (opts.series[0].data.ABCEF) { $("#resultC111011").html(opts.series[0].data.ABCEF); }
-			if (opts.series[0].data.ABDEF) { $("#resultC110111").html(opts.series[0].data.ABDEF); }
-			if (opts.series[0].data.ACDEF) { $("#resultC101111").html(opts.series[0].data.ACDEF); }
-			if (opts.series[0].data.BCDEF) { $("#resultC011111").html(opts.series[0].data.BCDEF); }
-			if (opts.series[0].data.ABCDEF) { $("#resultC111111").html(opts.series[0].data.ABCDEF); }
+			
 			// Update the labels
 			if (opts.series[0].name.A) { $("#label1").html(opts.series[0].name.A); }
 			if (opts.series[0].name.B) { $("#label2").html(opts.series[0].name.B); }
@@ -1970,6 +1974,21 @@
 			if (opts.series[0].name.D) { $("#label4").html(opts.series[0].name.D); }
 			if (opts.series[0].name.E) { $("#label5").html(opts.series[0].name.E); }
 			if (opts.series[0].name.F) { $("#label6").html(opts.series[0].name.F); }
+			
+			// if values and data are given
+			if (opts.series[0].hasOwnProperty("values") && opts.series[0].hasOwnProperty("data")) {
+				setValuesforFillCountVenn(opts.series[0].values);
+			// if only the data
+			} else if (opts.series[0].hasOwnProperty("data")) {
+				var values = {};
+				for (var letter in opts.series[0].data) {
+					values[letter] = opts.series[0].data[letter].length;
+				}
+				setValuesforFillCountVenn(values);
+			// if only the values
+			} else if(opts.series[0].hasOwnProperty("values")) {
+				setValuesforFillCountVenn(opts.series[0].values);
+			}
 
 			// Add info to the number
             $("*[id^=resultC]").each(function(){
@@ -1987,9 +2006,8 @@
             			catch(err) { }
             		}
             	}
-            	
-            	// if values series are provided, add the values
-            	if (opts.series[0].hasOwnProperty("values")) {
+            	// if data are provided
+            	if (opts.series[0].hasOwnProperty("data")) {
             		var cvalue = "";
     				for (var i=6; i<$(this).attr("id").length; i++) {
     					if ($(this).attr("id").substring(i+1,i+2) == "1") {
@@ -2001,7 +2019,7 @@
     						else if (i == 11) {cvalue += "F";}
     					}
     				}
-    				this.list = opts.series[0].values[cvalue];
+    				this.list = opts.series[0].data[cvalue];
 					if (!opts.disableClick) {
 						// Add some eventlistener
 						$(this).mouseover(function(){
@@ -2018,6 +2036,7 @@
             		$(this).removeClass("number-empty");
             	}
             });
+            
 		}
 		
 		function getVennType() {
