@@ -44,14 +44,10 @@
             //	values: [90, 300, 10, 2, 45, 9]
             //}],
             //series: [{
-            //	name: {A: 'List 1',
-            //         B: 'List 2',
-            //         C: 'List 3',
-            //         D: 'List 4'},
-            //	data: {A: 340, B: 562, C: 620, D: 592,
-            //         AB: 639, AC: 456, AD: 257, BC: 915,
-            //         BD: 354, CD: 143, ABC: 552, ABD: 578,
-            //         ACD: 298, BCD: 613, ABCD: 148}
+            //	name: {A: 'Actors',
+            //         B: 'Singers'},
+            //	data: {A: 4, B: 3, AB: 3},
+            //	values: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]}
             //}],
             fnClickCallback: function() {
             	var value = "";
@@ -1974,7 +1970,7 @@
 			if (opts.series[0].name.D) { $("#label4").html(opts.series[0].name.D); }
 			if (opts.series[0].name.E) { $("#label5").html(opts.series[0].name.E); }
 			if (opts.series[0].name.F) { $("#label6").html(opts.series[0].name.F); }
-		
+
 			// Add info to the number
             $("*[id^=resultC]").each(function(){
             	this.listnames = new Array();
@@ -1991,10 +1987,37 @@
             			catch(err) { }
             		}
             	}
-            	if($(this).text() > 0) {
+            	
+            	// if values series are provided, add the values
+            	if (opts.series[0].hasOwnProperty("values")) {
+            		var cvalue = "";
+    				for (var i=6; i<$(this).attr("id").length; i++) {
+    					if ($(this).attr("id").substring(i+1,i+2) == "1") {
+    						if (i == 6) {cvalue += "A";}
+    						else if (i == 7) {cvalue += "B";}
+    						else if (i == 8) {cvalue += "C";}
+    						else if (i == 9) {cvalue += "D";}
+    						else if (i == 10) {cvalue += "E";}
+    						else if (i == 11) {cvalue += "F";}
+    					}
+    				}
+    				this.list = opts.series[0].values[cvalue];
+					if (!opts.disableClick) {
+						// Add some eventlistener
+						$(this).mouseover(function(){
+			            	$(this).addClass("number-over");
+			            });
+			            $(this).mouseout(function(){
+			            	$(this).removeClass("number-over");
+			            }); 
+			            $(this).click(opts.fnClickCallback);
+					}
+            	}
+					
+				if($(this).text() > 0) {
             		$(this).removeClass("number-empty");
             	}
-            });      
+            });
 		}
 		
 		function getVennType() {
