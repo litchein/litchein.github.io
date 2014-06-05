@@ -98,20 +98,17 @@ $(document).ready(function(){
   });
 });
 					</pre>
-					<p> The serie can also define the number of occurence for each intersections.</p>
+					<p> The serie can also define the number of occurence for each intersections and their values. If only the data are provided, 
+					the values are computed. If only the values are provided the callback function is desactivated.</p>
 					<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').jvenn({
     series: [{
-      name: {A: 'List 1',
-                  B: 'List 2',
-                  C: 'List 3',
-                  D: 'List 4'},
-      data: {A: 340, B: 562, C: 620, D: 592,
-                AB: 639, AC: 456, AD: 257, BC: 915,
-                BD: 354, CD: 143, ABC: 552, ABD: 578,
-                ACD: 298, BCD: 613, ABCD: 148}
-     }]
+    	name: {A: 'Actors',
+               B: 'Singers'},
+    	data: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]},
+    	values: {A: 4, B: 3, AB: 3}
+    }],
   });
 });
 					</pre>
