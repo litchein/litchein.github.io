@@ -16,7 +16,7 @@
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="src/jvenn.min.js"></script>
+	<script type="text/javascript" src="src/jvenn.js"></script>
 	<script language="Javascript">
 		$(document).ready(function () {			
 		
@@ -71,6 +71,14 @@
 			$("#area1").val("Marilyn Monroe\nArnold Schwarzenegger\nJack Nicholson\nBarbra Streisand\nRobert de Niro\nDean Martin\nHarrison Ford");
 			$("#name2").val("Singers");
 			$("#area2").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
+			$("#name3").val("3");
+			$("#area3").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
+			$("#name4").val("4");
+			$("#area4").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
+			$("#name5").val("5");
+			$("#area5").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
+			$("#name6").val("6");
+			$("#area6").val("Freddy Mercury\nBarbra Streisand\nDean Martin\nRicky Martin\nCeline Dion\nMarilyn Monroe");
 			
 			$('[id^="clear"]').click(function() {
 				var index = $(this).attr("id").split("_")[1];
@@ -292,8 +300,10 @@
 			</div>
 		</div>
 		<hr>
-		<footer>
-			<p>Copyright &copy; 2014, INRA | Designed by <a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo</a> team.</p>
+		<footer style="text-align: center;">
+			<p>Copyright &copy; 2014, INRA | Designed by <a href="http://bioinfo.genotoul.fr" target="_blank">GenoToul Bioinfo</a> and
+			   <a href="http://sigenae.org" target="_blank">Sigenae</a> teams.
+			</p>
 		</footer>
 	</div>
 	<script>

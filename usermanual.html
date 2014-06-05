@@ -40,34 +40,102 @@
 		<div class="row">
 			<div class="span3 bs-docs-sidebar">
 				<ul class="nav nav-list bs-docs-sidenav affix">
-					<li class="active"><a href="#export-to-PNG"><i class="icon-chevron-right"></i> export to PNG</a></li>
-					<li><a href="#add-new-identifiers"><i class="icon-chevron-right"></i> add new identifiers</a></li>
+					<li class="active"><a href="#quickStart"><i class="icon-chevron-right"></i> Quick start</a></li>
+					<li><a href="#export"><i class="icon-chevron-right"></i> Export to ...</a></li>
+					<li><a href="#legend"><i class="icon-chevron-right"></i> Switch button panel</a></li>
+		    		<li><a href="#extraCharts"><i class="icon-chevron-right"></i> Extra chats</a></li>
 		    	</ul>
 		  	</div>
 		  	
 		  	<div class="span9">
-		  		<section id="export-to-PNG">
+		  		<section id="quickStart">
 					<div class="page-header">
-				    	<h1>Export to PNG</h1>
+				    	<h1>Quick start</h1>
+				    </div>
+				    <h4>Provide list(s) of element(s)</h4>
+				    <p>
+				    At right of the example page, six textarea are available to provide your lists of elements (<b>warning:</b> one by line!).
+				    If you provide several times the same item in a list it will be considered as unique. <br/>
+				    You can also name each list using input field before the corresponding one. The length of the name is limited up to eleven characters.
+				    </p>
+				    <h4>Two display modes: classic and Edwards</h4>
+				    <p>The default value is 'classic' to have a classical venn diagram to be displayed. If you want a Edwards-Venn
+				    diagram display, just set the drop-down list to 'edwards'. Available values are: 'classic' and 'edwards'.</p>
+					<div class="bs-docs-example" style="text-align: center;">
+				  		<img width="48%" src="img/jvenn-classic.png" class="img-rounded img-polaroid"> <img width="48%" src="img/jvenn-edwards.png" class="img-rounded img-polaroid">
+				  	</div>
+				  	<h4>Highlight intersections</h4>
+				  	<p>On mouseover the numbers to highlight the involved lists.</p>
+				  	<div class="bs-docs-example" style="text-align: center;">
+				  		<img width="48%" src="img/jvenn-hl-classic.png" class="img-rounded img-polaroid"> <img width="48%" src="img/jvenn-hl-edwards.png" class="img-rounded img-polaroid">
+				  	</div>
+				  	<h4>Question mark</h4>
+				  	<p>For all diagrams, when the intersection count size exceeds the allowed space, the value is substituted by a question mark.
+				  	The real value pops-up on mouse over.</p>				  	
+				</section>
+		  		
+		  		<section id="export">
+					<div class="page-header">
+				    	<h1>Export to PNG and/or CSV</h1>
+				    </div>
+				    <p>By clicking on the top right icon you can export:
+					    <ul>
+					    	<li>the venn diagram as a PNG file</li>
+					    	<li>the intersection table as a CSV file</li>
+					    </ul>
+					</p>
+					<div class="bs-docs-example" style="text-align: center;">
+				  		<img width="50%" src="img/jvenn-export.png" class="img-rounded">
+				  	</div> 
+				</section>
+								
+				<section id="legend">
+					<div class="page-header">
+				    	<h1>Switch button panel</h1>
 					</div>
-				  	<p>Explication avec une image ... </p> 
+				  	<p>
+				  	If you provide more than 3 lists a switch button panel is available.
+				  	Use it to focus on the intersection of interest.<br/>
+				  	To enhance the figure’s readability on the classical six lists Venn graphic, it was decided
+					not to present all the values and to link some areas to their figures using lines. This
+					still did not permit to show all figures, use the switch button panel to display it.
+					<br/><br/>
+					<b>Warning:</b> if one of the switch is on, mouseover numbers no highlight the involved lists.</p>
+					<div class="bs-docs-example" style="text-align: center;">
+				  		<img width="48%" src="img/jvenn-legend-classic.png" class="img-rounded img-polaroid"> <img width="48%" src="img/jvenn-legend-edwards.png" class="img-rounded img-polaroid">
+				  	</div>
 				</section>
 				
-				<section id="add-new-identifiers">
+				<section id="extraCharts">
 					<div class="page-header">
-				    	<h1>Add new identifiers</h1>
+				    	<h1>Extra charts</h1>
 					</div>
-				  	<p>The default value is 'classic' to have a classical venn diagram to be displayed. If you want a Edwards-Venn diagram display,
-				  	just set this option to 'edwards'. Available values for this parameters are: 'classic', 'edwards'.</p>
-				</section>
-
+				  	<p>Having an overview of the list size and comparing multiple diagrams can be difficult using a Venn diagram. Thus, jvenn provides
+				  	two extra charts bellow the Venn.
+					  	<ul>
+					  		<li>The first one represents the input lists size histogram. It allows users to	check the homogeneity of the lists size.</li>
+							<li>The second one displays the number of elements located in intersections of a certain size.
+								This feature can be used to compare the compactness of multiple Venn diagrams.
+							</li>
+						</ul>
+					</p>
+					<div class="bs-docs-example">
+				  		<img width="50%" style="float:left" src="img/jvenn-extra-chart.png" class="img-rounded">
+				  		<br/><br/>
+				  		In the first chart you can see the number of elements in each list (the shorter list is the "list 5" with 858 elements).
+				  		<br/><br/><br/><br/>
+				  		In the second chart, 1707 elements are specific of one list and 399 elements are shared by two of the six lists, for example.
+				  		<br/><br/><br/>
+				  	</div>
 		  	</div>
 		</div>
 		
 		<hr>
-		<footer>
-			<p>Copyright &copy; 2014, INRA | Designed by <a href="http://bioinfo.genotoul.fr/" target="_blank">GenoToul Bioinfo</a> team.</p>
-		</footer>
+		<footer style="text-align: center;">
+			<p>Copyright &copy; 2014, INRA | Designed by <a href="http://bioinfo.genotoul.fr" target="_blank">GenoToul Bioinfo</a> and
+			   <a href="http://sigenae.org" target="_blank">Sigenae</a> teams.
+			</p>
+	    </footer>
 	</div>
 	<script>
      	!function ($) {
