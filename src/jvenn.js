@@ -627,7 +627,7 @@
 			// Draw the bar chart
 			context.font = 'italic 10pt Arial';
 			context.textAlign = 'center';
-		    context.fillText('Number of common and specific elements', 250, ymargin);
+		    context.fillText('Number of elements: specific (1) or shared by 2, 3, ... lists', 250, ymargin);
 		    context.font = 'normal 8pt Arial';
 			var	xprev = 0,
 				ylegend = 0;
@@ -1668,7 +1668,7 @@
 			}
 		}
 		
-		function addLegend(div) {
+		function addLegend(div, vennSize) {
 			$t = div;
 			var i=1;
 			var hide = "";
@@ -1677,7 +1677,7 @@
 				div_legend += '<div id="item-'+i+'" name="' + $(this).text() + '" class="leg-items" style="opacity:0.5; background-color:' + $(this).css("color") + hide + '">';
 				div_legend += '<span style="background-color:white; margin-left:0px; padding:0px 2px 0px 2px; transition: margin-left .3s ease-in-out;">off</span></div>';
 				i += 1;
-				if(i>opts.series.length) {
+				if(i>vennSize) {
 					hide = ";display:none";
 				}
 			});
@@ -1739,12 +1739,12 @@
 
 				clearCanvas();
             	if (opts.displayMode == 'edwards') {
-                   	placeEdwardsVenn(opts.series.length);
+                   	placeEdwardsVenn(vennSize);
                 } else {
-                   	placeClassicVenn(opts.series.length);
+                   	placeClassicVenn(vennSize);
                 }
             	if (opts.displayStat) {
-            		placeStat(opts.series.length);
+            		placeStat(vennSize);
                 }
             	if(labels.length > 0) { 
             		$(val).show();
@@ -2136,7 +2136,7 @@
             	extraheight = 280; 
             }
             $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
-            $('<style>.number-black{font-weight:bold;color:#000000;cursor:pointer;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
+            $('<style>.number-black{font-weight:bold;color:#000000;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;cursor:pointer;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
            
             var	legleft = 434,
             	legtop  = 130;
@@ -2246,7 +2246,7 @@
             // if the exporting modul is requested
             if (opts.exporting === true){ addExportModule($t, extraheight, type[0]); }
             // if min 4 classes diagram is requested add legend
-            if (type[1] >= 4) { addLegend($t); }
+            if (type[1] >= 4) { addLegend($t, type[1]); }
             
             // number hover action
             $(".number-black").hover(
