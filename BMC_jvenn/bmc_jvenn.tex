@@ -516,12 +516,51 @@ reviewers for their insightful and constructive comments.
 %% Use of \listoftables is discouraged.
 %%
 \section*{Tables}
+
+\begin{table}[h!]
+\caption{Available formats and example for the \textit{series} option.}
+	\begin{tabular}{c|cccccc}
+		Application & Maximum & Layouts & Application &
+		Proportionality & Input data & Output\\ 
+		& number of & & type & & formats & formats \\
+		& input lists & & & & & \\ \hline
+		
+		VENNTURE \cite{Bronwen2012} &  6 & Edwards & Stand-alone & No & Lists &
+		Powerpoint,\\ 
+		& & & & & & Excel, CSV \\ \hline
+		
+		VennDiagram \cite{RVennDiagram} &  5 & Classical & R package & No & Lists
+		& R object, TIFF \\ \hline
+		
+		BioVenn \cite{Hulsen2008} &  3 & Classical & Web application & Yes &
+		Lists & SVG, PNG \\ \hline
+		
+		venny \cite{venny} &  4 & Classical & Web application & No &
+		Lists & PNG \\ \hline
+		 
+		Canvasxpress \cite{canvasxpress} &  4 & Classical & JavaScript library &
+		No & Intersection counts & JavaScript canvas \\ \hline
+		
+		Google & 3 & Classical & JavaScript library &
+		Yes & Lists & PNG \\ 
+		Chart API \cite{googleAPI} & & & & & & \\ \hline
+			
+		jvenn & 6 & Classical & Web application & No & Lists,
+		& Interactive 
+		\\
+		& & and Edwards & and JavaScript library & & intersection counts & diagram, \\
+		& & & & & and count lists & PNG, CSV
+	\end{tabular}
+\end{table}
+
+
+
 \begin{table}[h!]
 \caption{Available formats and example for the \textit{series} option.}
       \begin{tabular}{cccc}
         \hline
-        format & example\\ \hline
-        lists & 
+        Format & Example\\ \hline
+        Lists & 
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
@@ -531,15 +570,16 @@ series: [{
 	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"]
 }]
 \end{lstlisting}\\ \hline
-        intersection counts & 
+        Intersection counts & 
 \begin{lstlisting}
 series: [{
 	name: {A: 'sample 1', B: 'sample 2'},
 	data: {A: ["Otu3", "Otu4", "Otu6"], B: ["Otu8", "Otu9"], AB: ["Otu1",
-	"Otu2", "Otu5", "Otu7"]} }],
+	"Otu2", "Otu5", "Otu7"]},
 	values: {A: 3, B: 2, AB: 4}
+}]
 \end{lstlisting}\\ \hline
-        count lists  &
+        Count lists  &
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
