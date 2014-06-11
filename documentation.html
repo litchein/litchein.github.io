@@ -51,6 +51,7 @@
 					<li><a href="#disableClick"><i class="icon-chevron-right"></i> disableClick</a></li>
 					<li><a href="#useValues"><i class="icon-chevron-right"></i> useValues</a></li>
 					<li><a href="#exporting"><i class="icon-chevron-right"></i> exporting</a></li>
+					<li><a href="#search"><i class="icon-chevron-right"></i> search...</a></li>
 		    	</ul>
 		  	</div>
 		  	
@@ -287,7 +288,34 @@ $(document).ready(function(){
   });
 });
 					</pre>
-				</section>				
+				</section>
+				
+				<section id="search">
+					<div class="page-header">
+				    	<h1>search...</h1>
+					</div>
+				  	<p>Three parameters to manage a search field:
+				  	<ul>
+				  		<li>searchInput: a jquery object (an html input element), default value is null for no search feature</li>
+				  		<li>searchStatus: a jquery object (a span type element) to display the search status</li>
+				  		<li>searchMinSize: the minimum size of the input string to start the search.</li>
+				  	</ul>
+				  	</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    series: [{
+          name: 'sample1',
+          data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
+          values: [5, 15, 250, 20, 23, 58, 89]
+       }],
+       searchInput:  $("#search-field"),
+       searchStatus: $("#search-status"),
+       searchMinSize: 1
+  });
+});
+					</pre>
+				</section>
 		  	</div>
 		</div>
 		
