@@ -34,21 +34,21 @@
             	name: 'Singers',
             	data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
             }],
-            //series: [{
-            //	name: 'sample1',
-            //	data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
-            //	values: [5, 15, 250, 20, 23, 58, 89]
-            //}, {
-            //	name: 'sample2',
-            //	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"],
-            //	values: [90, 300, 10, 2, 45, 9]
-            //}],
-            //series: [{
-            //	name: {A: 'Actors',
-            //         B: 'Singers'},
-            //	data: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]},
-            //	values: {A: 4, B: 3, AB: 3}
-            //}],
+//            series: [{
+//            	name: 'sample1',
+//            	data: ["Otu1", "Otu2", "Otu3", "Otu4", "Otu5", "Otu6", "Otu7"],
+//            	values: [5, 15, 250, 20, 23, 58, 89]
+//            }, {
+//            	name: 'sample2',
+//            	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"],
+//            	values: [90, 300, 10, 2, 45, 9]
+//            }],
+//            series: [{
+//            	name: {A: 'Actors',
+//                     B: 'Singers'},
+//            	data: {A: ["Arnold Schwarzenegger", "Jack Nicholson", "Robert de Niro", "Harrison Ford"], B: ["Freddy Mercury", "Ricky Martin", "Celine Dion"], AB: ["Marilyn Monroe", "Barbra Streisand", "Dean Martin"]},
+//            	values: {A: 4, B: 3, AB: 3}
+//            }],
             fnClickCallback: function() {
             	var value = "";
             	if (this.listnames.length == 1) {
@@ -71,12 +71,13 @@
             displayMode: 'classic',
             displayStat: false,
             shortNumber: true,
+            searchInput: null,
             // Colors must be RGB
             //       green         , blue            , red            , yellow          , orange         , brown
             colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
         };  
 		var opts = $.extend(defaults, options); 
-
+		
 		function drawEllipse(x, y, r, w, h, a, fillcolor) {
 			var canvas = $("#canvasEllipse")[0]; 
 			var context = canvas.getContext("2d");
@@ -1690,49 +1691,18 @@
 				$(this).css('box-shadow',  'none');
 		    });
 			$("*[id^=item]").click(function(){
-				if($(this).children("span").text() === 'off') {
-					$(this).children("span").css('margin-left', '13px');
-			        $(this).css('opacity', 0.75);
-			        $(this).css('color', 'black');
-			        $(this).children("span").text('on');
+				var visible_id = null ;
+				if ($(this).children("span").text() === 'off') {
+					visible_id = select( $(this).attr('name') );
 				}
 				else {
-					$(this).children("span").css('margin-left', '0px');
-					$(this).css('opacity', 0.5);
-					$(this).children("span").text('off');
+					visible_id = unselect( $(this).attr('name') );
 				}
-				
-				var	labels = [];
-					val = "#resultC";
-				$("*[id^=item]").each(function(){
-					if($(this).children("span").text() === 'on') {
-						labels.push($(this).attr("name"));
-						val += "1";
-					}
-					else { val += "0"; }
-				});
-				if(labels.length > 0) {  
-					$("*[id^=label]").each(function(){
-            			if (labels.indexOf($(this).text()) < 0) {
-            				$(this).css('opacity', 0.1);
-            			} else {
-            				$(this).css('opacity', 0.6);
-            			}
-            		});
-					$(".number-black").each(function(){
-                		$(this).css('opacity', 0.1);
-                	});
-					$(val).css('opacity', 1);
-        		}
-				else {
-					$("*[id^=label]").each(function(){
-						$(this).css('opacity', 0.6);
-        			});
-					$(".number-black").each(function(){
-						$(this).css('opacity', 1);
-                	});
+				// Clear search
+				if (opts.searchInput != null) {
+					opts.searchInput.val("");
 				}
-
+				// Draw
 				clearCanvas();
             	if (opts.displayMode == 'edwards') {
                    	placeEdwardsVenn(vennSize);
@@ -1742,8 +1712,8 @@
             	if (opts.displayStat) {
             		placeStat(vennSize);
                 }
-            	if(labels.length > 0) { 
-            		$(val).show();
+            	if (visible_id != "resultC000000") { 
+            		$("#" + visible_id).show();
             	}
 			});
 		}
@@ -1963,8 +1933,7 @@
 			if (values.BCDEF) { $("#resultC011111").html(values.BCDEF); }
 			if (values.ABCDEF) { $("#resultC111111").html(values.ABCDEF); }
 		}
-		
-		
+
 		function fillCountVenn() {
 			
 			// Update the labels
@@ -2171,6 +2140,146 @@
 			});
 		}
 		
+		function unselect( unselected_name ) {
+			var unselected_idx = null ;
+			// Find group index
+			$("*[id^=label]").each(function(){
+				if( $(this).html() == unselected_name ) {
+					$(this).css('opacity', 0.1);
+					$(this).removeClass("is-selected");
+					var id = $(this).attr('id');
+					unselected_idx = id.charAt(id.length-1);
+				}
+			});
+			// Change legend button
+			legend_button = $("#item-" + unselected_idx) ;
+			legend_button.children("span").css('margin-left', '0px');
+			legend_button.css('opacity', 0.5);
+			legend_button.children("span").text('off');
+			// Change visibility
+			var visible_id = "resultC000000" ;
+			$(".is-selected").each(function(){
+				var id = $(this).attr('id') ;
+				var replace_pos = 6 + parseInt(id.charAt(id.length-1));
+				visible_id = visible_id.substr(0, replace_pos) + 1 + visible_id.substr(replace_pos+1);
+			});
+			if (visible_id != "resultC000000") {
+				$(".number-black").each(function(){
+					if( $(this).attr('id') == visible_id ) {
+						$(this).css('opacity', 1);
+					} else {
+						$(this).css('opacity', 0.1);
+					}
+	        	});
+			} else {
+				$(".number-black").each(function(){
+					$(this).css('opacity', 1);
+				});
+				$("*[id^=label]").each(function(){
+					$(this).css('opacity', 0.6);
+				});
+			}
+			
+			return( visible_id );
+		}
+		
+		function select( selected_name ) {
+			var selected_idx = null ;
+			// Find group index and show label
+			$("*[id^=label]").each(function(){
+				if( $(this).html() == selected_name ) {
+					$(this).css('opacity', 0.6);
+					$(this).addClass("is-selected");
+					var id = $(this).attr('id') ;
+					selected_idx = id.charAt(id.length-1);
+				} else if (!$(this).hasClass("is-selected")) {
+					$(this).css('opacity', 0.1);
+				}
+			});
+			// Change legend button
+			legend_button = $("#item-" + selected_idx) ;
+			legend_button.children("span").css('margin-left', '13px');
+			legend_button.css('opacity', 0.75);
+			legend_button.css('color', 'black');
+			legend_button.children("span").text('on');
+			// Change count visibility
+			var visible_idx = "resultC000000"
+			$(".is-selected").each(function(){
+				var id = $(this).attr('id') ;
+				var replace_pos = 6 + parseInt(id.charAt(id.length-1));
+				visible_idx = visible_idx.substr(0, replace_pos) + 1 + visible_idx.substr(replace_pos+1);
+			});
+			$(".number-black").each(function(){
+				if( $(this).attr('id') == visible_idx ) {
+					$(this).css('opacity', 1);
+				} else {
+					$(this).css('opacity', 0.1);
+				}
+        	});
+			return( visible_idx );
+		}
+
+		function search( val ) {
+			var val_lower_case = val.toLowerCase() ;
+			var groups_status = new Array();
+			var nb_find = 0 ;
+			
+			$("*[id^=label]").each( function() {
+				if ($(this).html() != "") {
+					groups_status[$(this).html()] = 'unselected' ;
+				}
+			});
+			
+			if ( val != "" ) {
+				// Find selected
+				$(".number-black:not(.number-empty)").each( function() {
+					for (var idx = 0 ; idx < this.list.length ; idx++) {
+						if( this.list[idx].toLowerCase().indexOf(val_lower_case) != -1) {
+							if ( nb_find == 0 ) {
+								for ( var idx_2 = 0 ; idx_2 < this.listnames.length ; idx_2++ ) {
+									groups_status[this.listnames[idx_2]] = 'selected' ;
+								}
+							}
+							nb_find++ ;
+						}
+					}
+				});
+				// Update
+				if (nb_find <= 1) {
+					for (var group_name in  groups_status) {
+						if( groups_status[group_name] == 'selected' ) {
+							select( group_name );
+						} else {
+							unselect( group_name );
+						}
+					}
+					if( nb_find == 0 ) {
+						$(".number-black").each(function(){
+							$(this).css('opacity', 0.1);
+						});
+						$("*[id^=label]").each(function(){
+							$(this).css('opacity', 0.1);
+						});
+					}
+				}
+			} else {
+				for (var group_name in  groups_status) {
+					unselect( group_name );
+				}
+			}
+			
+			// Display
+			clearCanvas();
+        	if (opts.displayMode == 'edwards') {
+               	placeEdwardsVenn( getVennType()[1] );
+            } else {
+               	placeClassicVenn( getVennType()[1] );
+            }
+        	if (opts.displayStat) {
+        		placeStat( getVennType()[1] );
+            }
+		}
+		
         this.each(function() {
             var $t = $(this);
             var extraheight = 0;
@@ -2275,7 +2384,13 @@
             } else if (type[0] == "count") {
             	fillCountVenn();
             }
-
+            
+			if( opts.searchInput != null ) {
+				opts.searchInput.change( function() {
+					search( opts.searchInput.val() );
+				});
+			}
+			
         	if (opts.displayMode == 'edwards') {
         		placeEdwardsVenn(type[1]);
         	} else {
