@@ -72,6 +72,7 @@
             displayStat: false,
             shortNumber: true,
             searchInput: null,
+            searchStatus: null,
             searchMinSize:1,
             // Colors must be RGB
             //       green         , blue            , red            , yellow          , orange         , brown
@@ -1702,6 +1703,9 @@
 				// Clear search
 				if (opts.searchInput != null) {
 					opts.searchInput.val("");
+					if (opts.searchStatus != null) {
+						opts.searchStatus.text("");
+					}
 				}
 				// Draw
 				clearCanvas();
@@ -2222,7 +2226,6 @@
 
 		function search( val, min_size ) {
 			var min_size = (min_size == null ? 1 : min_size)
-			var val_lower_case = val.toLowerCase();
 			var groups_status = new Array();
 			var visible_id = "resultC000000";
 			var nb_find = 0;
@@ -2232,7 +2235,7 @@
 				}
 			});
 			
-			if ( val == "" || min_size > val.length) { // Search is empty
+			if (val == "" || min_size > val.length) { // Search is empty
 				for (var group_name in  groups_status) {
 					visible_id = unselect( group_name );
 				}
@@ -2242,8 +2245,8 @@
 				var perfect_match = false;
 				$(".number-black:not(.number-empty)").each( function() {
 					for (var idx = 0 ; idx < this.list.length && !perfect_match ; idx++) {
-						if( this.list[idx].toLowerCase().indexOf(val_lower_case) != -1) {
-							if( this.list[idx].toLowerCase() == val_lower_case ) {
+						if (this.list[idx].indexOf(val) != -1) {
+							if (this.list[idx] == val) {
 								perfect_match = true;
 							}
 							listnames = this.listnames;
@@ -2257,7 +2260,7 @@
 					}
 					nb_find = 1;
 				}
-				// Update if search is not ambigous
+				// Update if search is not ambiguous
 				if (nb_find <= 1) { // Find or unfind
 					for (var group_name in  groups_status) {
 						if( groups_status[group_name] == 'selected' ) {
@@ -2266,11 +2269,24 @@
 							visible_id = unselect( group_name, false );
 						}
 					}
-				} else { // Ambigous
+				} else { // Ambiguous
 					for (var group_name in  groups_status) {
 						visible_id = unselect( group_name );
 					}
 				}
+			}
+			
+			// Update status
+			if( opts.searchStatus != null ) {
+				if (val == "" || min_size > val.length) {
+					opts.searchStatus.text( "" );
+				} else if (nb_find == 0) {
+					opts.searchStatus.text( "not found" );
+				} else if (nb_find == 1) {
+					opts.searchStatus.text( "found" );
+				} else if (nb_find > 1) {
+					opts.searchStatus.text( "ambiguous" );
+				} 
 			}
 			
 			// Display

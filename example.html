@@ -47,7 +47,9 @@
 		       
 			    $("#jvenn-container").jvenn({
 					series: seriesTable,
-					displayMode: $("#venn-type").val(),
+					searchInput:  $("#search-field"),
+					searchStatus: $("#search-status"),
+					displayMode:  $("#venn-type").val(),
 					displayStat: true,
 					fnClickCallback: function() {
 						var value = "";
@@ -202,7 +204,10 @@
 		<div class="hero-unit">
 			<h1>Hello jvenn!</h1>
 			<p class="bodytext"> Paste up to <strong>six</strong> lists using one row per element, then click 
-			the numbers in the <select id="venn-type" class="input-small" style="width:110px;margin-top:5px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.
+			the numbers in the <select id="venn-type" class="input-small" style="width:110px;margin-top:8px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.
+			<br/>Find an element in list(s):
+			<input id="search-field" type="text" style="margin-top:8px" placeholder="enter an element name..."/>
+			<span  id="search-status" class="label label-info" style="vertical-align: 15px; margin-left: -20px;"></span>
 			</p>
 		</div>
 		<div class="row-fluid">
