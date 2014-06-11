@@ -2140,7 +2140,8 @@
 			});
 		}
 		
-		function unselect( unselected_name ) {
+		function unselect( unselected_name, init ) {
+			var init = (init == null ? true : init);
 			var unselected_idx = null ;
 			// Find group index
 			$("*[id^=label]").each(function(){
@@ -2157,13 +2158,20 @@
 			legend_button.css('opacity', 0.5);
 			legend_button.children("span").text('off');
 			// Change visibility
-			var visible_id = "resultC000000" ;
+			var visible_id = "resultC000000";
 			$(".is-selected").each(function(){
-				var id = $(this).attr('id') ;
+				var id = $(this).attr('id');
 				var replace_pos = 6 + parseInt(id.charAt(id.length-1));
 				visible_id = visible_id.substr(0, replace_pos) + 1 + visible_id.substr(replace_pos+1);
 			});
-			if (visible_id != "resultC000000") {
+			if (visible_id == "resultC000000" && init) { // 0 selected element and init
+				$(".number-black").each(function(){
+					$(this).css('opacity', 1);
+				});
+				$("*[id^=label]").each(function(){
+					$(this).css('opacity', 0.6);
+				});
+			} else { // At least one selected element or non-init
 				$(".number-black").each(function(){
 					if( $(this).attr('id') == visible_id ) {
 						$(this).css('opacity', 1);
@@ -2171,13 +2179,6 @@
 						$(this).css('opacity', 0.1);
 					}
 	        	});
-			} else {
-				$(".number-black").each(function(){
-					$(this).css('opacity', 1);
-				});
-				$("*[id^=label]").each(function(){
-					$(this).css('opacity', 0.6);
-				});
 			}
 			
 			return( visible_id );
@@ -2190,22 +2191,22 @@
 				if( $(this).html() == selected_name ) {
 					$(this).css('opacity', 0.6);
 					$(this).addClass("is-selected");
-					var id = $(this).attr('id') ;
+					var id = $(this).attr('id');
 					selected_idx = id.charAt(id.length-1);
 				} else if (!$(this).hasClass("is-selected")) {
 					$(this).css('opacity', 0.1);
 				}
 			});
 			// Change legend button
-			legend_button = $("#item-" + selected_idx) ;
+			legend_button = $("#item-" + selected_idx);
 			legend_button.children("span").css('margin-left', '13px');
 			legend_button.css('opacity', 0.75);
 			legend_button.css('color', 'black');
 			legend_button.children("span").text('on');
 			// Change count visibility
-			var visible_idx = "resultC000000"
+			var visible_idx = "resultC000000";
 			$(".is-selected").each(function(){
-				var id = $(this).attr('id') ;
+				var id = $(this).attr('id');
 				var replace_pos = 6 + parseInt(id.charAt(id.length-1));
 				visible_idx = visible_idx.substr(0, replace_pos) + 1 + visible_idx.substr(replace_pos+1);
 			});
@@ -2220,51 +2221,53 @@
 		}
 
 		function search( val ) {
-			var val_lower_case = val.toLowerCase() ;
+			var val_lower_case = val.toLowerCase();
 			var groups_status = new Array();
-			var nb_find = 0 ;
-			
+			var visible_id = "resultC000000";
+			var nb_find = 0;
 			$("*[id^=label]").each( function() {
 				if ($(this).html() != "") {
-					groups_status[$(this).html()] = 'unselected' ;
+					groups_status[$(this).html()] = 'unselected';
 				}
 			});
 			
-			if ( val != "" ) {
+			if ( val == "" ) { // Search is empty
+				for (var group_name in  groups_status) {
+					visible_id = unselect( group_name );
+				}
+			} else { // Search element
 				// Find selected
+				var listnames = null ;
+				var perfect_match = false;
 				$(".number-black:not(.number-empty)").each( function() {
-					for (var idx = 0 ; idx < this.list.length ; idx++) {
+					for (var idx = 0 ; idx < this.list.length && !perfect_match ; idx++) {
 						if( this.list[idx].toLowerCase().indexOf(val_lower_case) != -1) {
-							if ( nb_find == 0 ) {
-								for ( var idx_2 = 0 ; idx_2 < this.listnames.length ; idx_2++ ) {
-									groups_status[this.listnames[idx_2]] = 'selected' ;
-								}
+							if( this.list[idx].toLowerCase() == val_lower_case ) {
+								perfect_match = true;
 							}
+							listnames = this.listnames;
 							nb_find++ ;
 						}
 					}
 				});
-				// Update
-				if (nb_find <= 1) {
-					for (var group_name in  groups_status) {
-						if( groups_status[group_name] == 'selected' ) {
-							select( group_name );
-						} else {
-							unselect( group_name );
-						}
-					}
-					if( nb_find == 0 ) {
-						$(".number-black").each(function(){
-							$(this).css('opacity', 0.1);
-						});
-						$("*[id^=label]").each(function(){
-							$(this).css('opacity', 0.1);
-						});
+				if (nb_find == 1  || perfect_match) {
+					for ( var idx_2 = 0 ; idx_2 < listnames.length ; idx_2++ ) {
+						groups_status[listnames[idx_2]] = 'selected' ;
 					}
 				}
-			} else {
-				for (var group_name in  groups_status) {
-					unselect( group_name );
+				// Update if search is not ambigous
+				if (nb_find <= 1 || perfect_match) { // Find or unfind
+					for (var group_name in  groups_status) {
+						if( groups_status[group_name] == 'selected' ) {
+							visible_id = select( group_name );
+						} else {
+							visible_id = unselect( group_name, false );
+						}
+					}
+				} else { // Ambigous
+					for (var group_name in  groups_status) {
+						visible_id = unselect( group_name );
+					}
 				}
 			}
 			
@@ -2278,6 +2281,9 @@
         	if (opts.displayStat) {
         		placeStat( getVennType()[1] );
             }
+        	if (visible_id != "resultC000000") { 
+        		$("#" + visible_id).show();
+        	}
 		}
 		
         this.each(function() {
@@ -2386,7 +2392,7 @@
             }
             
 			if( opts.searchInput != null ) {
-				opts.searchInput.change( function() {
+				opts.searchInput.keyup( function() {
 					search( opts.searchInput.val() );
 				});
 			}
