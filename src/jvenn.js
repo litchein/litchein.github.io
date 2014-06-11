@@ -72,6 +72,7 @@
             displayStat: false,
             shortNumber: true,
             searchInput: null,
+            searchMinSize:1,
             // Colors must be RGB
             //       green         , blue            , red            , yellow          , orange         , brown
             colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
@@ -2180,7 +2181,6 @@
 					}
 	        	});
 			}
-			
 			return( visible_id );
 		}
 		
@@ -2220,7 +2220,8 @@
 			return( visible_idx );
 		}
 
-		function search( val ) {
+		function search( val, min_size ) {
+			var min_size = (min_size == null ? 1 : min_size)
 			var val_lower_case = val.toLowerCase();
 			var groups_status = new Array();
 			var visible_id = "resultC000000";
@@ -2231,7 +2232,7 @@
 				}
 			});
 			
-			if ( val == "" ) { // Search is empty
+			if ( val == "" || min_size > val.length) { // Search is empty
 				for (var group_name in  groups_status) {
 					visible_id = unselect( group_name );
 				}
@@ -2254,9 +2255,10 @@
 					for ( var idx_2 = 0 ; idx_2 < listnames.length ; idx_2++ ) {
 						groups_status[listnames[idx_2]] = 'selected' ;
 					}
+					nb_find = 1;
 				}
 				// Update if search is not ambigous
-				if (nb_find <= 1 || perfect_match) { // Find or unfind
+				if (nb_find <= 1) { // Find or unfind
 					for (var group_name in  groups_status) {
 						if( groups_status[group_name] == 'selected' ) {
 							visible_id = select( group_name );
@@ -2393,7 +2395,7 @@
             
 			if( opts.searchInput != null ) {
 				opts.searchInput.keyup( function() {
-					search( opts.searchInput.val() );
+					search( opts.searchInput.val(), opts.searchMinSize );
 				});
 			}
 			
@@ -2418,7 +2420,9 @@
             		$("*[id^=item]").each(function(){
             			if($(this).children("span").text() === 'on') { activeleg = true; }
             		});
-            		if(!activeleg  &&  $(this).text() !== "") {
+            		var activesearch = false;
+        			if(opts.searchInput.val() != '') { activesearch= true; }
+            		if(!activeleg && !activesearch &&  $(this).text() !== "") {
 		            	var labels  = this.listnames;
 		            	var current = this;
 	            		$("*[id^=label]").each(function(){
@@ -2449,7 +2453,9 @@
             		$("*[id^=item]").each(function(){
             			if($(this).children("span").text() === 'on') { activeleg = true; }
             		});
-            		if(!activeleg  &&  $(this).text() !== "") {
+            		var activesearch = false;
+            		if(opts.searchInput.val() != '') { activesearch= true; }
+            		if(!activeleg && !activesearch && $(this).text() !== "") {
 	            		var labels = this.listnames;
 	                	$("*[id^=label]").each(function(){
 	            			$(this).css('opacity', 0.5);
