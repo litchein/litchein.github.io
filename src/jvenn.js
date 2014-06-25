@@ -582,6 +582,7 @@
 					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, ymargin + h-dataplot[i]+15);
 				}
 				else {
+					context.textAlign = 'right';
 					context.fillText(data[i], barwidth + 65 + i*barwidth + i*xspacer, ymargin + h-dataplot[i]-10);
 				}
 				if(i%2 && vennSize>2) {	ytext = ymargin + h + 25; }
