@@ -294,7 +294,7 @@ providing an insight on the similarities between the lists.
 In a Venn diagram each list is figured by a transparent shape. Shape overlaps
 contain the elements shared between lists or more often the corresponding counts.
 In proportional Venn diagrams the size of a shape depends on the number of
-elements of the corresponding list intersection. Venn diagram with up to four 
+elements of the corresponding list intersection. Venn diagrams with up to four 
 lists are easy to read and understand, but they become difficult to interpret
 with more lists. To solve this problem, the Edwards-Venn \cite{Edwards2004}
 representation introduces new shapes providing a clearer view (Fig. 2).
@@ -323,18 +323,18 @@ RNAbrowse \cite{Mariette} and WallProtDB \cite{SanClemente}.
 
 \subsection*{Inputs}
 
-The library accepts three different input formats : lists, intersection counts
-and count lists. All are JSON objects. Examples are presented in Table 1.
-``Lists'' contain for each input a label and an identifier table. ``Intersection
-counts'' contain a correspondence table between labels and letters [A..F] and a
-table linking the intersection names formed by the successions of letters and
-the counts. ``Count lists'' are organized as ``Lists'' in which identifiers are
-replaced by their unique occurrences and their counts. With ``Count lists'' the 
-figures presented in the diagram correspond to the sums of counts of all
-identifiers shared between lists. This has been used in diversity studies to
-present OTU (Operational Taxonomic Unit) read counts. For ``lists'' and ``count
-lists'', jvenn computes the intersection counts and displays the chart. For 
-``intersection counts'', it only displays the graphic. 
+The library accepts three different input formats : ``Lists'', ``Intersection
+counts'' and ``Count lists''. Examples are presented in Table 1. ``Lists'' contain
+for each input a label and an identifier table. ``Intersection counts'' contain a
+correspondence table between labels and letters [A..F] and a table linking the
+intersection names formed by the successions of letters and the counts. ``Count
+lists'' are organized as ``Lists'' in which identifiers are replaced by their
+unique occurrences and their counts. With ``Count lists'' the figures presented
+in the diagram correspond to the sums of counts of all identifiers shared
+between lists. This has been used in diversity studies to present OTU
+(Operational Taxonomic Unit) read counts. For ``Lists'' and ``Count lists'',
+jvenn computes the intersection counts and displays the chart. For
+``intersection counts'', it only displays the graphic.
 
 \subsection*{Display features}
 
@@ -343,8 +343,8 @@ representation. But then, the intersection areas are often too small to display
 the figures.
 
 To present, in a user-friendly manner, five or six list diagrams, jvenn implements
-(Fig. 1) several functionalities. First, the display can be switched to Edwards-Venn
-(Fig. 2) which gives a clearer graphical representation for six list diagrams. To
+several functionalities (Fig. 1). First, the display can be switched to
+Edwards-Venn (Fig. 2) which gives a clearer graphical representation for six list diagrams. To
 enhance the figure's readability on the classical six lists Venn graphic, it was
 decided not to present all the values and to link some areas to their figures
 using lines. This still did not permit to show all figures, therefore the switch
@@ -451,10 +451,10 @@ Multiple layouts
 
 \section*{Conclusions}
 
-jvenn allows whoever is familiar with the jquery library and has some JavaScript
-programming skills to embed Venn diagrams in a Web page without dependency. It
-has been designed following the examples of jbrowse \cite{Westesson01032013}, 
-Cytoscape-Web \cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}.
+jvenn allows programers, with moderate JavaScript experiences to embed Venn
+diagrams in a Web page without dependency. It has been designed following the
+examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010},
+and jHeatmap \cite{DeuPons2014}.
 
 \section*{Availability and requirements}
 
@@ -586,7 +586,7 @@ reviewers for their insightful and constructive comments.
 		\\
 		& & and Edwards & and JavaScript & & intersection & diagram, \\
 		& & & library & & counts and & PNG and CSV \\
-		& & & & & count lists & 
+		& & & & & Count lists & 
 	\end{tabular}
 \end{table}
 
@@ -595,8 +595,8 @@ reviewers for their insightful and constructive comments.
 \caption{Available formats and example for the \textit{series} option.}
       \begin{tabular}{cccc}
         \hline
-        format & example\\ \hline
-        lists & 
+        Format & Example\\ \hline
+        Lists & 
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
@@ -606,7 +606,7 @@ series: [{
 	data: ["Otu1", "Otu2", "Otu5", "Otu7", "Otu8", "Otu9"]
 }]
 \end{lstlisting}\\ \hline
-        intersection counts & 
+        Intersection counts & 
 \begin{lstlisting}
 series: [{
 	name: {A: 'sample 1', B: 'sample 2'},
@@ -614,7 +614,7 @@ series: [{
 	"Otu2", "Otu5", "Otu7"]} }],
 	values: {A: 3, B: 2, AB: 4}
 \end{lstlisting}\\ \hline
-        count lists  &
+        Count lists  &
 \begin{lstlisting}
 series: [{
 	name: 'sample1',
