@@ -284,11 +284,12 @@ http://bioinfo.genotoul.fr/jvenn.
 
 \section*{Background}
 
-With the advent of high-throughput biology the number of compared samples, within an experiment, is increasing.
-The analysis step often leads to the production of a biological 
-identifier list, such as gene names or operational taxonomic units, for each sample.
-A common visualization chart is the Venn diagrams \cite{Venn1880} which allows to spot 
-shared and unshared identifiers providing an insight on the similarities between the lists.
+With the advent of high-throughput biology the number of compared samples,
+within an experiment, is increasing. The analysis step often leads to the
+production of a biological identifier list, such as gene names or operational
+taxonomic units, for each sample. A common visualization chart is the Venn
+diagrams \cite{Venn1880} which allows to spot shared and unshared identifiers
+providing an insight on the similarities between the lists.
 
 In a Venn diagram each list is figured by a transparent shape. Shape overlaps
 contain the elements shared between lists or more often the corresponding counts.
@@ -296,7 +297,7 @@ In proportional Venn diagrams the size of a shape depends on the number of
 elements of the corresponding list intersection. Venn diagram with up to four 
 lists are easy to read and understand, but they become difficult to interpret
 with more lists. To solve this problem, the Edwards-Venn \cite{Edwards2004}
-representation introduces new shapes providing a clearer view.
+representation introduces new shapes providing a clearer view (Fig. 2).
 
 Many Venn diagram software packages are already available. The first six lines
 of Table 1 present a subset of selected packages with their features including 
@@ -342,7 +343,7 @@ representation. But then, the intersection areas are often too small to display
 the figures.
 
 To present, in a user-friendly manner, five or six list diagrams, jvenn implements
-several functionalities. First, the display can be switched to Edwards-Venn
+(Fig. 1) several functionalities. First, the display can be switched to Edwards-Venn
 (Fig. 2) which gives a clearer graphical representation for six list diagrams. To
 enhance the figure's readability on the classical six lists Venn graphic, it was
 decided not to present all the values and to link some areas to their figures
@@ -360,17 +361,17 @@ homogeneity of the input list sizes. The intersection size graph can be used to
 compare the compactness of multiple Venn diagrams.
 
 For more than three lists diagrams, jvenn presents a switch button panel to 
-highlight intersections (Fig. 1). It also provides two extra charts (Fig. 1 and
-Fig. 2) located bellow the Venn. The first one represents the input lists size
+highlight intersections (Fig. 1). It also provides two extra charts (Fig. 1) 
+located bellow the Venn. The first one represents the input lists size
 histogram. The second one displays the number of elements in intersections of a
 certain size. It includes, as well, search and intersection identifiers export 
 functions.
 
-Scientists are usually interested in extracting identifier lists for some intersections, 
-therefore, jvenn implements an one-click function which
-retrieves the names of the corresponding sets and the identifiers. To find an 
-identifier one can use the search box. The shapes containing the
-matching identifier are then highlighted.
+Scientists are usually interested in extracting identifier lists for some
+intersections, therefore, jvenn implements an one-click function which retrieves
+the names of the corresponding sets and the identifiers. To find an identifier
+one can use the search box. The shapes containing the matching identifier are
+then highlighted.
 
 \subsection*{Outputs}
 
@@ -398,25 +399,54 @@ diagram of 10 000 identifiers in two seconds.
 \section*{Results}
 
 M.A. Dillies and colleagues \cite{Dillies2012} have compared seven RNA-Seq data
-normalization methods and given a set of best practices to help biologists in their data processing. In table two, they 
-have shown the differences between methods pair-wise. 
-The raw data table provided by the team contains 5,277 lines and eight columns. The columns correspond to
-the different methods presented in the 'Differential expression analysis' section of the article. The data in the  
-table was thresholded ($p < 0.05$) to produce the method specific gene name lists. Six out of seven methods were
-selected for further processing ; Med was left out. The list were uploaded to the jvenn application and a 
-Venn diagram was produced. 
+normalization methods and given a set of best practices to help biologists in their 
+data processing. In table two, they have shown the differences between methods
+pair-wise. The raw data table provided by the team contains 5,277 lines and
+eight columns. The columns correspond to  the different methods presented in the
+'Differential expression analysis' section of the article. The data in the table
+was thresholded ($p < 0.05$) to produce the method specific gene name lists. Six
+out of seven methods were selected for further processing ; Med was left out.
+The lists were uploaded to the jvenn application and a Venn diagram was
+produced. Using the layout selector the diagram was shown in Edwards Venn
+format, in which all figures are accessible. This view presents all the lists
+overlaps between methods. Considering Fig. 2, the higher values are located in
+central areas of the graph showing that the methods share large portions of gene
+lists. The list of 484 gene shared by DESeq, TMM, UQ and FQ has been extracted
+by clicking on the corresponding figure. Gene G002562 was sought using the
+search box. It was found to be part of the five genes shared by FQ and UQ. 
 
-In the discussion section of the article the author 
+The jvenn statistics show that the different methods produce gene lists with
+very different sizes (minimum 417 - maximum 1,249) and the most of the genes are
+shared between methods : 1,069 genes out of 1,347 shared by at least four methods.
 
-The jvenn statistics show that the different methods produce gene lists with very different sizes (minimum
-417 - maximum 1,249) and the most of the genes are shared between methods : 1,069 genes out of 1,347 shared 
-by at least four methods.
-
-
+The same analysis was performed with VENNTURE, the only tool enabling to
+generate a six list Edwards Venn diagram. First the software package was
+installed on a computer running under MS-Windows. The six gene lists were loaded
+in an MS-Excel spreadsheet. VENNTURE was run using the spreadsheet as input
+generating a static MS-PowerPoint file containing the diagram and a MS-Excel
+file with all the intersection contents. The names of 484 genes shared by DESeq,
+TMM, UQ and FQ  were found in the intersection spreadsheet. The diagram did not
+allow to search for gene G002562. Once more it was found in the intersection
+spreadsheet.
 
 \section*{Discussion}
 
-Even if this kind of comparison gives some insight on the method result overlap.
+jvenn enables to compare up to six lists and dynamically to update the diagram
+by modifying the list content. Compared to VENNTURE it does not need any
+installation and gives access to a dynamic diagram providing simple functions to
+extract gene lists and perform searches. 
+
+jvenns' statistical view gives a simple a quick overview of the sizes of the
+different lists and of the overlaps. This enables to compare different Venn diagrams.
+
+jvenn diagrams 
+
+dynamic : list extraction, identifier search 
+
+no statistical view 
+
+Multiple layouts 
+
 
 
 \section*{Conclusions}
