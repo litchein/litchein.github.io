@@ -389,7 +389,7 @@ To simply produce a Venn diagram from identifier lists, jvenn is
 available as a Web application at http://bioinfo.genotoul.fr/jvenn/example.html
 (Fig. 3).
 jvenn's Web application performances depends on the client browser. Using the running version
-on a standard Linux computer (one cpu, 4GB of RAM), it displays a six lists
+on a standard Linux computer (one cpu, four GB of RAM), it displays a six lists
 diagram of 10 000 identifiers in two seconds.
 
 
@@ -401,53 +401,51 @@ data processing. In table two, they have shown the differences between methods
 pair-wise. The raw data table provided by the team contains 5,277 lines and
 seven columns. The columns correspond to  the different methods presented in the
 'Differential expression analysis' section of the article. The data in the table
-was threshold ($p < 0.05$) to produce the method specific gene name lists. Six
-out of seven methods were selected for further processing ; Med was left out.
+was filtered ($p < 0.05$) to produce the method specific gene name lists. Six
+out of seven lists were selected for further processing ; Med was left out.
 The lists were uploaded to the jvenn application and a Venn diagram was
 produced. Using the layout selector the diagram was shown in Edwards Venn
 format, in which all figures are accessible. This view presents all the lists
-overlaps between methods. Considering Fig. 2, the higher values are located in
+overlap between methods. Considering Fig. 2, the higher values are located in
 central areas of the graph showing that the methods share large portions of gene
-lists. The list of 484 gene shared by DESeq, TMM, UQ and FQ has been extracted
+lists. The list of 484 genes shared by DESeq, TMM, UQ and FQ has been extracted
 by clicking on the corresponding figure. Gene G002562 was sought using the
 search box. It was found to be part of the five genes shared by FQ and UQ. 
 
 The jvenn statistics show that the different methods produce gene lists with
-very different sizes (minimum 417 - maximum 1,249) and the most of the genes are
+very different sizes (minimum 417 - maximum 1,249) and that most of the genes are
 shared between methods : 1,069 genes out of 1,347 shared by at least four methods.
 
-The same analysis was performed with VENNTURE, the only tool enabling to
+The same analysis was performed with VENNTURE, the only other tool able to
 generate a six list Edwards Venn diagram. First, the software package was
 installed on a computer running under MS-Windows. Then, the six gene lists were loaded
 in an MS-Excel spreadsheet. VENNTURE was run using the spreadsheet as input
 generating a static MS-PowerPoint file containing the diagram and a MS-Excel
-file with all the intersection contents. The names of 484 genes shared by DESeq,
+file with all the intersection contents. The 484 genes shared by DESeq,
 TMM, UQ and FQ  were found in the intersection spreadsheet. The diagram did not
-allow to search for gene G002562. Once more it was found in the intersection
-spreadsheet.
+allow to search for gene G002562. It was found using MS-Excel text search in the 
+intersection spreadsheet.
 
 \section*{Discussion}
 
 jvenn enables to compare up to six lists and updates the diagram automatically
-when modifying the list content. Compared to VENNTURE it does not need any
+when modifying the lists content. Compared to VENNTURE it does not need any
 installation and gives access to a dynamic diagram providing simple functions to
 extract gene lists and perform searches. 
 jvenns' statistical charts give a simple and quick overview of the sizes of the
-different lists and of their overlaps. This enables to compare different Venn diagrams.
+different lists and of their overlaps. It permits to compare different Venn diagrams.
 These features are not available in the VENNTURE software package.
 
 For biologists using different techniques in their experiment or in their statistical
 analysis, jvenn enables to quickly extract the shared identifiers. Being found 
-using different approaches increases their confidence level.
+using different approaches these elements present a higher confidence level.
 
 \section*{Conclusions}
 
-Thanks' to the presented features, jvenn can be used in many cases to compare different 
-sets of results and easily extract the shared elements. Other examples, such as OTU 
-comparisons or bioinformatic software benchmarking results, 
-could complete the previously given ones.
-jvenn can help to automate this kind of analysis while embedded in a Web environment as it has 
-been implemented in WallProtDB \cite{SanClemente}
+Thanks to its numerous features, dynamic behavior and graphical layout quality, jvenn can be 
+efficiently used in many cases to compare different sets of results and easily extract shared 
+elements. Being a simple JavaScript plugin allows to embed it in any Web environment.
+
 
 \section*{Availability and requirements}
 
