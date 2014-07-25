@@ -286,18 +286,18 @@ http://bioinfo.genotoul.fr/jvenn.
 
 With the advent of high-throughput biology the number of compared samples,
 within an experiment, is increasing. The analysis step often leads to the
-production of a biological identifier list, such as gene names or operational
-taxonomic units, for each sample. A common visualization chart is the Venn
-diagrams \cite{Venn1880} which allows to spot shared and unshared identifiers
-providing an insight on the similarities between the lists.
+production of a biological identifier list, including gene names or operational
+taxonomic units, for each sample. Venn diagrams \cite{Venn1880} are a common
+visualization chart which allow to spot shared and unshared identifiers
+providing an insight on lists similarities. 
 
-In a Venn diagram each list is figured by a transparent shape. Shape overlaps
+In a Venn diagram each list is presented by a transparent shape. Shape overlaps
 contain the elements shared between lists or more often the corresponding counts.
 In proportional Venn diagrams the size of a shape depends on the number of
 elements of the corresponding list intersection. Venn diagrams with up to four 
-lists are easy to read and understand, but they become difficult to interpret
-with more lists. To solve this problem, the Edwards-Venn \cite{Edwards2004}
-representation introduces new shapes providing a clearer view (Fig. 2).
+lists are easy to read and understand, having more lists, they become difficult
+to interpret. To solve this problem, the Edwards-Venn \cite{Edwards2004}
+representation introduces new shapes providing a clearer view (Fig. 2). 
 
 Many Venn diagram software packages are already available. The first six lines
 of Table 1 present a subset of selected packages with their features including 
@@ -305,11 +305,11 @@ maximum number of input lists, input data formats, Venn diagram layouts,
 application types and output formats. The table gives insight on several aspects
 of Venn diagram production and highlights that no WEB applications handle up to
 six lists. VENNTURE \cite{Bronwen2012} is the only application able to
-produce such diagrams but this one only implements Edwards layout and only runs
-under MS-Windows to produce static MS-PowerPoint files. Proportional Venn
-diagrams are very limited in the number of lists they can display : maximum
-three. Therefore programs designed to display high number of lists will
-implement non proportional diagrams.
+produce such diagrams but it only implements Edwards layout and runs only
+under MS-Windows producing static MS-PowerPoint and MS-Excel files. Proportional
+Venn diagrams can only display very limited number of lists : maximum three.
+Therefore programs designed to display high number of lists will implement non
+proportional diagrams. 
 
 Hereafter we introduce jvenn, a JavaScript library, developed as a jQuery
 plug-in \cite{jquery}, including many features easing diagram production and
@@ -331,7 +331,7 @@ intersection names formed by the successions of letters and the counts. ``Count
 lists'' are organized as ``Lists'' in which identifiers are replaced by their
 unique occurrences and their counts. With ``Count lists'' the figures presented
 in the diagram correspond to the sums of counts of all identifiers shared
-between lists. This has been used in diversity studies to present OTU
+between lists. They have been used in diversity studies to present OTU
 (Operational Taxonomic Unit) read counts. For ``Lists'' and ``Count lists'',
 jvenn computes the intersection counts and displays the chart. For
 ``intersection counts'', it only displays the graphic.
@@ -339,8 +339,8 @@ jvenn computes the intersection counts and displays the chart. For
 \subsection*{Display features}
 
 Venn diagrams are commonly used to present up to six lists in its classical 
-representation. But then, the intersection areas are often too small to display 
-the figures.
+representation. Reading six lists, the intersection areas are often too small to
+display the figures.
 
 To present, in a user-friendly manner, five or six list diagrams, jvenn implements
 several functionalities (Fig. 1). First, the display can be switched to
@@ -360,13 +360,6 @@ comparison of multiple diagrams. The list size graph allows users to check the
 homogeneity of the input list sizes. The intersection size graph can be used to
 compare the compactness of multiple Venn diagrams.
 
-For more than three lists diagrams, jvenn presents a switch button panel to 
-highlight intersections (Fig. 1). It also provides two extra charts (Fig. 1) 
-located bellow the Venn. The first one represents the input lists size
-histogram. The second one displays the number of elements in intersections of a
-certain size. It includes, as well, search and intersection identifiers export 
-functions.
-
 Scientists are usually interested in extracting identifier lists for some
 intersections, therefore, jvenn implements an one-click function which retrieves
 the names of the corresponding sets and the identifiers. To find an identifier
@@ -375,23 +368,27 @@ then highlighted.
 
 \subsection*{Outputs}
 
-The display is based on a JavaScript canvas object allowing PNG export. The 
+jvenn display is based on a JavaScript canvas object allowing PNG export. The 
 intersection table can also be downloaded as a CSV file. It contains a header 
 line with the diagram area labels and, in column, the identifiers of the
 elements contained in the area. This feature can be customized by the
-developper.
+developer.
+
+\subsection*{Integration}
+
+jvenn allows programmers, with moderate JavaScript experiences to embed Venn
+diagrams in a Web page without dependency. It has been designed following the
+examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010},
+and jHeatmap \cite{DeuPons2014}.
+The integration documentation is included in the software package which can be
+downloaded from http://bioinfo.genotoul.fr/jvenn.
 
 \subsection*{Web application}
 
 To simply produce a Venn diagram from identifier lists, jvenn is 
 available as a Web application at http://bioinfo.genotoul.fr/jvenn/example.html
 (Fig. 3).
-The installation documentation is included in the software package which can be
-downloaded from http://bioinfo.genotoul.fr/jvenn.
-
-\subsection*{Performances}
-
-jvenn's performance depends on the client browser. Using the running version
+jvenn's Web application performances depends on the client browser. Using the running version
 on a standard Linux computer (one cpu, 4GB of RAM), it displays a six lists
 diagram of 10 000 identifiers in two seconds.
 
@@ -402,9 +399,9 @@ M.A. Dillies and colleagues \cite{Dillies2012} have compared seven RNA-Seq data
 normalization methods and given a set of best practices to help biologists in their 
 data processing. In table two, they have shown the differences between methods
 pair-wise. The raw data table provided by the team contains 5,277 lines and
-eight columns. The columns correspond to  the different methods presented in the
+seven columns. The columns correspond to  the different methods presented in the
 'Differential expression analysis' section of the article. The data in the table
-was thresholded ($p < 0.05$) to produce the method specific gene name lists. Six
+was threshold ($p < 0.05$) to produce the method specific gene name lists. Six
 out of seven methods were selected for further processing ; Med was left out.
 The lists were uploaded to the jvenn application and a Venn diagram was
 produced. Using the layout selector the diagram was shown in Edwards Venn
@@ -420,8 +417,8 @@ very different sizes (minimum 417 - maximum 1,249) and the most of the genes are
 shared between methods : 1,069 genes out of 1,347 shared by at least four methods.
 
 The same analysis was performed with VENNTURE, the only tool enabling to
-generate a six list Edwards Venn diagram. First the software package was
-installed on a computer running under MS-Windows. The six gene lists were loaded
+generate a six list Edwards Venn diagram. First, the software package was
+installed on a computer running under MS-Windows. Then, the six gene lists were loaded
 in an MS-Excel spreadsheet. VENNTURE was run using the spreadsheet as input
 generating a static MS-PowerPoint file containing the diagram and a MS-Excel
 file with all the intersection contents. The names of 484 genes shared by DESeq,
@@ -431,30 +428,26 @@ spreadsheet.
 
 \section*{Discussion}
 
-jvenn enables to compare up to six lists and dynamically to update the diagram
-by modifying the list content. Compared to VENNTURE it does not need any
+jvenn enables to compare up to six lists and updates the diagram automatically
+when modifying the list content. Compared to VENNTURE it does not need any
 installation and gives access to a dynamic diagram providing simple functions to
 extract gene lists and perform searches. 
+jvenns' statistical charts give a simple and quick overview of the sizes of the
+different lists and of their overlaps. This enables to compare different Venn diagrams.
+These features are not available in the VENNTURE software package.
 
-jvenns' statistical view gives a simple a quick overview of the sizes of the
-different lists and of the overlaps. This enables to compare different Venn diagrams.
-
-jvenn diagrams 
-
-dynamic : list extraction, identifier search 
-
-no statistical view 
-
-Multiple layouts 
-
-
+For biologists using different techniques in their experiment or in their statistical
+analysis, jvenn enables to quickly extract the shared identifiers. Being found 
+using different approaches increases their confidence level.
 
 \section*{Conclusions}
 
-jvenn allows programers, with moderate JavaScript experiences to embed Venn
-diagrams in a Web page without dependency. It has been designed following the
-examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010},
-and jHeatmap \cite{DeuPons2014}.
+Thanks' to the presented features, jvenn can be used in many cases to compare different 
+sets of results and easily extract the shared elements. Other examples, such as OTU 
+comparisons or bioinformatic software benchmarking results, 
+could complete the previously given ones.
+jvenn can help to automate this kind of analysis while embedded in a Web environment as it has 
+been implemented in WallProtDB \cite{SanClemente}
 
 \section*{Availability and requirements}
 
