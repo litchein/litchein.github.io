@@ -95,7 +95,7 @@
 
 
 %%% Begin ...
-\begin{document}
+\begin{document}\sloppy
 
 %%% Start of article front matter
 \begin{frontmatter}
@@ -204,21 +204,22 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} %if any
-Venn diagrams are commonly used to present list comparison results. For example, 
-biologists show differences between gene lists originating from different 
-conditions this way. It is also a standard tool to display method comparison results 
-in bioinformatics. When the number
-of input lists exceeds four the diagram becomes difficult to read. Alternative layouts
-and dynamic display features can improve its readability.
+Venn diagrams are commonly used to display list comparison. In biology, they 
+are widely used to show the differences between gene lists originating from 
+different differential analyses, for instance. They thus allow the comparison 
+between different experimental conditions or between different methods. 
+However, when the number of input lists exceeds four, the diagram becomes 
+difficult to read. Alternative layouts and dynamic display features can improve 
+its use and its readability.
 
 \parttitle{Results} %if any
 jvenn is a new JavaScript library. It processes lists and produces Venn diagrams. 
 It handles up to six input lists and presents results using classical or Edwards-Venn 
-layouts. With it, developers can easily embed dynamic Venn diagrams in Web pages. 
-jvenn allows to control and customize user interactions.
+layouts. User interactions can be controlled and customized. Finally, jvenn can 
+easily be embeded in a web page, allowing to have dynamic Venn diagrams.
 
 \parttitle{Conclusions} %if any
-We introduce jvenn, an open source component for Web environments helping
+jvenn is an open source component for web environments helping
 scientists to analyze their data. The library package, which comes with full
 documentation and an example, is freely available at
 http://bioinfo.genotoul.fr/jvenn.
@@ -284,100 +285,115 @@ http://bioinfo.genotoul.fr/jvenn.
 
 \section*{Background}
 
-With the advent of high-throughput biology the number of compared samples,
-within an experiment, is increasing. The analysis step often leads to the
-production of a biological identifier list, including gene names or operational
-taxonomic units, for each sample. Venn diagrams \cite{Venn1880} are a common
-visualization chart which allow to spot shared and unshared identifiers
+High-throughput biology has led to an increasing number of data, with more and 
+more complex experimental designs. The analysis of these data often produces 
+biological identifier lists, including gene names or operational
+taxonomic units, obtained from different methods (for differential analysis) 
+or from different experimental conditions. Venn diagrams \cite{Venn1880} are a 
+common visualization chart, which allows to spot shared and unshared identifiers
 providing an insight on lists similarities. 
 
-In a Venn diagram each list is presented by a transparent shape. Shape overlaps
+In a Venn diagram, each list is presented by a transparent shape. Shape overlaps
 contain the elements shared between lists or more often the corresponding counts.
-In proportional Venn diagrams the size of a shape depends on the number of
-elements of the corresponding list intersection. Venn diagrams with up to four 
-lists are easy to read and understand, having more lists, they become difficult
-to interpret. To solve this problem, the Edwards-Venn \cite{Edwards2004}
-representation introduces new shapes providing a clearer view (Fig. 2). 
+In proportional Venn diagrams, the size of a shape is proportional to the 
+number of elements of the corresponding list or of the corresponding lists
+intersection. Venn diagrams with up to four lists are easy to read and
+understand but Venn diagrams with more than four lists, are much harder to
+interpret. To solve this problem, the Edwards-Venn \cite{Edwards2004}
+representation introduces new shapes providing a clearer view, shown in the 
+example of Fig.~\ref{fig::edwards}.
 
 Many Venn diagram software packages are already available. The first six lines
-of Table 1 present a subset of selected packages with their features including 
-maximum number of input lists, input data formats, Venn diagram layouts,
-application types and output formats. The table gives insight on several aspects
-of Venn diagram production and highlights that no WEB applications handle up to
-six lists. VENNTURE \cite{Bronwen2012} is the only application able to
-produce such diagrams but it only implements Edwards layout and runs only
-under MS-Windows producing static MS-PowerPoint and MS-Excel files. Proportional
-Venn diagrams can only display very limited number of lists : maximum three.
-Therefore programs designed to display high number of lists will implement non
-proportional diagrams. 
+of Table~\ref{table::features} present a subset of selected packages with their 
+main features (maximum number of input lists, input data formats, Venn diagram 
+layouts, application types and output formats). The table gives insight on 
+several aspects of Venn diagram production and highlights that, up to now, no
+web application handled up to six lists. VENNTURE \cite{Bronwen2012} is the only
+application able to produce such diagrams but it only implements Edwards layout
+and runs only under MS-Windows OS, producing static MS-PowerPoint and MS-Excel
+files. Proportional Venn diagrams can only display a very limited number of lists,
+three at maximum. Therefore, as jvenn was designed to display up to six lists, 
+this one, does not implement proportional diagrams.
 
 Hereafter we introduce jvenn, a JavaScript library, developed as a jQuery
 plug-in \cite{jquery}, including many features easing diagram production and
-enhancing their readability. The library has already been used and cited in two
-scientific publications \cite{Bianchia2013, Aravindraja2013}. It is already
-embedded in different Web applications such as nG6 \cite{Mariette2012},
-RNAbrowse \cite{Mariette} and WallProtDB \cite{SanClemente}.
+enhancing their readability. In particular, jvenn can handle up to 6 lists, is 
+a dynamic tool and implements both proportional and Edwards layouts. The 
+library has already been used and cited in two scientific publications
+\cite{Bianchia2013, Aravindraja2013}. It is already embedded in different Web
+applications such as nG6 \cite{Mariette2012}, RNAbrowse \cite{Mariette} and
+WallProtDB \cite{SanClemente}.
 
 
 \section*{Implementation}
 
+This section presents the main features of the jvenn library, including the 
+kind of inputs it accepts, the different types of charts it displays, the types 
+of the outputs and how it can be integrated in websites or directly used on our 
+example web page.
+
 \subsection*{Inputs}
 
-The library accepts three different input formats : ``Lists'', ``Intersection
-counts'' and ``Count lists''. Examples are presented in Table 1. ``Lists'' contain
-for each input a label and an identifier table. ``Intersection counts'' contain a
-correspondence table between labels and letters [A..F] and a table linking the
-intersection names formed by the successions of letters and the counts. ``Count
-lists'' are organized as ``Lists'' in which identifiers are replaced by their
-unique occurrences and their counts. With ``Count lists'' the figures presented
-in the diagram correspond to the sums of counts of all identifiers shared
-between lists. They have been used in diversity studies to present OTU
-(Operational Taxonomic Unit) read counts. For ``Lists'' and ``Count lists'',
-jvenn computes the intersection counts and displays the chart. For
-``intersection counts'', it only displays the graphic.
+The jvenn library accepts three different input formats : ``Lists'',
+``Intersection counts'' and ``Count lists''. Examples are presented in 
+Table~\ref{table::format}, where the different lists are ``sample1'' and
+``sample2'', the elements of the different lists are given in the fields
+``data''. For ``Intersection counts'', the lists are given a label (``A'' or 
+``B'') which is used to make the correspondence between the list and its count.
+Finally, ``Count lists'' provide a count number for each element of a list.
+Hence, with ``Count lists'' the figures presented in the diagram correspond to
+the sums of counts of all elements shared between lists. they can be
+particularly useful to present OTU (Operational Taxonomic Unit) read counts. For
+``Lists'' and ``Count lists'', jvenn computes the intersection counts and
+displays the chart. For ``intersection counts'', the intersection counts is
+provided by the user. 
 
 \subsection*{Display features}
 
-Venn diagrams are commonly used to present up to six lists in its classical 
-representation. Reading six lists, the intersection areas are often too small to
+Venn diagrams are commonly used to present up to six lists but for six 
+lists, the intersection areas obtained when using a proportional layout are 
+often too small to
 display the figures.
 
-To present, in a user-friendly manner, five or six list diagrams, jvenn implements
-several features (Fig. 1). First, the display can be switched to
-Edwards-Venn (Fig. 2) which gives a clearer graphical representation for six list diagrams. To
-enhance the figure's readability on the classical six lists Venn graphic, it was
-decided not to present all the values and to link some areas to their figures
-using lines. This still did not permit to show all figures, therefore the switch
-button panel (Fig. 1) was added. It enables to switch on and off the different lists
-and display the corresponding intersection counts. For all diagrams, when the 
-intersection count length exceeds the allowed space, the value is substituted by
-a question mark. The value pops-up on mouse over. Last, to show the lists taking
-part in an intersection, jvenn highlights the corresponding shapes on mouse
-over, fading the others out.
+To display five or six lists diagrams, in a user-friendly manner, jvenn
+implements several features (the user interface is provided in Fig.~\ref{fig::features}). 
+First, the layout can be switched between the standard layout and the
+Edwards-Venn layout (Fig.~\ref{fig::edwards}) which gives a clearer graphical
+representation for six lists diagrams. To enhance the figure's readability for
+the classical six lists Venn chart, some count values are not shown and some are
+display outside the chart, using lines to line the count to its corresponding
+area. However, this is still not enough to show all figures. Therefore, a switch
+button panel (right side of Fig.~\ref{fig::features}) was added. It enables to
+switch on and off the different lists and to display the corresponding 
+intersection counts. 
+When the number of characters of the intersection count exceeds the available
+space to display it, the value is substituted by a question mark. When the mouse
+is mouved over this question mark, the value pops-up. To emphasize the list
+involved in an intersection area, jvenn highlights the intersection shapes when
+mouse is moved over, fading the others out.
 
-The extra charts presented under the Venn diagram simplify verification and
-comparison of multiple diagrams. The list size graph allows users to check the
+The extra charts presented under the Venn diagram ease the verification and
+comparison of multiple lists. The list size graph allows users to check the
 homogeneity of the input list sizes. The intersection size graph can be used to
 compare the compactness of multiple Venn diagrams.
 
 Scientists are usually interested in extracting identifier lists for some
-intersections, therefore, jvenn implements an one-click function which retrieves
-the names of the corresponding sets and the identifiers. To find an identifier
-one can use the search box. The shapes containing the matching identifier are
-then highlighted.
+intersections, therefore, jvenn implements a one-click function which retrieves
+the names of the corresponding sets and the identifiers. To find an identifier,
+one can use a dynamic search box. The shapes containing the matching 
+identifiers are highlighted when using this tool.
 
 \subsection*{Outputs}
 
-jvenn display is based on a JavaScript canvas object allowing PNG export. The 
-intersection table can also be downloaded as a CSV file. It contains a header 
-line with the diagram area labels and, in column, the identifiers of the
-elements contained in the area. This feature can be customized by the
-developer.
+jvenn display is based on a JavaScript canvas object that allows for PNG 
+export. The intersection table can also be downloaded as a CSV file. This file
+contains a header line with the diagram area labels and, in column, the
+identifiers of the elements contained in the area.
 
 \subsection*{Integration}
 
-jvenn allows programmers, with moderate JavaScript experiences to embed Venn
-diagrams in a Web page without dependency. It has been designed following the
+jvenn allows programmers having only moderate JavaScript experiences to embed 
+Venn diagrams in a Web page without dependency. It has been designed following the
 examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010},
 and jHeatmap \cite{DeuPons2014}.
 The integration documentation is included in the software package which can be
@@ -385,19 +401,18 @@ downloaded from http://bioinfo.genotoul.fr/jvenn.
 
 \subsection*{Web application}
 
-To simply produce a Venn diagram from identifier lists, jvenn is 
-available as a Web application at http://bioinfo.genotoul.fr/jvenn/example.html
-(Fig. 3).
-jvenn's Web application performances depends on the client browser. Using the running version
-on a standard Linux computer (one cpu, four GB of RAM), it displays a six lists
-diagram of 10 000 identifiers in two seconds.
+jvenn can also be directly used as a Web application, which is available at 
+http://bioinfo.genotoul.fr/jvenn/example.html (Fig.~\ref{fig::web}).
+jvenn's Web application performances depend on the client browser. Using the 
+current version on a standard Linux computer (one cpu, four GB of RAM), it
+displays a six lists diagram of 10,000 identifiers in two seconds.
 
 
 \section*{Results}
 
 M.A. Dillies and colleagues \cite{Dillies2012} have compared seven RNA-Seq data
 normalization methods and given a set of best practices to help biologists in their 
-data processing. In table two, they have shown the differences between methods
+data processing. In table 2, they have shown the differences between methods
 pair-wise. The raw data table provided by the team contains 5,277 lines and
 seven columns. The columns correspond to  the different methods presented in the
 'Differential expression analysis' section of the article. The data in the table
@@ -440,7 +455,7 @@ For biologists using different techniques in their experiment or in their statis
 analysis, jvenn enables to quickly extract the shared identifiers. Being found 
 using different approaches these elements present a higher confidence level.
 
-\section*{Conclusions}
+\section*{Conclusion}
 
 Thanks to its numerous features, dynamic behavior and graphical layout quality, jvenn can be 
 efficiently used in many cases to compare different sets of results and easily extract shared 
