@@ -352,11 +352,10 @@ provided by the user.
 
 Venn diagrams are commonly used to present up to six lists but for six 
 lists, the intersection areas obtained when using a proportional layout are 
-often too small to
-display the figures.
+often too small to display the figures.
 
 To display five or six lists diagrams, in a user-friendly manner, jvenn
-implements several features (the user interface is provided in Fig.~\ref{fig::features}). 
+implements several features.
 First, the layout can be switched between the standard layout and the
 Edwards-Venn layout (Fig.~\ref{fig::edwards}) which gives a clearer graphical
 representation for six lists diagrams. To enhance the figure's readability for
@@ -502,9 +501,9 @@ and CK wrote the manuscript. All authors read and approved the final manuscript.
 \section*{Acknowledgements}
 We would like to acknowledge all our users for providing us useful feedback on
 the system and for pointing out features worth developing. We thank the
-reviewers for their insightful and constructive comments. We also thank Julie
-Aubert and the French StatOmique Consortium for providing us the data used in
-the ``Results'' section.
+reviewers and Nathalie Villa-Vialaneix for their insightful and constructive
+comments. We also thank Julie Aubert and the French StatOmique Consortium for
+providing us the data used in the ``Results'' section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                  The Bibliography                       %%
@@ -547,25 +546,34 @@ the ``Results'' section.
 \section*{Figures}
   \begin{figure}[h!]
   \caption{\csentence{A six lists classic Venn diagram.}
-      This Venn diagram displays overlaps between six different biological
-      samples. The icon, located on the top-right, allows users to download the
-      diagram as a PNG file. The middle-right switch button
-      panel allows to activate or dis-activate lists to access a specific
-      intersection count. Charts showing the list size and intersection size 
-      repartition located underneath the diagram.}\label{fig::features}
+  	  On mouse over a figure, the shape corresponding to the lists involved in
+      the intersection are highlighted and the other ones faded out. In
+      this example, the user pointed the intersection between DESeq, FQ, UQ and
+      TMM which contains 484 different genes.
+      }\label{fig::features}
    \end{figure}
 
   \begin{figure}[h!]
   \caption{\csentence{A six lists Edwards-Venn diagram.}
-      On mouse over a figure, the shape corresponding to the lists involved in
-      the intersection are highlighted and the other ones faded out. In
-      this example, the user pointed the intersection between samples SRR068049,
-      SRR068051 and SRR068052 which contains eight different 
-	  items.}\label{fig::edwards}
+  	  This Venn diagram displays overlaps between six different biological
+      samples. The icon, located on the top-right, allows users to download the
+      diagram as a PNG file. The middle-right switch button
+      panel allows to activate or dis-activate lists to access a specific
+      intersection count. Charts showing the list size and intersection size 
+      repartition located underneath the diagram.}\label{fig::edwards}
    \end{figure}
       
   \begin{figure}[h!]
-  \caption{\csentence{???.}???}\label{fig::web}
+  \caption{\csentence{jvenn web application.}
+	  The running version of jvenn accessible at
+	  http://bioinfo.genotoul.fr/jvenn/example.html. This one allows the user to
+	  set all jvenn main features. The layout can be changed from classical to
+	  Edwards, a search box is accessible, the switch button panel and the
+	  exporting button are available and the statistical charts are displayed.
+	  On the right of the page, each of the six textareas can be filled with a
+	  list of elements (one per line). If the same item is given multiple times,
+	  this one will be considered as unique. The list labels can also be customized
+	  using the text field on the top of each textarea.}\label{fig::web} 
   \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
