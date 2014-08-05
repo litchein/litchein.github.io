@@ -320,7 +320,7 @@ plug-in \cite{jquery}, including many features easing diagram production and
 enhancing their readability. In particular, jvenn can handle up to 6 lists, is 
 a dynamic tool and implements both proportional and Edwards layouts. The 
 library has already been used and cited in two scientific publications
-\cite{Bianchia2013, Aravindraja2013}. It is already embedded in different Web
+\cite{Bianchia2013, Aravindraja2013}. It is already embedded in different web
 applications such as nG6 \cite{Mariette2012}, RNAbrowse \cite{Mariette} and
 WallProtDB \cite{SanClemente}.
 
@@ -393,74 +393,86 @@ identifiers of the elements contained in the area.
 \subsection*{Integration}
 
 jvenn allows programmers having only moderate JavaScript experiences to embed 
-Venn diagrams in a Web page without dependency. It has been designed following the
-examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web \cite{Lopes2010},
-and jHeatmap \cite{DeuPons2014}.
+Venn diagrams in a web page without dependency. It has been designed following
+the examples of jbrowse \cite{Westesson01032013}, Cytoscape-Web
+\cite{Lopes2010}, and jHeatmap \cite{DeuPons2014}.
 The integration documentation is included in the software package which can be
 downloaded from http://bioinfo.genotoul.fr/jvenn.
 
 \subsection*{Web application}
 
-jvenn can also be directly used as a Web application, which is available at 
+jvenn can also be directly used as a web application, which is available at 
 http://bioinfo.genotoul.fr/jvenn/example.html (Fig.~\ref{fig::web}).
-jvenn's Web application performances depend on the client browser. Using the 
+jvenn's web application performances depend on the client browser. Using the 
 current version on a standard Linux computer (one cpu, four GB of RAM), it
 displays a six lists diagram of 10,000 identifiers in two seconds.
 
 
 \section*{Results}
 
-M.A. Dillies and colleagues \cite{Dillies2012} have compared seven RNA-Seq data
-normalization methods and given a set of best practices to help biologists in their 
-data processing. In table 2, they have shown the differences between methods
-pair-wise. The raw data table provided by the team contains 5,277 lines and
-seven columns. The columns correspond to  the different methods presented in the
-'Differential expression analysis' section of the article. The data in the table
-was filtered ($p < 0.05$) to produce the method specific gene name lists. Six
-out of seven lists were selected for further processing ; Med was left out.
-The lists were uploaded to the jvenn application and a Venn diagram was
-produced. Using the layout selector the diagram was shown in Edwards Venn
-format, in which all figures are accessible. This view presents all the lists
-overlap between methods. Considering Fig. 2, the higher values are located in
-central areas of the graph showing that the methods share large portions of gene
-lists. The list of 484 genes shared by DESeq, TMM, UQ and FQ has been extracted
-by clicking on the corresponding figure. Gene G002562 was sought using the
-search box. It was found to be part of the five genes shared by FQ and UQ. 
-
-The jvenn statistics show that the different methods produce gene lists with
-very different sizes (minimum 417 - maximum 1,249) and that most of the genes are
-shared between methods : 1,069 genes out of 1,347 shared by at least four methods.
+M.A. Dillies and colleagues \cite{Dillies2012} have compared seven methods for
+normalization and search of differentially expressed genes in RNASeq data. This
+study is designed to provide a set of best practices to help biologists with
+their data processing. Table 2 of the cited article is the contingency table
+of the differentially expressed genes obtained from the seven methods, where 
+counts in the table correspond to the intersection of two lists obtained from
+two different methods. The raw data table, kindly provided by the team, contains
+5,277 lines and seven columns. The columns correspond to the different methods
+presented in the ``Differential expression analysis'' section of their article.
+The data in the table was filtered ($p < 0.05$) to retrieve the gene name lists
+corresponding to each method. As, jvenn handles only six list at most, six out
+of the seven lists were selected for further processing: we left out the median
+normalization method because, for one hand, this method is very similar to
+several other methods (as shown in the article) and, for the other hand, we
+believe that median is a poor estimate of the sequencing length, which is the
+bias that normalization methods try to correct. The lists were uploaded to the
+jvenn application and a Venn diagram was obtained, using an Edwards layout,
+which is shown in Fig.~\ref{fig::edwards}.
 
 The same analysis was performed with VENNTURE, the only other tool able to
 generate a six list Edwards Venn diagram. First, the software package was
-installed on a computer running under MS-Windows. Then, the six gene lists were loaded
-in an MS-Excel spreadsheet. VENNTURE was run using the spreadsheet as input
-generating a static MS-PowerPoint file containing the diagram and a MS-Excel
-file with all the intersection contents. The 484 genes shared by DESeq,
-TMM, UQ and FQ  were found in the intersection spreadsheet. The diagram did not
-allow to search for gene G002562. It was found using MS-Excel text search in the 
-intersection spreadsheet.
+installed on a computer running under MS-Windows OS. The six gene lists were 
+loaded in an MS-Excel spreadsheet and VENNTURE was run using the spreadsheet as
+input generating a static MS-PowerPoint file containing the diagram and a MS-Excel
+file with all the intersection contents.
 
 \section*{Discussion}
 
-jvenn enables to compare up to six lists and updates the diagram automatically
-when modifying the lists content. Compared to VENNTURE it does not need any
-installation and gives access to a dynamic diagram providing simple functions to
-extract gene lists and perform searches. 
-jvenns' statistical charts give a simple and quick overview of the sizes of the
-different lists and of their overlaps. It permits to compare different Venn diagrams.
-These features are not available in the VENNTURE software package.
+Fig.~\ref{fig::edwards} presents all the lists overlaps. The highest values are
+located in central areas of the graph, showing that the corresponding methods
+share large portions of gene lists. Finally, a list of 484 genes shared by
+DESeq, TMM, UQ and FQ has been extracted. Gene G002562 was sought using the
+search box. It was found to be part of the five genes shared by FQ and UQ.
 
-For biologists using different techniques in their experiment or in their statistical
-analysis, jvenn enables to quickly extract the shared identifiers. Being found 
-using different approaches these elements present a higher confidence level.
+The jvenn statistics show that the different methods produce gene lists with
+very different sizes (minimum 417 - maximum 1,249) and that most of the genes are
+shared between methods: 1,069 genes out of 1,347 are common between at least 
+four methods.
+
+The same 484 genes shared by DESeq, TMM, UQ and FQ  were found in the
+intersection spreadsheet. The diagram did not allow to search for gene G002562,
+which was was found using MS-Excel text search in the intersection spreadsheet
+nevertheless.
 
 \section*{Conclusion}
 
-Thanks to its numerous features, dynamic behavior and graphical layout quality, jvenn can be 
-efficiently used in many cases to compare different sets of results and easily extract shared 
-elements. Being a simple JavaScript plug-in allows to embed it in any Web
-environment.
+jvenn enables to compare up to six lists and updates the diagram automatically
+when modifying the lists content. Compared to VENNTURE it does not need any 
+local installation of a new program and it gives access to a dynamic diagram 
+providing simple functions to extract gene lists and perform searches. 
+jvenn's statistics charts give a simple and quick overview of the sizes of the
+different lists and of their overlaps. It permits to compare different Venn
+diagrams. These features are not available in the VENNTURE software package.
+
+For biologists using different techniques in their experiment or in their
+statistical analysis, jvenn enables to quickly extract the shared identifiers.
+When comparing different methods applied to extract differentially expressed
+genes, these features ease the analysis.
+
+Thanks to its numerous features, dynamic behavior and graphical layout quality,
+jvenn can be efficiently used in many cases to compare different sets of results
+and easily extract shared elements. Being a simple JavaScript plug-in allows to
+embed it in any web environment.
 
 
 \section*{Availability and requirements}
@@ -489,7 +501,9 @@ and CK wrote the manuscript. All authors read and approved the final manuscript.
 \section*{Acknowledgements}
 We would like to acknowledge all our users for providing us useful feedback on
 the system and for pointing out features worth developing. We thank the
-reviewers for their insightful and constructive comments. 
+reviewers for their insightful and constructive comments. We also thank Julie
+Aubert and the French StatOmique Consortium for providing us the data used in
+the ``Results'' section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                  The Bibliography                       %%
@@ -537,16 +551,21 @@ reviewers for their insightful and constructive comments.
       diagram as a PNG file. The middle-right switch button
       panel allows to activate or dis-activate lists to access a specific
       intersection count. Charts showing the list size and intersection size 
-      repartition located underneath the diagram.}
-      \end{figure}
+      repartition located underneath the diagram.}\label{fig::features}
+   \end{figure}
 
-\begin{figure}[h!]
+  \begin{figure}[h!]
   \caption{\csentence{A six lists Edwards-Venn diagram.}
       On mouse over a figure, the shape corresponding to the lists involved in
       the intersection are highlighted and the other ones faded out. In
       this example, the user pointed the intersection between samples SRR068049,
-      SRR068051 and SRR068052 which contains eight different items.}
-      \end{figure}
+      SRR068051 and SRR068052 which contains eight different 
+	  items.}\label{fig::edwards}
+   \end{figure}
+      
+  \begin{figure}[h!]
+  \caption{\csentence{???.}???}\label{fig::web}
+  \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                               %%
@@ -559,7 +578,8 @@ reviewers for their insightful and constructive comments.
 \section*{Tables}
 
 \begin{table}[h!]
-\caption{Features of a subset of already available software packages, and jvenn.}
+\caption{Features of a subset of already available software packages, and 
+jvenn.}\label{table::features}
 	\begin{tabular}{c|cccccc}
 		Application & Maximum & Layouts & Application &
 		Proportionality & Input data & Output\\ 
@@ -574,10 +594,10 @@ reviewers for their insightful and constructive comments.
 		& R object \\
 		& & & & & & and TIFF \\ \hline
 		
-		BioVenn \cite{Hulsen2008} &  3 & Classical & Web application & Yes &
+		BioVenn \cite{Hulsen2008} &  3 & Classical & web application & Yes &
 		Lists & SVG and PNG \\ \hline
 		
-		venny \cite{venny} &  4 & Classical & Web application & No &
+		venny \cite{venny} &  4 & Classical & web application & No &
 		Lists & PNG \\ \hline
 		 
 		Canvasxpress \cite{canvasxpress} &  4 & Classical & JavaScript library &
@@ -588,7 +608,7 @@ reviewers for their insightful and constructive comments.
 		Yes & Lists & PNG \\ 
 		Chart API \cite{googleAPI} & & & & & & \\ \hline \hline
 			
-		jvenn & 6 & Classical & Web application & No & Lists,
+		jvenn & 6 & Classical & web application & No & Lists,
 		& Interactive 
 		\\
 		& & and Edwards & and JavaScript & & intersection & diagram, \\
@@ -599,7 +619,7 @@ reviewers for their insightful and constructive comments.
 
 
 \begin{table}[h!]
-\caption{Available formats and example for the \textit{series} option.}
+\caption{Available input formats.}\label{table::format}
       \begin{tabular}{cccc}
         \hline
         Format & Example\\ \hline
