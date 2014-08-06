@@ -561,7 +561,7 @@
 			context.fillStyle = "#000";
 			context.font = 'italic 10pt Arial';
 			context.textAlign = 'center';
-		    context.fillText('Size of each lists', 250, ymargin+27);
+		    context.fillText('Size of each list', 250, ymargin+27);
 		    context.font = 'normal 8pt Arial';
 		    context.textAlign = 'right';
 		    context.fillText(0, 45, ymargin + h + 2);
