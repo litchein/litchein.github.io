@@ -49,6 +49,8 @@
 %%% Load packages
 \usepackage{listings}
 \usepackage{color}
+\usepackage{lineno}
+\linenumbers
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \lstset{
   language=Java,
@@ -287,11 +289,11 @@ http://bioinfo.genotoul.fr/jvenn.
 
 High-throughput biology has led to an increasing number of data, with more and 
 more complex experimental designs. The analysis of these data often produces 
-biological identifier lists, including gene names or operational
-taxonomic units, obtained from different methods (for differential analysis) 
-or from different experimental conditions. Venn diagrams \cite{Venn1880} are a 
-common visualization chart, which allows to spot shared and unshared identifiers
-providing an insight on lists similarities. 
+biological identifier lists, including gene names or OTU (Operational Taxonomic
+Unit), obtained from different methods (for differential analysis) or from
+different experimental conditions. Venn diagrams \cite{Venn1880} are a common
+visualization chart, which allows to spot shared and unshared identifiers
+providing an insight on lists similarities.
 
 In a Venn diagram, each list is presented by a transparent shape. Shape overlaps
 contain the elements shared between lists or more often the corresponding counts.
@@ -304,16 +306,18 @@ representation introduces new shapes providing a clearer view, shown in the
 example of Fig.~\ref{fig::edwards}.
 
 Many Venn diagram software packages are already available. The first six lines
-of Table~\ref{table::features} present a subset of selected packages with their 
+of Table~\ref{table::features} present the main packages with their 
 main features (maximum number of input lists, input data formats, Venn diagram 
 layouts, application types and output formats). The table gives insight on 
-several aspects of Venn diagram production and highlights that, up to now, no
-web application handled up to six lists. VENNTURE \cite{Bronwen2012} is the only
-application able to produce such diagrams but it only implements Edwards layout
-and runs only under MS-Windows OS, producing static MS-PowerPoint and MS-Excel
-files. Proportional Venn diagrams can only display a very limited number of lists,
-three at maximum. Therefore, as jvenn was designed to display up to six lists, 
-this one, does not implement proportional diagrams.
+several aspects of the Venn diagram production and highlights that, up to now, 
+no web application handled up to six lists. VENNTURE \cite{Bronwen2012} is the
+only application able to produce such diagrams but it only implements Edwards
+layout and runs only under MS-Windows OS, producing static MS-PowerPoint and
+MS-Excel files. Proportional Venn diagrams can only display a very limited
+number of lists, three at maximum. The only feature available in other software
+which is not in jvenn is the proportional diagram. This is justified by the fact
+that jvenn was designed to display up to six lists and that proportional diagram
+is not suited to visualize more than three lists.
 
 Hereafter we introduce jvenn, a JavaScript library, developed as a jQuery
 plug-in \cite{jquery}, including many features easing diagram production and
@@ -343,10 +347,10 @@ Table~\ref{table::format}, where the different lists are ``sample1'' and
 Finally, ``Count lists'' provide a count number for each element of a list.
 Hence, with ``Count lists'' the figures presented in the diagram correspond to
 the sums of counts of all elements shared between lists. they can be
-particularly useful to present OTU (Operational Taxonomic Unit) read counts. For
+particularly useful to present OTU read counts \cite{Aravindraja2013}. For
 ``Lists'' and ``Count lists'', jvenn computes the intersection counts and
 displays the chart. For ``intersection counts'', the intersection counts is
-provided by the user. 
+provided by the user.
 
 \subsection*{Display features}
 
@@ -437,29 +441,52 @@ file with all the intersection contents.
 
 \section*{Discussion}
 
-Fig.~\ref{fig::edwards}, outputed by jvenn, presents all the lists overlaps. The
-highest values are located in central areas of the graph, showing that the corresponding methods
-share large portions of gene lists. Finally, taking advantage of jvenn's panel
-button, a list of 484 genes shared by DESeq, TMM, UQ and FQ has been extracted.
-One of the 5,277 genes was randomly choosen (G002562) and sought using jvenn
-search box. It was found to be part of the five genes shared by FQ and UQ.
+The lists overlaps, as produced by jvenn, are given in Fig.~\ref{fig::edwards} 
+(Edwards layout) and \ref{fig::features} (standard layout). The highest counts
+are located in central areas of the graph, showing that the corresponding
+methods share large portions of gene lists. The jvenn statistics show that the
+different methods produce gene lists with very different sizes (minimum 417 -
+maximum 1,249) and that most of the genes are shared between methods: 1,069
+genes out of 1,347 are common between at least four methods.
+In a very intuitive manner, the chart also points out that the results are
+strongly consensual since there are many zeros in the peripheral areas. Only a
+few genes (114) are specific to one list only (24 for FQ, 27 for UQ and 63 for
+DESeq, which appears to be the less restrictive method, as shown in the barplot
+below the Venn diagram, and also the most different from the others). 
+Genes that are in two lists only are also very few (47: 13 for DESeq and TMM, 5
+for UQ and FQ, 15 for TMM and UQ, 8 for FQ and DESeq and 6 for DESeq and UQ). 
+Note that all these numbers are easily read from the chart and that the strong
+consensus between the lists is also clearly shown from the upper side figure
+``Number of elements: specific or shared by several lists''). Such findings are
+not easily shown using only contingency tables.
 
-In the same way, the 484 genes shared by DESeq, TMM, UQ and FQ  were found
-in the intersection spreadsheet outputed by VENNTURE. The diagram did not allow
-to search for gene G002562, which was was found using MS-Excel text search in
-the intersection spreadsheet nevertheless.
+The largest count over all lists overlaps is found to be 484, which is the
+number of genes found to be differential by DESeq, TMM, UQ and FQ. As shown in
+Fig~\ref{fig::web}, this list is very easily retrieved from the web application 
+in one click only, providing the biologist with a large list of very consensual
+list to study.
 
-The jvenn statistics show that the different methods produce gene lists with
-very different sizes (minimum 417 - maximum 1,249) and that most of the genes are
-shared between methods: 1,069 genes out of 1,347 are common between at least 
-four methods.
+On the other hand, if the biologist is interested in one specific gene, this 
+gene can easily be tracked using the search box at the top side of
+Fig.~\ref{fig::web}. As no specific gene is of interest in the seminal work, we
+simply picked out one of the 5,277 genes randomly (G002562) and used it in the
+search box. It was found to be part of the five genes specific to FQ and UQ.
+
+Making the same analysis with VENNTURE is also possible but a bit harder: the 
+484 genes shared by DESeq, TMM, UQ and FQ can be found easily in the 
+intersection spreadsheet outputed by VENNTURE but the diagram did not allow
+to search for gene G002562. Thus, this gene has to be found using MS-Excel text 
+search in the intersection spreadsheet, which is less handy than a dynamic and 
+interactive search. Moreover, the additional statistics are not provided by the
+tool.
+
 
 \section*{Conclusion}
 
 jvenn enables to compare up to six lists and updates the diagram automatically
 when modifying the lists content. Compared to VENNTURE it does not need any 
 local installation of a new program and it gives access to a dynamic diagram 
-providing simple functions to extract gene lists and perform searches. 
+providing simple tools to extract gene lists and perform searches. 
 jvenn's statistics charts give a simple and quick overview of the sizes of the
 different lists and of their overlaps. It permits to compare different Venn
 diagrams. These features are not available in the VENNTURE software package.
@@ -471,14 +498,14 @@ genes, these features ease the analysis.
 
 Thanks to its numerous features, dynamic behavior and graphical layout quality,
 jvenn can be efficiently used in many cases to compare different sets of results
-and easily extract shared elements. Being a simple JavaScript plug-in allows to
-embed it in any web environment.
+and easily extract shared elements. Being a simple JavaScript plug-in allows
+developers to embed it in any web environment.
 
 
 \section*{Availability and requirements}
 
 jvenn is freely available under the GNU General Public License (GPL) and can be
-downloaded with an example and the full documentation at
+downloaded with an example and its full documentation at
 http://bioinfo.genotoul.fr/jvenn  website. A running version is accessible at
 http://bioinfo.genotoul.fr/jvenn/example.html.
 
