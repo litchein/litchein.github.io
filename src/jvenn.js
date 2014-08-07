@@ -2033,6 +2033,7 @@
 			$t = div;
 			
 			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
+			div_export += '<a id="data-export" href="" download="" style="display:none;"></a>';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
         	div_export += '<div id="menu" style="position: relative;width:150px; height:30px; display:none; right:123px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
@@ -2056,10 +2057,80 @@
 				context.lineTo(20,5+i*5.2);
 				context.strokeStyle = "#666";
 				context.stroke();
-			}		
-
+			}
+			
 			var select_form = $("#menu");
 			var ceColorOri = $("#canvasExport").css('background');
+			$("#format-png").click(function(event) {
+				$("#canvasExport").css('background', ceColorOri);
+				$("#canvasExport").css('border-color', "white");
+				$("#canvasExport").hover(function() {
+					$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent');
+					$(this).css('border', '1px solid #6688AA');
+					$(this).css('border-radius', '3px');
+				}, function() {
+					$(this).css('background', ceColorOri);
+					$(this).css('border-color', "white");
+				});
+				select_form.hide();
+				html2canvas($("#frame"), {
+					onrendered: function(canvas) {
+						var img = canvas.toDataURL("image/png");
+						$('#data-export').attr("href", img);
+						$('#data-export').attr("download", "jVenn_chart.png");
+						$('#data-export')[0].click();
+					}
+				});
+			});
+			$("#format-csv").click(function(event) {
+				$("#canvasExport").css('background', ceColorOri);
+				$("#canvasExport").css('border-color', "white");
+				$("#canvasExport").hover(function() {
+					$(this).css('background', 'linear-gradient(to bottom, white, #AECEFF) repeat scroll 0 0 transparent');
+					$(this).css('border', '1px solid #6688AA');
+					$(this).css('border-radius', '3px');
+				}, function() {
+					$(this).css('background', ceColorOri);
+					$(this).css('border-color', "white");
+				});
+				select_form.hide();
+				var	rawData = new Array(),
+					comma = false;
+				$("*[id^=resultC]").each(function(){
+					if (!this.empty) {
+						var	currentRow = new Array(),
+							tmpline = this.listnames.join("|");
+						
+						if (tmpline.indexOf(',') >= 0) {
+							comma = true;
+							tmpline = tmpline.replace(/,/g, '_');
+						}
+						currentRow.push(tmpline);
+						
+						for (var i in this.list) {
+							tmpline = this.list[i];
+							if (this.list[i].indexOf(",") >= 0) {
+								comma = true;
+								tmpline = this.list[i].replace(/,/g, '_');
+							}
+							currentRow.push(tmpline);
+						}
+						rawData.push(currentRow);
+					}
+	            });
+				var csvContent = "data:text/csv;charset=utf-8,";
+				if(comma) {
+					csvContent += "##\n## Warning: comma(s) have been replaced by underscore(s)\n##\n";
+				}
+				transpose(rawData).forEach(function(infoArray, index){
+					dataString = infoArray.join(",");
+					csvContent += index <= infoArray.length ? dataString+ "\n" : dataString;
+				});
+				var encodedUri = encodeURI(csvContent);
+				$('#data-export').attr("href", encodedUri);
+				$('#data-export').attr("download", "jVenn.csv");
+				$('#data-export')[0].click();
+			});
 			$("#canvasExport").click(function (event) {
 				$(this).css('background', 'linear-gradient(to bottom, #AECEFF, white) repeat scroll 0 0 transparent');
 				$(this).css('border', '1px solid #6688AA');
@@ -2089,51 +2160,6 @@
 				}, function() {
 					$(this).css('background', colorOrig);
 					$(this).css('color', '');
-				});
-				$("#format-png").click(function(event) {
-					select_form.hide();
-					html2canvas($("#frame"), {
-						onrendered: function(canvas) {
-							var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-							window.location.href = img;
-						}
-					});
-				});
-				$("#format-csv").click(function(event) {
-					var	rawData = new Array(),
-						comma = false;
-					$("*[id^=resultC]").each(function(){
-						if (!this.empty) {
-							var	currentRow = new Array(),
-								tmpline = this.listnames.join("|");
-							
-							if (tmpline.indexOf(',') >= 0) {
-								comma = true;
-								tmpline = tmpline.replace(/,/g, '_');
-							}
-							currentRow.push(tmpline);
-							
-							for (var i in this.list) {
-								tmpline = this.list[i];
-								if (this.list[i].indexOf(",") >= 0) {
-									comma = true;
-									tmpline = this.list[i].replace(/,/g, '_');
-								}
-								currentRow.push(tmpline);
-							}
-							rawData.push(currentRow);
-						}
-		            });
-					var csvContent = "data:text/csv;charset=utf-8,";
-					if(comma) {
-						csvContent += "##\n## Warning: comma(s) have been replaced by underscore(s)\n##\n";
-					}
-					transpose(rawData).forEach(function(infoArray, index){
-						dataString = infoArray.join(",");
-						csvContent += index <= infoArray.length ? dataString+ "\n" : dataString;
-					});
-					var encodedUri = encodeURI(csvContent);
-					window.open(encodedUri);
 				});
 			});
 			$("#canvasExport").hover(function() {
