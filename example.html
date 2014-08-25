@@ -24,7 +24,7 @@
 				var lines = $("#"+areaID).val().split("\n");
 				var table = new Array();
 				for (var lindex in lines) {
-					table.push(lines[lindex]);
+					table.push(lines[lindex].trim());
 				}
 				return (table);
 			}
