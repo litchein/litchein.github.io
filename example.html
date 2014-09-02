@@ -472,7 +472,6 @@
 					'G005214\nG005215\nG005217\nG005220\nG005221\nG005222\nG005227\nG005231\nG005234\nG005237\nG005241\nG005243\nG005246\nG005248\nG005250\n'+
 					'G005254\nG005255\nG005259\nG005262\nG005263\nG005264\nG005265\nG005266\nG005268\nG005269\nG005273\nG005274\nG005276\n'
 				);
-				$('#citation').fadeIn(2000);
 				updateJvenn();
 			});
 			
@@ -492,7 +491,6 @@
 				$('#search-field').val("");
 				$('#search-status').html("");
 				$('#venn-type').val("classic");
-				$('#citation').hide();
 				updateJvenn();
 			});
 			
@@ -619,27 +617,27 @@
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
 			<h1>Hello jvenn!</h1>
-			<p class="bodytext" style="margin-top:15px"> Paste up to <strong>six</strong> lists using one row per element, then click 
-			the numbers in the <select id="venn-type" class="input-small" style="width:110px;margin-top:8px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.
-			<br/>Find an element in list(s):
-			<input id="search-field" type="text" style="margin-top:8px" placeholder="enter an element name..."/>
-			<span  id="search-status" class="label label-info" style="vertical-align: 15px; margin-left: -20px;"></span>
-			</p>
-			<p style="text-align:right">
+			<div class="span5" style="margin-left:0">
+				<p class="bodytext" style="margin-top:15px"> Paste up to <strong>six</strong> lists using one row per element, then click 
+				the numbers in the <select id="venn-type" class="input-small" style="width:110px;margin-top:8px"><option value="classic">classic</option><option value="edwards">Edwards'</option></select> venn to see the results.
+				<br/>Find an element in list(s):
+				<input id="search-field" type="text" style="margin-top:8px" placeholder="enter an element name..."/>
+				<span  id="search-status" class="label label-info" style="vertical-align: 15px; margin-left: -20px;"></span>
+				</p>
+			</div>
+			<div class="span5" style="margin:35px 0 0 60px">
+				<div style="position:absolute;width:510px;padding:0px 5px 0 5px;background-color:white;border:1px solid lightgrey;border-radius:5px;text-align:justify">
+					<span class="label label-info" style="position:absolute;top:-10px;left:-10px">How to cite</span>
+			    	<h6>Philippe Bardou, Jérôme Mariette, Frédéric Escudié, Christophe Djemiel and Christophe Klopp. jvenn: an interactive Venn diagram viewer.
+			  	   	 	BMC Bioinformatics 2014, 15:293 doi:10.1186/1471-2105-15-293 &nbsp; - &nbsp;
+					<a href="http://www.biomedcentral.com/1471-2105/15/293/abstract" target="_blank"> Abstract/FREE Full Text </a></h6>
+				</div>
+			</div>
+
+			<p style="clear:both;padding-top:15px;text-align:right">
 				<button id="clear-all" class="btn">Clear all</button>
 				<button id="example" class="btn btn-primary">Load an example...</button>
 			</p>
-			<div id="citation" style="display:none;">
-				<br/>
-				<div style="position:absolute;width:1040px;padding:0px 5px 0 5px;background-color:white;border:1px solid lightgrey;border-radius:5px;">
-					<span class="label label-info" style="position:absolute;top:-10px;left:-10px">Reference</span>
-			   	    <h6>Dillies MA, Rau A, Aubert J, Hennequet-Antier C, Jeanmougin M, Servant N, Keime C, Marot G, Castel D, Estelle J,
-			   	    	et al. (2013) A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data
-			   	    	analysis. Brief Bioinform 14: 671–683 &nbsp;&nbsp; - &nbsp;&nbsp;
-					<a href="http://bib.oxfordjournals.org/content/14/6/671.full" target="_blank"> Abstract/FREE Full Text </a></h6>
-				</div>
-				<br/>
-			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
