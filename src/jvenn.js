@@ -683,6 +683,11 @@
 			// Calculate the width and height of the Array
 			var	w = a.length ? a.length : 0,
 				h = a[0] instanceof Array ? a[0].length : 0;
+			for(i=0; i<w; i++) {
+				if(a[i] instanceof Array  &&  a[i].length > h) {
+					h = a[i].length;
+				}
+			}
 			// In case it is a zero matrix, no transpose routine needed.
 			if(h === 0 || w === 0) { return []; }
 			var i, j, t = [];
@@ -2123,8 +2128,7 @@
 					csvContent += "##\n## Warning: comma(s) have been replaced by underscore(s)\n##\n";
 				}
 				transpose(rawData).forEach(function(infoArray, index){
-					dataString = infoArray.join(",");
-					csvContent += index <= infoArray.length ? dataString+ "\n" : dataString;
+					csvContent += infoArray.join(",") + "\n";
 				});
 				var encodedUri = encodeURI(csvContent);
 				$('#data-export').attr("href", encodedUri);
@@ -5327,7 +5331,6 @@ return function(zStack, options, doc, queue, _html2canvas) {
       if (storageContext.clip){
         ctx.save();
         ctx.beginPath();
-        // console.log(storageContext);
         ctx.rect(storageContext.clip.left, storageContext.clip.top, storageContext.clip.width, storageContext.clip.height);
         ctx.clip();
       }
