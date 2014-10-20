@@ -2112,7 +2112,7 @@
 						}
 						currentRow.push(tmpline);
 						
-						for (var i in this.list) {
+						for (var i=0 ; i < this.list.length ; i++) {
 							tmpline = this.list[i];
 							if (this.list[i].indexOf(",") >= 0) {
 								comma = true;
