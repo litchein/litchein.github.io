@@ -2019,7 +2019,7 @@
 			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<a id="data-export" href="" download="" style="display:none;"></a>';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
-        	div_export += '<div id="menu" style="position: relative;width:150px; height:30px; display:none; right:123px; top:-4px;">';
+        	div_export += '<div id="export-menu" style="position: relative;width:150px; height:30px; display:none; right:123px; top:-4px;">';
         	div_export += '<div style="box-shadow: 3px 3px 10px rgb(136, 136, 136); border: 1px solid rgb(160, 160, 160); background: none repeat scroll 0% 0% rgb(255, 255, 255);padding: 5px 0px;">';
         	div_export += '<div id="format-png" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download PNG image</div>';
         	div_export += '<div id="format-svg" style="padding: 0px 10px; background: none repeat scroll 0% 0% transparent; color: rgb(48, 48, 48); font-size: 12px;">Download SVG image</div>';
@@ -2044,7 +2044,7 @@
 				econtext.stroke();
 			}
 			
-			var select_form = $("#menu");
+			var select_form = $("#export-menu");
 			var ceColorOri = $("#canvasExport").css('background');
 			$("#format-png").click(function(event) {
 				$("#canvasExport").css('background', ceColorOri);
@@ -2469,7 +2469,7 @@
             			if($(this).children("span").text() === 'on') { activeleg = true; }
             		});
             		var activesearch = false;
-        			if(opts.searchInput.val() != '') { activesearch= true; }
+            		if(opts.searchInput != null && opts.searchInput.val() != '') { activesearch= true; }
             		if(!activeleg && !activesearch &&  $(this).text() !== "") {
 		            	var labels  = this.listnames;
 		            	var current = this;
