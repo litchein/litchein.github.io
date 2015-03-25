@@ -484,7 +484,7 @@
 			ctx.beginPath();
 			ctx.rect(x, y, w, h);
 			ctx.closePath();
-			ctx.save();
+			//ctx.save();
 			ctx.lineWidth = 0.75;
 			ctx.shadowColor = "rgba(0,0,0, 0.4)";
 			ctx.shadowBlur = 7;
@@ -494,7 +494,7 @@
 			ctx.stroke();
 			ctx.fillStyle = fillcolor;
 			ctx.fill();
-			ctx.restore();
+			//ctx.restore();
 		}
 		
 		function changeOpacity(rgba, opacity) {
