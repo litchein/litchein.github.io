@@ -16,10 +16,11 @@
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="src/jvenn.min.js"></script>
+	<script type="text/javascript" src="src/jvenn.js"></script>
+	<script type="text/javascript" src="src/canvas2svg.js"></script>
 	<script language="Javascript">
 		$(document).ready(function () {			
-		
+
 			function getArrayFromArea(areaID) {
 				var lines = $("#"+areaID).val().split("\n");
 				var table = new Array();
