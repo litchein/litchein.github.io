@@ -2058,13 +2058,21 @@
 					$(this).css('border-color', "white");
 				});
 				select_form.hide();
-				alert("TODO")
-				/*html2canvas($("#frame")).then(function(canvas) {
-					var img = canvas.toDataURL("image/png");
-					$('#data-export').attr("href", img);
+				var export_canvas = document.createElement( "canvas" );
+				export_ctx = export_canvas.getContext( "2d" );
+				export_canvas.width = __canvasWidth;
+				export_canvas.height = __canvasHeight;
+				var img = document.createElement( "img" );
+				img.setAttribute( "src", "data:image/svg+xml;base64," + window.btoa(__context.getSerializedSvg(true)));
+				img.setAttribute('height', '700px');
+				img.setAttribute('width', '500px');
+				img.onload = function() {
+					export_ctx.drawImage( img, 0, 0 );
+					var export_img = export_canvas.toDataURL("image/png");
+					$('#data-export').attr("href", export_img);
 					$('#data-export').attr("download", "jVenn_chart.png");
 					$('#data-export')[0].click();
-				});*/
+				};
 			});
 			$("#format-svg").click(function(event) {
 				$("#canvasExport").css('background', ceColorOri);
@@ -2078,7 +2086,7 @@
 					$(this).css('border-color', "white");
 				});
 				select_form.hide();
-				var svgContent = "data:image/svg+xml;base64,"+window.btoa(__context.getSerializedSvg(true)),
+				var svgContent = "data:image/svg+xml;base64," + window.btoa(__context.getSerializedSvg(true)),
 					encodedUri = encodeURI(svgContent);
 				$('#data-export').attr("href", encodedUri);
 				$('#data-export').attr("download", "jVenn_chart.svg");
