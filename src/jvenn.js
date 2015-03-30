@@ -2078,9 +2078,8 @@
 					$(this).css('border-color', "white");
 				});
 				select_form.hide();
-				var svgContent = "data:img/svg;charset=utf-8,";
-				svgContent += __context.getSerializedSvg(true);
-				var	encodedUri = encodeURI(svgContent);
+				var svgContent = "data:image/svg+xml;base64,"+window.btoa(__context.getSerializedSvg(true)),
+					encodedUri = encodeURI(svgContent);
 				$('#data-export').attr("href", encodedUri);
 				$('#data-export').attr("download", "jVenn_chart.svg");
 				$('#data-export')[0].click();
