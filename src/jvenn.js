@@ -2013,14 +2013,21 @@
 			}
 		}
 		
-		function addSVGText(text, x, y) {
-			return '<text fill="#000" stroke="none" font-family="Arial" font-size="8pt" font-style="normal" font-weight="normal" text-decoration="none" x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="alphabetic">'+text+'</text>';
+		function addSVGText(text, x, y, color, opacity, ffamily, fsize, fweight, isLabel) {
+			if (isLabel) {
+				x = parseInt(x.replace("px", "")) + 20;
+				y = parseInt(y.replace("px", "")) + 14;
+			} else {
+				x = parseInt(x.replace("px", "")) + 5;
+				y = parseInt(y.replace("px", "")) + 14;
+			}
+			return '<text fill="'+color+'" fill-opacity="'+opacity+'" stroke="none" font-family="Helvetica,Arial,sans-serif" font-size="'+fsize+'"pt font-style="normal" font-weight="'+fweight+'" text-decoration="none" x="'+x+'"pt y="'+y+'"pt text-anchor="middle" dominant-baseline="alphabetic">'+text+'</text>';
 		}
 		
 		function addExportModule(div, extraheight, type){
 			$t = div;
 			
-			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(415+extraheight)+'px; width: 25px; height: 20px;">';
+			var div_export = '<div id="module-export" style="position: relative; left:475px; top: -'+(418+extraheight)+'px; width: 25px; height: 20px;">';
 			div_export += '<a id="data-export" href="" download="" style="display:none;"></a>';
 			div_export += '<canvas id="canvasExport" style="border:1px solid white" width="25" height="20"></canvas>';
         	div_export += '<div id="export-menu" style="position: relative;width:150px; height:30px; display:none; right:123px; top:-4px;">';
@@ -2066,8 +2073,33 @@
 				export_ctx = export_canvas.getContext( "2d" );
 				export_canvas.width = __canvasWidth;
 				export_canvas.height = __canvasHeight;
-				var img = document.createElement( "img" );
-				img.setAttribute( "src", "data:image/svg+xml;base64," + window.btoa(__context.getSerializedSvg(true)));
+				var img = document.createElement( "img" ),
+					$expDiv = $("<div></div>");
+				$expDiv.append(__context.getSerializedSvg(true));
+				
+				$("[id^=resultC]").each(function(){					
+					if($(this).css("display") != "none") {
+						if ($(this).html().indexOf("<span") === 0) {
+							value = "?";
+						} else {
+							value = $(this).html();
+						}
+						$expDiv.children("svg").children("g").append(addSVGText(value, 
+							$(this).css("left"),  $(this).css("top"),
+							$(this).css("color"), $(this).css("opacity"),
+							$(this).css("font-family"), $(this).css("font-size"),
+							$(this).css("font-weight"), false));
+					}
+				});
+				$("[id^=label]").each(function(){
+					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), 
+							$(this).css("left"),  $(this).css("top"), 
+							$(this).css("color"), $(this).css("opacity"),
+							$(this).css("font-family"), $(this).css("font-size"),
+							$(this).css("font-weight"), true));
+				});
+
+				img.setAttribute( "src", "data:image/svg+xml;base64," + window.btoa($expDiv.html()));
 				img.setAttribute('height', '700px');
 				img.setAttribute('width', '500px');
 				img.onload = function() {
@@ -2094,11 +2126,26 @@
 				var $expDiv = $("<div></div>");
 				$expDiv.append(__context.getSerializedSvg(true));
 				
-				$("[id^=resultC]").each(function(){
-					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), $(this).css("left"), $(this).css("top")));
+				$("[id^=resultC]").each(function(){					
+					if($(this).css("display") != "none") {
+						if ($(this).html().indexOf("<span") === 0) {
+							value = "?";
+						} else {
+							value = $(this).html();
+						}
+						$expDiv.children("svg").children("g").append(addSVGText(value, 
+							$(this).css("left"),  $(this).css("top"),
+							$(this).css("color"), $(this).css("opacity"),
+							$(this).css("font-family"), $(this).css("font-size"),
+							$(this).css("font-weight"), false));
+					}
 				});
 				$("[id^=label]").each(function(){
-					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), $(this).css("left"), $(this).css("top")));
+					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), 
+							$(this).css("left"),  $(this).css("top"), 
+							$(this).css("color"), $(this).css("opacity"),
+							$(this).css("font-family"), $(this).css("font-size"),
+							$(this).css("font-weight"), true));
 				});
 				
 				var svgContent = "data:image/svg+xml;base64," + window.btoa($expDiv.html()),
