@@ -2013,6 +2013,10 @@
 			}
 		}
 		
+		function addSVGText(text, x, y) {
+			return '<text fill="#000" stroke="none" font-family="Arial" font-size="8pt" font-style="normal" font-weight="normal" text-decoration="none" x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="alphabetic">'+text+'</text>';
+		}
+		
 		function addExportModule(div, extraheight, type){
 			$t = div;
 			
@@ -2086,7 +2090,18 @@
 					$(this).css('border-color', "white");
 				});
 				select_form.hide();
-				var svgContent = "data:image/svg+xml;base64," + window.btoa(__context.getSerializedSvg(true)),
+				
+				var $expDiv = $("<div></div>");
+				$expDiv.append(__context.getSerializedSvg(true));
+				
+				$("[id^=resultC]").each(function(){
+					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), $(this).css("left"), $(this).css("top")));
+				});
+				$("[id^=label]").each(function(){
+					$expDiv.children("svg").children("g").append(addSVGText($(this).html(), $(this).css("left"), $(this).css("top")));
+				});
+				
+				var svgContent = "data:image/svg+xml;base64," + window.btoa($expDiv.html()),
 					encodedUri = encodeURI(svgContent);
 				$('#data-export').attr("href", encodedUri);
 				$('#data-export').attr("download", "jVenn_chart.svg");
