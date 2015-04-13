@@ -76,11 +76,13 @@
             searchMinSize:1,
             // Colors must be RGB
             //       green         , blue            , red            , yellow          , orange         , brown
-            colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
+            colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"],
+            fontSize: "12px",
+            fontFamily: "Arial"
         };  
 		var opts = $.extend(defaults, options),
 			__canvasWidth = 500,
-			__canvasHeight = 700,
+			__canvasHeight = 415,
 			__context = null;
 		
 		function drawEllipse(x, y, r, w, h, a, fillcolor) {
@@ -654,7 +656,7 @@
             if(opts.shortNumber  &&  div.text().length > space) {
 				div.html("<span title=" + div.text() + ">?</span>");
 			}
-            var l = left - ((div.text().length-1)/2 * 8);
+            var l = left - ((div.text().length-1)/2 * 4);
 			div.css("left", l).css("top", top);
 		}
 		
@@ -2021,7 +2023,7 @@
 				x = parseInt(x.replace("px", "")) + 5;
 				y = parseInt(y.replace("px", "")) + 14;
 			}
-			return '<text fill="'+color+'" fill-opacity="'+opacity+'" stroke="none" font-family="Helvetica,Arial,sans-serif" font-size="'+fsize+'"pt font-style="normal" font-weight="'+fweight+'" text-decoration="none" x="'+x+'"pt y="'+y+'"pt text-anchor="middle" dominant-baseline="alphabetic">'+text+'</text>';
+			return '<text fill="'+color+'" fill-opacity="'+opacity+'" stroke="none" font-family="'+ffamily+'" font-size="'+fsize+'"pt font-style="normal" font-weight="'+fweight+'" text-decoration="none" x="'+x+'"pt y="'+y+'"pt text-anchor="middle" dominant-baseline="alphabetic">'+text+'</text>';
 		}
 		
 		function addExportModule(div, extraheight, type){
@@ -2407,7 +2409,8 @@
             var $t = $(this);
             var extraheight = 0;
             if (opts.displayStat) {
-            	extraheight = 280; 
+            	extraheight = 280;
+            	__canvasHeight += extraheight;
             }
             $t.css({"width": "500px", "height": ""+(450+extraheight)+"px"});
             $('<style>.number-black{font-weight:bold;color:#000000;text-decoration:none;font-size:12px;}.number-over{font-weight:bold;cursor:pointer;color:#0000FF;text-decoration:underline;}.number-empty{font-weight:normal;font-size:12px;}</style>').appendTo('body');
@@ -2486,10 +2489,10 @@
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111011"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111101"></div>';
 			div_content += '<div class="number-black" style="position: absolute; left: -1000px; top: -2200px;" id="resultC111111"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;"  id="label1"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;"  id="label2"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label1"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label2"></div>';
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label3"></div>';
-			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;"  id="label4"></div>';
+			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label4"></div>';
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label5"></div>';
 			div_content += '<div style="position: absolute; left: -1000px; top: -1000px; opacity:0.5;" id="label6"></div>';
 			div_content += '</div>';
@@ -2502,8 +2505,12 @@
             $("*[id^=resultC]").each(function(){
 				$(this).html(0);
 				$(this).addClass("number-empty");
+				$(this).css("font-size", opts.fontSize);
+				$(this).css("font-family", opts.fontFamily);
 			});
-            
+            $("*[id^=label]").each(function(){
+				$(this).css("font-family", opts.fontFamily);
+            });
             var type = getVennType(); 
             if (type[0] == "list") {
             	fillListVenn();
