@@ -47,6 +47,8 @@
 					<li><a href="#displayStat"><i class="icon-chevron-right"></i> displayStat</a></li>
 					<li><a href="#fnClickCallback"><i class="icon-chevron-right"></i> fnClickCallback</a></li>
 					<li><a href="#colors"><i class="icon-chevron-right"></i> colors</a></li>
+					<li><a href="#fontFamily"><i class="icon-chevron-right"></i> fontFamily</a></li>
+					<li><a href="#fontSize"><i class="icon-chevron-right"></i> fontSize</a></li>
 					<li><a href="#shortNumber"><i class="icon-chevron-right"></i> shortNumber</a></li>
 					<li><a href="#disableClick"><i class="icon-chevron-right"></i> disableClick</a></li>
 					<li><a href="#useValues"><i class="icon-chevron-right"></i> useValues</a></li>
@@ -77,8 +79,7 @@ $(document).ready(function(){
         data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
       }]
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 		  		<section id="series">
@@ -97,8 +98,7 @@ $(document).ready(function(){
         data: ["Freddy Mercury", "Barbra Streisand", "Dean Martin", "Ricky Martin", "Celine Dion", "Marilyn Monroe"]
       }]
   });
-});
-					</pre>
+});</pre>
 					<p> The serie can also define the number of occurence for each intersections and their values. If only the data are provided, 
 					the values are computed. If only the values are provided the callback function is desactivated.</p>
 					<pre class="prettyprint linenums">
@@ -111,8 +111,7 @@ $(document).ready(function(){
     	values: {A: 4, B: 3, AB: 3}
     }],
   });
-});
-					</pre>
+});</pre>
 					<p>Finaly, the serie can define the list values with the number of occurence for each value.</p>
 					<pre class="prettyprint">
 $(document).ready(function(){
@@ -127,8 +126,7 @@ $(document).ready(function(){
           values: [234, 29, 239, 5]
        }]
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="displayMode">
@@ -142,8 +140,7 @@ $(document).ready(function(){
   $('#example').jvenn({
     displayMode: 'edwards'
   });
-});
-					</pre>
+});</pre>
 				</section>
 
 				<section id="displayStat">
@@ -159,8 +156,7 @@ $(document).ready(function(){
   $('#example').jvenn({
     displayStat: false
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="fnClickCallback">
@@ -198,22 +194,46 @@ $(document).ready(function(){
       alert(value);
     }
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="colors">
 					<div class="page-header">
 				    	<h1>colors</h1>
 					</div>
-				  	<p>jvenn comes with some default colors, you can change them to the ones you want.</p>
+				  	<p>Jvenn comes with some default colors, you can change them to the ones you want.</p>
 				  	<pre class="prettyprint linenums">
 $(document).ready(function(){
   $('#example').jvenn({
     colors: ["rgb(0,102,0)","rgb(90,155,212)","rgb(241,90,96)","rgb(250,220,91)","rgb(255,117,0)","rgb(192,152,83)"]
   });
-});
-					</pre>
+});</pre>
+				</section>
+
+				<section id="fontFamily">
+					<div class="page-header">
+				    	<h1>fontFamily</h1>
+					</div>
+				  	<p>The jvenn default font family is Arial, you can change it using "fontFamily" parameter.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    fontFamily: "monospace"
+  });
+});</pre>
+				</section>
+				
+				<section id="fontSize">
+					<div class="page-header">
+				    	<h1>fontSize</h1>
+					</div>
+				  	<p>The jvenn default font size is 12px, you can change it using "fontSize" parameter.</p>
+				  	<pre class="prettyprint linenums">
+$(document).ready(function(){
+  $('#example').jvenn({
+    fontSize: "11px"
+  });
+});</pre>
 				</section>
 
 				<section id="shortNumber">
@@ -227,8 +247,7 @@ $(document).ready(function(){
   $('#example').jvenn({
     shortNumber: true
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="disableClick">
@@ -248,8 +267,7 @@ $(document).ready(function(){
       }],
       disableClick: true
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="useValues">
@@ -267,8 +285,7 @@ $(document).ready(function(){
        }],
       useValues: true
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="exporting">
@@ -286,8 +303,7 @@ $(document).ready(function(){
        }],
       exporting: false
   });
-});
-					</pre>
+});</pre>
 				</section>
 				
 				<section id="search">
@@ -313,8 +329,7 @@ $(document).ready(function(){
        searchStatus: $("#search-status"),
        searchMinSize: 1
   });
-});
-					</pre>
+});</pre>
 				</section>
 		  	</div>
 		</div>
