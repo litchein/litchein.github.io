@@ -2578,7 +2578,7 @@
             			if($(this).children("span").text() === 'on') { activeleg = true; }
             		});
             		var activesearch = false;
-            		if(opts.searchInput.val() != '') { activesearch= true; }
+            		if(opts.searchInput != null && opts.searchInput.val() != '') { activesearch= true; }
             		if(!activeleg && !activesearch && $(this).text() !== "") {
 	            		var labels = this.listnames;
 	                	$("*[id^=label]").each(function(){
