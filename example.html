@@ -29,6 +29,7 @@
 			var colorDefault = ["#006600", "#5a9bd4", "#f15a60", "#cfcf1b", "#ff7500", "#c09853"],
 				displayMode  = "classic",
 				displayStat  = true,
+				displaySwitch= true,
 				shortNumber  = true,
 				fontSize     = "12px",
 				fontFamily   = "Arial";
@@ -71,11 +72,12 @@
 					colors: colorsTable,
 					fontSize:   fontSize,
 					fontFamily: fontFamily,
-					searchInput:  $("#search-field"),
-					searchStatus: $("#search-status"),
-					displayMode: displayMode,
-					shortNumber: shortNumber,
-					displayStat: displayStat,
+					searchInput:   $("#search-field"),
+					searchStatus:  $("#search-status"),
+					displayMode:   displayMode,
+					shortNumber:   shortNumber,
+					displayStat:   displayStat,
+					displaySwitch: displaySwitch,
 					fnClickCallback: function() {
 						var value = "";
 						if (this.listnames.length == 1) {
@@ -568,6 +570,15 @@
 				updateJvenn();				
 			});
 			
+			$("#dsw_yes").click(function() {
+				displaySwitch = true;
+				updateJvenn();				
+			});
+			$("#dsw_no").click(function() {
+				displaySwitch = false;
+				updateJvenn();				
+			});
+			
 			$("#dm_classic").click(function() {
 				displayMode = "classic";
 				updateJvenn();				
@@ -807,6 +818,12 @@
 							<div class="btn-group" data-toggle="buttons-radio">
 					  			<button id="ds_yes" type="button" class="btn btn-mini active">Yes</button>
 								<button id="ds_no"  type="button" class="btn btn-mini">No</button>
+							</div><br/>
+							<img src="img/bullet.png" style="vertical-align:initial;padding-top:10px">
+							Display the switch button panel (if more than 3 lists provided): 
+							<div class="btn-group" data-toggle="buttons-radio">
+					  			<button id="dsw_yes" type="button" class="btn btn-mini active">Yes</button>
+								<button id="dsw_no"  type="button" class="btn btn-mini">No</button>
 							</div><br/>
 					  		<img src="img/bullet.png" style="vertical-align:initial;padding-top:10px">
 							Substitute intersection count size by a question mark: 
