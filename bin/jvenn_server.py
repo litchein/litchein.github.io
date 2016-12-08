@@ -115,6 +115,10 @@ if __name__ == '__main__':
     parser.add_argument("--daemon", action="store_true", dest="daemon", default=False, help="Run the server as daemon")
     args = vars(parser.parse_args())
 
+    if args["daemon"]:
+        from cherrypy.process.plugins import Daemonizer
+        Daemonizer(cherrypy.engine).subscribe()
+
     app_conf = {
         '/':
             {'tools.staticdir.root': WEB_DIR},
