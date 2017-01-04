@@ -35,8 +35,11 @@ class AppServer(object):
 
     @cherrypy.expose
     def process_venn(self, **kwargs):
+        delimiter = '\t'
+        if (kwargs["delimiter"] == "," or kwargs["delimiter"] == ";") :
+           delimiter = kwargs["delimiter"]
         file_path = self.__upload(**kwargs)
-        return self.__compare_lists(file_path, True, "\t")
+        return self.__compare_lists(file_path, kwargs["header"], delimiter)
 
     def __upload(self, **kwargs):
 
@@ -59,17 +62,20 @@ class AppServer(object):
         
         return(filepath)
 
-    def __compare_lists ( self, file , header, spliter):
+    def __compare_lists ( self, file, header, spliter):
         
         FH = open(file,'r')
         names = {}
         samples = {}
+        
         for i, line in enumerate(FH.readlines()):
             if i == 0 and header:
                 for j, val in enumerate(line.split(spliter)):
-                    names[string.ascii_uppercase[j]] = val
+                    names[string.ascii_uppercase[j]] = val.rstrip('\n\r')
             else:
                 for j, val in enumerate(line.split(spliter)):
+                    if i == 0:
+                        names[string.ascii_uppercase[j]] = "List " + str(j+1)
                     if j in samples:
                         samples[j].append(val)
                     else:
@@ -78,6 +84,9 @@ class AppServer(object):
         d = {}
         j = 1
         
+        if len(names)>6:
+            return json.dumps([{'error':"Error: too many columns (" + str(len(names)) + ">6) in input file!"}])
+        
         for s in samples:
             for line in samples[s]:
                 if line.rstrip('\n\r') in d:
@@ -85,7 +94,8 @@ class AppServer(object):
                     if d[line.rstrip('\n\r')] - j < 0:
                         d[line.rstrip('\n\r')] += j
                 else:
-                    d[line.rstrip('\n\r')] = j
+                    if line.rstrip('\n\r') != "":
+                        d[line.rstrip('\n\r')] = j
             j *= 10
     
         d2 = {}
@@ -104,8 +114,7 @@ class AppServer(object):
                     k = k + string.ascii_uppercase[i]
             values[k] = len(d2[key])
             data[k] = []
-            data[k].append(','.join(d2[key]))
-        
+            data[k].append('\n'.join(d2[key]))
         return json.dumps([{'name': names, 'values' : values, 'data':data}], indent=4, sort_keys=True)
 
 
