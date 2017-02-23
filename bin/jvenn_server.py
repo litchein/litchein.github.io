@@ -38,7 +38,10 @@ class AppServer(object):
         delimiter = '\t'
         if (kwargs["delimiter"] == "," or kwargs["delimiter"] == ";") :
            delimiter = kwargs["delimiter"]
-        file_path = self.__upload(**kwargs)
+        try:
+            file_path = self.__upload(**kwargs)
+        except:
+            return json.dumps([{'error':"Error: Please provide a delimited text file."}])
         return self.__compare_lists(file_path, kwargs["header"], delimiter)
 
     def __upload(self, **kwargs):
@@ -67,11 +70,15 @@ class AppServer(object):
         FH = open(file,'r')
         names = {}
         samples = {}
+        linenb = 0
         
         for i, line in enumerate(FH.readlines()):
+            if i == 0:
+                linenb = len(line.split(spliter))
             if i == 0 and header:
                 for j, val in enumerate(line.split(spliter)):
                     names[string.ascii_uppercase[j]] = val.rstrip('\n\r')
+                linenb = len(names)
             else:
                 for j, val in enumerate(line.split(spliter)):
                     if i == 0:
@@ -80,7 +87,10 @@ class AppServer(object):
                         samples[j].append(val)
                     else:
                         samples[j] = [val]
-        
+                if linenb != len(line.split(spliter)):
+                    return json.dumps([{'error':"Error: Inconsistent number of fields line " + str(i+1) + 
+                                        " (" + str(len(line.split(spliter))) + " for " + str(linenb) + " expected)"}])
+                    
         d = {}
         j = 1
         
